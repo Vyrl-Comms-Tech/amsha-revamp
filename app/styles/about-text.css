@@ -1,0 +1,54 @@
+.about-text {
+  position: relative;
+  width: 100%;
+  display: flex;
+  background: var(--color-white);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+/* ── background image (behind text, dimmed) ── */
+.about-text-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* ── content block ── */
+.about-text-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 90%;
+  text-align: center;
+}
+.about-text-label {
+  color: var(--color-black);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+/* combined paragraph */
+.about-text-text {
+  font-size: 48px;
+  line-height: 1.4;
+}
+
+/* black bold portion — the "heading" */
+.about-text-primary {
+  color: var(--color-black);
+  font-weight: 500;
+}
+
+/* gray dimmed portion — the "paragraph" */
+.about-text-secondary {
+  color: var(--color-black-35);
+  font-weight: 500;
+}

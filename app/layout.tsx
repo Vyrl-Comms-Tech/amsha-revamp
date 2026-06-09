@@ -1,15 +1,58 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const anekLatin = localFont({
+  variable: "--font-anek",
+  src: [
+    {
+      // AnekLatin-Thin.ttf
+      path: "../public/font/AnekLatin-Thin.ttf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-ExtraLight.ttf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/font/AnekLatin-ExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
+  ],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +68,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", anekLatin.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

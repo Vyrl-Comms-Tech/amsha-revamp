@@ -1,0 +1,82 @@
+.p-oc {
+  padding-block: 50px;
+  background: var(--color-white);
+}
+.oc-section {
+  width: 90vw;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.oc-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.oc-cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 10px;
+  padding: 40px 35px;
+}
+
+.oc-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 587px;
+  padding: 28px 25px 27px 25px;
+  flex: 1 0 0;
+  background: var(--color-white) !important;
+  border-radius: 12px;
+}
+
+.oc-card-logo {
+  width: 129px;
+  height: 100px;
+  object-fit: contain;
+  object-position: left top;
+}
+
+.oc-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.oc-card-company {
+  font-size: 50px;
+  font-weight: 500;
+  color: var(--color-black);
+  line-height: 1;
+}
+
+.oc-card-subtitle {
+  font-size: 50px;
+  font-weight: 500;
+  color: var(--color-black-50);
+  line-height: 1;
+}
+
+.oc-card-testimonial {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-card-text);
+  line-height: 1.01;
+}
+@media (max-width: 760px) {
+  .p-oc {
+    padding-bottom: 50px !important;
+    padding-block: 0px;
+  }
+  .oc-cards{
+    padding: 20px;
+  }
+}

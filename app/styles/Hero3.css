@@ -1,0 +1,103 @@
+.hero3-section {
+  position: relative;
+  width: 100%;
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+/* ── background image (behind text, dimmed) ── */
+.hero3-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* ── content block ── */
+.hero3-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 75%;
+  text-align: center;
+}
+.hero3-label {
+  color: var(--color-white);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+/* combined paragraph */
+.hero3-text {
+  font-size: 40px;
+}
+
+/* white bold portion — the "heading" */
+.hero3-primary {
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+/* gray dimmed portion — the "paragraph" */
+.hero3-secondary {
+  color: var(--color-white-35);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+/* Laptop (≤1280px) */
+@media (max-width: 1580px) {
+  .hero3-text {
+    font-size: 38px;
+    line-height: 1.3;
+  }
+  .hero3-content {
+    max-width: 88%;
+  }
+}
+
+/* Tablet (≤991px) */
+@media (max-width: 991px) {
+  .hero3-text {
+    font-size: 28px;
+  }
+  .hero3-label {
+    font-size: 20px;
+  }
+  .hero3-content {
+    max-width: 90%;
+    gap: 20px;
+  }
+}
+
+/* Mobile (≤575px) */
+@media (max-width: 575px) {
+  .hero3-section {
+    padding: 70px 1.5rem 60px;
+    min-height: 60vh;
+    justify-content: center;
+  }
+  .hero3-text {
+    font-size: 25px;
+    line-height: 1.1;
+  }
+  .hero3-label {
+    font-size: 25px;
+  }
+  .hero3-content {
+    max-width: 100%;
+    gap: 16px;
+  }
+}

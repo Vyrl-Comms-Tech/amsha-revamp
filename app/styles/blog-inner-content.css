@@ -1,0 +1,121 @@
+.bic-section {
+  width: 100%;
+  background: var(--color-white);
+  padding: 60px 100px 100px;
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+/* ── Left: article ── */
+.bic-article {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+    
+.bic-article p {
+  font-size: 25px;
+  font-weight: 400;
+  color: #222;
+  line-height: 1.15;
+}
+
+/* ── Right: sidebar ── */
+.bic-sidebar {
+  flex: 0 0 620px;
+  position: sticky;
+  top: 100px;
+}
+
+.bic-card {
+  background:#F8F8F8;
+  border-radius: 10px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bic-card-title {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--color-black);
+  line-height: 1.1;
+}
+
+.bic-card-sub {
+  font-size:20px;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.15;
+}
+
+.bic-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 19px;
+  font-family: var(--font-primary);
+  color: var(--color-black);
+  background: var(--color-white);
+  outline: none;
+}
+
+.bic-input::placeholder {
+  color: #aaa;
+}
+
+.bic-input:focus {
+  border-color: #999;
+}
+
+.bic-disclaimer {
+  font-size: 18px;
+  font-weight: 400;
+  color: #888;
+  line-height: 1.15;
+}
+
+.bic-btn {
+  width:max-content;
+  padding: 13px 25px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: 500;
+  font-family: var(--font-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.bic-btn:hover {
+  opacity: 0.8;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+  .bic-section {
+    flex-direction: column;
+    padding: 48px 40px 80px;
+    gap: 40px;
+  }
+  .bic-sidebar {
+    flex: none;
+    width: 100%;
+    position: static;
+  }
+}
+
+@media (max-width: 575px) {
+  .bic-section {
+    padding: 40px 24px 60px;
+  }
+  .bic-article p {
+    font-size: 15px;
+  }
+}

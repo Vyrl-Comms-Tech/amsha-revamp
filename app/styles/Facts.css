@@ -1,0 +1,124 @@
+.facts-section {
+  width: 100%;
+  background: black;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 100px;
+}
+
+/* ── Center crystal image — sits between both boxes ── */
+.facts-center-img-wrap {
+  position: absolute;
+  left: 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 22, 26, 0.14) 2.61%,
+    rgba(250, 250, 250, 0.14) 48.84%,
+    rgba(21, 22, 26, 0.14) 91.36%
+  );
+  filter: blur(2px);
+  top: 0;
+  transform: translateX(-50%);
+  width: 620px;
+  opacity: 0.7;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.facts-center-img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* ── Boxes row ── */
+.facts-boxes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+}
+
+.facts-box {
+  flex: 1;
+  height: 630px;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(19px);
+  -webkit-backdrop-filter: blur(19px);
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── MBTI box: heading row with logo ── */
+.facts-box-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.facts-mbti-logo {
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+  margin-top: 4px;
+}
+
+.facts-box-title {
+  font-size: 50px;
+  font-weight: 500;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.facts-box-text {
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-white-82);
+  line-height: 1.1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 991px) {
+  .facts-section {
+    padding: 60px 40px;
+  }
+  .facts-boxes {
+    flex-direction: column;
+  }
+  .facts-box-title {
+    font-size: 36px;
+  }
+  .facts-center-img-wrap {
+    width: 280px;
+    left: 50%;
+  }
+}
+
+@media (max-width: 575px) {
+  .facts-section {
+    padding: 50px 24px;
+  }
+  .facts-box {
+    padding: 30px 24px;
+    min-height: auto;
+    height: auto;
+  }
+  .facts-box-title {
+    font-size: 26px;
+  }
+  .facts-box-text {
+    font-size: 13px;
+  }
+  .facts-center-img-wrap {
+    width: 200px;
+  }
+}
