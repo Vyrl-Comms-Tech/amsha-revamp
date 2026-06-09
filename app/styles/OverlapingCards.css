@@ -10,6 +10,15 @@
   overflow: hidden;
 }
 
+/* bg image sits inside its own clipping wrapper */
+.oc-bg-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  z-index: 0;
+}
+
 .oc-bg {
   position: absolute;
   inset: 0;
@@ -45,6 +54,54 @@
   object-position: left top;
 }
 
+/* Avatar group — mobile only */
+.oc-avatar-row {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.oc-avatars {
+  display: flex;
+}
+
+.oc-avatar {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-white);
+  margin-left: -10px;
+  flex-shrink: 0;
+}
+
+.oc-avatar:first-child {
+  margin-left: 0;
+}
+
+.oc-client-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+/* Contact button — mobile only */
+.oc-contact-btn {
+  display: none;
+  align-self: flex-start;
+  margin-top: 16px;
+  padding: 12px 28px;
+  font-size: 16px;
+  background: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-primary);
+}
+
 .oc-card-content {
   display: flex;
   flex-direction: column;
@@ -71,12 +128,97 @@
   color: var(--color-card-text);
   line-height: 1.01;
 }
+
+/* ══════════════════════════════
+   1200 – 1600px
+══════════════════════════════ */
+@media (max-width: 1600px) {
+  .oc-card {
+    height: 520px;
+  }
+  .oc-card-company,
+  .oc-card-subtitle {
+    font-size: 38px;
+  }
+  .oc-card-testimonial {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .oc-card {
+    height: 480px;
+  }
+  .oc-card-company,
+  .oc-card-subtitle {
+    font-size: 30px;
+  }
+  .oc-card-testimonial {
+    font-size: 15px;
+  }
+  .oc-cards {
+    padding: 30px 25px;
+  }
+}
+
 @media (max-width: 760px) {
   .p-oc {
-    padding-bottom: 50px !important;
-    padding-block: 0px;
+    padding-block: 30px;
+    padding-inline: 16px;
   }
-  .oc-cards{
-    padding: 20px;
+  .oc-section {
+    width: 100%;
+    border-radius: 20px;
+    overflow: visible; /* bg clip handled by .oc-bg-wrap */
+  }
+  .oc-cards {
+    display: flex;
+    flex-wrap: nowrap;
+    cursor: grab;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    max-width: 85vw;
+    margin: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding: 20px 0;
+  }
+  .oc-cards::-webkit-scrollbar {
+    display: none;
+  }
+  .oc-card {
+    flex: 0 0 100%;
+    height: auto;
+    scroll-snap-align: start;
+    justify-content: flex-start;
+    gap: 130px;
+    border-radius: 0;
+    padding-inline: 20px;
+  }
+
+  /* hide desktop logo, show avatar row */
+  .oc-card-logo {
+    display: none;
+  }
+  .oc-avatar-row {
+    display: flex;
+  }
+
+  /* show contact button */
+  .oc-contact-btn {
+    display: block;
+    margin-top: 5px;
+    padding: 11px 22px;
+    font-size: 17px;
+  }
+
+  .oc-card-company,
+  .oc-card-subtitle {
+    font-size: 35px;
+  }
+  .oc-card-testimonial {
+    font-size: 18px;
+    line-height: 1;
   }
 }

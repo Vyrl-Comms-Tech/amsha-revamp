@@ -86,7 +86,21 @@
   line-height: 1.1;
 }
 
-/* ── Responsive ── */
+@media (max-width: 1600px) {
+  .facts-box-title {
+    font-size: 42px;
+  }
+  .facts-mbti-logo {
+    height: 130px;
+    width: 130px;
+  }
+  .facts-box-head {
+    align-items: center;
+  }.facts-box-text{
+    font-size: 22px;
+  }
+}
+
 @media (max-width: 991px) {
   .facts-section {
     padding: 60px 40px;
@@ -103,20 +117,23 @@
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 640px) {
   .facts-section {
-    padding: 50px 24px;
+    padding: 50px 30px;
+  }
+  .facts-mbti-logo {
+    display: none;
   }
   .facts-box {
     padding: 30px 24px;
-    min-height: auto;
-    height: auto;
+    gap: 60px;
   }
   .facts-box-title {
-    font-size: 26px;
+    font-size: 35px;
   }
   .facts-box-text {
-    font-size: 13px;
+    font-size: 20px;
+    line-height: 1.1;
   }
   .facts-center-img-wrap {
     width: 200px;

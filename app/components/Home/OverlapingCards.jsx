@@ -1,6 +1,9 @@
 "use client";
+import { useRef } from "react";
 import Image from "next/image";
 import "../../styles/OverlapingCards.css";
+
+const AVATARS = ["/over1.png", "/over1.png", "/over1.png", "/over1.png"];
 
 const CARDS = [
   {
@@ -27,24 +30,53 @@ const CARDS = [
 ];
 
 const OverlapingCards = () => {
-  return (
+  const sliderRef = useRef(null);
+  const drag = useRef({ active: false, startX: 0 });
 
+  const snapTo = (index) => {
+    const el = sliderRef.current;
+    const cardWidth = el.offsetWidth;
+    el.scrollTo({ left: index * cardWidth, behavior: "smooth" });
+  };
+
+  const currentIndex = () => {
+    const el = sliderRef.current;
+    return Math.round(el.scrollLeft / el.offsetWidth);
+  };
+
+  const onMouseDown = (e) => {
+    drag.current = { active: true, startX: e.pageX };
+    sliderRef.current.style.cursor = "grabbing";
+  };
+
+  const onMouseUp = (e) => {
+    if (!drag.current.active) return;
+    drag.current.active = false;
+    sliderRef.current.style.cursor = "grab";
+    const dx = e.pageX - drag.current.startX;
+    const idx = currentIndex();
+    if (dx < -40) snapTo(Math.min(idx + 1, CARDS.length - 1));
+    else if (dx > 40) snapTo(Math.max(idx - 1, 0));
+    else snapTo(idx);
+  };
+
+  return (
     <div className="p-oc">
       <section className="oc-section">
-        {/* Background photo */}
-        <Image
-          src="/img11.jpg"
-          alt=""
-          fill
-          className="oc-bg"
-          priority
-        />
+        <div className="oc-bg-wrap">
+          <Image src="/img11.jpg" alt="" fill className="oc-bg" priority />
+        </div>
 
-        {/* Three cards */}
-        <div className="oc-cards">
+        <div
+          className="oc-cards"
+          ref={sliderRef}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
+        >
           {CARDS.map((card, i) => (
             <div key={i} className="oc-card">
-              {/* Logo — top left */}
+              {/* Desktop: company logo */}
               <Image
                 src={card.logo}
                 alt={card.company}
@@ -53,7 +85,19 @@ const OverlapingCards = () => {
                 className="oc-card-logo"
               />
 
-              {/* Content — bottom */}
+              {/* Mobile: overlapping avatars + client count */}
+              <div className="oc-avatar-row">
+                <div className="oc-avatars">
+                  {AVATARS.map((src, j) => (
+                    <div key={j} className="oc-avatar">
+                      <Image src={src} alt="" fill style={{ objectFit: "cover" }} />
+                    </div>
+                  ))}
+                </div>
+                <span className="oc-client-count">27+ clients</span>
+              </div>
+
+              {/* Content */}
               <div className="oc-card-content">
                 {card.company.split("\n").map((line, j) => (
                   <h3 key={j} className="oc-card-company" style={{ marginBottom: 0 }}>
@@ -64,6 +108,7 @@ const OverlapingCards = () => {
                   <h3 className="oc-card-subtitle">{card.subtitle}</h3>
                 )}
                 <p className="oc-card-testimonial">{card.testimonial}</p>
+                <button className="oc-contact-btn">Contact us</button>
               </div>
             </div>
           ))}

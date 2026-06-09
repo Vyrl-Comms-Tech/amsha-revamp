@@ -231,6 +231,7 @@
   .hero-section {
     flex-direction: column;
     justify-content: center;
+    gap: 20px;
     /* grid-template-columns: 1fr; */
     /* align-items: center; */
     display: flex;

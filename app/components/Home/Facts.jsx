@@ -20,7 +20,18 @@ const Facts = () => {
 
         {/* Box 1 — Facet5 */}
         <div className="facts-box">
-          <h2 className="facts-box-title">Facet5:</h2>
+          <div className="facts-box-head">
+            <h2 className="facts-box-title">
+              Facet5:
+            </h2>
+            <Image
+              src="/img17.png"
+              alt="MBTI"
+              width={190}
+              height={130}
+              className="facts-mbti-logo"
+            />
+          </div>
           <p className="facts-box-text">
             Facet5 is a psychometric assessment tool that provides deeper insight
             into individual behaviour, personality, and workplace preferences,
@@ -36,10 +47,10 @@ const Facts = () => {
               MBTI® (Myers-Briggs<br />Type Indicator):
             </h2>
             <Image
-              src="/img10.png"
+              src="/img16.png"
               alt="MBTI"
-              width={90}
-              height={70}
+              width={140}
+              height={130}
               className="facts-mbti-logo"
             />
           </div>
@@ -48,7 +59,7 @@ const Facts = () => {
             understand communication styles, decision-making approaches,
             leadership preferences, and team dynamics through personality-based
             insight and behavioural understanding.
-            <br /><br />
+           <br />
             For students and young professionals, the MBTI® Career Report also
             provides guidance on career preferences, strengths, work styles, and
             potential career paths aligned with their personality type and natural

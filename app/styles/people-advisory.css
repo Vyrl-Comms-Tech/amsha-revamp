@@ -6,43 +6,44 @@
   background: var(--color-dark) !important;
 }
 
-.hero-section-of-poeple-advisory  .hero-heading {
+.hero-section-of-poeple-advisory .hero-heading {
   position: absolute;
   top: 40px;
   left: 50px;
   z-index: 2;
 }
 
-.hero-section-of-poeple-advisory  .hero-heading h1 {
+.hero-section-of-poeple-advisory .hero-heading h1 {
   font-size: 70px;
   font-weight: 500;
 }
 
-.hero-section-of-poeple-advisory  .hero-image {
+.hero-section-of-poeple-advisory .hero-image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.hero-section-of-poeple-advisory  .hero-image img {
+.hero-section-of-poeple-advisory .hero-image img {
   width: 997px;
   height: auto;
   display: block;
 }
 
-.hero-section-of-poeple-advisory  .hero-number {
+.hero-section-of-poeple-advisory .hero-number {
   position: absolute;
   bottom: 40px;
   left: 50px;
 }
 
-.hero-section-of-poeple-advisory  .hero-number span {
+.hero-section-of-poeple-advisory .hero-number span {
   font-size: 168px;
+  color: var(--color-white);
   font-weight: 500;
 }
 
-.hero-section-of-poeple-advisory  .hero-content {
+.hero-section-of-poeple-advisory .hero-content {
   position: absolute;
   right: 50px;
   bottom: 40px;
@@ -52,40 +53,87 @@
   align-items: flex-end;
 }
 
-.hero-section-of-poeple-advisory  .hero-content p {
+.hero-section-of-poeple-advisory .hero-content p {
   font-size: 25px;
   text-align: end;
   line-height: 1.1;
+  color: var(--color-white);
   margin-bottom: 24px;
 }
 
-.hero-section-of-poeple-advisory  .hero-content button {
+.hero-section-of-poeple-advisory .hero-content button {
   padding: 9px 21px;
+  font-size: 22px;
   gap: 10px;
   color: var(--color-white) !important;
   border-radius: 10px;
   border: 0.5px solid var(--color-white-90);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(7px);
-  font-size: 22px;
   font-weight: 500;
   cursor: pointer;
   transition: 0.3s ease;
 }
-@media (max-width:760px){
+
+@media (max-width: 1500px) {
+  .hero-section-of-poeple-advisory .hero-heading h1 {
+    font-size: 60px;
+  }
+  .hero-section-of-poeple-advisory .hero-number span {
+    font-size: 130px;
+  }
+  .hero-section-of-poeple-advisory .hero-content {
+    max-width: 438px;
+  }
+  .hero-section-of-poeple-advisory .hero-content p {
+  font-size: 21px;
+  }
   
-.hero-section-of-poeple-advisory  .hero-heading h1 {
-  font-size: 40px;
+.hero-section-of-poeple-advisory .hero-content button {
+  padding: 9px 21px;
+  font-size: 19px;
 }
-.hero-section-of-poeple-advisory  .hero-number {
-  position: absolute;
-  top: auto;
-  bottom: auto;
-  left: 15px;
 }
 
-.hero-section-of-poeple-advisory  .hero-number span {
-  font-size: 48px;
-  font-weight: 400;
-}
+@media (max-width: 760px) {
+  .hero-section-of-poeple-advisory{
+    height: 80vh;
+  }
+  .hero-section-of-poeple-advisory .hero-heading {
+    top: 24px;
+    left: 20px;
+  }
+  .hero-section-of-poeple-advisory .hero-heading h1 {
+    font-size: 40px;
+  }
+
+  /* "01" sits directly below the heading */
+  .hero-section-of-poeple-advisory .hero-number {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    bottom: auto;
+  }
+  .hero-section-of-poeple-advisory .hero-number span {
+    font-size: 48px;
+    font-weight: 400;
+  }
+
+  /* paragraph centered, button stays right */
+  .hero-section-of-poeple-advisory .hero-content {
+    right: 20px;
+    left: 20px;
+    bottom: 28px;
+    max-width: 100%;
+    align-items: flex-end;
+  }
+  .hero-section-of-poeple-advisory .hero-content p {
+    font-size: 20px;
+    text-align: right;
+    margin-bottom: 26px;
+  }
+  .hero-section-of-poeple-advisory .hero-content button {
+    font-size: 18px;
+    padding: 6px 15px;
+  }
 }
