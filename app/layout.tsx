@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import LenisProvider from "./components/layout/LenisProvider";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -71,9 +72,11 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", anekLatin.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <LenisProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@
   height: 800px;
   background: var(--color-white);
   overflow: hidden;
+  z-index: 99;
 }
 
 .brands-section::after {

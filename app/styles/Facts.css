@@ -1,7 +1,12 @@
+.facts-wrapper {
+  background: #000;
+}
+
 .facts-section {
   width: 100%;
-  background: black;
+  background: transparent;
   position: relative;
+  z-index: 6;
   overflow: hidden;
   padding: 80px 100px;
 }
@@ -34,7 +39,7 @@
 /* ── Boxes row ── */
 .facts-boxes {
   position: relative;
-  z-index: 1;
+  z-index: 999 ;
   display: flex;
   gap: 20px;
 }

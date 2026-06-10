@@ -1,5 +1,6 @@
 .why-choose-us {
   width: 100%;
+  z-index: 99;
   background: var(--color-dark);
   color: var(--color-white);
   padding: 100px 0;

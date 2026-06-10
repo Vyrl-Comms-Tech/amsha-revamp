@@ -27,7 +27,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className={`nav-container${isDark ? " nav-dark" : ""}`}>
+    <nav className={`nav-container ${isDark ? " nav-dark" : ""}`}>
       {/* Logo */}
       <div className="logo">
         <Image

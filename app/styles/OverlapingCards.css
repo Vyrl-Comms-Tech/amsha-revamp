@@ -1,6 +1,7 @@
 .p-oc {
   padding-block: 50px;
   background: var(--color-white);
+  z-index: 99;
 }
 .oc-section {
   width: 90vw;

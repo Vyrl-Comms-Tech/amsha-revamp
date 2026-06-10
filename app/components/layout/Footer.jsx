@@ -1,8 +1,4 @@
 "use client";
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Environment, PerspectiveCamera } from "@react-three/drei";
-import { Model } from "../../model";
 import "../../styles/Footer.css";
 
 const QUICK_LINKS = [
@@ -45,9 +41,7 @@ const Footer = () => {
 
         {/* ── Right column — 3D model + legal ── */}
         <div className="footer-right">
-          <div className="footer-canvas">
-          <img src='/img1.png' alt=""/>
-          </div>
+          <div className="footer-canvas" />
 
           <div className="footer-bottom">
             <p className="footer-copyright">© 2021 All Rights Reserved</p>

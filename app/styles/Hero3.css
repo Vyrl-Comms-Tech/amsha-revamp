@@ -1,17 +1,28 @@
+/* Wrapper height = 100vh (section) + scroll distance for animation.
+   Brands cannot scroll into view until this entire height is consumed.
+   400vh = 100vh section + 300vh stick time. Increase for more scroll. */
+.hero3-wrapper {
+  height: 400vh;
+  background: #000; /* black lives here so the section can be transparent */
+}
+
 .hero3-section {
-  position: relative;
+  position: sticky;
+  top: 0;
+  /* z-index > canvas-wrapper (5) so this section's stacking context sits
+     above the fixed canvas — text will paint on top of the 3D model */
+  z-index: 6;
   width: 100%;
-  background: #000;
-  min-height: 100vh;
+  height: 100vh;
+  background: transparent; /* wrapper provides the black, model shows through */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 80px 24px;
-  overflow: hidden;
+  /* overflow: hidden intentionally omitted — it breaks position: sticky */
 }
 
-/* ── background image (behind text, dimmed) ── */
 .hero3-bg {
   position: absolute;
   inset: 0;
@@ -19,7 +30,6 @@
   pointer-events: none;
 }
 
-/* ── content block ── */
 .hero3-content {
   position: relative;
   z-index: 2;
@@ -27,37 +37,39 @@
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  max-width: 75%;
+  max-width: 84%;
   text-align: center;
 }
+
 .hero3-label {
   color: var(--color-white);
   font-size: 25px;
   font-weight: 400;
 }
 
-/* combined paragraph */
 .hero3-text {
-  font-size: 40px;
+  font-size: 48px;
+  line-height: 1.1;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
-/* white bold portion — the "heading" */
+/* SplitType word wrapper — keeps each word on one piece, no mid-word line breaks */
+.hero3-text .word {
+  white-space: nowrap;
+}
+
 .hero3-primary {
   color: var(--color-white);
   font-weight: 500;
 }
 
-/* gray dimmed portion — the "paragraph" */
 .hero3-secondary {
   color: var(--color-white-35);
   font-weight: 500;
 }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
-
-/* Laptop (≤1280px) */
+/* Laptop (≤1580px) */
 @media (max-width: 1580px) {
   .hero3-text {
     font-size: 38px;
@@ -70,6 +82,9 @@
 
 /* Tablet (≤991px) */
 @media (max-width: 991px) {
+  .hero3-wrapper {
+    height: 350vh;
+  }
   .hero3-text {
     font-size: 28px;
   }
@@ -84,9 +99,11 @@
 
 /* Mobile (≤575px) */
 @media (max-width: 575px) {
+  .hero3-wrapper {
+    height: 300vh;
+  }
   .hero3-section {
     padding: 70px 1.5rem 60px;
-    min-height: 60vh;
     justify-content: center;
   }
   .hero3-text {

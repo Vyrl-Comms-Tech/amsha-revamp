@@ -10,11 +10,13 @@
 .footer-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 100vh;
+  height: 90vh;
 }
 
 /* ── Left column ── */
 .footer-left {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -107,6 +109,8 @@
 }
 
 .footer-bottom {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

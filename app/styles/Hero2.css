@@ -1,10 +1,23 @@
-.hero2-section {
-  position: relative;
+/* Wrapper height = 100vh (section) + scroll budget for box animations.
+   Increase to slow down the animation pace, decrease to speed it up. */
+.hero2-wrapper {
+  height: 300vh;
   background: #000;
+}
+
+.hero2-section {
+  position: sticky;
+  z-index: 9;
+  top: 0;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  background: transparent;
   padding-top: 160px !important;
+  /* perspective enables CSS 3D depth — boxes travel from z:-1500 to z:0,
+     appearing to burst forward out of the screen */
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  /* overflow:hidden intentionally removed — breaks position:sticky */
 }
 
 /* ── center image ── */
@@ -81,22 +94,29 @@
 
 .box-1 {
   left: 58.3%;
+  z-index: 100;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(7px);
   top: 15%;
 }
-/* top-right  */
 .box-2 {
+  z-index: 100;
   left: 24.5%;
   top: 37.5%;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(7px);
 }
-/* mid-left   */
 
 .box-5 {
+  z-index: 100;
   left: 56.8%;
   top: 64%;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(7px);
 }
-/* bot-right  */
-
-/* ── bottom-left description ── */
 .hero2-desc {
   position: absolute;
   bottom: 8%;
@@ -109,7 +129,6 @@
   z-index: 2;
 }
 
-/* Laptop (≤1280px) */
 @media (max-width: 1580px) {
   .stat-number {
     font-size: 24px;
@@ -136,7 +155,6 @@
   }
 }
 
-/* Tablet (≤991px) */
 @media (max-width: 991px) {
   .hero2-section {
     padding-top: 100px !important;
@@ -172,7 +190,9 @@
   }
 }
 
-/* Mobile (≤575px) */
+
+
+
 @media (max-width: 575px) {
   .hero2-section {
     padding-top: 80px !important;
@@ -211,6 +231,6 @@
     top: 66%;
   }
   .hero2-desc {
-   display: none;
+    display: none;
   }
 }

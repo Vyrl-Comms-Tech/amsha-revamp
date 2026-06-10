@@ -4,17 +4,18 @@ import "../../styles/Facts.css";
 
 const Facts = () => {
   return (
+    <div className="facts-wrapper">
     <section className="facts-section">
 
       {/* ── Center crystal/glass background image ── */}
-      <div className="facts-center-img-wrap">
+      {/* <div className="facts-center-img-wrap">
         <Image
           src="/img1.png"
           alt=""
           fill
           className="facts-center-img"
         />
-      </div>
+      </div> */}
 
       <div className="facts-boxes">
 
@@ -69,6 +70,7 @@ const Facts = () => {
 
       </div>
     </section>
+    </div>
   );
 };
 
