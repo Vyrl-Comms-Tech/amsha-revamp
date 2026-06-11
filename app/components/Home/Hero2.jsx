@@ -8,15 +8,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Corner = ({ pos }) => <span className={`bracket bracket-${pos}`} />;
 
-const StatBox = ({ className }) => (
+const BOXES = [
+  {
+    className: "box-1",
+    title: "Sustainability",
+    text: "We create people solutions designed to support long-term organisational growth, stability, and workplace success.",
+  },
+  {
+    className: "box-2",
+    title: "Innovation",
+    text: "We combine modern workplace thinking, behavioural insight, and practical strategy to deliver solutions that move organisations forward.",
+  },
+  {
+    className: "box-5",
+    title: "People-Centric",
+    text: "We believe strong organisations are built by empowering people, strengthening leadership, and creating healthier workplace cultures.",
+  },
+];
+
+const StatBox = ({ className, title, text }) => (
   <div className={`stat-box ${className}`}>
     <Corner pos="tl" />
     <Corner pos="tr" />
     <Corner pos="bl" />
     <Corner pos="br" />
     <div className="stat-content">
-      <span className="stat-number">Sustainability</span>
-      <span className="stat-label">We create people solutions designed to support long-term organisational growth, stability, and workplace success</span>
+      <span className="stat-number">{title}</span>
+      <span className="stat-label">{text}</span>
     </div>
   </div>
 );
@@ -71,9 +89,9 @@ const Hero2 = () => {
       <section ref={sectionRef} className="hero2-section">
         <div className="hero2-image-wrapper" />
 
-        <StatBox className="box-1" />
-        <StatBox className="box-2" />
-        <StatBox className="box-5" />
+        {BOXES.map((box) => (
+          <StatBox key={box.className} {...box} />
+        ))}
 
         <p className="hero2-desc">
           Amsha Advisory delivers strategic, people-centric solutions that enhance

@@ -10,11 +10,11 @@ const items = [
     },
     {
         title: "Empowered Growth",
-        text: "We help teams and leaders build the skills, confidence, and systems they need to grow with clarity and purpose.",
+        text: "We support organisations and individuals in unlocking their potential through practical development solutions that foster growth, performance, and long-term success.",
     },
     {
         title: "Strategic Partnership",
-        text: "We work closely with organisations as a trusted advisory partner, supporting people decisions that create lasting business impact.",
+        text: "We work closely with our clients as long-term partners, creating tailored solutions that support organisational goals, strengthen teams, and drive sustainable business impact.",
     },
 ];
 

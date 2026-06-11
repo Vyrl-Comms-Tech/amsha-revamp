@@ -10,17 +10,30 @@ const SLIDES = [
   {
     heading: "People Advisory",
     number: "01",
-    text: "We create bold digital experiences that connect design, storytelling, and performance into one seamless visual journey.",
+    text: "Strategic organisational support designed to strengthen workplace structure, improve role clarity, enhance operational efficiency, and support overall organisational performance.",
   },
   {
-    heading: "Talent Strategy",
+    heading: "Employee Training & Development",
     number: "02",
-    text: "We align people and organisational strategy, helping leaders build high-performing teams with purpose and precision.",
+    text: "Interactive and practical training programs focused on improving workplace performance, leadership capability, and team effectiveness.",
   },
   {
-    heading: "Leadership Growth",
+    heading: "Upskilling & Training",
     number: "03",
-    text: "We develop future-ready leaders, guiding organisations through transformation with clarity, confidence, and lasting impact.",
+    text: "Targeted development programs that help individuals strengthen professional skills and adapt to evolving workplace demands.",
+  },{
+    heading: "Entrepreneurial Consulting",
+    number: "04",
+    text: "Business support solutions designed to help entrepreneurs build stronger foundations, improve operations, and scale sustainably.",
+  },
+  {
+    heading: "Career Development",
+    number: "05",
+    text: " Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth .",
+  }, {
+    heading: "Talent Assessment",
+    number: "06",
+    text: "Behavioural and assessment-based solutions that support informed hiring, development, and organisational decision-making.",
   },
 ];
 
