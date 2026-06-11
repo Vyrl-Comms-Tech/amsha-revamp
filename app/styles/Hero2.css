@@ -3,6 +3,9 @@
 .hero2-wrapper {
   height: 300vh;
   background: #000;
+  /* clip-without-scroll-container: keeps sticky working while preventing
+     any child content from widening the document horizontally */
+  overflow-x: clip;
 }
 
 .hero2-section {
@@ -25,7 +28,7 @@
   position: absolute;
   top:-15%;
   left: 10%;
-  width: 1108px;
+  width: min(1108px, 90%);
   height: 130vh;
   /* background: linear-gradient(
     90deg,
@@ -109,6 +112,7 @@
   font-size: 21px;
   font-weight: 300;
   width: 300px;
+  max-width: calc(100vw - 80px);
 }
 
 .box-1 {

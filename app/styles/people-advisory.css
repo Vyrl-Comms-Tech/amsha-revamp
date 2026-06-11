@@ -107,7 +107,7 @@
     height: 240vh;
   }
   .hero-section-of-poeple-advisory {
-    height: 80vh;
+    height: 100vh;
   }
   .hero-section-of-poeple-advisory .hero-heading {
     top: 24px;
@@ -118,7 +118,7 @@
   }
   .hero-section-of-poeple-advisory .hero-number {
     position: absolute;
-    top: 70px;
+    top: 105px;
     left: 20px;
     bottom: auto;
   }

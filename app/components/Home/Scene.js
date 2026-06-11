@@ -60,6 +60,17 @@ const LABELS = ["Hero (start)", "Hero2 start", "Hero3 start", "Hero3 end"];
 // ─────────────────────────────────────────────────────────────────────────────
 const DEFAULT_EXTRA = { x: -8, y: 495, z: 3 };
 
+// Mobile keyframes — same Y spin progression so the animation feels identical,
+// but x (pitch) and z (roll) are halved so the model tilts far less and stays
+// within the narrow portrait canvas.
+const MOBILE_KEYFRAMES = [
+  { p: 0,     x:  6,   y:  75,    z:  -7  },
+  { p: 0.125, x:  7,   y: 321,    z:   8  },
+  { p: 0.5,   x:  6,   y: 500,    z:  -6  },
+  { p: 1.0,   x:  3.5, y: 658.5,  z:  -3  },
+];
+const MOBILE_EXTRA = { x: -3, y: 200, z: 1 };
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 function lerp(a, b, t) {
@@ -161,22 +172,28 @@ const Scene = ({ progress = 0, progress2 = 0 }) => {
     return () => gui?.destroy();
   }, []);
 
-  // ── Camera Z — pull back on mobile so the model isn't too close ─
-  // useThree().size gives the canvas pixel dimensions, which change as the
-  // canvas-wrapper CSS breakpoints kick in.  < 600 px canvas width = mobile.
-  // Desktop: z = 8.2   Mobile (≤575 px viewport / 85 vw canvas): z = 10.2
+  // ── Canvas size → mobile flag ───────────────────────────────────
+  // useThree().size gives canvas pixel dimensions (updates with CSS breakpoints).
+  // < 600 px canvas width = mobile (85 vw canvas on a ≤575 px viewport).
   const { size } = useThree();
-  const cameraZ = size.width < 600 ? 10.2 : 8.2;
+  const isMobile = size.width < 600;
+
+  // Pull camera further back on mobile so the model appears smaller and
+  // fits inside the narrow portrait canvas without clipping.
+  const cameraZ = isMobile ? 10.8 : 8.2;
 
   // ── Compute final rotation ──────────────────────────────────────
-  // Step 1: interpolate across the main Hero→Hero3 keyframes
-  const rot = getRotation(progress, keyframes);
+  // On mobile use the reduced-tilt keyframes so pitch/roll don't push
+  // the model outside the canvas edges.
+  const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : keyframes;
+  const rot = getRotation(progress, activeKeyframes);
 
   // Step 2: add the Facts→Footer extra rotation on top
+  const activeExtra = isMobile ? MOBILE_EXTRA : extra;
   if (progress2 > 0) {
-    rot.x += progress2 * extra.x * DEG;
-    rot.y += progress2 * extra.y * DEG;
-    rot.z += progress2 * extra.z * DEG;
+    rot.x += progress2 * activeExtra.x * DEG;
+    rot.y += progress2 * activeExtra.y * DEG;
+    rot.z += progress2 * activeExtra.z * DEG;
   }
 
   return (

@@ -40,8 +40,8 @@ const Hero = () => {
       });
 
       // Canvas slides from center (50%) → right column center (75%) as the
-      // footer enters the viewport. Skip on mobile — there's no right column,
-      // and the hard-locked left: 75% would push the canvas off-screen.
+      // footer enters the viewport. On mobile there's no right column so instead
+      // the canvas slides DOWN so the model appears at the bottom of the screen.
       if (window.innerWidth > 575) {
         positionTween = gsap.to(canvasEl, {
           left: "75%",
@@ -57,6 +57,23 @@ const Hero = () => {
             },
           },
         });
+      } else {
+        // Mobile: slide canvas down so the model lands at the bottom of the
+        // footer view instead of staying pinned at the top of the screen.
+        positionTween = gsap.to(canvasEl, {
+          top: "32%",
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: footerEl,
+            start: "top 80%",
+            end: "top 15%",
+            scrub: 0.3,
+            onLeave: () => {
+              gsap.set(canvasEl, { top: "32%" });
+            },
+          },
+        });
       }
     }
 
@@ -65,7 +82,7 @@ const Hero = () => {
       trigger2?.kill();
       positionTween?.scrollTrigger?.kill();
       if (canvasEl) {
-        gsap.set(canvasEl, { clearProps: "left" });
+        gsap.set(canvasEl, { clearProps: "left,top" });
       }
     };
   }, []);

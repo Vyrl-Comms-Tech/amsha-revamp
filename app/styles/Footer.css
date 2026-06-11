@@ -23,7 +23,10 @@
   padding-bottom: 60px;
   padding-right: 40px;
 }
-
+.button-and-para {
+  display: flex;
+  flex-direction: column-reverse;
+}
 .footer-heading {
   font-size: 78px;
   font-weight: 500;
@@ -51,7 +54,9 @@
   font-size: 22px;
   font-weight: 400;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer-cta:hover {
@@ -160,13 +165,61 @@
 
 @media (max-width: 575px) {
   .footer {
-    padding: 50px 0 0 28px;
+    padding: 44px 20px 0;
   }
+
+  /* Extend footer so there is room for the 3D model at the bottom */
+  .footer-main {
+    height: auto;
+    padding-bottom: 50vh;
+  }
+
   .footer-heading {
-    font-size: 38px;
+    font-size: 30px;
+    white-space: normal;
+    line-height: 1.15;
+    margin-bottom: 16px;
   }
+
+  .footer-cta {
+    font-size: 16px;
+    padding: 9px 22px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  .footer-sub {
+    font-size: 16px;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  /* Two-column grid matching Figma — 3 cols flow 2 + 1 */
   .footer-links {
-    gap: 30px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 16px;
+    margin-top: 30px;
+    padding-top: 24px;
+    flex-wrap: unset;
+  }
+
+  /* Show the copyright bar on mobile */
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-canvas {
+    display: none;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    padding: 16px 0 24px;
+  }
+
+  .footer-legal {
+    gap: 16px;
   }
 }

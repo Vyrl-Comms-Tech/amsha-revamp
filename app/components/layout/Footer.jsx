@@ -17,11 +17,14 @@ const Footer = () => {
         {/* ── Left column ── */}
         <div className="footer-left">
           <h1 className="footer-heading">LETS GET IN TOUCH</h1>
+<div className="button-and-para">
+
+          <button className="footer-cta">Contact us</button>
           <p className="footer-sub">
             For those who want more from their business, there&apos;s
             Amsha. Get started today and never look back.
           </p>
-          <button className="footer-cta">Contact us</button>
+</div>
 
           <div className="footer-links">
             {[0, 1, 2].map((col) => (
