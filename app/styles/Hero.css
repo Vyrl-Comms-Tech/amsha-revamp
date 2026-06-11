@@ -231,12 +231,11 @@
 /* Mobile (≤575px) */
 @media (max-width: 575px) {
   .hero-section {
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    /* grid-template-columns: 1fr; */
-    /* align-items: center; */
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 25vh;
+    gap: 16px;
   }
   .hero-center {
     display: none;
@@ -250,8 +249,8 @@
   .canvas-wrapper {
     width: 85vw;
     left: 50%;
-    top: 5%;
-    height: 70vh;
+    top: 40%;
+    height: 60vh;
     transform: translateX(-50%);
   }
   .canvas-wrapper::before {

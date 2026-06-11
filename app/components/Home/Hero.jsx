@@ -29,6 +29,8 @@ const Hero = () => {
     const footerEl = document.querySelector(".footer");
     let trigger2 = null;
     let positionTween = null;
+    let mobileHero2Tween = null;
+    let mobileFooterTween = null;
 
     if (factsEl && footerEl) {
       trigger2 = ScrollTrigger.create({
@@ -39,10 +41,8 @@ const Hero = () => {
         onUpdate: (self) => setProgress2(self.progress),
       });
 
-      // Canvas slides from center (50%) → right column center (75%) as the
-      // footer enters the viewport. On mobile there's no right column so instead
-      // the canvas slides DOWN so the model appears at the bottom of the screen.
       if (window.innerWidth > 575) {
+        // Desktop: canvas slides from center (50%) → right column (75%) on footer entry
         positionTween = gsap.to(canvasEl, {
           left: "75%",
           ease: "none",
@@ -52,26 +52,42 @@ const Hero = () => {
             start: "top 70%",
             end: "top 40%",
             scrub: 0.3,
-            onLeave: () => {
-              gsap.set(canvasEl, { left: "75%" });
-            },
+            onLeave: () => gsap.set(canvasEl, { left: "75%" }),
           },
         });
       } else {
-        // Mobile: slide canvas down so the model lands at the bottom of the
-        // footer view instead of staying pinned at the top of the screen.
-        positionTween = gsap.to(canvasEl, {
-          top: "32%",
+        // Mobile: canvas starts at top:40% (model at bottom, behind Hero content).
+        // Animate top as each section enters so the model repositions:
+        //   Hero2 / Hero3  → top: 20%  (model centered: 20% + 30vh = ~50%)
+        //   Footer         → top: 45%  (model deep at bottom: 45% + 30vh = ~75%)
+        const hero2El = document.querySelector(".hero2-wrapper");
+
+        if (hero2El) {
+          // Model moves from bottom (Hero) to center (Hero2/Hero3) as Hero2 scrolls in
+          mobileHero2Tween = gsap.to(canvasEl, {
+            top: "20%",
+            ease: "none",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: hero2El,
+              start: "top 80%",  // hero2 is 80% into viewport
+              end: "top 10%",    // hero2 almost fully entered
+              scrub: 0.5,
+            },
+          });
+        }
+
+        // Model moves from center (Hero2/Hero3) to deep bottom (Footer)
+        mobileFooterTween = gsap.to(canvasEl, {
+          top: "45%",
           ease: "none",
           immediateRender: false,
           scrollTrigger: {
             trigger: footerEl,
             start: "top 80%",
-            end: "top 15%",
-            scrub: 0.3,
-            onLeave: () => {
-              gsap.set(canvasEl, { top: "32%" });
-            },
+            end: "top 20%",
+            scrub: 0.5,
+            onLeave: () => gsap.set(canvasEl, { top: "45%" }),
           },
         });
       }
@@ -81,6 +97,8 @@ const Hero = () => {
       trigger.kill();
       trigger2?.kill();
       positionTween?.scrollTrigger?.kill();
+      mobileHero2Tween?.scrollTrigger?.kill();
+      mobileFooterTween?.scrollTrigger?.kill();
       if (canvasEl) {
         gsap.set(canvasEl, { clearProps: "left,top" });
       }
