@@ -1,4 +1,6 @@
 .founder-section {
+  position: relative;
+  /* z-index: 10; */
   width: 100%;
   background: var(--color-dark);
 }
@@ -95,7 +97,11 @@
   object-fit: cover;
   object-position: center top;
 }
-
+@media (max-width:1780px){
+  .founder-container{
+    height: auto;
+  }
+}
 /* ── Responsive ── */
 @media (max-width: 991px) {
   .founder-container {

@@ -1,4 +1,6 @@
 .bic-section {
+  position: relative;
+  z-index: 10;
   width: 100%;
   background: var(--color-white);
   padding: 60px 100px 100px;

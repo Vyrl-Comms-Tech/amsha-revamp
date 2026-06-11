@@ -1,4 +1,5 @@
 .why-choose-us {
+  position: relative;
   width: 100%;
   z-index: 99;
   background: var(--color-dark);
@@ -74,7 +75,7 @@
 }
 
 .why-item p {
-  margin: 22px 0 0;
+  overflow: hidden;
   font-size: 18px;
   max-width: 730px;
   line-height: 1.55;

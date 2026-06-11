@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { useThree } from "@react-three/fiber";
+import { useThree, useFrame } from "@react-three/fiber";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { Model } from "../../model";
 
@@ -83,6 +83,10 @@ function getRotation(progress, keyframes) {
   };
 }
 
+const MAX_YAW   = 0.175; // ~2 deg
+const MAX_PITCH = 0.152; // ~1.3 deg
+const LERP_EASE = 0.04;
+
 const Scene = ({ progress = 0, progress2 = 0 }) => {
   const [keyframes, setKeyframes] = useState(DEFAULT_KEYFRAMES);
   const kfRef = useRef(DEFAULT_KEYFRAMES.map((kf) => ({ ...kf })));
@@ -90,10 +94,32 @@ const Scene = ({ progress = 0, progress2 = 0 }) => {
   const [extra, setExtra] = useState({ ...DEFAULT_EXTRA });
   const extraRef = useRef({ ...DEFAULT_EXTRA });
 
+  const mouseGroupRef = useRef();
+  const mouseTarget  = useRef({ x: 0, y: 0 });
+  const mouseCurrent = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      mouseTarget.current.x = (e.clientX / window.innerWidth  - 0.5) * 2;
+      mouseTarget.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
+  }, []);
+
+  useFrame(() => {
+    mouseCurrent.current.x = lerp(mouseCurrent.current.x, mouseTarget.current.x, LERP_EASE);
+    mouseCurrent.current.y = lerp(mouseCurrent.current.y, mouseTarget.current.y, LERP_EASE);
+    if (mouseGroupRef.current) {
+      mouseGroupRef.current.rotation.y =  mouseCurrent.current.x * MAX_YAW;
+      mouseGroupRef.current.rotation.x =  mouseCurrent.current.y * MAX_PITCH;
+    }
+  });
+
   useEffect(() => {
     let gui;
     import("lil-gui").then(({ default: GUI }) => {
-      // gui = new GUI({ title: "Rotation Keyframes", width: 128 });
+      gui = new GUI({ title: "Rotation Keyframes", width: 128 });
 
       // ── Hero → Hero3 keyframe folders ────────────────────────────
       LABELS.forEach((label, idx) => {
@@ -157,7 +183,9 @@ const Scene = ({ progress = 0, progress2 = 0 }) => {
     <>
       <PerspectiveCamera fov={45} near={0.2} far={10000} makeDefault position={[0, 2.5, cameraZ]} />
       <Environment preset="city" />
-      <Model rotationX={rot.x} rotationY={rot.y} rotationZ={rot.z} />
+      <group ref={mouseGroupRef}>
+        <Model rotationX={rot.x} rotationY={rot.y} rotationZ={rot.z} />
+      </group>
     </>
   );
 };

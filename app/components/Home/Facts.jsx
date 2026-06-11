@@ -26,7 +26,7 @@ const Facts = () => {
               Facet5:
             </h2>
             <Image
-              src="/img17.png"
+              src="/img18.png"
               alt="MBTI"
               width={190}
               height={130}

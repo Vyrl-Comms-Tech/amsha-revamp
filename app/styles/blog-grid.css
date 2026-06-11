@@ -1,4 +1,6 @@
 .bg-section {
+  position: relative;
+  z-index: 10;
   width: 100%;
   background: var(--color-white);
   padding: 80px 50px 100px;

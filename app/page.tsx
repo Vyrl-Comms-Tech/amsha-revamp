@@ -7,6 +7,7 @@ import OverlapingCards from "../app/components/Home/OverlapingCards";
 import PeopleAdvisory from "../app/components/Home/PeopleAdvisory";
 import WhyChooseUs from "../app/components/Home/WhyChooseUs";
 import Facts from "../app/components/Home/Facts";
+import Particles from "../app/components/Home/Particles";
 export default function Home() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function Home() {
       <PeopleAdvisory />
       <WhyChooseUs />
       <Facts />
+      {/* <Particles /> */}
     </>
   );
 }

@@ -1,35 +1,142 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../../styles/people-advisory.css";
+import { PinkSphereCanvas } from "./Particles";
 
-export default function PoepleAdvisory() {
-    return (
-        <section className="hero-section-of-poeple-advisory">
-            <div className="hero-heading">
-                <h1>People Advisory</h1>
-            </div>
+const SLIDES = [
+  {
+    heading: "People Advisory",
+    number: "01",
+    text: "We create bold digital experiences that connect design, storytelling, and performance into one seamless visual journey.",
+  },
+  {
+    heading: "Talent Strategy",
+    number: "02",
+    text: "We align people and organisational strategy, helping leaders build high-performing teams with purpose and precision.",
+  },
+  {
+    heading: "Leadership Growth",
+    number: "03",
+    text: "We develop future-ready leaders, guiding organisations through transformation with clarity, confidence, and lasting impact.",
+  },
+];
 
-            <div className="hero-image">
-                <Image
-                    src="/img13.gif"
-                    alt="Hero Visual"
-                    width={780}
-                    height={800}
-                    priority
-                />
-            </div>
+export default function PeopleAdvisory() {
+  const wrapperRef  = useRef();
+  const headingRef  = useRef();
+  const numberRef   = useRef();
+  const paraRef     = useRef();
+  const [slide, setSlide]       = useState(0);
+  const currentSlide            = useRef(0);
+  const hasShownSlide3          = useRef(false);
 
-            <div className="hero-number">
-                <span>01</span>
-            </div>
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
 
-            <div className="hero-content">
-                <p>
-                    We create bold digital experiences that connect design, storytelling,
-                    and performance into one seamless visual journey.
-                </p>
+    const getEls = () =>
+      [headingRef.current, numberRef.current, paraRef.current].filter(Boolean);
 
-                <button>Explore More</button>
-            </div>
-        </section>
-    );
+    const isAnimating = { current: false };
+    const pending     = { current: null };
+    let sectionEnd    = 0;
+
+    const runTransition = (next) => {
+      isAnimating.current = true;
+      currentSlide.current = next;
+
+      gsap.to(getEls(), {
+        autoAlpha: 0,
+        yPercent: -100,
+        duration: 0.3,
+        ease: "power1.inOut",
+        stagger: 0.04,
+        onComplete: () => {
+          flushSync(() => setSlide(currentSlide.current));
+          gsap.fromTo(
+            getEls(),
+            { autoAlpha: 0, yPercent: 100 },
+            {
+              autoAlpha: 1,
+              yPercent: 0,
+              duration: 0.4,
+              ease: "power1.inOut",
+              stagger: 0.06,
+              onComplete: () => {
+                isAnimating.current = false;
+                if (next === 2) hasShownSlide3.current = true;
+                if (pending.current !== null && pending.current !== currentSlide.current) {
+                  const nextPending = pending.current;
+                  pending.current = null;
+                  runTransition(nextPending);
+                }
+              },
+            }
+          );
+        },
+      });
+    };
+
+    const goTo = (next) => {
+      if (next === currentSlide.current) return;
+      if (isAnimating.current) { pending.current = next; return; }
+      runTransition(next);
+    };
+
+    const st = ScrollTrigger.create({
+      trigger: wrapperRef.current,
+      start: "top top",
+      end: "bottom bottom",
+      onRefresh: (self) => { sectionEnd = self.end; },
+      onUpdate: (self) => {
+        sectionEnd = self.end;
+        const p = self.progress;
+        goTo(p < 0.28 ? 0 : p < 0.56 ? 1 : 2);
+      },
+    });
+
+    // Snap back if the user fast-scrolls past the section before slide 3 has been shown
+    const snapScrollBack = () => {
+      if (hasShownSlide3.current || !sectionEnd) return;
+      if (window.scrollY > sectionEnd) {
+        window.scrollTo({ top: sectionEnd, behavior: "instant" });
+      }
+    };
+
+    window.addEventListener("scroll", snapScrollBack, { passive: true });
+
+    return () => {
+      st.kill();
+      window.removeEventListener("scroll", snapScrollBack);
+    };
+  }, []);
+
+  const { heading, number, text } = SLIDES[slide];
+
+  return (
+    <div ref={wrapperRef} className="pa-scroll-wrapper">
+      <section className="hero-section-of-poeple-advisory">
+
+        <div className="hero-heading">
+          <h1 ref={headingRef}>{heading}</h1>
+        </div>
+
+        <div className="hero-image">
+          <PinkSphereCanvas />
+        </div>
+
+        <div className="hero-number">
+          <span ref={numberRef}>{number}</span>
+        </div>
+
+        <div className="hero-content">
+          <p ref={paraRef}>{text}</p>
+          <button>Explore More</button>
+        </div>
+
+      </section>
+    </div>
+  );
 }

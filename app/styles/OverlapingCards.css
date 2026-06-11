@@ -1,4 +1,5 @@
 .p-oc {
+  position: relative;
   padding-block: 50px;
   background: var(--color-white);
   z-index: 99;

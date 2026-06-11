@@ -20,6 +20,25 @@
   /* overflow:hidden intentionally removed — breaks position:sticky */
 }
 
+.hero2-section::before {
+  content: "";
+  position: absolute;
+  top:-15%;
+  left: 10%;
+  width: 1108px;
+  height: 130vh;
+  /* background: linear-gradient(
+    90deg,
+    rgba(21, 22, 26, 0.14) 2.61%,
+    rgba(250, 250, 250, 0.14) 48.84%,
+    rgba(21, 22, 26, 0.14) 91.36%
+  );
+  filter: blur(32px);
+  transform: rotate(26.828deg); */
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* ── center image ── */
 .hero2-image-wrapper {
   position: absolute;
