@@ -249,6 +249,7 @@
   }
   .canvas-wrapper {
     width: 85vw;
+    left: 50%;
     top: 5%;
     height: 70vh;
     transform: translateX(-50%);

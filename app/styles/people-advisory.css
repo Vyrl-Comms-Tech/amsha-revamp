@@ -27,12 +27,12 @@
 }
 
 .hero-section-of-poeple-advisory .hero-image {
+  width: 920px;
+  height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 920px;
-  height: 90%;
   pointer-events: none;
 }
 
@@ -142,4 +142,12 @@
     font-size: 18px;
     padding: 6px 15px;
   }
+}
+
+@media (max-width:600px){
+  
+.hero-section-of-poeple-advisory .hero-image {
+  width: 620px;
+  height: 50%;
+}
 }

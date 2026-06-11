@@ -40,41 +40,24 @@ const Hero = () => {
       });
 
       // Canvas slides from center (50%) → right column center (75%) as the
-      // footer enters the viewport.
-      //
-      // WHY scrub: 0.3 instead of scrub: true
-      //   Lenis uses a lerp-based inertia model.  On any wheel input it briefly
-      //   creates a tiny oscillating scroll delta before settling — with zero lag
-      //   (scrub: true) the canvas faithfully follows that micro-oscillation,
-      //   producing a visible "goes left then right" blip.  A 0.3 s lag is
-      //   short enough to feel instant but long enough to absorb the Lenis blip.
-      //
-      // WHY immediateRender: false
-      //   Prevents GSAP from snapshotting the start value at page-load time.
-      //   Instead it reads the live CSS value the first time scroll enters the
-      //   trigger, so any prior inline style (e.g. from onLeave) doesn't confuse
-      //   the start state on a back-and-forth scroll.
-      //
-      // WHY only left (no width animation)
-      //   Width + transform:translateX(-50%) interact and add unnecessary jitter.
-      //   Canvas width stays at 55 vw from CSS; only the center anchor moves.
-      //
-      // onLeave hard-locks the position once the footer is fully scrolled in,
-      //   preventing end-of-page Lenis momentum from nudging it back left.
-      positionTween = gsap.to(canvasEl, {
-        left: "75%",
-        ease: "none",
-        immediateRender: false,
-        scrollTrigger: {
-          trigger: footerEl,
-          start: "top 70%",
-          end: "top 40%",
-          scrub: 0.3,
-          onLeave: () => {
-            gsap.set(canvasEl, { left: "75%" });
+      // footer enters the viewport. Skip on mobile — there's no right column,
+      // and the hard-locked left: 75% would push the canvas off-screen.
+      if (window.innerWidth > 575) {
+        positionTween = gsap.to(canvasEl, {
+          left: "75%",
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: footerEl,
+            start: "top 70%",
+            end: "top 40%",
+            scrub: 0.3,
+            onLeave: () => {
+              gsap.set(canvasEl, { left: "75%" });
+            },
           },
-        },
-      });
+        });
+      }
     }
 
     return () => {
