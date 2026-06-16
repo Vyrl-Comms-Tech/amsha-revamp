@@ -1,0 +1,113 @@
+.ss-wrapper {
+  position: relative;
+  /* height set dynamically in JS: window.innerHeight + scrollDistance */
+}
+
+.services-section {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  height: 100vh;
+  background: #121316;
+  overflow: hidden;
+}
+
+.orb-wrap {
+  position: absolute;
+  left: 50%;
+  height: 950px;
+  width: 100%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.orb-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.service-card {
+  position: absolute;
+  padding: 30px 20px;
+  border-radius: 10px;
+  background: rgba(245, 245, 245, 0.05);
+  backdrop-filter: blur(7px);
+  color: #ffffff;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.service-card span {
+  display: block;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 9px;
+}
+
+.service-card h3 {
+  margin: 0 0 17px;
+  font-size: 32px;
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.service-card p {
+  margin: 0 0 9px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 20px;
+  line-height: 1.08;
+}
+
+.service-card a {
+  font-size: 20px;
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 400;
+}
+
+/* ── Mobile — vertical stack, no sphere, no absolute positions ── */
+@media (max-width: 768px) {
+  .ss-wrapper {
+    height: auto !important;
+  }
+
+  .services-section {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 20px;
+  }
+
+  .orb-wrap {
+    display: none;
+  }
+
+  .service-card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+  }
+  
+.service-card span {
+  font-size: 17px;
+}
+
+.service-card h3 {
+  font-size: 27px;
+}
+
+.service-card p {
+  font-size: 18px;
+}
+
+.service-card a {
+  font-size: 14px;
+}
+}

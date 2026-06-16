@@ -1,0 +1,174 @@
+.och-wrapper {
+  position: relative;
+  height:250vh;
+  background: var(--color-white);
+  z-index: 99;
+}
+
+.och-section {
+  position: sticky;
+  top: 0;
+  height: 50vh;
+  overflow: hidden;
+  background: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  padding: 50px 50px 40px;
+}
+
+.och-track-outer {
+  flex: 1;
+  padding-left: 200px !important;
+  overflow: hidden;
+  position: relative;
+  padding-left: 0;
+}
+
+.och-track {
+  display: flex;
+  height: 100%;
+}
+
+.och-item {
+  flex: 0 0 calc((100vw - 100px) / 3);
+  padding-right: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.och-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-bottom: 60px;
+}
+.och-heading {
+  font-size: 68px;
+  font-weight: 500;
+  color: var(--color-black);
+  line-height: 1.05;
+}
+
+.och-heading-dim {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.och-number {
+  font-size: 70px;
+  font-weight: 500;
+  color:#5C5C5C;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Sliding track ── */
+/* .och-track-outer {
+  flex: 1;
+  padding-left: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.och-track {
+  display: flex;
+  height: 100%; 
+}
+  */
+
+/* Each item is exactly 1/3 of the available content width */
+/* .och-item {
+  flex-shrink: 0;
+  width: calc((100vw - 100px) / 2.8);
+  padding-right: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+} */
+
+.och-item-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.och-item-heading {
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--color-black);
+}
+
+.och-item-text {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.55);
+  line-height: 1.45;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+@media (max-width: 1280px) {
+  .och-heading {
+    font-size: 54px;
+  }
+  .och-number {
+    font-size: 100px;
+  }
+}
+
+@media (max-width: 991px) {
+  .och-section {
+    padding: 60px 30px 40px;
+  }
+  .och-heading {
+    font-size: 42px;
+  }
+  .och-number {
+    font-size: 80px;
+  }
+  .och-item {
+    flex: 0 0 calc((100vw - 60px) / 2);
+    padding-right: 40px;
+  }
+  .och-item-heading {
+    font-size: 20px;
+  }
+  .och-item-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .och-wrapper {
+    width: 100%;
+  }
+.och-track-outer {
+padding-left: 0px !important;
+}
+  .och-section {
+    width: 100%;
+    padding: 50px 20px 30px;
+  }
+  .och-top {
+    margin-bottom: 40px;
+  }
+  .och-heading {
+    font-size: 32px;
+  }
+  .och-number {
+    font-size: 60px;
+  }
+  .och-item {
+    flex: 0 0 calc(100vw - 40px);
+    padding-right: 20px;
+  }
+  .och-item-heading {
+    font-size: 18px;
+  }
+  .och-item-text {
+    font-size: 15px;
+  }
+}

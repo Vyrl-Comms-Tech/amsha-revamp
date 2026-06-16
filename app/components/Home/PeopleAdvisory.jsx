@@ -21,7 +21,8 @@ const SLIDES = [
     heading: "Upskilling & Training",
     number: "03",
     text: "Targeted development programs that help individuals strengthen professional skills and adapt to evolving workplace demands.",
-  },{
+  },
+  {
     heading: "Entrepreneurial Consulting",
     number: "04",
     text: "Business support solutions designed to help entrepreneurs build stronger foundations, improve operations, and scale sustainably.",
@@ -30,7 +31,8 @@ const SLIDES = [
     heading: "Career Development",
     number: "05",
     text: " Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth .",
-  }, {
+  },
+  {
     heading: "Talent Assessment",
     number: "06",
     text: "Behavioural and assessment-based solutions that support informed hiring, development, and organisational decision-making.",
@@ -38,13 +40,13 @@ const SLIDES = [
 ];
 
 export default function PeopleAdvisory() {
-  const wrapperRef  = useRef();
-  const headingRef  = useRef();
-  const numberRef   = useRef();
-  const paraRef     = useRef();
-  const [slide, setSlide]       = useState(0);
-  const currentSlide            = useRef(0);
-  const hasShownSlide3          = useRef(false);
+  const wrapperRef   = useRef();
+  const headingRef   = useRef();
+  const numberRef    = useRef();
+  const paraRef      = useRef();
+  const [slide, setSlide] = useState(0);
+  const currentSlide      = useRef(0);
+  const hasShownAll       = useRef(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -54,7 +56,7 @@ export default function PeopleAdvisory() {
 
     const isAnimating = { current: false };
     const pending     = { current: null };
-    let sectionEnd    = 0;
+    let sectionEnd = 0;
 
     const runTransition = (next) => {
       isAnimating.current = true;
@@ -79,7 +81,7 @@ export default function PeopleAdvisory() {
               stagger: 0.06,
               onComplete: () => {
                 isAnimating.current = false;
-                if (next === 2) hasShownSlide3.current = true;
+                if (next === SLIDES.length - 1) hasShownAll.current = true;
                 if (pending.current !== null && pending.current !== currentSlide.current) {
                   const nextPending = pending.current;
                   pending.current = null;
@@ -105,24 +107,39 @@ export default function PeopleAdvisory() {
       onRefresh: (self) => { sectionEnd = self.end; },
       onUpdate: (self) => {
         sectionEnd = self.end;
-        const p = self.progress;
-        goTo(p < 0.28 ? 0 : p < 0.56 ? 1 : 2);
+        goTo(Math.min(SLIDES.length - 1, Math.floor(self.progress * SLIDES.length)));
       },
     });
 
-    // Snap back if the user fast-scrolls past the section before slide 3 has been shown
-    const snapScrollBack = () => {
-      if (hasShownSlide3.current || !sectionEnd) return;
-      if (window.scrollY > sectionEnd) {
-        window.scrollTo({ top: sectionEnd, behavior: "instant" });
+    // Wheel guard: intercept downward wheel events when the user is inside the
+    // section and hasn't seen all slides yet.  Non-passive so we can preventDefault.
+    const onWheel = (e) => {
+      if (hasShownAll.current || !sectionEnd) return;
+      const atOrPastEnd = window.scrollY >= sectionEnd - 5;
+      if (e.deltaY > 0 && atOrPastEnd) {
+        e.preventDefault();
       }
     };
 
-    window.addEventListener("scroll", snapScrollBack, { passive: true });
+    // Touch guard: same idea for swipe-up on mobile.
+    let touchStartY = 0;
+    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
+    const onTouchMove  = (e) => {
+      if (hasShownAll.current || !sectionEnd) return;
+      const swipingUp   = e.touches[0].clientY < touchStartY;
+      const atOrPastEnd = window.scrollY >= sectionEnd - 5;
+      if (swipingUp && atOrPastEnd) e.preventDefault();
+    };
+
+    window.addEventListener("wheel",      onWheel,      { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true  });
+    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
 
     return () => {
       st.kill();
-      window.removeEventListener("scroll", snapScrollBack);
+      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove",  onTouchMove);
     };
   }, []);
 

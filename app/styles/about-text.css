@@ -1,5 +1,15 @@
+/* Tall wrapper — its height = 100vh (section) + scroll time for animation.
+   Increase to give the animation more scroll distance. */
+.about-text-wrapper {
+  height: 400vh;
+  background: var(--color-white);
+}
+
 .about-text {
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 80px 24px;
   z-index: 10;
   width: 100%;
   display: flex;
@@ -7,16 +17,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
   overflow: hidden;
-}
-
-/* ── background image (behind text, dimmed) ── */
-.about-text-bg {
-  position: absolute;
-  inset: 0;
-  opacity: 0.22;
-  pointer-events: none;
 }
 
 /* ── content block ── */
@@ -30,6 +31,7 @@
   max-width: 90%;
   text-align: center;
 }
+
 .about-text-label {
   color: var(--color-black);
   font-size: 25px;
@@ -40,16 +42,49 @@
 .about-text-text {
   font-size: 48px;
   line-height: 1.4;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
-/* black bold portion — the "heading" */
+/* SplitType word wrapper — prevents mid-word line breaks */
+.about-text-text .word {
+  white-space: nowrap;
+}
+
+/* black bold portion */
 .about-text-primary {
   color: var(--color-black);
   font-weight: 500;
 }
 
-/* gray dimmed portion — the "paragraph" */
-.about-text-secondary {
+/* gray dimmed portion */
+/* .about-text-secondary {
   color: var(--color-black-35);
   font-weight: 500;
+} */
+
+@media (max-width: 991px) {
+  .about-text-wrapper {
+    height: 350vh;
+  }
+  .about-text-text {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 667px) {
+  .about-text-wrapper {
+    height: 300vh;
+  }
+  .about-text-text {
+    font-size: 29px;
+    line-height: 1.3;
+  }
+  .about-text {
+    padding: 70px 1.5rem 60px;
+  }
+  .about-text-content {
+    max-width: 100%;
+    gap: 16px;
+  }
 }

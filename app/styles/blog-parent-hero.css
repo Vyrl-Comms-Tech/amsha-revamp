@@ -157,6 +157,7 @@
   }
   .bph-card {
     flex-direction: column;
+    gap: 15px;
   }
   .bph-image {
     flex: none;
@@ -167,13 +168,13 @@
 
 @media (max-width: 575px) {
   .bph-wrapper {
-    padding: 140px 24px 40px;
+    padding: 200px 15px 40px;
   }
   .bph-title {
     font-size: 30px;
   }
   .bph-card-title {
-    font-size: 22px;
+    font-size: 30px;
   }
   .bph-image {
     height: 220px;
@@ -182,5 +183,15 @@
     margin-top: 20px;
     padding: 9px 19px;
     font-size: 16px;
+  }
+
+  .bph-card-desc {
+    font-size: 18px;
+    line-height: 1.1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show only 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

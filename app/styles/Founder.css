@@ -123,14 +123,24 @@
   }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 675px) {
   .founder-container {
-    padding: 50px 24px;
+    padding: 0px 0px;
   }
   .founder-heading {
     font-size: 36px;
   }
+  .founder-body p{
+    font-size: 18px;
+    line-height: 1.1;
+  }
+  .founder-body{
+    gap: 19px;
+  }
   .founder-right {
-    min-height: 320px;
+    min-height: 520px;
+  }
+  .founder-left{
+    padding-inline: 15px;
   }
 }

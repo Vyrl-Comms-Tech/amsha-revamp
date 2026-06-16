@@ -1,0 +1,286 @@
+
+
+.sa-section {
+  background: var(--color-white, #fff);
+  padding: 100px 50px 80px;
+}
+
+.sa-heading {
+  font-size: 65px;
+  font-weight: 500;
+  color: var(--color-black, #15161a);
+  margin-bottom: 100px;
+}
+
+/* ── Grid — 3 equal columns ── */
+.sa-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 310px;
+  gap: 30px;
+  margin-bottom: 46px;
+}
+
+/* ── Card base ── */
+.sa-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 28px 28px 32px;
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  transition: border-color 0.2s;
+}
+
+.sa-card:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+/* ── Dark card variant ── */
+.sa-card--dark {
+  background: #15161a;
+  border-color: transparent;
+}
+
+.sa-card--dark:hover {
+  border-color: transparent;
+}
+
+/* ── Card top row: number + icon ── */
+.sa-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: auto;
+}
+
+.sa-num {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.sa-card--dark .sa-num {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.sa-icon {
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.55);
+  transition: transform 0.3s ease;
+}
+
+.sa-card--dark .sa-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sa-card--open .sa-icon {
+  transform: rotate(45deg);   
+}
+
+/* ── Card main: title + collapsible body ── */
+.sa-card-main {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sa-title {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--color-black, #ffffff);
+  line-height: 1.15;
+}
+
+.sa-card--dark .sa-title {
+  color: #fff;
+}
+
+/* ── Accordion body — CSS grid 0fr → 1fr trick ── */
+.sa-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.sa-card--open .sa-body {
+  grid-template-rows: 1fr;
+  margin-top: 46px;
+}
+
+.sa-body-inner {
+  overflow: hidden;
+}
+
+.sa-text {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+  line-height: 1.3;
+  padding-bottom: 4px;
+}
+
+.sa-card--dark .sa-text {
+  color: rgb(255, 255, 255);
+}
+
+/* ══════════════════════════════
+   ROW 7 — newsletter + last card
+══════════════════════════════ */
+
+.sa-last-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+/* ── Newsletter block ── */
+.sa-newsletter {
+  background: #15161a;
+  border-radius: 16px;
+  padding: 52px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  color: #fff;
+}
+
+.sa-nl-heading {
+  font-size: 40px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.sa-nl-sub {
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+.sa-nl-legal {
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.6;
+}
+
+.sa-nl-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.sa-nl-input {
+  flex: 1;
+  padding: 13px 18px;
+  background: #222;
+  border-radius: 8px;
+  color: #979797;
+  font-size: 19px;
+  font-family: var(--font-primary, inherit);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sa-nl-input::placeholder {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.sa-nl-input:focus {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.sa-nl-btn {
+  padding: 13px 26px;
+  color: #fff;
+  border: 1px solid white !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: var(--font-primary, inherit);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.sa-nl-btn:hover {
+  opacity: 0.88;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+@media (max-width: 1280px) {
+  .sa-heading {
+    font-size: 48px;
+  }
+  .sa-title {
+    font-size: 20px;
+  }
+  .sa-nl-heading {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .sa-section {
+    padding: 70px 30px 60px;
+  }
+  .sa-heading {
+    font-size: 38px;
+    margin-bottom: 36px;
+  }
+  .sa-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
+  }
+  .sa-card {
+    overflow: visible;
+  }
+  .sa-last-row {
+    grid-template-columns: 1fr;
+  }
+  .sa-newsletter {
+    padding: 40px 36px;
+  }
+}
+
+@media (max-width: 575px) {
+  .sa-section {
+    padding: 50px 20px 50px;
+  }
+  .sa-heading {
+    font-size: 30px;
+  }
+  .sa-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .sa-last-row {
+    gap: 12px;
+  }
+  .sa-title {
+    font-size: 18px;
+  }
+  .sa-nl-heading {
+    font-size: 24px;
+  }
+  .sa-nl-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sa-nl-input {
+    max-width: 100%;
+  }
+  .sa-newsletter {
+    padding: 36px 24px;
+  }
+}

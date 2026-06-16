@@ -32,9 +32,9 @@
 }
 
 .bic-card {
+  padding: 28px 24px;
   background:#F8F8F8;
   border-radius: 10px;
-  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -57,7 +57,6 @@
 .bic-input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 19px;
   font-family: var(--font-primary);
@@ -115,9 +114,14 @@
 
 @media (max-width: 575px) {
   .bic-section {
-    padding: 40px 24px 60px;
+    padding: 40px 15px 60px;
   }
   .bic-article p {
-    font-size: 15px;
+    font-size: 22px;
   }
+  
+.bic-card {
+  padding: 28px 15px;
+  gap: 19px;
+}
 }

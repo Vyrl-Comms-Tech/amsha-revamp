@@ -42,7 +42,7 @@
 
 /* Form card */
 .cu-form {
-  flex: 0 0 64%;
+  /* flex: 0 0 54%; */
   background: #f5f5f5;
   border-radius: 12px;
   padding: 40px 40px 30px;
@@ -53,8 +53,8 @@
 
 /* Two-column input row */
 .cu-row {
-  display: grid;
   grid-template-columns: 1fr 1fr;
+  display: grid;
   gap: 20px;
 }
 
@@ -133,8 +133,8 @@
 /* ── Bottom: contact info ── */
 .cu-contacts {
   display: flex;
-justify-content: space-between;
-align-items: flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 24px;
   padding-top: 20px;
 }
@@ -165,6 +165,18 @@ align-items: flex-start;
   font-weight: 400;
   color: var(--color-black);
   line-height: 1.2;
+}
+
+@media (max-width:1700px){
+  .cu-row {
+  grid-template-columns: 0fr 0fr;
+}
+.cu-section {
+    padding: 176px 50px 80px;
+}
+.cu-heading{
+  font-size: 90px;
+}
 }
 
 /* ── Responsive ── */
@@ -199,12 +211,23 @@ align-items: flex-start;
   }
   .cu-image {
     min-height: 320px;
+    border-radius: 0px;
   }
 }
 
 @media (max-width: 640px) {
+  
+.cu-label {
+  font-size: 20px;
+}
   .cu-section {
-    padding: 80px 24px 48px;
+    padding: 200px 0px 48px;
+  }
+  .cu-form{
+    padding: 40px 15px 30px;
+  }
+  .form-wrapper , .cu-top{
+padding-inline: 15px;
   }
   .cu-heading {
     font-size: 42px;
@@ -212,8 +235,30 @@ align-items: flex-start;
   .cu-row {
     grid-template-columns: 1fr;
   }
+  .cu-input, .cu-textarea{
+    padding: 11px 22px 11px 10px;
+  }
   .cu-contacts {
     grid-template-columns: 1fr;
-    gap: 32px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 33px;
+    padding-inline: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Reorder: Phone(1st) → Email(3rd) → Location(2nd) becomes Phone → Email → Location */
+  .cu-contacts .cu-contact-item:nth-child(1) { order: 1; }
+  .cu-contacts .cu-contact-item:nth-child(2) { order: 3; }
+  .cu-contacts .cu-contact-item:nth-child(3) { order: 2; }
+  .cu-contact-item{
+    max-width: 100%;
+  }
+  .cu-contact-item p{
+    font-size: 20px;
+  }
+  .cu-icon{
+    width: 80px;
+    height: 80px;
   }
 }

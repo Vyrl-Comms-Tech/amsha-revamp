@@ -94,11 +94,21 @@ function getRotation(progress, keyframes) {
   };
 }
 
-const MAX_YAW   = 0.175; // ~2 deg
-const MAX_PITCH = 0.152; // ~1.3 deg
-const LERP_EASE = 0.04;
+const MAX_YAW   = 0.475; // ~2 deg
+const MAX_PITCH = 0.352; // ~1.3 deg
+const LERP_EASE = 0.07;
 
-const Scene = ({ progress = 0, progress2 = 0 }) => {
+// ── Idle ambient motion (model moves even without mouse) ─────────────────────
+// SPEED: oscillation rate in radians/sec  → higher = faster wiggle
+//   good range: 0.15 (very slow) … 0.5 (lively)
+// AMP: peak rotation in radians  → 0.02 ≈ 1°,  0.09 ≈ 5°
+//   good range: 0.02 (subtle) … 0.10 (obvious)
+const IDLE_SPEED_Y = 1; // ← increase/decrease to speed up/slow down Y sway
+const IDLE_SPEED_X = 0.58; // ← increase/decrease to speed up/slow down X tilt
+const IDLE_AMP_Y   = 0.06; // ← increase/decrease Y sway amount
+const IDLE_AMP_X   = 0.13; // ← increase/decrease X tilt amount
+
+const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
   const [keyframes, setKeyframes] = useState(DEFAULT_KEYFRAMES);
   const kfRef = useRef(DEFAULT_KEYFRAMES.map((kf) => ({ ...kf })));
 
@@ -118,19 +128,20 @@ const Scene = ({ progress = 0, progress2 = 0 }) => {
     return () => window.removeEventListener("mousemove", onMouseMove);
   }, []);
 
-  useFrame(() => {
+  useFrame((state) => {
     mouseCurrent.current.x = lerp(mouseCurrent.current.x, mouseTarget.current.x, LERP_EASE);
     mouseCurrent.current.y = lerp(mouseCurrent.current.y, mouseTarget.current.y, LERP_EASE);
     if (mouseGroupRef.current) {
-      mouseGroupRef.current.rotation.y =  mouseCurrent.current.x * MAX_YAW;
-      mouseGroupRef.current.rotation.x =  mouseCurrent.current.y * MAX_PITCH;
+      const t = state.clock.elapsedTime;
+      mouseGroupRef.current.rotation.y = mouseCurrent.current.x * MAX_YAW + Math.sin(t * IDLE_SPEED_Y) * IDLE_AMP_Y;
+      mouseGroupRef.current.rotation.x = mouseCurrent.current.y * MAX_PITCH + Math.sin(t * IDLE_SPEED_X) * IDLE_AMP_X;
     }
   });
 
   useEffect(() => {
     let gui;
     import("lil-gui").then(({ default: GUI }) => {
-      // gui = new GUI({ title: "Rotation Keyframes", width: 128 });
+      gui = new GUI({ title: "Rotation Keyframes", width: 128 });
 
       // ── Hero → Hero3 keyframe folders ────────────────────────────
       LABELS.forEach((label, idx) => {
@@ -183,17 +194,27 @@ const Scene = ({ progress = 0, progress2 = 0 }) => {
   const cameraZ = isMobile ? 10.8 : 8.2;
 
   // ── Compute final rotation ──────────────────────────────────────
-  // On mobile use the reduced-tilt keyframes so pitch/roll don't push
-  // the model outside the canvas edges.
-  const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : keyframes;
-  const rot = getRotation(progress, activeKeyframes);
+  let rot;
+  if (overrideRotation !== null) {
+    // Direct angle — skips keyframe lerp; mouse parallax still applies via mouseGroupRef
+    rot = {
+      x: overrideRotation.x * DEG,
+      y: overrideRotation.y * DEG,
+      z: overrideRotation.z * DEG,
+    };
+  } else {
+    // On mobile use the reduced-tilt keyframes so pitch/roll don't push
+    // the model outside the canvas edges.
+    const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : keyframes;
+    rot = getRotation(progress, activeKeyframes);
 
-  // Step 2: add the Facts→Footer extra rotation on top
-  const activeExtra = isMobile ? MOBILE_EXTRA : extra;
-  if (progress2 > 0) {
-    rot.x += progress2 * activeExtra.x * DEG;
-    rot.y += progress2 * activeExtra.y * DEG;
-    rot.z += progress2 * activeExtra.z * DEG;
+    // Add the Facts→Footer extra rotation on top
+    const activeExtra = isMobile ? MOBILE_EXTRA : extra;
+    if (progress2 > 0) {
+      rot.x += progress2 * activeExtra.x * DEG;
+      rot.y += progress2 * activeExtra.y * DEG;
+      rot.z += progress2 * activeExtra.z * DEG;
+    }
   }
 
   return (

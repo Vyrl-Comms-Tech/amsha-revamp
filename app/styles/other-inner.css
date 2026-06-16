@@ -1,0 +1,153 @@
+.oi-section {
+  background: var(--color-white, #fff);
+  padding: 40px 40px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Top row — two equal cards ── */
+.oi-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── Card base ── */
+.oi-card {
+  background: #15161a;
+  border-radius: 12px;
+  padding: 32px 34px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Card header: step label + title pushed apart from list ── */
+.oi-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: auto;
+}
+
+.oi-step {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1;
+}
+
+.oi-title {
+  font-size: 42px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.08;
+  margin: 0;
+}
+
+/* ── Bullet list ── */
+.oi-list {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 32px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.oi-list li {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+}
+
+/* ── Wide bottom card ── */
+.oi-card--wide {
+  flex-direction: row;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.oi-wide-left {
+  flex: 1;
+  padding: 32px 34px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.oi-wide-left .oi-step {
+  margin-bottom: 10px;
+}
+
+.oi-wide-left .oi-list {
+  margin-top: 20px;
+  gap: 5px;
+}
+
+/* ── Image panel ── */
+.oi-wide-img {
+  flex: 0 0 38%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 12px 12px 0;
+}
+
+.oi-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+@media (max-width: 991px) {
+  .oi-section {
+    padding: 30px 24px 50px;
+  }
+  .oi-title {
+    font-size: 32px;
+  }
+  .oi-wide-img {
+    flex: 0 0 34%;
+  }
+}
+
+@media (max-width: 768px) {
+  .oi-top-row {
+    grid-template-columns: 1fr;
+  }
+  .oi-card--wide {
+    flex-direction: column;
+  }
+  .oi-wide-img {
+    flex: none;
+    height: 260px;
+    border-radius: 0 0 12px 12px;
+  }
+  .oi-title {
+    font-size: 28px;
+  }
+  .oi-list li {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 575px) {
+  .oi-section {
+    padding: 24px 16px 40px;
+    gap: 14px;
+  }
+  .oi-card {
+    padding: 26px 22px 30px;
+  }
+  .oi-title {
+    font-size: 24px;
+  }
+  .oi-wide-img {
+    height: 220px;
+  }
+}

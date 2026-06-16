@@ -124,13 +124,13 @@
 
 @media (max-width: 640px) {
   .facts-section {
-    padding: 50px 30px;
+    padding: 50px 15px;
   }
   .facts-mbti-logo {
     display: none;
   }
   .facts-box {
-    padding: 30px 24px;
+    padding: 30px 15px;
     gap: 60px;
   }
   .facts-box-title {

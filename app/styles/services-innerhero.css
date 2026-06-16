@@ -1,0 +1,146 @@
+/* ── Outer: white background, full height, only padding-inline ── */
+.sih-outer {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-white, #fff);
+  display: flex;
+  align-items: center;
+  padding: 0px 50px;
+}
+
+/* ── Gray card — 80vh tall, centered vertically by parent flex ── */
+.sih-card {
+  flex: 1;
+  margin-top: 5%;
+  height: 55vh;
+  background: #6b6b6b;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sih-content {
+  flex: 0 0 58%;
+  padding: 70px 60px 70px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.sih-heading {
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.sih-desc {
+  font-size: 23px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.35;
+  max-width: 90%;
+}
+
+.sih-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 9px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: var(--font-primary);
+  text-decoration: none;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.sih-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Image — absolutely fills 100% of sih-outer height
+       ↑ card is 80vh → image overflows ~10vh top + bottom  ── */
+.sih-img-wrap {
+  position: absolute;
+  right: 100px;
+  top: 15%;
+  bottom: 0;
+  width: 42%;
+  height: 80%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.sih-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+@media (max-width: 1280px) {
+  .sih-heading {
+    font-size: 44px;
+  }
+  .sih-content {
+    flex: 0 0 55%;
+  }
+  .sih-img-wrap {
+    width: 44%;
+  }
+}
+
+@media (max-width: 991px) {
+  .sih-outer {
+    padding: 0 ;
+    height: 100vh;
+    align-items: stretch;
+  }
+  .sih-card {
+    flex: 1;
+    height: auto;
+    margin-top: 0;
+    min-height: 100vh;
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  .sih-content {
+    flex: none;
+    width: 100%;
+    padding: 60px 36px;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .sih-img-wrap {
+    display: none;
+  }
+  .sih-heading {
+    font-size: 38px;
+  }
+  .sih-desc {
+    font-size: 17px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .sih-content {
+    padding: 50px 28px;
+    gap: 18px;
+  }
+  .sih-heading {
+    font-size: 30px;
+  }
+  .sih-desc {
+    font-size: 15px;
+  }
+}

@@ -69,9 +69,14 @@ const Brands = () => {
         <h2 className="brands-sub">Worked With</h2>
       </div>
 
-      {/* Mobile straight marquee */}
+      {/* Mobile straight marquee — two rows, opposite directions */}
       <div className="brands-mobile-marquee">
         <div className="brands-mobile-track">
+          {[...LOGOS, ...LOGOS].map((src, i) => (
+            <Image key={i} src={src} alt="" width={120} height={60} className="brand-img" />
+          ))}
+        </div>
+        <div className="brands-mobile-track brands-mobile-track--reverse">
           {[...LOGOS, ...LOGOS].map((src, i) => (
             <Image key={i} src={src} alt="" width={120} height={60} className="brand-img" />
           ))}

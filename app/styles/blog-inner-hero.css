@@ -70,12 +70,12 @@
 
 @media (max-width: 575px) {
   .bih-top {
-    padding: 80px 24px 24px;
+    padding: 170px 24px 24px;
   }
   .bih-title {
-    font-size: 26px;
+    font-size: 35px;
   }
   .bih-image {
-    height: 240px;
+    height: 400px;
   }
 }

@@ -20,36 +20,38 @@ const ContactUsHero = () => {
       {/* ── Middle: form + image ── */}
       <div className="cu-main">
 
-        <form className="cu-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="cu-row">
-            <div className="cu-field">
-              <label className="cu-label">Name Of Company *</label>
-              <input className="cu-input" type="text" placeholder="Enter Your Company Name" />
+        <div className="form-wrapper">
+          <form className="cu-form" onSubmit={(e) => e.preventDefault()}>
+            <div className="cu-row">
+              <div className="cu-field">
+                <label className="cu-label">Name Of Company *</label>
+                <input className="cu-input" type="text" placeholder="Enter Your Company Name" />
+              </div>
+              <div className="cu-field">
+                <label className="cu-label">Field Of Activity *</label>
+                <input className="cu-input" type="text" placeholder="Enter The Field Of Activity" />
+              </div>
             </div>
-            <div className="cu-field">
-              <label className="cu-label">Field Of Activity *</label>
-              <input className="cu-input" type="text" placeholder="Enter The Field Of Activity" />
-            </div>
-          </div>
 
-          <div className="cu-row">
-            <div className="cu-field">
-              <label className="cu-label">Phone *</label>
-              <input className="cu-input" type="tel" placeholder="Enter Your Phone Number" />
+            <div className="cu-row">
+              <div className="cu-field">
+                <label className="cu-label">Phone *</label>
+                <input className="cu-input" type="tel" placeholder="Enter Your Phone Number" />
+              </div>
+              <div className="cu-field">
+                <label className="cu-label">Email *</label>
+                <input className="cu-input" type="email" placeholder="Enter Your Email Address" />
+              </div>
             </div>
-            <div className="cu-field">
-              <label className="cu-label">Email *</label>
-              <input className="cu-input" type="email" placeholder="Enter Your Email Address" />
+
+            <div className="cu-field cu-field--full">
+              <label className="cu-label">Name</label>
+              <textarea className="cu-textarea" placeholder="Your Name" rows={5} />
             </div>
-          </div>
 
-          <div className="cu-field cu-field--full">
-            <label className="cu-label">Name</label>
-            <textarea className="cu-textarea" placeholder="Your Name" rows={5} />
-          </div>
-
-          <button type="submit" className="cu-btn">Send now</button>
-        </form>
+            <button type="submit" className="cu-btn">Send now</button>
+          </form>
+        </div>
 
         <div className="cu-image">
           <Image
@@ -95,7 +97,7 @@ const ContactUsHero = () => {
 
       </div>
     </section>
-  );
+  );            
 };
 
 export default ContactUsHero;

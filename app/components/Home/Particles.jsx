@@ -4,8 +4,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 const RADIUS = 250;
-const PARTICLE_NUM = 9000;
-const D = 0.003;
+const PARTICLE_NUM = 12000;
+const D = 0.002;
 
 function PinkSphere() {
   const ref = useRef();

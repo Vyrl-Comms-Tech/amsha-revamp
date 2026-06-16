@@ -36,25 +36,42 @@ export default function AboutHero() {
       onUpdate: (self) => setProgress2(self.progress),
     });
 
-    // Slide canvas center (50%) → right (75%) as footer enters — same as home
-    const positionTween = gsap.to(canvasEl, {
-      left: "75%",
-      ease: "none",
-      immediateRender: false,
-      scrollTrigger: {
-        trigger: footerEl,
-        start: "top 70%",
-        end: "top 40%",
-        scrub: 0.3,
-        onLeave: () => gsap.set(canvasEl, { left: "75%" }),
-      },
-    });
+    // Desktop: slide canvas center (50%) → right (75%) as footer enters
+    // Mobile: canvas already at top:40% via CSS; nudge to top:45% in footer
+    let positionTween = null;
+    if (window.innerWidth > 575) {
+      positionTween = gsap.to(canvasEl, {
+        left: "75%",
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: footerEl,
+          start: "top 70%",
+          end: "top 40%",
+          scrub: 0.3,
+          onLeave: () => gsap.set(canvasEl, { left: "75%" }),
+        },
+      });
+    } else {
+      positionTween = gsap.to(canvasEl, {
+        top: "45%",
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: footerEl,
+          start: "top 80%",
+          end: "top 20%",
+          scrub: 0.5,
+          onLeave: () => gsap.set(canvasEl, { top: "45%" }),
+        },
+      });
+    }
 
     return () => {
       showTrigger.kill();
       rotateTrigger.kill();
       positionTween?.scrollTrigger?.kill();
-      gsap.set(canvasEl, { clearProps: "left" });
+      gsap.set(canvasEl, { clearProps: "left,top" });
     };
   }, []);
 

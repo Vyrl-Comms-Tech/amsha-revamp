@@ -125,7 +125,7 @@
     grid-template-columns: 1fr;
   }
   .bg-section {
-    padding: 50px 24px 60px;
+    padding: 0px 15px 60px;
   }
   .bg-title {
     font-size: 30px;
@@ -133,4 +133,18 @@
   .bg-card-image {
     height: 220px;
   }
+  
+.bg-label {
+  font-size: 20px;
+}
+.bg-header {
+  margin-bottom: 28px;
+}
+
+.bg-card-title {
+  font-size: 25px;
+}
+.bg-card-desc{
+  line-height: 1.1;
+}
 }
