@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import "../../styles/about-text.css";
+import TextAnimation from "../layout/TextAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,12 @@ const AboutText = () => {
     <div ref={wrapperRef} className="about-text-wrapper">
       <section className="about-text">
         <div className="about-text-content">
-          <span className="about-text-label">About us</span>
+                    <TextAnimation animateOnScroll={false} delay={0.7}>
+          <span className="about-text-label">
+            
+            About us
+            </span>
+           </TextAnimation>
 
           <p ref={textRef} className="about-text-text">
             <span ref={primaryRef} className="about-text-primary">

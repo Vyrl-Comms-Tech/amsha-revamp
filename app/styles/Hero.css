@@ -2,6 +2,8 @@
   overflow-x: hidden;
   background: #000;
   height: 100vh;
+  outline: none;
+  border: none;
 }
 
 .loading-screen {
@@ -22,13 +24,42 @@
   overflow: hidden;
 }
 
-.hero-section::before {
-  content: "";
-  position: absolute;
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes dot-float {
+  0% {
+    translate: 0px 0px;
+  }
+  25% {
+    translate: 4px -6px;
+  }
+  50% {
+    translate: -3px -4px;
+  }
+  75% {
+    translate: -5px 3px;
+  }
+  100% {
+    translate: 0px 0px;
+  }
+}
+
+.hero-glow {
+  position: fixed;
   top: -20%;
   left: 10%;
   width: 1108px;
-  height: 130vh;
+  height: 150vh;
   background: linear-gradient(
     90deg,
     rgba(21, 22, 26, 0.14) 2.61%,
@@ -36,7 +67,6 @@
     rgba(21, 22, 26, 0.14) 91.36%
   );
   filter: blur(32px);
-  transform: rotate(-26.939deg);
   z-index: 0;
   pointer-events: none;
 }
@@ -119,7 +149,6 @@
   width: 55vw;
   z-index: 5;
 }
-
 
 /* sections that should HIDE the model: add class "cover" + a background */
 .info-section.cover {

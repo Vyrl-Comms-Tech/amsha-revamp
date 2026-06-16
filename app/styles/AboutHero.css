@@ -26,12 +26,12 @@
   color: white;
 }
 
-.aboutHeroContent h1 {
+/* .aboutHeroContent h1 {
   font-size: 56px;
   margin-bottom: 16px;
-}
+} */
 
-.aboutHeroContent p {
+.aboutHeroContent h1 {
   font-size: 36px;
   line-height: 1.2;
   margin-bottom: 28px;
@@ -60,7 +60,7 @@
   .canvas-wrapper {
     width: 38vw;
   }
-  .aboutHeroContent p {
+  .aboutHeroContent h1 {
   font-size: 25px;
 }
 }

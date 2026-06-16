@@ -5,7 +5,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import TextAnimation from "../layout/TextAnimation";
+import { GlowDot } from "../layout/svg";
 import "../../styles/Hero.css";
+
+const DOTS = [
+  { top: "22%", left: "33%" },
+  { top: "34%", left: "38%" },
+  { top: "68%", left: "34%" },
+  { top: "20%", left: "44%" },
+  { top: "55%", left: "38%" },
+  { top: "82%", left: "46%" },
+  { top: "25%", left: "62%" },
+  { top: "48%", left: "74%" },
+  { top: "75%", left: "68%" },
+  { top: "40%", left: "64%" },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,9 +27,39 @@ const Hero = () => {
   const [progress, setProgress] = useState(0);
   const [progress2, setProgress2] = useState(0);
   const canvasWrapperRef = useRef(null);
+  const glowRef = useRef(null);
 
   useEffect(() => {
     const canvasEl = canvasWrapperRef.current;
+    const glowEl = glowRef.current;
+
+    // Glow rotation: -26.939deg → +26.939deg across Hero(1vh) + Hero2(3vh)
+    gsap.set(glowEl, { rotation: -26.939 });
+    const glowTween = gsap.to(glowEl, {
+      rotation: 26.939,
+      ease: "none",
+      scrollTrigger: {
+        trigger: document.body,
+        start: "top top",
+        end: `+=${window.innerHeight * 4}`,
+        scrub: 1.2,
+      },
+    });
+
+    // Glow fade-out: disappears as Hero3 enters (first 60vh of its scroll budget)
+    const hero3El = document.querySelector(".hero3-wrapper");
+    const glowFadeTween = hero3El
+      ? gsap.to(glowEl, {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero3El,
+          start: "top bottom",
+          end: `top 40%`,
+          scrub: 0.6,
+        },
+      })
+      : null;
 
     // Hero(100vh) + Hero2(300vh) + Hero3(400vh) = 800vh = 8 × viewport height
     const trigger = ScrollTrigger.create({
@@ -95,6 +139,10 @@ const Hero = () => {
     }
 
     return () => {
+      glowFadeTween?.scrollTrigger?.kill();
+      glowFadeTween?.kill();
+      glowTween.scrollTrigger?.kill();
+      glowTween.kill();
       trigger.kill();
       trigger2?.kill();
       positionTween?.scrollTrigger?.kill();
@@ -110,12 +158,20 @@ const Hero = () => {
     <main className="main">
       <section className="hero-section">
 
+        {/* animated glow background */}
+        <div ref={glowRef} className="hero-glow" />
+
+        {/* decorative scatter dots */}
+        {DOTS.map((pos, i) => (
+          <GlowDot key={i} delay={+(i * 0.31).toFixed(2)} style={{ position: "absolute", zIndex: 6, pointerEvents: "none", ...pos }} />
+        ))}
+
         {/* left col */}
         <div className="hero-left">
-                  <TextAnimation animateOnScroll={true} delay={0.5}>
+          <TextAnimation animateOnScroll={true} delay={0.5}>
 
-          <span className="hero-badge">&#8226; &nbsp; For those who want more from their business</span>
-                  </TextAnimation>
+            <span className="hero-badge">&#8226; &nbsp; For those who want more from their business</span>
+          </TextAnimation>
           <TextAnimation animateOnScroll={false} delay={0.7}>
             <h1 className="hero-heading">Empowering People Elevating Businesses</h1>
           </TextAnimation>
@@ -131,7 +187,12 @@ const Hero = () => {
               People-centred strategies designed to strengthen leadership, elevate workplace performance, and drive sustainable business growth.
             </p>
           </TextAnimation>
-          <button className="hero-cta">Contact us</button>
+          <button className="hero-cta btn-4">
+            <span>
+
+              Contact us
+            </span>
+          </button>
         </div>
 
         {/* fixed canvas — outside grid flow so it doesn't shift columns */}

@@ -41,8 +41,9 @@ const SLIDES = [
 ];
 
 export default function PeopleAdvisory() {
-  const wrapperRef   = useRef();
-  const numberRef    = useRef();
+  const wrapperRef        = useRef();
+  const numberRef         = useRef();
+  const sphereProgressRef = useRef(0); // drives Particles rotation via ref (no re-render)
   const [slide, setSlide] = useState(0);
   const currentSlide      = useRef(0);
   const hasShownAll       = useRef(false);
@@ -105,6 +106,7 @@ export default function PeopleAdvisory() {
       onRefresh: (self) => { sectionEnd = self.end; },
       onUpdate: (self) => {
         sectionEnd = self.end;
+        sphereProgressRef.current = self.progress;
         goTo(Math.min(SLIDES.length - 1, Math.floor(self.progress * SLIDES.length)));
       },
     });
@@ -154,7 +156,7 @@ export default function PeopleAdvisory() {
         </div>
 
         <div className="hero-image">
-          <PinkSphereCanvas />
+          <PinkSphereCanvas progressRef={sphereProgressRef} />
         </div>
 
         <div className="hero-number">
@@ -165,7 +167,12 @@ export default function PeopleAdvisory() {
           <TextAnimation key={`p-${slide}`} animateOnScroll={false} delay={0.15}>
             <p>{text}</p>
           </TextAnimation>
-          <button>Explore More</button>
+          <button className="btn-4">
+            <span>
+
+            Explore More
+            </span>
+            </button>
         </div>
 
       </section>

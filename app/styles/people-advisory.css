@@ -107,29 +107,40 @@
   .pa-scroll-wrapper {
     height: 600vh;
   }
+  /* Switch to flex column so heading + number stack automatically */
   .hero-section-of-poeple-advisory {
-    padding-inline: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 20px 28px;
     height: 100vh;
   }
+  /* Heading: leave absolute flow, become a flex child */
   .hero-section-of-poeple-advisory .hero-heading {
-    top: 24px;
-    width: 100%;
-    left: 20px;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 90%;
+    overflow: hidden;
   }
   .hero-section-of-poeple-advisory .hero-heading h1 {
     font-size: 40px;
   }
+  /* Number sits immediately below heading — no fixed top */
   .hero-section-of-poeple-advisory .hero-number {
-    position: absolute;
-    top: 105px;
-    left: 20px;
+    position: relative;
+    top: auto;
+    left: auto;
     bottom: auto;
+    overflow: hidden;
+    margin-top: 6px;
   }
   .hero-section-of-poeple-advisory .hero-number span {
     font-size: 48px;
     font-weight: 400;
   }
+  /* Content stays pinned to the bottom */
   .hero-section-of-poeple-advisory .hero-content {
+    position: absolute;
     right: 20px;
     left: 20px;
     bottom: 28px;
@@ -147,10 +158,9 @@
   }
 }
 
-@media (max-width:600px){
-  
-.hero-section-of-poeple-advisory .hero-image {
-  width: 620px;
-  height: 50%;
-}
+@media (max-width: 600px) {
+  .hero-section-of-poeple-advisory .hero-image {
+    width: 620px;
+    height: 50%;
+  }
 }

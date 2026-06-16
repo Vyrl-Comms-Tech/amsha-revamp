@@ -4,22 +4,32 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 const RADIUS = 250;
-const PARTICLE_NUM = 12000;
-const D = 0.002;
+const PARTICLE_NUM = 14000;
+// Controls how strongly particles cluster at poles vs equator.
+// < 1 = poles heavy  |  1.0 = perfectly uniform
+// 0.32 was too extreme — equator went empty when sphere rotated sideways.
+// 0.62 still shows noticeably denser poles but keeps the center filled.
+const POLE_BIAS = 0.62;
 
-function PinkSphere() {
-  const ref = useRef();
+// progressRef.current is a 0→1 scroll value from PeopleAdvisory's ScrollTrigger.
+// Rotation is driven entirely by scroll — no time-based auto-spin.
+function PinkSphere({ progressRef }) {
+  const ref    = useRef();
+  const smooth = useRef({ y: 0, z: 0, x: 0 }); // current lerped rotation
 
   const geometry = useMemo(() => {
     const geo = new THREE.BufferGeometry();
     const verts = [];
     for (let i = 0; i < PARTICLE_NUM; i++) {
-      const theta = Math.acos(THREE.MathUtils.randFloatSpread(2));
-      const phi = THREE.MathUtils.randFloatSpread(360);
+      const u      = THREE.MathUtils.randFloatSpread(2);
+      const uBiased = Math.sign(u) * Math.pow(Math.abs(u), POLE_BIAS);
+      const theta  = Math.acos(uBiased);
+      const phi    = THREE.MathUtils.randFloat(0, Math.PI * 2);
+      const r      = RADIUS * THREE.MathUtils.randFloat(0.82, 1.18);
       verts.push(
-        RADIUS * Math.sin(theta) * Math.cos(phi),
-        RADIUS * Math.sin(theta) * Math.sin(phi),
-        RADIUS * Math.cos(theta)
+        r * Math.sin(theta) * Math.cos(phi),
+        r * Math.sin(theta) * Math.sin(phi),
+        r * Math.cos(theta)
       );
     }
     geo.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
@@ -28,9 +38,23 @@ function PinkSphere() {
 
   useFrame(() => {
     if (!ref.current) return;
-    ref.current.rotation.y += D;
-    ref.current.rotation.z += D;
-    ref.current.rotation.x -= D;
+    const p = progressRef?.current ?? 0;
+
+    // Target rotation — Y spins continuously, X/Z oscillate so poles tilt
+    // in and out of view between slides (dense top-bottom ↔ dense left-right)
+    const tY = p * Math.PI * 4;                     // 2 full Y-spins across all slides
+    const tZ = Math.sin(p * Math.PI * 6) * 0.7;     // lean left/right
+    const tX = Math.sin(p * Math.PI * 3) * 0.85;    // lean forward/back
+
+    // Smooth lerp so the sphere eases into each new orientation (cinematic feel)
+    const E = 0.07;
+    smooth.current.y += (tY - smooth.current.y) * E;
+    smooth.current.z += (tZ - smooth.current.z) * E;
+    smooth.current.x += (tX - smooth.current.x) * E;
+
+    ref.current.rotation.y = smooth.current.y;
+    ref.current.rotation.z = smooth.current.z;
+    ref.current.rotation.x = smooth.current.x;
   });
 
   return (
@@ -41,14 +65,14 @@ function PinkSphere() {
 }
 
 // Embeddable canvas — drop into any sized container
-export function PinkSphereCanvas({ style, className }) {
+export function PinkSphereCanvas({ style, className, progressRef }) {
   return (
     <Canvas
       style={{ width: "100%", height: "100%", ...style }}
       className={className}
       camera={{ position: [0, 0, 900], fov: 45 }}
     >
-      <PinkSphere />
+      <PinkSphere progressRef={progressRef} />
     </Canvas>
   );
 }

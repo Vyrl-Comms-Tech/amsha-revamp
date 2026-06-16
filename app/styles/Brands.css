@@ -46,8 +46,8 @@
 /* Logos */
 .brand-img {
   display: block;
-  width: 180px;
-  height: 70px;
+  width: 190px;
+  height: 90px;
   object-fit: contain;
   filter: grayscale(1);
 }
@@ -58,8 +58,12 @@
 }
 
 @keyframes brands-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 1500px) {
@@ -114,7 +118,7 @@
     flex-wrap: nowrap;
     gap: 40px;
     width: max-content;
-    animation: brands-scroll 18s linear infinite;
+    animation: brands-scroll 35s linear infinite;
   }
   .brands-mobile-track--reverse {
     animation-direction: reverse;

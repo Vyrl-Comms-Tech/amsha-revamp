@@ -15,7 +15,7 @@ export default function AboutHero() {
   useEffect(() => {
     const canvasEl = canvasWrapperRef.current;
 
-    const factsEl  = document.querySelector(".facts-section");
+    const factsEl = document.querySelector(".facts-section");
     const footerEl = document.querySelector(".footer");
     if (!factsEl || !footerEl) return;
 
@@ -23,7 +23,7 @@ export default function AboutHero() {
     const showTrigger = ScrollTrigger.create({
       trigger: factsEl,
       start: "top 80%",
-      onEnter:     () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.6 }),
+      onEnter: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.6 }),
       onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4 }),
     });
 
@@ -79,8 +79,12 @@ export default function AboutHero() {
     <>
       <section className="aboutHero">
         <div className="aboutHeroContent">
-          <p>At Amsha Advisory, we believe that behind every strong organisation are people, leadership, and workplace cultures shaping the way businesses grow and perform.</p>
-          <button>Contact us</button>
+          <h1>At Amsha Advisory, we believe that behind every strong organisation are people, leadership, and workplace cultures shaping the way businesses grow and perform.</h1>
+          <button className="btn-4">
+            <span>
+            Contact us
+          </span>
+          </button>
         </div>
       </section>
 

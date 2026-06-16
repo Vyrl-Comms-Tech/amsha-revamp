@@ -41,12 +41,12 @@ const Navbar = () => {
       {/* Desktop links */}
       <div className="nav-links">
         {links.map(({ href, label }) => (
-          <Link key={href} href={href}>
+          <Link key={href} href={href} className="lightning-effect">
             {label}
           </Link>
         ))}
-        <Link href="/contact-us" id="contact-link">
-          Contact Us
+        <Link href="/contact-us" id="contact-link" className="btn-4">
+          <span>Contact Us</span>
         </Link>
       </div>
 

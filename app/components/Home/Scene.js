@@ -77,6 +77,23 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
+function smoothstep(e0, e1, x) {
+  const t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0)));
+  return t * t * (3 - 2 * t);
+}
+
+// Plateau: ramp up entering Hero2, hold 1 throughout Hero2, ramp down entering Hero3.
+// Hero2 = p 0.125 → 0.5  (100vh to 400vh of 800vh total)
+function computeGlassFactor(p) {
+  const START = 0.125;
+  const END   = 0.5;
+  const BLEND = 0.03; // ~24vh transition width at each boundary
+  if (p <= START - BLEND || p >= END + BLEND) return 0;
+  if (p >= START + BLEND && p <= END - BLEND) return 1;
+  if (p < START + BLEND) return smoothstep(START - BLEND, START + BLEND, p);
+  return 1 - smoothstep(END - BLEND, END + BLEND, p);
+}
+
 function getRotation(progress, keyframes) {
   // Find the two bracketing keyframes for the current progress value
   let i = keyframes.length - 2;
@@ -222,7 +239,7 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
       <PerspectiveCamera fov={45} near={0.2} far={10000} makeDefault position={[0, 2.5, cameraZ]} />
       <Environment preset="city" />
       <group ref={mouseGroupRef}>
-        <Model rotationX={rot.x} rotationY={rot.y} rotationZ={rot.z} />
+        <Model rotationX={rot.x} rotationY={rot.y} rotationZ={rot.z} glassFactor={computeGlassFactor(progress)} />
       </group>
     </>
   );

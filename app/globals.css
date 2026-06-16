@@ -107,6 +107,11 @@
 
 body {
   font-family: var(--font-primary);
+  background: #000; /* prevent white body background flashing between dark sections */
+}
+
+section, main {
+  outline: none;
 }
 
 .dark {
@@ -153,4 +158,70 @@ body {
   html {
     @apply font-sans;
   }
+}
+
+/* ── Lightning shimmer — add className="lightning-effect" to any link ── */
+.lightning-effect {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.lightning-effect::before {
+  content: "";
+  width: 20px;
+  position: absolute;
+  top: 0;
+  left: -20px;
+  bottom: 0;
+  z-index: 9;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.7)  50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+}
+
+.lightning-effect:hover::before {
+  animation: lightning-sweep 0.65s ease-in-out forwards;
+}
+
+@keyframes lightning-sweep {
+  0%   { left: -50px; }
+  100% { left: 110%;  }
+}
+
+/* ── Sweep shimmer button ── */
+.btn-4 {
+  border: 1px solid;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-4 span {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-4::after {
+  background: currentColor;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: 0.15;
+  position: absolute;
+  top: -50px;
+  transform: rotate(35deg);
+  transition: left 550ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn-4:hover::after {
+  left: 120%;
 }
