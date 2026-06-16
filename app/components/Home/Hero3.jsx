@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import "../../styles/Hero3.css";
+import TextAnimation from "../layout/TextAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,7 +52,12 @@ const Hero3 = () => {
         <div className="hero3-bg" />
 
         <div className="hero3-content">
-          <span className="hero3-label">About us</span>
+        <TextAnimation animateOnScroll={true} delay={0.2}>
+          <span className="hero3-label">
+            
+            About us
+            </span>
+            </TextAnimation>
 
           <p ref={textRef} className="hero3-text">
             <span className="hero3-primary">

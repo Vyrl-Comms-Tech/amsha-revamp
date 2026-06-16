@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import "../../styles/OverlapingCards.css";
+import TextAnimation from "../layout/TextAnimation";
 
 const AVATARS = ["/over1.png", "/over1.png", "/over1.png", "/over1.png"];
 
@@ -86,7 +87,7 @@ const OverlapingCards = () => {
               />
 
               {/* Mobile: overlapping avatars + client count */}
-              <div className="oc-avatar-row">
+              {/* <div className="oc-avatar-row">
                 <div className="oc-avatars">
                   {AVATARS.map((src, j) => (
                     <div key={j} className="oc-avatar">
@@ -95,20 +96,24 @@ const OverlapingCards = () => {
                   ))}
                 </div>
                 <span className="oc-client-count">27+ clients</span>
-              </div>
+              </div> */}
 
               {/* Content */}
               <div className="oc-card-content">
                 {card.company.split("\n").map((line, j) => (
-                  <h3 key={j} className="oc-card-company" style={{ marginBottom: 0 }}>
-                    {line}
-                  </h3>
+                  <TextAnimation key={j} animateOnScroll={true} delay={0.1}>
+                    <h3 className="oc-card-company" style={{ marginBottom: 0 }}>{line}</h3>
+                  </TextAnimation>
                 ))}
                 {card.subtitle && (
-                  <h3 className="oc-card-subtitle">{card.subtitle}</h3>
+                  <TextAnimation animateOnScroll={true} delay={0.1}>
+                    <h3 className="oc-card-subtitle">{card.subtitle}</h3>
+                  </TextAnimation>
                 )}
-                <p className="oc-card-testimonial">{card.testimonial}</p>
-                <button className="oc-contact-btn">Contact us</button>
+                <TextAnimation animateOnScroll={true} delay={0.1}>
+                  <p className="oc-card-testimonial">{card.testimonial}</p>
+                </TextAnimation>
+                {/* <button className="oc-contact-btn">Contact us</button> */}
               </div>
             </div>
           ))}

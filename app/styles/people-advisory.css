@@ -108,6 +108,7 @@
     height: 600vh;
   }
   .hero-section-of-poeple-advisory {
+    padding-inline: 15px;
     height: 100vh;
   }
   .hero-section-of-poeple-advisory .hero-heading {

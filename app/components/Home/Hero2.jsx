@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../../styles/Hero2.css";
+import TextAnimation from "../layout/TextAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,8 +34,15 @@ const StatBox = ({ className, title, text }) => (
     <Corner pos="bl" />
     <Corner pos="br" />
     <div className="stat-content">
-      <span className="stat-number">{title}</span>
-      <span className="stat-label">{text}</span>
+      <span className="stat-number">
+
+        {title}
+      </span>
+      <span className="stat-label">
+
+        {text}
+
+      </span>
     </div>
   </div>
 );
@@ -92,13 +100,14 @@ const Hero2 = () => {
         {BOXES.map((box) => (
           <StatBox key={box.className} {...box} />
         ))}
-
-        <p className="hero2-desc">
-          Amsha Advisory delivers strategic, people-centric solutions that enhance
-          business efficiency, drive growth, and foster positive workplace cultures.
-          We bridge traditional HR gaps with innovative approaches for long-term
-          success.
-        </p>
+        <TextAnimation animateOnScroll={true} delay={0.5}>
+          <p className="hero2-desc">
+            Amsha Advisory delivers strategic, people-centric solutions that enhance
+            business efficiency, drive growth, and foster positive workplace cultures.
+            We bridge traditional HR gaps with innovative approaches for long-term
+            success.
+          </p>
+        </TextAnimation>
       </section>
     </div>
   );

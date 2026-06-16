@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../../styles/people-advisory.css";
 import { PinkSphereCanvas } from "./Particles";
+import TextAnimation from "../layout/TextAnimation";
 
 const SLIDES = [
   {
@@ -41,9 +42,7 @@ const SLIDES = [
 
 export default function PeopleAdvisory() {
   const wrapperRef   = useRef();
-  const headingRef   = useRef();
   const numberRef    = useRef();
-  const paraRef      = useRef();
   const [slide, setSlide] = useState(0);
   const currentSlide      = useRef(0);
   const hasShownAll       = useRef(false);
@@ -51,8 +50,7 @@ export default function PeopleAdvisory() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    const getEls = () =>
-      [headingRef.current, numberRef.current, paraRef.current].filter(Boolean);
+    const getEls = () => [numberRef.current].filter(Boolean);
 
     const isAnimating = { current: false };
     const pending     = { current: null };
@@ -150,7 +148,9 @@ export default function PeopleAdvisory() {
       <section className="hero-section-of-poeple-advisory">
 
         <div className="hero-heading">
-          <h1 ref={headingRef}>{heading}</h1>
+          <TextAnimation key={`h-${slide}`} animateOnScroll={false} delay={0.15}>
+            <h1>{heading}</h1>
+          </TextAnimation>
         </div>
 
         <div className="hero-image">
@@ -162,7 +162,9 @@ export default function PeopleAdvisory() {
         </div>
 
         <div className="hero-content">
-          <p ref={paraRef}>{text}</p>
+          <TextAnimation key={`p-${slide}`} animateOnScroll={false} delay={0.15}>
+            <p>{text}</p>
+          </TextAnimation>
           <button>Explore More</button>
         </div>
 

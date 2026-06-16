@@ -194,14 +194,14 @@
     height: auto;
     scroll-snap-align: start;
     justify-content: flex-start;
-    gap: 130px;
+    gap: 80px;
     border-radius: 0;
     padding-inline: 20px;
   }
 
   /* hide desktop logo, show avatar row */
   .oc-card-logo {
-    display: none;
+    /* display: none; */
   }
   .oc-avatar-row {
     display: flex;

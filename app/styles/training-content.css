@@ -1,0 +1,237 @@
+
+.th-layout {
+  display: flex;
+  align-items: flex-start; /* REQUIRED: makes position:sticky work in flex */
+  gap: 58px;
+  padding: 40px;
+  background: #f2f2f2;
+  min-height: 100vh;
+}
+
+/* ── Left sticky form ── */
+.th-form-wrap {
+  flex: 0 0 540px;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start; /* belt-and-suspenders for sticky */
+}
+
+.th-form {
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.th-form-heading {
+  font-size: 35px;
+  font-weight: 500;
+  color: black;
+}
+
+.th-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.th-label {
+  font-size: 25px;
+  font-weight: 500;
+  color: rgba(74, 74, 74, 0.8);
+}
+
+.th-req {
+  color: rgba(74, 74, 74, 0.8);
+  margin-left: 2px;
+}
+
+.th-input {
+  border-radius: 10px;
+  padding: 17px 21px 16px 10px;
+  font-size: 19px;
+  color: #979797;
+  background: #f6f6f6;
+  outline: none;
+  font-family: var(--font-primary, inherit);
+  transition: border-color 0.2s;
+}
+
+.th-input:focus {
+  border-color: rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+
+.th-input::placeholder {
+  color: rgba(0, 0, 0, 0.32);
+}
+
+.th-textarea {
+  resize: none;
+}
+
+.th-submit {
+  padding: 11px 26px;
+  background: #15161a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  font-family: var(--font-primary, inherit);
+  transition: opacity 0.2s;
+}
+
+.th-submit:hover {
+  opacity: 0.82;
+}
+
+/* ── Right course list ── */
+.th-courses {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ── Individual course card ── */
+.th-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 16px;
+  display: flex;
+  overflow: hidden;
+}
+
+.th-card-left {
+  flex: 1;
+  padding: 26px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.th-card-title {
+  font-size: 29px;
+  font-weight: 500;
+  max-width: 70%;
+  color: #15161a;
+  line-height: 1.1;
+}
+
+.th-card-list {
+  list-style: disc;
+  padding-left: 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.th-card-list li {
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.68);
+  line-height: 1.2;
+}
+
+.th-more {
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  text-align: left;
+}
+
+.th-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.th-btn-outline {
+  padding: 7px 18px;
+  border-radius: 10px;
+  border: 1px solid #15161a;
+  background: #fff;
+  font-size: 19px;
+  font-weight: 400;
+  color: #15161a;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.th-btn-outline:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.th-btn-fill {
+  padding: 7px 18px;
+  border-radius: 10px;
+  border: 1px solid #15161a;
+  background: #15161a;
+  color: #fff;
+  border: none;
+  font-size: 19px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.th-btn-fill:hover {
+  opacity: 0.82;
+}
+
+/* ── Card image panel ── */
+.th-card-img {
+  flex: 0 0 36%;
+  position: relative;
+  overflow: hidden;
+}
+
+.th-img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+
+@media (max-width: 1100px) {
+  .th-form-wrap {
+    flex: 0 0 260px;
+  }
+  .th-card-img {
+    flex: 0 0 22%;
+  }
+}
+
+@media (max-width: 768px) {
+  .th-layout {
+    flex-direction: column;
+    padding: 24px 15px 50px;
+    gap: 24px;
+  }
+  .th-form-wrap {
+    position: relative;
+    top: auto;
+    flex: none;
+    width: 100%;
+  }
+  .th-card {
+    flex-direction: column;
+  }
+  .th-card-img {
+    flex: none;
+    height: 200px;
+    width: 100%;
+  }
+  .th-card-title {
+    font-size: 18px;
+  }
+}

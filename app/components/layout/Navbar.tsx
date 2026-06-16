@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import "../../styles/navbar.css";
 
-const darkRoutes = ["/blog","/contact-us",'/blog-inner'];
+const darkRoutes = ["/blog","/contact-us",'/blog-inner','/services-inner','/services-inner1'];
 
 const links = [
   { href: "/", label: "Home" },

@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import "../../styles/Brands.css";
+import TextAnimation from "../layout/TextAnimation";
 
 const LOGOS = [
   "/img2.png", "/img3.png", "/img4.png", "/img5.png", "/img6.png",
@@ -65,8 +66,21 @@ const Brands = () => {
   return (
     <section className="brands-section">
       <div className="brands-title">
-        <h2 className="brands-heading">Brands We&apos;ve</h2>
-        <h2 className="brands-sub">Worked With</h2>
+        <TextAnimation animateOnScroll={true} delay={0.1}>
+        <h2 className="brands-heading">
+          Brands We&apos;ve
+          
+          </h2>
+</TextAnimation>
+        <TextAnimation animateOnScroll={true} delay={0.1}>
+        <h2 className="brands-sub">
+
+          
+          Worked With
+
+
+        </h2>
+</TextAnimation>
       </div>
 
       {/* Mobile straight marquee — two rows, opposite directions */}

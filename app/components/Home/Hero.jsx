@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
+import TextAnimation from "../layout/TextAnimation";
 import "../../styles/Hero.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -111,8 +112,13 @@ const Hero = () => {
 
         {/* left col */}
         <div className="hero-left">
+                  <TextAnimation animateOnScroll={true} delay={0.5}>
+
           <span className="hero-badge">&#8226; &nbsp; For those who want more from their business</span>
-          <h1 className="hero-heading">Empowering People Elevating Businesses</h1>
+                  </TextAnimation>
+          <TextAnimation animateOnScroll={false} delay={0.7}>
+            <h1 className="hero-heading">Empowering People Elevating Businesses</h1>
+          </TextAnimation>
         </div>
 
         {/* center — transparent spacer, fixed canvas sits here */}
@@ -120,9 +126,11 @@ const Hero = () => {
 
         {/* right col */}
         <div className="hero-right">
-          <p className="hero-desc">
-            People-centred strategies designed to strengthen leadership, elevate workplace performance, and drive sustainable business growth.
-          </p>
+          <TextAnimation animateOnScroll={false} delay={0.6}>
+            <p className="hero-desc">
+              People-centred strategies designed to strengthen leadership, elevate workplace performance, and drive sustainable business growth.
+            </p>
+          </TextAnimation>
           <button className="hero-cta">Contact us</button>
         </div>
 

@@ -2,6 +2,7 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import "../../styles/why-choose-us.css";
+import TextAnimation from "../layout/TextAnimation";
 
 const items = [
     {
@@ -67,10 +68,14 @@ const WhyChooseUs = () => {
         <section className="why-choose-us">
             <div className="why-container">
                 <div className="why-heading">
+
+                            <TextAnimation animateOnScroll={true} delay={0.1}>
+                    
                     <h2>
                         Why Choose <br />
                         <span>Amsha Advisory?</span>
                     </h2>
+                            </TextAnimation>
                 </div>
 
                 <div className="why-content">
