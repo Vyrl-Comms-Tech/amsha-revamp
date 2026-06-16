@@ -8,7 +8,7 @@
 .och-section {
   position: sticky;
   top: 0;
-  height: 50vh;
+  height: max-content;
   overflow: hidden;
   background: var(--color-white);
   display: flex;
@@ -141,34 +141,64 @@
   }
 }
 
+@media (max-width: 768px) {
+  /* Collapse wrapper — GSAP is off, no scroll distance needed */
+  .och-wrapper {
+    height: auto;
+  }
+  .och-section {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    padding-bottom: 50px;
+  }
+  /* OverlapingCards-style snap slider */
+  .och-track-outer {
+    max-width: 88vw;
+    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    cursor: grab;
+    padding-left: 0 !important;
+  }
+  .och-track-outer::-webkit-scrollbar { display: none; }
+  .och-track { overflow: visible; }
+  .och-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    padding-right: 0;
+    opacity: 1 !important;
+  }
+}
+
 @media (max-width: 575px) {
   .och-wrapper {
     width: 100%;
   }
-.och-track-outer {
-padding-left: 0px !important;
-}
   .och-section {
     width: 100%;
-    padding: 50px 20px 30px;
+    padding: 50px 15px 30px;
   }
   .och-top {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   .och-heading {
-    font-size: 32px;
+    font-size: 30px;
   }
   .och-number {
-    font-size: 60px;
+    font-size: 40px;
   }
   .och-item {
     flex: 0 0 calc(100vw - 40px);
-    padding-right: 20px;
+    padding-right: 15px;
   }
   .och-item-heading {
-    font-size: 18px;
+    font-size: 25px;
   }
   .och-item-text {
-    font-size: 15px;
+    font-size: 18px;
   }
 }

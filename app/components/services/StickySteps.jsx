@@ -65,7 +65,9 @@ export default function StickySteps() {
 
   // GSAP scroll animation — desktop only
   useEffect(() => {
-    if (isMobile) {
+    // Read matchMedia directly — isMobile state can lag behind on first hydration
+    const mobile = window.matchMedia("(max-width: 768px)").matches;
+    if (mobile) {
       if (wrapperRef.current) wrapperRef.current.style.height = "";
       return;
     }

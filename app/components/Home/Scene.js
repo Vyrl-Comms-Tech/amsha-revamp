@@ -141,7 +141,7 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
   useEffect(() => {
     let gui;
     import("lil-gui").then(({ default: GUI }) => {
-      gui = new GUI({ title: "Rotation Keyframes", width: 128 });
+      // gui = new GUI({ title: "Rotation Keyframes", width: 128 });
 
       // ── Hero → Hero3 keyframe folders ────────────────────────────
       LABELS.forEach((label, idx) => {

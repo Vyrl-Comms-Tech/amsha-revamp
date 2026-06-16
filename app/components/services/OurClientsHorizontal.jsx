@@ -31,20 +31,34 @@ const getItemWidth = () => {
 };
 
 export default function OurClientsHorizontal() {
-    const wrapperRef = useRef(null);
-    const trackRef = useRef(null);
+    const wrapperRef    = useRef(null);
+    const trackRef      = useRef(null);
+    const trackOuterRef = useRef(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const currentIndex = useRef(0);
-    const hasShownAll = useRef(false);
+    const hasShownAll  = useRef(false);
+
+    const handleMobileScroll = () => {
+      const el = trackOuterRef.current;
+      if (!el) return;
+      const index = Math.min(ITEMS.length - 1, Math.round(el.scrollLeft / el.offsetWidth));
+      if (index !== currentIndex.current) {
+        currentIndex.current = index;
+        setActiveIndex(index);
+      }
+    };
 useEffect(() => {
+  // Skip GSAP entirely on mobile — touch scroll consumes events and locks the page
+  if (window.matchMedia("(max-width: 768px)").matches) return;
+
   gsap.registerPlugin(ScrollTrigger);
 
   const ctx = gsap.context(() => {
     const track = trackRef.current;
     const items = gsap.utils.toArray(".och-item");
+    if (!items.length) return;
     const itemWidth = () => items[0].offsetWidth;
 
-    // CSS sticky handles pinning — no GSAP pin needed (pin: true breaks layout of sections below)
     gsap.to(track, {
       x: () => -(itemWidth() * (ITEMS.length - 1)),
       ease: "none",
@@ -88,7 +102,7 @@ useEffect(() => {
                 </div>
 
                 {/* ── Horizontal sliding items ── */}
-                <div className="och-track-outer">
+                <div ref={trackOuterRef} className="och-track-outer" onScroll={handleMobileScroll}>
                     <div ref={trackRef} className="och-track">
                         {ITEMS.map((item, i) => {
                             const diff = i - activeIndex;
