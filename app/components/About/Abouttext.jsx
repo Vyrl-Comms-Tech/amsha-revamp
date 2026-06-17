@@ -52,19 +52,19 @@ const AboutText = () => {
     <div ref={wrapperRef} className="about-text-wrapper">
       <section className="about-text">
         <div className="about-text-content">
-                    <TextAnimation animateOnScroll={false} delay={0.7}>
-          <span className="about-text-label">
-            
-            About us
+          <TextAnimation animateOnScroll={true} delay={0.7}>
+            <span className="about-text-label">
+
+              About us
             </span>
-           </TextAnimation>
+          </TextAnimation>
 
           <p ref={textRef} className="about-text-text">
             <span ref={primaryRef} className="about-text-primary">
               Amsha Advisory was created with the vision of helping organisations
               navigate people-related challenges with greater clarity, strategy, and
               purpose. We partner
-            {/* <span ref={secondaryRef} className="about-text-secondary"> */}
+              {/* <span ref={secondaryRef} className="about-text-secondary"> */}
               with businesses to strengthen workplace performance, develop leaders,
               improve team dynamics, and create environments where both people and
               organisations can grow sustainably

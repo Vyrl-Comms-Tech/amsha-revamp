@@ -3,6 +3,7 @@ import { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TextAnimation from "../layout/TextAnimation";
 import Scene from "../Home/Scene";
 import "../../styles/AboutHero.css";
 
@@ -79,7 +80,11 @@ export default function AboutHero() {
     <>
       <section className="aboutHero">
         <div className="aboutHeroContent">
+
+                    <TextAnimation animateOnScroll={false} delay={0.7}>
+          
           <h1>At Amsha Advisory, we believe that behind every strong organisation are people, leadership, and workplace cultures shaping the way businesses grow and perform.</h1>
+                    </TextAnimation>
           <button className="btn-4">
             <span>
             Contact us

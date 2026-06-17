@@ -1,5 +1,7 @@
+"use client";
 import Image from "next/image";
 import "../../styles/Founder.css";
+import TextAnimation from "../layout/TextAnimation";
 
 export default function Founder() {
     return (
@@ -7,15 +9,27 @@ export default function Founder() {
             <div className="founder-container">
 
                 <div className="founder-left">
-                    <h2 className="founder-heading">Founder&rsquo;s Note:</h2>
+                    <TextAnimation animateOnScroll={true} delay={0.3}>
+                        <h2 className="founder-heading">
+
+
+                            Founder&rsquo;s Note:
+                        </h2>
+                    </TextAnimation>
 
                     <div className="founder-body">
-                        <p>
-                            As the founder of Amsha Advisory, I built this consultancy on a simple
-                            belief: people are at the heart of every successful organisation. Behind
-                            every business outcome are individuals, teams, leaders, and workplace
-                            cultures shaping the way organisations grow, perform, and evolve.
-                        </p>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
+
+                            <p>
+                                As the founder of Amsha Advisory, I built this consultancy on a simple
+                                belief: people are at the heart of every successful organisation. Behind
+                                every business outcome are individuals, teams, leaders, and workplace
+                                cultures shaping the way organisations grow, perform, and evolve.
+                            </p>
+                        </TextAnimation>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                         <p>
                             Amsha Advisory was created with the vision of helping organisations
                             navigate people-related challenges with greater clarity, strategy, and
@@ -24,6 +38,9 @@ export default function Founder() {
                             stronger teams, healthier workplace cultures, and more sustainable
                             organisational growth.
                         </p>
+                        </TextAnimation>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                         <p>
                             The name Amsha, meaning &ldquo;to awaken&rdquo; in Swahili, reflects
                             the essence of what this consultancy stands for: awakening potential
@@ -32,23 +49,45 @@ export default function Founder() {
                             growth, resilience, empowerment, and the importance of staying connected
                             to purpose while building for the future.
                         </p>
+                        </TextAnimation>
+
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                         <p>
                             What began as a passion for supporting people and organisations has
                             evolved into a consultancy working across industries and regions,
                             partnering with businesses that understand the value of investing in
                             their people.
                         </p>
+                        </TextAnimation>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                         <p>
                             As we continue to grow, our commitment remains the same: to create
                             meaningful impact by helping organisations strengthen the people behind
                             the business.
                         </p>
-
+                        </TextAnimation>
                         <div className="founder-signature">
-                            <p>Thank you for being part of this journey with me.</p>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
+                            <p>
+                                Thank you for being part of this journey with me.
+                                </p>
+                        </TextAnimation>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                             <p>Sincerely,</p>
+                        </TextAnimation>
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                             <p className="founder-name">Krittika Manek</p>
+                        </TextAnimation>
+
+                        <TextAnimation animateOnScroll={true} delay={0.3}>
+
                             <p className="founder-title">Founder &amp; CEO, Amsha Advisory</p>
+                        </TextAnimation>
                         </div>
                     </div>
                 </div>

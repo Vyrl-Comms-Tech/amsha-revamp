@@ -6,9 +6,9 @@ import OtherInner from '@/app/components/ServicesInner/otherInner'
 const page = () => {
   return (
     <div>
-        <ServicesInnerHero/>
-        <SupportAreas/>
-      <OtherInner/>
+      <ServicesInnerHero />
+      <SupportAreas />
+      <OtherInner />
 
     </div>
   )

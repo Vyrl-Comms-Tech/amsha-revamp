@@ -4,13 +4,14 @@
   color: var(--color-white);
   padding: 80px 0 0 50px;
   overflow: hidden;
+  position: relative;
 }
 
 /* ── Two-column grid ── */
 .footer-main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 90vh;
+  height: 92vh;
 }
 
 /* ── Left column ── */
@@ -145,6 +146,38 @@
 
 .footer-legal a:hover {
   color: var(--color-white);
+}
+
+/* ── Bottom glow strip with floating dots ── */
+.footer-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.footer-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(175deg, rgba(21, 22, 26, 0.14) 4.03%, rgba(250, 250, 250, 0.14) 56.17%, rgba(21, 22, 26, 0.14) 138.51%);
+  filter: blur(32px);
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 1;    transform: scale(1.35); }
+}
+
+@keyframes dot-float {
+  0%   { translate: 0px 0px; }
+  25%  { translate: 4px -6px; }
+  50%  { translate: -3px -4px; }
+  75%  { translate: -5px 3px; }
+  100% { translate: 0px 0px; }
 }
 
 /* ── Responsive ── */
