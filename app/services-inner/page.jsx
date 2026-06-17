@@ -1,15 +1,14 @@
 import React from 'react'
-import ServicesInnerHero from '@/app/components/ServicesInner/ServiceInnerHero'
-import SupportAreas from '@/app/components/ServicesInner/SupportAreas'
-import OtherInner from '@/app/components/ServicesInner/otherInner'
+import ServiceInnerHero from '../components/ServicesInner/ServiceInnerHero'
+import SupportAreas from '../components/ServicesInner/SupportAreas'
+import ServiceOtherInner from "../components/ServicesInner/ServiceOtherInner";
 
 const page = () => {
   return (
     <div>
-      <ServicesInnerHero />
+      <ServiceInnerHero />
       <SupportAreas />
-      <OtherInner />
-
+      <ServiceOtherInner />
     </div>
   )
 }

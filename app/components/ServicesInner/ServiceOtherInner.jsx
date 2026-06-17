@@ -1,7 +1,8 @@
+"use client"
+
 import Image from "next/image";
 import "../../styles/other-inner.css";
 import TextAnimation from "../layout/TextAnimation";
-
 // Default content — used by the employee-training-development page.
 // Pass topCards / bottomCard props to override for any other service page.
 const DEFAULT_TOP_CARDS = [
@@ -44,7 +45,7 @@ const DEFAULT_BOTTOM_CARD = {
   ],
 };
 
-export default function OtherInner({
+export default function ServiceOtherInner({
   topCards = DEFAULT_TOP_CARDS,
   bottomCard = DEFAULT_BOTTOM_CARD,
 }) {
