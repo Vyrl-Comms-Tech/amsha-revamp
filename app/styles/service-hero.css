@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  overflow: hidden;
 }
 
 /* ── Left: content ── */
@@ -51,7 +52,62 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ── Fixed canvas: right half of the screen ── */
+/* ── Right-side glow strip with floating dots ── */
+.sh-right-glow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.sh-right-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 22, 26, 0.14) 2.61%,
+    rgba(250, 250, 250, 0.14) 48.84%,
+    rgba(21, 22, 26, 0.14) 91.36%
+  );
+  filter: blur(32px);
+  transform: rotate(13.963deg);
+  transform-origin: center;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes dot-float {
+  0% {
+    translate: 0px 0px;
+  }
+  25% {
+    translate: 4px -6px;
+  }
+  50% {
+    translate: -3px -4px;
+  }
+  75% {
+    translate: -5px 3px;
+  }
+  100% {
+    translate: 0px 0px;
+  }
+}
+
 .sh-canvas-wrapper {
   position: fixed;
   top: 8%;
@@ -61,14 +117,28 @@
   z-index: 5;
   pointer-events: none;
 }
+@media (max-width: 1550px) {
+  .sh-left {
+    top: 5%;
+    gap: 11px;
+  }
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+  .sh-heading {
+    font-size: 62px;
+  }
 
+  .sh-desc {
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+}
 @media (max-width: 1280px) {
   .sh-heading {
     font-size: 70px;
+  }
+  .sh-left {
+    top: 0%
   }
   .sh-desc {
     font-size: 17px;

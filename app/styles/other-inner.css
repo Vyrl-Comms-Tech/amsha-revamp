@@ -2,6 +2,8 @@
   background: var(--color-white, #fff);
   padding: 40px 40px 60px;
   display: flex;
+  z-index: 99;
+  position: relative;
   flex-direction: column;
   gap: 20px;
 }

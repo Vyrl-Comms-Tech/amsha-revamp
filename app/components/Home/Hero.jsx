@@ -5,8 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import TextAnimation from "../layout/TextAnimation";
-import { GlowDot } from "../layout/svg";
 import "../../styles/Hero.css";
+import { GlowDot } from "../layout/svg";
 
 const DOTS = [
   { top: "22%", left: "33%" },

@@ -1,7 +1,10 @@
 import Image from "next/image";
 import "../../styles/other-inner.css";
+import TextAnimation from "../layout/TextAnimation";
 
-const TOP_CARDS = [
+// Default content — used by the employee-training-development page.
+// Pass topCards / bottomCard props to override for any other service page.
+const DEFAULT_TOP_CARDS = [
   {
     step: "Step One",
     title: "Training Formats",
@@ -12,7 +15,7 @@ const TOP_CARDS = [
     ],
   },
   {
-    step: "Step One",
+    step: "Step Two",
     title: "Session Duration Options",
     bullets: [
       "2-Hour Sessions",
@@ -24,8 +27,8 @@ const TOP_CARDS = [
   },
 ];
 
-const BOTTOM_CARD = {
-  step: "Step One",
+const DEFAULT_BOTTOM_CARD = {
+  step: "Step Three",
   title: "Delivery Approach",
   image: "/ab1.png",
   bullets: [
@@ -41,21 +44,31 @@ const BOTTOM_CARD = {
   ],
 };
 
-export default function OtherInner() {
+export default function OtherInner({
+  topCards = DEFAULT_TOP_CARDS,
+  bottomCard = DEFAULT_BOTTOM_CARD,
+}) {
   return (
     <section className="oi-section">
-
       {/* Top row — two equal cards */}
       <div className="oi-top-row">
-        {TOP_CARDS.map((card, i) => (
+        {topCards.map((card, i) => (
           <div key={i} className="oi-card">
             <div className="oi-card-header">
-              <span className="oi-step">{card.step}</span>
-              <h3 className="oi-title">{card.title}</h3>
+              <TextAnimation animateOnScroll={true} delay={0.3}>
+                <span className="oi-step">{card.step}</span>
+              </TextAnimation>
+              <TextAnimation animateOnScroll={true} delay={0.3}>
+                <h3 className="oi-title">{card.title}</h3>
+              </TextAnimation>
             </div>
             <ul className="oi-list">
               {card.bullets.map((b, j) => (
-                <li key={j}>{b}</li>
+                <li key={j}>
+                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                    <span>{b}</span>
+                  </TextAnimation>
+                </li>
               ))}
             </ul>
           </div>
@@ -65,24 +78,31 @@ export default function OtherInner() {
       {/* Bottom row — wide card with image */}
       <div className="oi-card oi-card--wide">
         <div className="oi-wide-left">
-          <span className="oi-step">{BOTTOM_CARD.step}</span>
-          <h3 className="oi-title">{BOTTOM_CARD.title}</h3>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <span className="oi-step">{bottomCard.step}</span>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <h3 className="oi-title">{bottomCard.title}</h3>
+          </TextAnimation>
           <ul className="oi-list">
-            {BOTTOM_CARD.bullets.map((b, j) => (
-              <li key={j}>{b}</li>
+            {bottomCard.bullets.map((b, j) => (
+              <li key={j}>
+                <TextAnimation animateOnScroll={true} delay={0.3}>
+                  <span>{b}</span>
+                </TextAnimation>
+              </li>
             ))}
           </ul>
         </div>
         <div className="oi-wide-img">
           <Image
-            src={BOTTOM_CARD.image}
-            alt="Delivery Approach"
+            src={bottomCard.image}
+            alt={bottomCard.title}
             fill
             className="oi-img"
           />
         </div>
       </div>
-
     </section>
   );
 }

@@ -4,55 +4,58 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../../styles/sticky-steps.css";
 import { PinkSphereCanvas } from "../Home/Particles";
+import TextAnimation from "../layout/TextAnimation";
 
 const STEPS = [
   {
     step: "Step One",
     title: "People Advisory",
     text: "Strategic organisational support designed to strengthen workplace structure, improve role clarity, enhance operational efficiency, and support overall organisational performance.",
-    href: "#",
+    href: "/services/people-advisory",
   },
   {
     step: "Step Two",
     title: "Employee Training & Development",
     text: "Interactive and practical training programs focused on improving workplace performance, leadership capability, and team effectiveness.",
-    href: "#",
+    href: "/services/employee-training-development",
   },
   {
     step: "Step Three",
     title: "Upskilling & Training",
     text: "Targeted development programs that help individuals strengthen professional skills and adapt to evolving workplace demands.",
-    href: "#",
+    href: "/services/upskilling-training",
   },
   {
     step: "Step Four",
     title: "Entrepreneurial Consulting",
     text: "Business support solutions designed to help entrepreneurs build stronger foundations, improve operations, and scale sustainably.",
-    href: "#",
+    href: "/services/entrepreneurial-consulting",
   },
   {
     step: "Step Five",
     title: "Career Development",
     text: "Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth.",
-    href: "#",
+    href: "/services/career-development",
   },
   {
     step: "Step Six",
     title: "Talent Assessment",
     text: "Behavioural and assessment-based solutions that support informed hiring, development, and organisational decision-making.",
-    href: "#",
+    href: "/services/talent-assessment",
   },
 ];
 
-const TOPS    = [59, 340, 593, 860, 1127, 1394];
-const CARD_H  = 250;
+const TOPS = [59, 340, 593, 860, 1127, 1394];
+const CARD_H = 250;
 const colBottom = TOPS[TOPS.length - 1] + CARD_H;
 
 export default function StickySteps() {
   const wrapperRef = useRef(null);
-  const cardRefs   = useRef([]);
+  const cardRefs = useRef([]);
   const [isMobile, setIsMobile] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 768px)").matches,
   );
 
   // Keep isMobile in sync when viewport resizes across the breakpoint
@@ -81,7 +84,7 @@ export default function StickySteps() {
     setWrapperH();
 
     const tween = gsap.to(cardRefs.current, {
-      y: () => -(Math.max(0, colBottom - window.innerHeight)),
+      y: () => -Math.max(0, colBottom - window.innerHeight),
       ease: "none",
       scrollTrigger: {
         trigger: wrapperRef.current,
@@ -92,7 +95,10 @@ export default function StickySteps() {
       },
     });
 
-    const onResize = () => { setWrapperH(); ScrollTrigger.refresh(); };
+    const onResize = () => {
+      setWrapperH();
+      ScrollTrigger.refresh();
+    };
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -105,7 +111,6 @@ export default function StickySteps() {
   return (
     <div ref={wrapperRef} className="ss-wrapper">
       <section className="services-section">
-
         <div className="orb-wrap">
           <PinkSphereCanvas />
         </div>
@@ -113,21 +118,32 @@ export default function StickySteps() {
         {STEPS.map((step, i) => (
           <div
             key={i}
-            ref={el => { cardRefs.current[i] = el; }}
-            className="service-card"
-            style={isMobile ? {} : {
-              top:   TOPS[i],
-              width: 620,
-              ...(i % 2 === 0 ? { left: 100 } : { right: 100 }),
+            ref={(el) => {
+              cardRefs.current[i] = el;
             }}
+            className="service-card"
+            style={
+              isMobile
+                ? {}
+                : {
+                    top: TOPS[i],
+                    width: 620,
+                    ...(i % 2 === 0 ? { left: 100 } : { right: 100 }),
+                  }
+            }
           >
-            <span>{step.step}</span>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
+            <TextAnimation animateOnScroll={true} delay={0.1}>
+              <span>{step.step}</span>
+            </TextAnimation>
+            <TextAnimation animateOnScroll={true} delay={0.1}>
+              <h3>{step.title}</h3>
+            </TextAnimation>
+            <TextAnimation animateOnScroll={true} delay={0.1}>
+              <p>{step.text}</p>
+            </TextAnimation>
             <a href={step.href}>VIEW NOW</a>
           </div>
         ))}
-
       </section>
     </div>
   );

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -10,20 +10,33 @@ import {
 } from "@/components/ui/sheet";
 import "../../styles/navbar.css";
 
-const darkRoutes = ["/blog","/contact-us",'/blog-inner','/services-inner','/services-inner1'];
+const darkRoutes = [
+  "/blog",
+  "/contact-us",
+  "/blog-inner",
+  "/services-inner",
+  "/services-inner1",
+  '/services/people-advisory',
+  '/services/employee-training-development',
+
+"/services/upskilling-training",
+ "/services/entrepreneurial-consulting",
+ "/services/career-development",
+ "/services/talent-assessment",
+];
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/blog", label: "Blog" },
-  { href: "/testimonials", label: "Testimonials" },
+  { href: "/blog", label: "Knowledge Hub" },
+  { href: "/training", label: "Training" },
 ];
 
 const Navbar = () => {
   const pathname = usePathname();
   const isDark = darkRoutes.some(
-    (r) => pathname === r || pathname.startsWith(r + "/")
+    (r) => pathname === r || pathname.startsWith(r + "/"),
   );
 
   return (
@@ -61,15 +74,32 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <rect y="5" width="28" height="2.5" rx="1.25" fill="currentColor" />
-            <rect y="13" width="28" height="2.5" rx="1.25" fill="currentColor" />
-            <rect y="21" width="28" height="2.5" rx="1.25" fill="currentColor" />
+            <rect
+              y="13"
+              width="28"
+              height="2.5"
+              rx="1.25"
+              fill="currentColor"
+            />
+            <rect
+              y="21"
+              width="28"
+              height="2.5"
+              rx="1.25"
+              fill="currentColor"
+            />
           </svg>
         </SheetTrigger>
 
         <SheetContent side="right" className="nav-sheet">
           {/* Sheet logo */}
           <div className="nav-sheet-logo">
-            <Image src="/blogo.svg" alt="Amsha Advisory" height={60} width={38} />
+            <Image
+              src="/blogo.svg"
+              alt="Amsha Advisory"
+              height={60}
+              width={38}
+            />
           </div>
 
           {/* Sheet links */}

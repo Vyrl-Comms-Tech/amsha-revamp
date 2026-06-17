@@ -14,9 +14,9 @@
 }
 
 .orb-wrap {
+  height: 950px;
   position: absolute;
   left: 50%;
-  height: 950px;
   width: 100%;
   top: 54%;
   transform: translate(-50%, -50%);
@@ -67,7 +67,12 @@
   text-underline-offset: 2px;
   font-weight: 400;
 }
-
+@media (max-width:1590px){
+  .orb-wrap {
+  height: 750px;
+  
+}
+}
 /* ── Mobile — vertical stack, no sphere, no absolute positions ── */
 @media (max-width: 768px) {
   .ss-wrapper {

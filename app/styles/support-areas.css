@@ -2,6 +2,8 @@
 
 .sa-section {
   background: var(--color-white, #fff);
+  position: relative;
+  z-index: 99;
   padding: 100px 50px 80px;
 }
 

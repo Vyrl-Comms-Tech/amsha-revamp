@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import "../../styles/support-areas.css";
+import TextAnimation from "../layout/TextAnimation";
 
 const ITEMS = [
   // Row 1 — dark at col 0
@@ -122,7 +123,9 @@ export default function SupportAreas() {
 
   return (
     <section className="sa-section">
-      <h2 className="sa-heading">Areas We Support</h2>
+      <TextAnimation animateOnScroll={true} delay={0.3}>
+        <h2 className="sa-heading">Areas We Support</h2>
+      </TextAnimation>
 
       <div className="sa-grid">
         {ITEMS.map((item, i) => {
@@ -154,16 +157,22 @@ export default function SupportAreas() {
       {/* Row 7 — newsletter + single dark card */}
       <div className="sa-last-row">
         <div className="sa-newsletter">
-          <h3 className="sa-nl-heading">Easier HR For Your Inbox</h3>
-          <p className="sa-nl-sub">
-            Get Resources, Tips, And Inspiration That Will Help You Save Time
-            And Shine At Work.
-          </p>
-          <p className="sa-nl-legal">
-            By Providing My Email, I Authorize Amsha Advisory To Keep Me
-            Informed About Its Products, Services And Events Through Email. My
-            Data Will Be Handled According To The Privacy Notice.
-          </p>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <h3 className="sa-nl-heading">Easier HR For Your Inbox</h3>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <p className="sa-nl-sub">
+              Get Resources, Tips, And Inspiration That Will Help You Save Time
+              And Shine At Work.
+            </p>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <p className="sa-nl-legal">
+              By Providing My Email, I Authorize Amsha Advisory To Keep Me
+              Informed About Its Products, Services And Events Through Email. My
+              Data Will Be Handled According To The Privacy Notice.
+            </p>
+          </TextAnimation>
           <div className="sa-nl-form">
             <input
               type="email"
@@ -172,7 +181,7 @@ export default function SupportAreas() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="sa-nl-btn" type="button">
+            <button className="sa-nl-btn btn-4" type="button">
               Count Me In
             </button>
           </div>

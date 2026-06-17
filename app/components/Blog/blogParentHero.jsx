@@ -28,9 +28,11 @@ const BlogParentHero = () => {
           {tabs.map((tab) => (
             <button
               key={tab}
-              className={`bph-tab ${activeTab === tab ? "bph-tab--active" : ""}`}
+              className={`bph-tab btn-4 ${activeTab === tab ? "bph-tab--active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
+
+              
               {tab}
             </button>
           ))}

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { Model } from "../../model";
@@ -39,8 +39,6 @@ const DEFAULT_KEYFRAMES = [
   //                   ↑ was 298.5 — fixed to 658.5 (= 298.5 + 360) so model
   //                     lands at the same visual angle but keeps spinning forward
 ];
-
-const LABELS = ["Hero (start)", "Hero2 start", "Hero3 start", "Hero3 end"];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FACTS → FOOTER  EXTRA ROTATION
@@ -126,12 +124,6 @@ const IDLE_AMP_Y   = 0.06; // ← increase/decrease Y sway amount
 const IDLE_AMP_X   = 0.13; // ← increase/decrease X tilt amount
 
 const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
-  const [keyframes, setKeyframes] = useState(DEFAULT_KEYFRAMES);
-  const kfRef = useRef(DEFAULT_KEYFRAMES.map((kf) => ({ ...kf })));
-
-  const [extra, setExtra] = useState({ ...DEFAULT_EXTRA });
-  const extraRef = useRef({ ...DEFAULT_EXTRA });
-
   const mouseGroupRef = useRef();
   const mouseTarget  = useRef({ x: 0, y: 0 });
   const mouseCurrent = useRef({ x: 0, y: 0 });
@@ -155,50 +147,6 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
     }
   });
 
-  useEffect(() => {
-    let gui;
-    import("lil-gui").then(({ default: GUI }) => {
-      // gui = new GUI({ title: "Rotation Keyframes", width: 128 });
-
-      // ── Hero → Hero3 keyframe folders ────────────────────────────
-      LABELS.forEach((label, idx) => {
-        const folder = gui.addFolder(label);
-        const params = { ...DEFAULT_KEYFRAMES[idx] };
-
-        const update = (key, v) => {
-          kfRef.current[idx] = { ...kfRef.current[idx], [key]: v };
-          setKeyframes(kfRef.current.map((kf) => ({ ...kf })));
-        };
-
-        folder.add(params, "x", -180,  180, 0.5).name("X  pitch").onChange((v) => update("x", v));
-        folder.add(params, "y", -1080, 1080, 0.5).name("Y  yaw  (spin)").onChange((v) => update("y", v));
-        folder.add(params, "z", -180,  180, 0.5).name("Z  roll").onChange((v) => update("z", v));
-        folder.close();
-      });
-
-      // ── Facts → Footer extra rotation folder ─────────────────────
-      const exFolder = gui.addFolder("Facts → Footer  (+extra °)");
-      const exParams = { ...DEFAULT_EXTRA };
-      const updateEx = (key, v) => {
-        extraRef.current[key] = v;
-        setExtra({ ...extraRef.current });
-      };
-      exFolder.add(exParams, "x", -360, 360,  0.5).name("X extra °").onChange((v) => updateEx("x", v));
-      exFolder.add(exParams, "y", -1080, 1080, 0.5).name("Y extra °").onChange((v) => updateEx("y", v));
-      exFolder.add(exParams, "z", -360, 360,  0.5).name("Z extra °").onChange((v) => updateEx("z", v));
-      exFolder.close();
-
-      // ── Log current values to console so you can paste them in ───
-      gui.add({
-        log: () => {
-          console.log("DEFAULT_KEYFRAMES:\n", JSON.stringify(kfRef.current, null, 2));
-          console.log("DEFAULT_EXTRA:\n", JSON.stringify(extraRef.current, null, 2));
-        },
-      }, "log").name("Log values → console");
-    });
-
-    return () => gui?.destroy();
-  }, []);
 
   // ── Canvas size → mobile flag ───────────────────────────────────
   // useThree().size gives canvas pixel dimensions (updates with CSS breakpoints).
@@ -222,11 +170,11 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
   } else {
     // On mobile use the reduced-tilt keyframes so pitch/roll don't push
     // the model outside the canvas edges.
-    const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : keyframes;
+    const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : DEFAULT_KEYFRAMES;
     rot = getRotation(progress, activeKeyframes);
 
     // Add the Facts→Footer extra rotation on top
-    const activeExtra = isMobile ? MOBILE_EXTRA : extra;
+    const activeExtra = isMobile ? MOBILE_EXTRA : DEFAULT_EXTRA;
     if (progress2 > 0) {
       rot.x += progress2 * activeExtra.x * DEG;
       rot.y += progress2 * activeExtra.y * DEG;

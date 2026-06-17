@@ -5,6 +5,7 @@
   background: var(--color-white, #fff);
   display: flex;
   align-items: center;
+  z-index: 99;
   padding: 0px 50px;
 }
 
@@ -81,11 +82,36 @@
   object-fit: cover;
   object-position: center;
 }
+@media (max-width:1620px){
+  .sih-card {
+  margin-top: 5%;
+  height: 62vh;
+}
 
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+.sih-content {
+  flex: 0 0 58%;
+  padding: 70px 60px 70px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
 
+.sih-heading {
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1.05;
+  color: #fff;
+}
+
+.sih-desc {
+  font-size: 23px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.35;
+  max-width: 90%;
+}
+
+}
 @media (max-width: 1280px) {
   .sih-heading {
     font-size: 44px;
