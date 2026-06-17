@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import "../../styles/navbar.css";
 
+<<<<<<< Updated upstream
 const darkRoutes = [
   "/blog",
   "/contact-us",
@@ -24,13 +25,21 @@ const darkRoutes = [
  "/services/career-development",
  "/services/talent-assessment",
 ];
+=======
+const darkRoutes = ["/knowledge-hub","/contact-us",'/services-inner','/services-inner1'];
+>>>>>>> Stashed changes
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
+<<<<<<< Updated upstream
   { href: "/blog", label: "Knowledge Hub" },
   { href: "/training", label: "Training" },
+=======
+  { href: "/knowledge-hub", label: "Knowledge Hub" },
+  { href: "/testimonials", label: "Testimonials" },
+>>>>>>> Stashed changes
 ];
 
 const Navbar = () => {

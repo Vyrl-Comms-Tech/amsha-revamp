@@ -12,17 +12,84 @@
 /* ── Left: article ── */
 .bic-article {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  min-width: 0;
 }
-    
+
 .bic-article p {
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 400;
   color: #222;
-  line-height: 1.15;
+  line-height: 1.7;
+  margin-bottom: 18px;
 }
+
+.bic-article h1,
+.bic-article h2,
+.bic-article h3,
+.bic-article h4,
+.bic-article h5,
+.bic-article h6 {
+  font-weight: 600;
+  color: #111;
+  line-height: 1.25;
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.bic-article h1 { font-size: 32px; }
+.bic-article h2 { font-size: 28px; }
+.bic-article h3 { font-size: 22px; }
+.bic-article h4 { font-size: 20px; }
+.bic-article h5 { font-size: 18px; }
+.bic-article h6 { font-size: 16px; }
+
+.bic-article strong { font-weight: 700; }
+.bic-article em     { font-style: italic; }
+.bic-article u      { text-decoration: underline; }
+
+.bic-article ul,
+.bic-article ol {
+  padding-left: 24px;
+  margin-bottom: 18px;
+}
+
+.bic-article ul { list-style: disc; }
+.bic-article ol { list-style: decimal; }
+
+.bic-article li {
+  font-size: 18px;
+  color: #222;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+/* nested <p> inside <li> (Quill / TipTap pattern) */
+.bic-article li p {
+  margin-bottom: 0;
+}
+
+.bic-article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* margin: 28px auto; */
+}
+
+.bic-article a {
+  color: #0057d9;
+  text-decoration: underline;
+}
+
+.bic-article blockquote {
+  border-left: 4px solid #ddd;
+  margin: 24px 0;
+  padding: 8px 20px;
+  color: #555;
+  font-style: italic;
+}
+
+/* first child should have no top margin */
+.bic-article > *:first-child { margin-top: 0; }
 
 /* ── Right: sidebar ── */
 .bic-sidebar {
@@ -116,12 +183,16 @@
   .bic-section {
     padding: 40px 15px 60px;
   }
-  .bic-article p {
-    font-size: 22px;
+
+  .bic-article p,
+  .bic-article li { font-size: 16px; }
+
+  .bic-article h1 { font-size: 26px; }
+  .bic-article h2 { font-size: 22px; }
+  .bic-article h3 { font-size: 19px; }
+
+  .bic-card {
+    padding: 28px 15px;
+    gap: 19px;
   }
-  
-.bic-card {
-  padding: 28px 15px;
-  gap: 19px;
-}
 }

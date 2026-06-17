@@ -29,6 +29,10 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
+<<<<<<< Updated upstream
 , "app/components/contactUs/contactUsHero.jsx", "app/blog-inner/page.jsx", "app/about/page.jsx", "app/page.jsx", "app/blog/page.jsx", "app/services/page.jsx", "app/training/page.jsx", "app/contact-us/page.jsx", "app/services-inner/page.jsx", "app/layout.tsx", "app/components/layout/Navbar.jsx", "app/components/Blog/blogParentHero.jsx", "components/ui/sheet.tsx", "components/ui/button.tsx", "app/services/people-advisory/page.jsx"  ],
+=======
+, "app/components/contactUs/contactUsHero.jsx", "app/[slug]/page.jsx", "app/about/page.jsx", "app/page.jsx", "app/blog/page.jsx", "app/services/page.jsx", "app/training/page.jsx", "app/contact-us/page.jsx", "app/services-inner/page.jsx", "app/layout.tsx", "app/components/layout/Navbar.jsx", "app/components/Blog/blogParentHero.jsx", "components/ui/sheet.tsx", "components/ui/button.tsx"  ],
+>>>>>>> Stashed changes
   "exclude": ["node_modules"]
 }

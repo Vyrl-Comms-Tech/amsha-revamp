@@ -1,46 +1,42 @@
+"use client";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import "../../styles/blog-inner-content.css";
 
-const BlogInnerContent = () => {
+const BlogInnerContent = ({ data, loading }) => {
+
+  if (loading || !data) {
+    return (
+      <section className="bic-section">
+        <article className="bic-article">
+          <Skeleton height={28} width="55%" style={{ marginBottom: 16 }} />
+          <Skeleton count={5} style={{ marginBottom: 10 }} />
+          <Skeleton height={24} width="45%" style={{ marginTop: 36, marginBottom: 14 }} />
+          <Skeleton count={6} style={{ marginBottom: 10 }} />
+          <Skeleton height={24} width="50%" style={{ marginTop: 36, marginBottom: 14 }} />
+          <Skeleton count={4} style={{ marginBottom: 10 }} />
+        </article>
+        <aside className="bic-sidebar">
+          <div className="bic-card">
+            <Skeleton height={36} width="80%" />
+            <Skeleton count={2} style={{ marginBottom: 6 }} />
+            <Skeleton height={48} />
+            <Skeleton count={3} style={{ marginBottom: 6 }} />
+            <Skeleton height={46} width={140} />
+          </div>
+        </aside>
+      </section>
+    );
+  }
+
   return (
     <section className="bic-section">
 
       {/* ── Left: article body ── */}
-      <article className="bic-article">
-        <p>
-          Many organisations have culture documented. Far fewer have it lived.
-        </p>
-        <p>
-          The gap between a value statement on a website and the actual experience
-          of working somewhere is one of the most common and costly disconnects in
-          modern business. Policies can define what an organisation stands for on
-          paper. Culture is defined by what happens in meetings, how feedback is
-          given, and how leaders behave when things go wrong.
-        </p>
-        <p>
-          In a world where employees have more visibility into organisational
-          behaviour than ever before, that gap is increasingly difficult to hide.
-          People talk, compare experiences, and make career decisions accordingly.
-        </p>
-        <p>
-          The organisations building genuinely strong cultures are not necessarily
-          running bigger engagement programmes. They are being more intentional
-          about the small, daily moments that either reinforce or quietly undermine
-          what they say they believe.<br />
-          A leader who acknowledges a mistake openly does more for culture than a
-          policy document ever could.<br />
-          A manager who makes time for a struggling team member sends a signal no
-          handbook can replicate.
-        </p>
-        <p>
-          Culture is not a project with a deadline. It is the accumulation of every
-          interaction, every decision, and every moment where values are either
-          honoured or quietly abandoned.
-        </p>
-        <p>
-          At Amsha Advisory, we help organisations close the gap between the culture
-          they describe and the one their people actually experience.
-        </p>
-      </article>
+      <article
+        className="bic-article"
+        dangerouslySetInnerHTML={{ __html: data.htmlFormat }}
+      />
 
       {/* ── Right: newsletter sidebar ── */}
       <aside className="bic-sidebar">

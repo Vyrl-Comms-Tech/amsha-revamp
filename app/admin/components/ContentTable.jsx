@@ -49,7 +49,7 @@ export default function ContentTable({ defaultCategory }) {
   const [items, setItems]         = useState([])
   const [pagination, setPagination] = useState({ total: 0, totalPages: 1, page: 1 })
   const [loading, setLoading]     = useState(true)
-  const [deleteTarget, setDeleteTarget] = useState(null)  // { id, name }
+  const [deleteTarget, setDeleteTarget] = useState(null) 
   const [deleting, setDeleting]         = useState(false)
 
   const fetchContent = useCallback(async () => {
