@@ -28,13 +28,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
               className={`bph-tab btn-4 ${activeTab === tab ? "bph-tab--active" : ""}`}
               onClick={() => setActiveTab(tab)}
             >
-<<<<<<< Updated upstream
-
-              
-              {tab}
-=======
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
->>>>>>> Stashed changes
             </button>
           ))}
         </div>
