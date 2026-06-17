@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import ServiceInnerHero from "../../components/ServicesInner/ServiceInnerHero";
-import OtherInner from "../../components/ServicesInner/otherInner";
 import FooterModel from "../../components/layout/FooterModel";
+import ServiceOtherInner from "../../components/ServicesInner/ServiceOtherInner";
 
 // ─────────────────────────────────────────────────────────────
 // SERVICES DATA — update hero / topCards / bottomCard text here
@@ -263,7 +263,7 @@ export default async function ServiceSlugPage({ params }) {
         desc={data.hero.desc}
         image={data.hero.image}
       />
-      <OtherInner
+      <ServiceOtherInner
         topCards={data.topCards}
         bottomCard={data.bottomCard}
       />

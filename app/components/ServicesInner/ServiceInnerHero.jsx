@@ -16,15 +16,15 @@ export default function ServiceInnerHero({
       {/* ── Gray card ── */}
       <div className="sih-card">
         <div className="sih-content">
-                      <TextAnimation animateOnScroll={true} delay={0.3}>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
 
-          <h1 className="sih-heading">{heading}</h1>
-                      </TextAnimation>
-                                  <TextAnimation animateOnScroll={true} delay={0.3}>
+            <h1 className="sih-heading">{heading}</h1>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
 
-                      
-          <p className="sih-desc">{desc}</p>
-                                  </TextAnimation>
+
+            <p className="sih-desc">{desc}</p>
+          </TextAnimation>
           <a href={btnHref} className="sih-btn btn-4">{btnText}</a>
         </div>
       </div>
