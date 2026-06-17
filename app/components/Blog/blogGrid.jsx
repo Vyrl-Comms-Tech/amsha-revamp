@@ -1,5 +1,7 @@
+'use client'
 import Image from "next/image";
 import "../../styles/blog-grid.css";
+import TextAnimation from "../layout/TextAnimation";
 
 const posts = [
   {
@@ -26,8 +28,16 @@ const BlogGrid = () => {
   return (
     <section className="bg-section">
       <div className="bg-header">
-        <p className="bg-label">People Strategies for Startup Success</p>
-        <h2 className="bg-title">Blogs &amp; articles</h2>
+        <TextAnimation animateOnScroll={true} delay={0.3}>
+
+
+          <p className="bg-label">People Strategies for Startup Success</p>
+        </TextAnimation>
+        <TextAnimation animateOnScroll={true} delay={0.3}>
+
+
+          <h2 className="bg-title">Blogs &amp; articles</h2>
+        </TextAnimation>
       </div>
 
       <div className="bg-grid">
@@ -44,8 +54,15 @@ const BlogGrid = () => {
 
             <div className="bg-card-body">
               <span className="bg-badge">{post.badge}</span>
-              <h3 className="bg-card-title">{post.title}</h3>
-              <p className="bg-card-desc">{post.desc}</p>
+              <TextAnimation animateOnScroll={true} delay={0.3}>
+
+                <h3 className="bg-card-title">{post.title}</h3>
+              </TextAnimation>
+              <TextAnimation animateOnScroll={true} delay={0.3}>
+
+
+                <p className="bg-card-desc">{post.desc}</p>
+              </TextAnimation>
             </div>
           </article>
         ))}
