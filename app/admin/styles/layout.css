@@ -1,0 +1,32 @@
+/* Admin root layout: dark sidebar + light main area */
+.admin-root {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--admin-content-bg);
+  font-family: var(--font-anek), sans-serif;
+  color: var(--admin-text);
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  background: var(--admin-content-bg);
+}
+
+.admin-content::-webkit-scrollbar { width: 5px; }
+.admin-content::-webkit-scrollbar-track { background: transparent; }
+.admin-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}

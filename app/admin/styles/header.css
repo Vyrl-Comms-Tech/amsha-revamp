@@ -1,0 +1,106 @@
+/* ── Header component styles ──────────────────────────────── */
+
+.admin-header {
+  height: var(--admin-header-h);
+  min-height: var(--admin-header-h);
+  background: var(--admin-header-bg);
+  border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.admin-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.admin-header-title {
+  font-size: clamp(15px, 1.3vw, 18px);
+  font-weight: 600;
+  color: var(--admin-text);
+  line-height: 1.2;
+}
+
+.admin-header-date {
+  font-size: clamp(11px, 0.82vw, 12px);
+  color: var(--admin-text-muted);
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-header-bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--admin-border);
+  cursor: pointer;
+  color: var(--admin-text-muted);
+  transition: all var(--admin-transition);
+  position: relative;
+}
+
+.admin-header-bell:hover {
+  background: var(--admin-content-bg);
+  color: var(--admin-text);
+}
+
+.admin-header-bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  background: #15161a;
+  border-radius: 50%;
+  border: 1.5px solid var(--admin-header-bg);
+}
+
+.admin-user-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  border-radius: 30px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-content-bg);
+  cursor: pointer;
+  transition: all var(--admin-transition);
+}
+
+.admin-user-chip:hover {
+  border-color: var(--admin-border-mid);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.admin-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #15161a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(9px, 0.72vw, 10px);
+  font-weight: 700;
+  color: #f4f4f4;
+  flex-shrink: 0;
+}
+
+.admin-user-name {
+  font-size: clamp(12px, 0.9vw, 13px);
+  font-weight: 500;
+  color: var(--admin-text);
+}

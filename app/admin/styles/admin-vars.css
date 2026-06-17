@@ -1,0 +1,37 @@
+/* ============================================================
+   ADMIN PANEL — SHARED CSS VARIABLES
+   Import this in the root admin layout so all child
+   components can inherit these tokens.
+   ============================================================ */
+
+:root {
+  /* Sidebar */
+  --admin-sidebar-bg:          #15161a;
+  --admin-sidebar-w:           220px;
+  --admin-sidebar-collapsed-w: 64px;
+  --admin-sidebar-border:      rgba(255, 255, 255, 0.08);
+  --admin-sidebar-text:        rgba(244, 244, 244, 0.52);
+  --admin-sidebar-text-active: #f4f4f4;
+  --admin-sidebar-hover:       rgba(255, 255, 255, 0.06);
+  --admin-sidebar-active:      rgba(255, 255, 255, 0.10);
+  --admin-sidebar-section:     rgba(244, 244, 244, 0.24);
+
+  /* Content area (light) */
+  --admin-content-bg:  #f1f2f1;
+  --admin-header-bg:   #ffffff;
+  --admin-card-bg:     #ffffff;
+  --admin-border:      rgba(0, 0, 0, 0.08);
+  --admin-border-mid:  rgba(0, 0, 0, 0.13);
+  --admin-shadow:      0 1px 3px rgba(0,0,0,0.06), 0 1px 8px rgba(0,0,0,0.04);
+
+  /* Text on light bg */
+  --admin-text:        #15161a;
+  --admin-text-muted:  rgba(21, 22, 26, 0.52);
+  --admin-text-subtle: rgba(21, 22, 26, 0.30);
+
+  /* Shared */
+  --admin-header-h:    58px;
+  --admin-radius:      10px;
+  --admin-radius-sm:   7px;
+  --admin-transition:  0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}

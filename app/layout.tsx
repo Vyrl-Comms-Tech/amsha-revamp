@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
+import AdminWrapper from "./components/layout/AdminWrapper";
 import LenisProvider from "./components/layout/LenisProvider";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -73,9 +72,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <LenisProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <AdminWrapper>
+            {children}
+          </AdminWrapper>
         </LenisProvider>
       </body>
     </html>

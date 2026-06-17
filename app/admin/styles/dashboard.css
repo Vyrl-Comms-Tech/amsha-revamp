@@ -1,0 +1,96 @@
+/* ── Dashboard page styles (stats + page header) ─────────── */
+
+.admin-page-top {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-page-title {
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 700;
+  color: var(--admin-text);
+  line-height: 1.2;
+}
+
+.admin-page-desc {
+  font-size: clamp(12px, 0.9vw, 13px);
+  color: var(--admin-text-muted);
+  margin-top: 3px;
+}
+
+/* ── Stat cards grid ────────────────────────────────────────── */
+.admin-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 1080px) {
+  .admin-stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .admin-stats-row { grid-template-columns: 1fr; }
+}
+
+.admin-stat-card {
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--admin-shadow);
+  transition: box-shadow var(--admin-transition), border-color var(--admin-transition);
+  cursor: default;
+}
+
+.admin-stat-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.09), 0 1px 12px rgba(0,0,0,0.06);
+  border-color: var(--admin-border-mid);
+}
+
+.admin-stat-icon-box {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 10px;
+  background: rgba(21, 22, 26, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text-subtle);
+  flex-shrink: 0;
+}
+
+.admin-stat-body { flex: 1; min-width: 0; }
+
+.admin-stat-label {
+  font-size: clamp(11px, 0.82vw, 12px);
+  color: var(--admin-text-muted);
+  font-weight: 450;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-stat-value {
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--admin-text-subtle);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.admin-stat-meta {
+  font-size: clamp(10px, 0.75vw, 11px);
+  color: var(--admin-text-subtle);
+  margin-top: 3px;
+}

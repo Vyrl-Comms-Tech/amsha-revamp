@@ -1,0 +1,120 @@
+/* ── DeleteConfirmPopup ────────────────────────────────────── */
+
+.del-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  animation: del-fade-in 0.18s ease;
+}
+
+@keyframes del-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.del-popup {
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 400px;
+  padding: 28px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: del-slide-up 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes del-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.del-popup-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: #dc2626;
+}
+
+.del-popup-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--admin-text);
+  margin: 0 0 6px;
+}
+
+.del-popup-desc {
+  font-size: 13px;
+  color: var(--admin-text-muted);
+  margin: 0 0 22px;
+  line-height: 1.5;
+}
+
+.del-popup-name {
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.del-popup-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.del-popup-cancel {
+  flex: 1;
+  padding: 8px 14px;
+  border-radius: var(--admin-radius-sm);
+  border: 1px solid var(--admin-border-mid);
+  background: transparent;
+  color: var(--admin-text);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-anek), sans-serif;
+  cursor: pointer;
+  transition: background var(--admin-transition);
+}
+
+.del-popup-cancel:hover {
+  background: var(--admin-content-bg);
+}
+
+.del-popup-confirm {
+  flex: 1;
+  padding: 8px 14px;
+  border-radius: var(--admin-radius-sm);
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-anek), sans-serif;
+  cursor: pointer;
+  transition: background var(--admin-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.del-popup-confirm:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.del-popup-confirm:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
