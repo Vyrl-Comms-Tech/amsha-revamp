@@ -7,10 +7,12 @@ import OverlapingCards from "./components/Home/OverlapingCards";
 import PeopleAdvisory from "./components/Home/PeopleAdvisory";
 import WhyChooseUs from "./components/Home/WhyChooseUs";
 import Facts from "./components/Home/Facts";
+import Multiple3d from "@/app/components/layout/Multiple3d";
 import Particles from "./components/Home/Particles";
 export default function Home() {
   return (
     <>
+      {/* <Multiple3d/> */}
       <Hero />
       <Hero2 />
       <Hero3 />

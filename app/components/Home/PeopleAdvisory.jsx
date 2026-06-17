@@ -4,7 +4,7 @@ import { flushSync } from "react-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../../styles/people-advisory.css";
-import { PinkSphereCanvas } from "./Particles";
+import Multiple3d from "../layout/Multiple3d";
 import TextAnimation from "../layout/TextAnimation";
 
 const SLIDES = [
@@ -41,12 +41,11 @@ const SLIDES = [
 ];
 
 export default function PeopleAdvisory() {
-  const wrapperRef        = useRef();
-  const numberRef         = useRef();
-  const sphereProgressRef = useRef(0); // drives Particles rotation via ref (no re-render)
+  const wrapperRef = useRef();
+  const numberRef = useRef();
   const [slide, setSlide] = useState(0);
-  const currentSlide      = useRef(0);
-  const hasShownAll       = useRef(false);
+  const currentSlide = useRef(0);
+  const hasShownAll = useRef(false);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -54,7 +53,7 @@ export default function PeopleAdvisory() {
     const getEls = () => [numberRef.current].filter(Boolean);
 
     const isAnimating = { current: false };
-    const pending     = { current: null };
+    const pending = { current: null };
     let sectionEnd = 0;
 
     const runTransition = (next) => {
@@ -81,13 +80,16 @@ export default function PeopleAdvisory() {
               onComplete: () => {
                 isAnimating.current = false;
                 if (next === SLIDES.length - 1) hasShownAll.current = true;
-                if (pending.current !== null && pending.current !== currentSlide.current) {
+                if (
+                  pending.current !== null &&
+                  pending.current !== currentSlide.current
+                ) {
                   const nextPending = pending.current;
                   pending.current = null;
                   runTransition(nextPending);
                 }
               },
-            }
+            },
           );
         },
       });
@@ -95,7 +97,10 @@ export default function PeopleAdvisory() {
 
     const goTo = (next) => {
       if (next === currentSlide.current) return;
-      if (isAnimating.current) { pending.current = next; return; }
+      if (isAnimating.current) {
+        pending.current = next;
+        return;
+      }
       runTransition(next);
     };
 
@@ -103,11 +108,17 @@ export default function PeopleAdvisory() {
       trigger: wrapperRef.current,
       start: "top top",
       end: "bottom bottom",
-      onRefresh: (self) => { sectionEnd = self.end; },
+      onRefresh: (self) => {
+        sectionEnd = self.end;
+      },
       onUpdate: (self) => {
         sectionEnd = self.end;
-        sphereProgressRef.current = self.progress;
-        goTo(Math.min(SLIDES.length - 1, Math.floor(self.progress * SLIDES.length)));
+        goTo(
+          Math.min(
+            SLIDES.length - 1,
+            Math.floor(self.progress * SLIDES.length),
+          ),
+        );
       },
     });
 
@@ -123,23 +134,25 @@ export default function PeopleAdvisory() {
 
     // Touch guard: same idea for swipe-up on mobile.
     let touchStartY = 0;
-    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY; };
-    const onTouchMove  = (e) => {
+    const onTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const onTouchMove = (e) => {
       if (hasShownAll.current || !sectionEnd) return;
-      const swipingUp   = e.touches[0].clientY < touchStartY;
+      const swipingUp = e.touches[0].clientY < touchStartY;
       const atOrPastEnd = window.scrollY >= sectionEnd - 5;
       if (swipingUp && atOrPastEnd) e.preventDefault();
     };
 
-    window.addEventListener("wheel",      onWheel,      { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true  });
-    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
 
     return () => {
       st.kill();
-      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove",  onTouchMove);
+      window.removeEventListener("touchmove", onTouchMove);
     };
   }, []);
 
@@ -148,33 +161,37 @@ export default function PeopleAdvisory() {
   return (
     <div ref={wrapperRef} className="pa-scroll-wrapper">
       <section className="hero-section-of-poeple-advisory">
-
         <div className="hero-heading">
-          <TextAnimation key={`h-${slide}`} animateOnScroll={false} delay={0.15}>
+          <TextAnimation
+            key={`h-${slide}`}
+            animateOnScroll={false}
+            delay={0.15}
+          >
             <h1>{heading}</h1>
           </TextAnimation>
         </div>
 
         <div className="hero-image">
-          <PinkSphereCanvas progressRef={sphereProgressRef} />
+          <Multiple3d embed targetIndex={slide} />
         </div>
+
 
         <div className="hero-number">
           <span ref={numberRef}>{number}</span>
         </div>
 
         <div className="hero-content">
-          <TextAnimation key={`p-${slide}`} animateOnScroll={false} delay={0.15}>
+          <TextAnimation
+            key={`p-${slide}`}
+            animateOnScroll={false}
+            delay={0.15}
+          >
             <p>{text}</p>
           </TextAnimation>
           <button className="btn-4">
-            <span>
-
-            Explore More
-            </span>
-            </button>
+            <span>Explore More</span>
+          </button>
         </div>
-
       </section>
     </div>
   );
