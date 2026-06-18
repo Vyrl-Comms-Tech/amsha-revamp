@@ -1,0 +1,198 @@
+/* ── TrainingTable — view modal & extras ──────────────────── */
+
+/* Error banner */
+.tt-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(239, 68, 68, 0.07);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+  font-size: clamp(12px, 0.88vw, 13px);
+}
+
+.tt-error-close {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #dc2626;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.tt-error-close:hover { background: rgba(239, 68, 68, 0.1); }
+
+/* Empty / loading cell */
+.tt-table-empty {
+  text-align: center;
+  padding: 40px 16px !important;
+  color: var(--admin-text-subtle);
+}
+
+/* Delivery cell — wrap chips neatly */
+.tt-delivery-cell { max-width: 160px; }
+
+/* Category badge — allow text wrap for long category names */
+.tt-category-badge {
+  white-space: normal;
+  max-width: 160px;
+  line-height: 1.4;
+}
+
+.tt-empty-cell {
+  color: var(--admin-text-subtle);
+}
+
+/* ── View modal ──────────────────────────────────────────── */
+.tt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tt-modal {
+  background: var(--admin-card-bg, #ffffff);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.tt-modal-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--admin-border);
+  flex-shrink: 0;
+}
+
+.tt-modal-title {
+  flex: 1;
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 600;
+  color: var(--admin-text);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tt-modal-close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid var(--admin-border);
+  background: transparent;
+  cursor: pointer;
+  color: var(--admin-text-muted);
+  transition: all 0.15s;
+}
+
+.tt-modal-close:hover {
+  background: var(--admin-content-bg);
+  color: var(--admin-text);
+}
+
+.tt-modal-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--admin-border);
+  flex-shrink: 0;
+}
+
+.tt-modal-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tt-modal-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tt-modal-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tt-modal-label {
+  font-size: clamp(10px, 0.76vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--admin-text-subtle);
+}
+
+.tt-modal-value {
+  font-size: clamp(12px, 0.92vw, 13px);
+  color: var(--admin-text-muted);
+}
+
+.tt-modal-desc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--admin-border);
+  padding-top: 14px;
+}
+
+.tt-modal-bullets {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tt-modal-bullets li {
+  font-size: clamp(12px, 0.92vw, 13px);
+  color: var(--admin-text-muted);
+  line-height: 1.55;
+}
+
+.tt-modal-text {
+  font-size: clamp(12px, 0.92vw, 13px);
+  color: var(--admin-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tt-modal-text--empty {
+  color: var(--admin-text-subtle);
+  font-style: italic;
+}
+
+.tt-modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--admin-border);
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}

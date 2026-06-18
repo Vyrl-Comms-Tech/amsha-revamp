@@ -169,7 +169,6 @@ const Hero = () => {
         {/* left col */}
         <div className="hero-left">
           <TextAnimation animateOnScroll={true} delay={0.5}>
-
             <span className="hero-badge">&#8226; &nbsp; For those who want more from their business</span>
           </TextAnimation>
           <TextAnimation animateOnScroll={false} delay={0.7}>

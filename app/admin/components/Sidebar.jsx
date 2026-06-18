@@ -12,6 +12,8 @@ import {
   LogOut,
   ChevronLeft,
   FilePlus,
+  Brain,
+  TableProperties,
 } from 'lucide-react'
 import '../styles/sidebar.css'
 
@@ -37,6 +39,19 @@ const NAV = [
       { href: '/admin/add-content', label: 'Add Content',  icon: FilePlus },
     ],
   },
+  {
+    section: 'Training table',
+    items: [
+      { href: '/admin/trainings', label: 'Trainings', icon: TableProperties },
+    ],
+  },
+  {
+    section: 'Add Trainings',
+    items: [
+      { href: '/admin/training',         label: 'Add Training',  icon: Brain },
+    ],
+  },
+ 
 ]
 
 export default function Sidebar({ collapsed, onToggle }) {
@@ -73,7 +88,7 @@ export default function Sidebar({ collapsed, onToggle }) {
               const active =
                 href === '/admin'
                   ? pathname === '/admin'
-                  : pathname.startsWith(href)
+                  : pathname === href || pathname.startsWith(href + '/')
               return (
                 <Link
                   key={href}

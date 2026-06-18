@@ -1,0 +1,168 @@
+/* ── Add Training — extra styles (layered on top of add-content.css) ── */
+
+/* ── Description mode toggle ─────────────────────────────── */
+.at-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(21, 22, 26, 0.05);
+  border-radius: 7px;
+  padding: 3px;
+}
+
+.at-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: clamp(11px, 0.82vw, 12px);
+  font-weight: 600;
+  font-family: var(--font-anek), sans-serif;
+  color: var(--admin-text-muted);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.at-mode-btn:hover {
+  color: var(--admin-text);
+}
+
+.at-mode-btn--active {
+  background: #ffffff;
+  color: var(--admin-text);
+  box-shadow: 0 1px 3px rgba(21, 22, 26, 0.12);
+}
+
+/* ── Bullet points list ──────────────────────────────────── */
+.at-bullets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.at-bullet-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.at-bullet-dot {
+  font-size: 18px;
+  color: var(--admin-text-muted);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+}
+
+.at-bullet-input {
+  flex: 1;
+}
+
+.at-bullet-remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--admin-text-subtle);
+  transition: background 0.15s, color 0.15s;
+}
+
+.at-bullet-remove:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+.at-add-bullet-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 7px;
+  border: 1px dashed var(--admin-border-mid);
+  background: transparent;
+  cursor: pointer;
+  font-size: clamp(12px, 0.88vw, 13px);
+  font-weight: 500;
+  font-family: var(--font-anek), sans-serif;
+  color: var(--admin-text-muted);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.at-add-bullet-btn:hover {
+  border-color: rgba(21, 22, 26, 0.28);
+  color: var(--admin-text);
+  background: rgba(21, 22, 26, 0.02);
+}
+
+/* ── Delivery mode chips ─────────────────────────────────── */
+.at-delivery-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.at-delivery-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--admin-border-mid);
+  background: var(--admin-content-bg);
+  cursor: pointer;
+  font-size: clamp(12px, 0.88vw, 13px);
+  font-weight: 500;
+  font-family: var(--font-anek), sans-serif;
+  color: var(--admin-text-muted);
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.at-delivery-chip:hover {
+  border-color: rgba(21, 22, 26, 0.28);
+  color: var(--admin-text);
+}
+
+.at-delivery-chip--on {
+  border-color: #15161a;
+  background: #15161a;
+  color: #f4f4f4;
+}
+
+.at-delivery-chip--on:hover {
+  color: #f4f4f4;
+  opacity: 0.88;
+}
+
+/* ── Status chips ────────────────────────────────────────── */
+.at-status-chip--draft.at-delivery-chip--on.at-status-chip--draft-on {
+  border-color: #a16207;
+  background: #a16207;
+  color: #fff;
+}
+
+.at-status-chip--published.at-delivery-chip--on.at-status-chip--published-on {
+  border-color: #15803d;
+  background: #15803d;
+  color: #fff;
+}
+
+/* ── Optional badge ──────────────────────────────────────── */
+.at-optional-badge {
+  font-size: clamp(9px, 0.72vw, 10px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(21, 22, 26, 0.06);
+  color: var(--admin-text-subtle);
+}

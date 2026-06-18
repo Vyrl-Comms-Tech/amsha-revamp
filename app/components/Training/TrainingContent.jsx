@@ -1,79 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import "../../styles/training-content.css";
+import axios from "axios";
 
 const MAX_VISIBLE = 4;
-
-const COURSES = [
-  {
-    title: "Leadership & Management Development",
-    image: "/img11.jpg",
-    bullets: [
-      "From Doer to Leader: Making the Shift",
-      "Leadership Mindset: From Manager to Leader",
-      "Understanding Leadership Styles",
-      "Situational Leadership in Modern Workplaces",
-      "Building High-Performance Teams",
-      "Strategic Leadership & Decision Making",
-    ],
-  },
-  {
-    title: "Verbal Communication",
-    image: "/img11.jpg",
-    bullets: [
-      "Clear & Confident Workplace Communication",
-      "Structured Thinking & Message Clarity",
-      "Active Listening Skills",
-      "Persuasive Communication",
-      "Storytelling for Business Impact",
-      "Asking Powerful Questions",
-    ],
-  },
-  {
-    title: "Non-Verbal Communication",
-    image: "/img11.jpg",
-    bullets: [
-      "Body Language in Professional Settings",
-      "Voice Modulation & Tone of Authority",
-      "Reading Non-Verbal Cues",
-      "Presence & Confidence in Meetings",
-    ],
-  },
-  {
-    title: "Workplace Communication & Professionalism",
-    image: "/img11.jpg",
-    bullets: [
-      "Communication Mastery",
-      "Professional Etiquette & Workplace Behaviour",
-      "Workplace Communication Basics",
-      "Email & Business Communication",
-      "Adaptability in the Modern Workplace",
-      "Writing for Impact",
-    ],
-  },
-  {
-    title: "Emotional Intelligence at Work",
-    image: "/img11.jpg",
-    bullets: [
-      "Understanding Emotional Intelligence",
-      "Self-Awareness & Self-Regulation",
-      "Empathy in Leadership",
-      "Managing Emotions Under Pressure",
-      "Building Resilience",
-    ],
-  },
-  {
-    title: "Conflict Resolution & Difficult Conversations",
-    image: "/img11.jpg",
-    bullets: [
-      "Understanding Conflict Dynamics",
-      "De-escalation Techniques",
-      "Facilitation & Mediation Basics",
-      "Difficult Conversations Framework",
-    ],
-  },
-];
 
 export default function TrainingContent() {
   const [expanded, setExpanded] = useState({});
@@ -81,8 +12,28 @@ export default function TrainingContent() {
     company: "", activity: "", phone: "", email: "", message: "",
   });
 
-  const toggle  = (i) => setExpanded((prev) => ({ ...prev, [i]: !prev[i] }));
+  const toggle = (i) => setExpanded((prev) => ({ ...prev, [i]: !prev[i] }));
   const onField = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/admin/training/get`
+        );
+        setCourses(response.data?.data?.data);
+      } catch (error) {
+        console.error("Something went wrong:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
 
   return (
     <div className="th-layout">
@@ -128,31 +79,83 @@ export default function TrainingContent() {
 
       {/* ── Right scrollable course cards ── */}
       <main className="th-courses">
-        {COURSES.map((course, i) => {
-          const open    = !!expanded[i];
-          const hasMore = course.bullets.length > MAX_VISIBLE;
-          const visible = open ? course.bullets : course.bullets.slice(0, MAX_VISIBLE);
+        {courses.map((course, i) => {
+          const open = !!expanded[i];
+          const hasMore =
+            course.descMode === "bullets" &&
+            course.bullets.length > MAX_VISIBLE;
+
+          const visible =
+            course.descMode === "bullets"
+              ? open
+                ? course.bullets
+                : course.bullets.slice(0, MAX_VISIBLE)
+              : [];
 
           return (
-            <div key={i} className="th-card">
+            <div key={course._id} className="th-card">
               <div className="th-card-left">
+                <div>
+                  <span className="hero-badge-training">
+                    {course.category}
+                  </span>
+                </div>
+
                 <h3 className="th-card-title">{course.title}</h3>
-                <ul className="th-card-list">
-                  {visible.map((b, j) => <li key={j}>{b}</li>)}
-                </ul>
-                {hasMore && (
-                  <button className="th-more" type="button" onClick={() => toggle(i)}>
-                    {open ? "Show less" : "…… More"}
-                  </button>
+
+                {course.descMode === "text" ? (
+                  <p className="th-card-desc">
+                    {course.description}
+                  </p>
+                ) : (
+                  <>
+                    <ul className="th-card-list">
+                      {visible.map((b, j) => (
+                        <li key={j}>{b}</li>
+                      ))}
+                    </ul>
+
+                    {hasMore && (
+                      <button
+                        className="th-more"
+                        type="button"
+                        onClick={() => toggle(i)}
+                      >
+                        {open ? "Show less" : "...... More"}
+                      </button>
+                    )}
+                  </>
                 )}
+
+                <div className="training-tags-container">
+                  {course.deliveryModes?.map((mode, index) => (
+                    <div key={index} className="training-tags">
+                      <p>{mode}</p>
+                    </div>
+                  ))}
+                </div>
+
                 <div className="th-card-actions">
-                  <button className="th-btn-outline" type="button">View more</button>
-                  <button className="th-btn-fill"    type="button">Inquiry</button>
+                  <button className="th-btn-outline" type="button">
+                    View more
+                  </button>
+                  <button className="th-btn-fill" type="button">
+                    Inquiry
+                  </button>
                 </div>
               </div>
-              <div className="th-card-img">
-                <Image src={course.image} alt={course.title} fill className="th-img" />
-              </div>
+
+              {/* <div className="th-card-img">
+                <div className="th-card-img-inner">
+                  <Image
+                    src={course?.image || "/ab1.png"}
+                    alt={course.title}
+                    fill
+                    className="th-img"
+                  />
+                </div>
+              </div> */}
+
             </div>
           );
         })}
