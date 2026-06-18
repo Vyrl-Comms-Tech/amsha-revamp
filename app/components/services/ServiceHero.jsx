@@ -15,35 +15,29 @@ const ServiceHero = () => {
     <>
       <section className="sh-section">
         <div className="sh-left">
-
-                  <TextAnimation animateOnScroll={true} delay={0.3}>
-          
-          <h1 className="sh-heading">Our Services</h1>
-                  </TextAnimation>
-        <TextAnimation animateOnScroll={true} delay={0.3}>
-
-
-          <p className="sh-desc">
-            At Amsha Advisory, our People Advisory solutions are designed to
-            help organisations strengthen their internal foundations through
-            structured, practical, and people-centred support. We work closely
-            with businesses to identify operational and organisational gaps that
-            may be impacting efficiency, communication, leadership alignment,
-            workplace culture, and overall performance.
-          </p>
-        </TextAnimation>
-                <TextAnimation animateOnScroll={true} delay={0.3}>
-
-        
-          <p className="sh-desc">
-            Our approach goes beyond traditional HR support by focusing on how
-            organisations function in practice, from structure and communication
-            flow to accountability, operational processes, and employee
-            experience. We create tailored solutions that support healthier
-            workplace environments, stronger organisational performance, and
-            long-term business sustainability.
-          </p>
-                </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <h1 className="sh-heading">Our Services</h1>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <p className="sh-desc">
+              At Amsha Advisory, our People Advisory solutions are designed to
+              help organisations strengthen their internal foundations through
+              structured, practical, and people-centred support. We work closely
+              with businesses to identify operational and organisational gaps
+              that may be impacting efficiency, communication, leadership
+              alignment, workplace culture, and overall performance.
+            </p>
+          </TextAnimation>
+          <TextAnimation animateOnScroll={true} delay={0.3}>
+            <p className="sh-desc">
+              Our approach goes beyond traditional HR support by focusing on how
+              organisations function in practice, from structure and
+              communication flow to accountability, operational processes, and
+              employee experience. We create tailored solutions that support
+              healthier workplace environments, stronger organisational
+              performance, and long-term business sustainability.
+            </p>
+          </TextAnimation>
           <button className="sh-btn btn-4">Contact us</button>
         </div>
 

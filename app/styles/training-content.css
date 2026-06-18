@@ -1,9 +1,10 @@
-
 .th-layout {
   display: flex;
   align-items: flex-start; /* REQUIRED: makes position:sticky work in flex */
   gap: 58px;
   padding: 40px;
+  position: relative;
+  z-index: 999;
   background: #f2f2f2;
   min-height: 100vh;
 }
@@ -32,7 +33,7 @@
   color: black;
 }
 
-.hero-badge-training{
+.hero-badge-training {
   border: 0.7px solid var(--color-card-text);
   color: black;
   border-radius: 999px;
@@ -201,7 +202,7 @@
 .th-card-img {
   flex: 0 0 40%;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   padding-block: 19px;
   padding-right: 23px;
   justify-content: center;
@@ -221,13 +222,13 @@
   border-radius: 10px;
 }
 
-.training-tags-container{
+.training-tags-container {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.training-tags{
+.training-tags {
   width: min-content;
   padding-block: 8px;
   padding-inline: 10px;
@@ -235,7 +236,7 @@
   background-color: #f6f6f6;
 }
 
-.training-tags p{
+.training-tags p {
   font-size: 16px;
   color: #15161a;
 }
