@@ -98,6 +98,64 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.12);
 }
 
+/* ── Field error ── */
+.cu-field-error {
+  font-size: 14px;
+  color: #d32f2f;
+  margin-top: -4px;
+}
+
+.cu-input--error {
+  box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.4) !important;
+}
+
+/* ── Success banner ── */
+.cu-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 17px;
+  font-weight: 500;
+  animation: cu-fade-in 0.3s ease;
+}
+
+/* ── API error banner ── */
+.cu-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 17px;
+  font-weight: 500;
+  animation: cu-fade-in 0.3s ease;
+}
+
+.cu-error-close {
+  background: none;
+  border: none;
+  color: #c62828;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+@keyframes cu-fade-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .cu-btn {
   align-self: flex-start;
   padding: 12px 28px;
@@ -114,6 +172,17 @@
 
 .cu-btn:hover {
   opacity: 0.8;
+}
+
+.cu-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cu-input:disabled,
+.cu-textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Image */

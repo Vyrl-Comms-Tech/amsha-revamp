@@ -1,0 +1,53 @@
+/* ── ContactTable ──────────────────────────────────────────── */
+
+.ct-modal {
+  max-width: 520px;
+}
+
+/* Company name cell with icon */
+.ct-company-cell {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ct-row-icon {
+  flex-shrink: 0;
+  color: var(--admin-text-subtle);
+}
+
+/* Constrain long text cells */
+.ct-field-cell {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ct-phone-cell {
+  white-space: nowrap;
+}
+
+.ct-email-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ct-email-link {
+  color: var(--admin-primary, #4f46e5);
+  text-decoration: none;
+  font-size: inherit;
+}
+
+.ct-email-link:hover {
+  text-decoration: underline;
+}
+
+/* Modal contact line (icon + text) */
+.ct-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

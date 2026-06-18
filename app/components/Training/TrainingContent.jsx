@@ -6,14 +6,83 @@ import axios from "axios";
 
 const MAX_VISIBLE = 4;
 
+const INITIAL_FORM = { company: "", activity: "", phone: "", email: "", message: "" };
+const INITIAL_ERRORS = { company: "", activity: "", phone: "", email: "" };
+
+function validateEmail(val) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+}
+
+function validateFields(form) {
+  const errors = { ...INITIAL_ERRORS };
+  if (!form.company.trim()) errors.company = "Company name is required.";
+  if (!form.activity.trim()) errors.activity = "Field of activity is required.";
+  if (!form.phone.trim()) {
+    errors.phone = 'Phone number is required.';
+  } else if (!/^[0-9]+$/.test(form.phone)) {
+    errors.phone = 'Phone number must contain only numbers.';
+  }
+  if (!form.email.trim()) errors.email = "Email address is required.";
+  else if (!validateEmail(form.email)) errors.email = "Please enter a valid email address.";
+  return errors;
+}
+
 export default function TrainingContent() {
   const [expanded, setExpanded] = useState({});
-  const [form, setForm] = useState({
-    company: "", activity: "", phone: "", email: "", message: "",
-  });
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [errors, setErrors] = useState(INITIAL_ERRORS);
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const toggle = (i) => setExpanded((prev) => ({ ...prev, [i]: !prev[i] }));
-  const onField = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }));
+
+  const onField = (key) => (e) => {
+    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
+  };
+
+  useEffect(() => {
+    if (!success) return;
+    const t = setTimeout(() => setSuccess(false), 5000);
+    return () => clearTimeout(t);
+  }, [success]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setApiError("");
+
+    const fieldErrors = validateFields(form);
+    if (Object.values(fieldErrors).some(Boolean)) {
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          companyName: form.company,
+          fieldOfActivity: form.activity,
+          phone: form.phone,
+          email: form.email,
+          message: form.message,
+          pageSource: "training-form",
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json?.message || "Something went wrong. Please try again.");
+      setForm(INITIAL_FORM);
+      setErrors(INITIAL_ERRORS);
+      setSuccess(true);
+    } catch (err) {
+      setApiError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -43,37 +112,91 @@ export default function TrainingContent() {
         <div className="th-form">
           <h2 className="th-form-heading">Request For Enquiry</h2>
 
-          <div className="th-field">
-            <label className="th-label">Name Of Company <span className="th-req">*</span></label>
-            <input className="th-input" type="text" placeholder="Enter Your Company Name"
-              value={form.company} onChange={onField("company")} />
-          </div>
+          {success && (
+            <div className="th-success-banner">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm4.707 7.707-5.5 5.5a1 1 0 0 1-1.414 0l-2.5-2.5a1 1 0 1 1 1.414-1.414L8.5 11.086l4.793-4.793a1 1 0 1 1 1.414 1.414z" fill="currentColor" />
+              </svg>
+              Message sent! We&apos;ll be in touch shortly.
+            </div>
+          )}
 
-          <div className="th-field">
-            <label className="th-label">Field Of Activity <span className="th-req">*</span></label>
-            <input className="th-input" type="text" placeholder="Enter The Field Of Activity"
-              value={form.activity} onChange={onField("activity")} />
-          </div>
+          {apiError && (
+            <div className="th-error-banner">
+              {apiError}
+              <button className="th-error-close" onClick={() => setApiError("")} aria-label="Dismiss">×</button>
+            </div>
+          )}
 
-          <div className="th-field">
-            <label className="th-label">Phone <span className="th-req">*</span></label>
-            <input className="th-input" type="tel" placeholder="Enter Your Phone Number"
-              value={form.phone} onChange={onField("phone")} />
-          </div>
+          <form onSubmit={handleSubmit} noValidate>
+            <div className="th-field">
+              <label className="th-label">Name Of Company <span className="th-req">*</span></label>
+              <input
+                className={`th-input${errors.company ? " th-input--error" : ""}`}
+                type="text"
+                placeholder="Enter Your Company Name"
+                value={form.company}
+                onChange={onField("company")}
+                disabled={submitting}
+              />
+              {errors.company && <span className="th-field-error">{errors.company}</span>}
+            </div>
 
-          <div className="th-field">
-            <label className="th-label">Email <span className="th-req">*</span></label>
-            <input className="th-input" type="email" placeholder="Enter Your Email Address"
-              value={form.email} onChange={onField("email")} />
-          </div>
+            <div className="th-field">
+              <label className="th-label">Field Of Activity <span className="th-req">*</span></label>
+              <input
+                className={`th-input${errors.activity ? " th-input--error" : ""}`}
+                type="text"
+                placeholder="Enter The Field Of Activity"
+                value={form.activity}
+                onChange={onField("activity")}
+                disabled={submitting}
+              />
+              {errors.activity && <span className="th-field-error">{errors.activity}</span>}
+            </div>
 
-          <div className="th-field">
-            <label className="th-label">Messages</label>
-            <textarea className="th-input th-textarea" placeholder="Your Message" rows={5}
-              value={form.message} onChange={onField("message")} />
-          </div>
+            <div className="th-field">
+              <label className="th-label">Phone <span className="th-req">*</span></label>
+              <input
+                className={`th-input${errors.phone ? " th-input--error" : ""}`}
+                type="tel"
+                placeholder="Enter Your Phone Number"
+                value={form.phone}
+                onChange={onField("phone")}
+                disabled={submitting}
+              />
+              {errors.phone && <span className="th-field-error">{errors.phone}</span>}
+            </div>
 
-          <button className="th-submit btn-4" type="button">Send now</button>
+            <div className="th-field">
+              <label className="th-label">Email <span className="th-req">*</span></label>
+              <input
+                className={`th-input${errors.email ? " th-input--error" : ""}`}
+                type="email"
+                placeholder="Enter Your Email Address"
+                value={form.email}
+                onChange={onField("email")}
+                disabled={submitting}
+              />
+              {errors.email && <span className="th-field-error">{errors.email}</span>}
+            </div>
+
+            <div className="th-field">
+              <label className="th-label">Messages</label>
+              <textarea
+                className="th-input th-textarea"
+                placeholder="Your Message"
+                rows={5}
+                value={form.message}
+                onChange={onField("message")}
+                disabled={submitting}
+              />
+            </div>
+
+            <button className="th-submit btn-4" type="submit" disabled={submitting}>
+              {submitting ? "Sending…" : "Send now"}
+            </button>
+          </form>
         </div>
       </aside>
 
