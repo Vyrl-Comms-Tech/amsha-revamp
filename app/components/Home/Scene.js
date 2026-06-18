@@ -1,11 +1,13 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useReducer } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
 import { Model } from "../../model";
 
 const DEG = Math.PI / 180;
 
+// To disable the on-screen lil-gui rotation panel later, just flip this to false.
+const SHOW_GUI = false;
 // ─────────────────────────────────────────────────────────────────────────────
 // MAIN ROTATION KEYFRAMES  (Hero → Hero2 → Hero3)
 //
@@ -32,10 +34,10 @@ const DEG = Math.PI / 180;
 // ─────────────────────────────────────────────────────────────────────────────
 const DEFAULT_KEYFRAMES = [
   // p     x       y       z
-  { p: 0,     x: 13.6, y:  75,    z: -17.5 }, // Hero  start
-  { p: 0.125, x: 15,   y: 321,    z:  20.5 }, // Hero2 start
-  { p: 0.5,   x: 13,   y: 500,    z: -15   }, // Hero3 start  (Y higher than Hero2 ✓)
-  { p: 1.0,   x:  7.5, y: 658.5,  z:  -6.5 }, // Hero3 end    (Y higher than Hero3 start ✓)
+  { p: 0, x: 13.6, y: 75, z: -17.5 }, // Hero  start
+  { p: 0.125, x: 15, y: 321, z: 20.5 }, // Hero2 start
+  { p: 0.5, x: 13, y: 500, z: -15 }, // Hero3 start  (Y higher than Hero2 ✓)
+  { p: 1.0, x: 7.5, y: 658.5, z: -6.5 }, // Hero3 end    (Y higher than Hero3 start ✓)
   //                   ↑ was 298.5 — fixed to 658.5 (= 298.5 + 360) so model
   //                     lands at the same visual angle but keeps spinning forward
 ];
@@ -62,12 +64,18 @@ const DEFAULT_EXTRA = { x: -8, y: 495, z: 3 };
 // but x (pitch) and z (roll) are halved so the model tilts far less and stays
 // within the narrow portrait canvas.
 const MOBILE_KEYFRAMES = [
-  { p: 0,     x:  6,   y:  75,    z:  -7  },
-  { p: 0.125, x:  7,   y: 321,    z:   8  },
-  { p: 0.5,   x:  6,   y: 500,    z:  -6  },
-  { p: 1.0,   x:  3.5, y: 658.5,  z:  -3  },
+  { p: 0, x: 6, y: 75, z: -7 },
+  { p: 0.125, x: 7, y: 321, z: 8 },
+  { p: 0.5, x: 6, y: 500, z: -6 },
+  { p: 1.0, x: 3.5, y: 658.5, z: -3 },
 ];
 const MOBILE_EXTRA = { x: -3, y: 200, z: 1 };
+
+// Live-editable copies of the desktop keyframes/extra — the lil-gui panel
+// mutates these directly. Module-scope (not a ref) so they're safe to read
+// during render under the React 19 Compiler; Scene only ever mounts once.
+let liveKeyframes = DEFAULT_KEYFRAMES.map((k) => ({ ...k }));
+let liveExtra = { ...DEFAULT_EXTRA };
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -84,7 +92,7 @@ function smoothstep(e0, e1, x) {
 // Hero2 = p 0.125 → 0.5  (100vh to 400vh of 800vh total)
 function computeGlassFactor(p) {
   const START = 0.125;
-  const END   = 0.5;
+  const END = 0.5;
   const BLEND = 0.03; // ~24vh transition width at each boundary
   if (p <= START - BLEND || p >= END + BLEND) return 0;
   if (p >= START + BLEND && p <= END - BLEND) return 1;
@@ -96,12 +104,16 @@ function getRotation(progress, keyframes) {
   // Find the two bracketing keyframes for the current progress value
   let i = keyframes.length - 2;
   for (let k = 0; k < keyframes.length - 1; k++) {
-    if (progress < keyframes[k + 1].p) { i = k; break; }
+    if (progress < keyframes[k + 1].p) {
+      i = k;
+      break;
+    }
   }
   const a = keyframes[i];
   const b = keyframes[i + 1];
   const range = b.p - a.p;
-  const t = range === 0 ? 1 : Math.max(0, Math.min(1, (progress - a.p) / range));
+  const t =
+    range === 0 ? 1 : Math.max(0, Math.min(1, (progress - a.p) / range));
   return {
     x: lerp(a.x, b.x, t) * DEG,
     y: lerp(a.y, b.y, t) * DEG,
@@ -109,7 +121,7 @@ function getRotation(progress, keyframes) {
   };
 }
 
-const MAX_YAW   = 0.475; // ~2 deg
+const MAX_YAW = 0.475; // ~2 deg
 const MAX_PITCH = 0.352; // ~1.3 deg
 const LERP_EASE = 0.07;
 
@@ -120,33 +132,102 @@ const LERP_EASE = 0.07;
 //   good range: 0.02 (subtle) … 0.10 (obvious)
 const IDLE_SPEED_Y = 1; // ← increase/decrease to speed up/slow down Y sway
 const IDLE_SPEED_X = 0.58; // ← increase/decrease to speed up/slow down X tilt
-const IDLE_AMP_Y   = 0.06; // ← increase/decrease Y sway amount
-const IDLE_AMP_X   = 0.13; // ← increase/decrease X tilt amount
+const IDLE_AMP_Y = 0.06; // ← increase/decrease Y sway amount
+const IDLE_AMP_X = 0.13; // ← increase/decrease X tilt amount
 
 const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
   const mouseGroupRef = useRef();
-  const mouseTarget  = useRef({ x: 0, y: 0 });
+  const mouseTarget = useRef({ x: 0, y: 0 });
   const mouseCurrent = useRef({ x: 0, y: 0 });
+
+  // forceRender() repaints the canvas after lil-gui mutates liveKeyframes/liveExtra
+  const [, forceRender] = useReducer((c) => c + 1, 0);
 
   useEffect(() => {
     const onMouseMove = (e) => {
-      mouseTarget.current.x = (e.clientX / window.innerWidth  - 0.5) * 2;
+      mouseTarget.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseTarget.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
     };
     window.addEventListener("mousemove", onMouseMove);
     return () => window.removeEventListener("mousemove", onMouseMove);
   }, []);
 
+  // ── lil-gui panel for tuning Hero2/Hero3 rotation keyframes live ───────────
+  // Set SHOW_GUI = false at the top of this file to remove the panel entirely.
+  useEffect(() => {
+    if (!SHOW_GUI) return;
+    let gui;
+    let cancelled = false;
+
+    import("lil-gui").then(({ default: GUI }) => {
+      if (cancelled) return;
+      gui = new GUI({ title: "Model Rotation — Hero2 / Hero3" });
+      gui.onChange(() => forceRender());
+
+      const kfLabels = [
+        "Hero start (p=0)",
+        "Hero2 start (p=0.125)",
+        "Hero3 start (p=0.5)",
+        "Hero3 end (p=1.0)",
+      ];
+      liveKeyframes.forEach((kf, i) => {
+        const folder = gui.addFolder(kfLabels[i]);
+        folder.add(kf, "x", -180, 180, 0.5).name("pitch (x)");
+        folder.add(kf, "y", 0, 1080, 0.5).name("yaw (y)");
+        folder.add(kf, "z", -180, 180, 0.5).name("roll (z)");
+      });
+
+      const extraFolder = gui.addFolder("Facts → Footer (+extra °)");
+      extraFolder.add(liveExtra, "x", -180, 180, 0.5).name("pitch (x)");
+      extraFolder.add(liveExtra, "y", -720, 720, 0.5).name("yaw (y)");
+      extraFolder.add(liveExtra, "z", -180, 180, 0.5).name("roll (z)");
+
+      gui
+        .add(
+          {
+            log: () => {
+              console.log(
+                "DEFAULT_KEYFRAMES =",
+                JSON.stringify(liveKeyframes, null, 2),
+              );
+              console.log(
+                "DEFAULT_EXTRA =",
+                JSON.stringify(liveExtra, null, 2),
+              );
+            },
+          },
+          "log",
+        )
+        .name("Log values → console");
+    });
+
+    return () => {
+      cancelled = true;
+      gui?.destroy();
+    };
+  }, []);
+
   useFrame((state) => {
-    mouseCurrent.current.x = lerp(mouseCurrent.current.x, mouseTarget.current.x, LERP_EASE);
-    mouseCurrent.current.y = lerp(mouseCurrent.current.y, mouseTarget.current.y, LERP_EASE);
+    mouseCurrent.current.x = lerp(
+      mouseCurrent.current.x,
+      mouseTarget.current.x,
+      LERP_EASE,
+    );
+    mouseCurrent.current.y = lerp(
+      mouseCurrent.current.y,
+      mouseTarget.current.y,
+      LERP_EASE,
+    );
     if (mouseGroupRef.current) {
       const t = state.clock.elapsedTime;
-      mouseGroupRef.current.rotation.y = mouseCurrent.current.x * MAX_YAW + Math.sin(t * IDLE_SPEED_Y) * IDLE_AMP_Y;
-      mouseGroupRef.current.rotation.x = mouseCurrent.current.y * MAX_PITCH + Math.sin(t * IDLE_SPEED_X) * IDLE_AMP_X;
+      mouseGroupRef.current.rotation.y =
+        mouseCurrent.current.x * MAX_YAW +
+        Math.sin(t * IDLE_SPEED_Y) * IDLE_AMP_Y;
+      mouseGroupRef.current.rotation.x =
+        mouseCurrent.current.y * MAX_PITCH +
+        Math.sin(t * IDLE_SPEED_X) * IDLE_AMP_X;
     }
   });
-
 
   // ── Canvas size → mobile flag ───────────────────────────────────
   // useThree().size gives canvas pixel dimensions (updates with CSS breakpoints).
@@ -170,11 +251,11 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
   } else {
     // On mobile use the reduced-tilt keyframes so pitch/roll don't push
     // the model outside the canvas edges.
-    const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : DEFAULT_KEYFRAMES;
+    const activeKeyframes = isMobile ? MOBILE_KEYFRAMES : liveKeyframes;
     rot = getRotation(progress, activeKeyframes);
 
     // Add the Facts→Footer extra rotation on top
-    const activeExtra = isMobile ? MOBILE_EXTRA : DEFAULT_EXTRA;
+    const activeExtra = isMobile ? MOBILE_EXTRA : liveExtra;
     if (progress2 > 0) {
       rot.x += progress2 * activeExtra.x * DEG;
       rot.y += progress2 * activeExtra.y * DEG;
@@ -184,10 +265,21 @@ const Scene = ({ progress = 0, progress2 = 0, overrideRotation = null }) => {
 
   return (
     <>
-      <PerspectiveCamera fov={45} near={0.2} far={10000} makeDefault position={[0, 2.5, cameraZ]} />
+      <PerspectiveCamera
+        fov={45}
+        near={0.2}
+        far={10000}
+        makeDefault
+        position={[0, 2.5, cameraZ]}
+      />
       <Environment preset="city" />
       <group ref={mouseGroupRef}>
-        <Model rotationX={rot.x} rotationY={rot.y} rotationZ={rot.z} glassFactor={computeGlassFactor(progress)} />
+        <Model
+          rotationX={rot.x}
+          rotationY={rot.y}
+          rotationZ={rot.z}
+          glassFactor={computeGlassFactor(progress)}
+        />
       </group>
     </>
   );

@@ -12,31 +12,37 @@ const SLIDES = [
     heading: "People Advisory",
     number: "01",
     text: "Strategic organisational support designed to strengthen workplace structure, improve role clarity, enhance operational efficiency, and support overall organisational performance.",
+    href: "/services/people-advisory",
   },
   {
     heading: "Employee Training & Development",
     number: "02",
     text: "Interactive and practical training programs focused on improving workplace performance, leadership capability, and team effectiveness.",
+    href: "/services/employee-training-development",
   },
   {
     heading: "Upskilling & Training",
     number: "03",
     text: "Targeted development programs that help individuals strengthen professional skills and adapt to evolving workplace demands.",
+    href: "/services/upskilling-training",
   },
   {
     heading: "Entrepreneurial Consulting",
     number: "04",
     text: "Business support solutions designed to help entrepreneurs build stronger foundations, improve operations, and scale sustainably.",
+    href: "/services/entrepreneurial-consulting",
   },
   {
     heading: "Career Development",
     number: "05",
     text: " Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth .",
+    href: "/services/career-development",
   },
   {
     heading: "Talent Assessment",
     number: "06",
     text: "Behavioural and assessment-based solutions that support informed hiring, development, and organisational decision-making.",
+    href: "/services/talent-assessment",
   },
 ];
 
@@ -156,7 +162,7 @@ export default function PeopleAdvisory() {
     };
   }, []);
 
-  const { heading, number, text } = SLIDES[slide];
+  const { heading, number, text, href } = SLIDES[slide];
 
   return (
     <div ref={wrapperRef} className="pa-scroll-wrapper">
@@ -175,7 +181,6 @@ export default function PeopleAdvisory() {
           <Multiple3d embed targetIndex={slide} />
         </div>
 
-
         <div className="hero-number">
           <span ref={numberRef}>{number}</span>
         </div>
@@ -189,7 +194,10 @@ export default function PeopleAdvisory() {
             <p>{text}</p>
           </TextAnimation>
           <button className="btn-4">
-            <span>Explore More</span>
+            <a href={href}>
+              {" "}
+              <span>Explore More</span>
+            </a>
           </button>
         </div>
       </section>
