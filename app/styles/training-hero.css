@@ -1,3 +1,4 @@
+
 .training-hero {
   height: 100vh;
   background: #000;
@@ -5,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 2 !important;
   gap: 32px;
   text-align: center;
   position: relative;
@@ -97,7 +99,23 @@
   left: 50%;
   width: 50vw;
   height: 100vh;
-  z-index: 5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Opaque cover — sits between the canvas (z:1) and the text (z:10).
+     A fixed child always paints in front of its own ancestor's background,
+     no matter how low its z-index is, so .training-hero's own black bg
+     can never hide .th-canvas-wrapper by itself. This sibling layer can,
+     since it's compared directly against the canvas within the same
+     local stacking context. Guarantees the model stays hidden here
+     regardless of the model's current pose/position. ── */
+.training-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 3;
   pointer-events: none;
 }
 

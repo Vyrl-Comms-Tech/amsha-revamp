@@ -11,6 +11,8 @@ const MODEL_ANGLE = { x: -10, y: 450, z: 18 };
 
 const TrainingHero = () => {
   return (
+    <div className="training-hero-wrapper">
+
     <div className="training-hero">
       <TextAnimation animateOnScroll={true} delay={0.3}>
         <h1>Training Topics</h1>
@@ -61,6 +63,7 @@ const TrainingHero = () => {
           </Suspense>
         </Canvas>
       </div>
+    </div>
     </div>
   );
 };

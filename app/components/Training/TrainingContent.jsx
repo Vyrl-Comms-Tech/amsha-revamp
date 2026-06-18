@@ -73,7 +73,7 @@ export default function TrainingContent() {
               value={form.message} onChange={onField("message")} />
           </div>
 
-          <button className="th-submit" type="button">Send now</button>
+          <button className="th-submit btn-4" type="button">Send now</button>
         </div>
       </aside>
 
@@ -136,10 +136,10 @@ export default function TrainingContent() {
                 </div>
 
                 <div className="th-card-actions">
-                  <button className="th-btn-outline" type="button">
+                  <button className="th-btn-outline btn-4" type="button">
                     View more
                   </button>
-                  <button className="th-btn-fill" type="button">
+                  <button className="th-btn-fill btn-4" type="button">
                     Inquiry
                   </button>
                 </div>

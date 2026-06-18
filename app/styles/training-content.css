@@ -18,9 +18,9 @@
 }
 
 .th-form {
+  padding: 40px 40px 30px;
   background: #fff;
   border-radius: 10px;
-  padding: 40px 40px 30px;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -34,13 +34,13 @@
 }
 
 .hero-badge-training {
+  font-size: 15px;
   border: 0.7px solid var(--color-card-text);
   color: black;
   border-radius: 999px;
   align-items: center;
   width: fit-content;
   padding: 3px 15px;
-  font-size: 15px;
   display: inline-flex;
 }
 
@@ -98,10 +98,10 @@
   font-family: var(--font-primary, inherit);
   transition: opacity 0.2s;
 }
-
+/* 
 .th-submit:hover {
   opacity: 0.82;
-}
+} */
 
 /* ── Right course list ── */
 .th-courses {
@@ -121,8 +121,8 @@
 }
 
 .th-card-left {
-  flex: 1;
   padding: 19px 23px 19px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -137,17 +137,17 @@
 }
 
 .th-card-list {
-  list-style: disc;
   padding-left: 19px;
+  list-style: disc;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
 .th-card-list li {
+  line-height: 1.2;
   font-size: 18.5px;
   color: rgba(0, 0, 0, 0.68);
-  line-height: 1.2;
 }
 
 .th-more {
@@ -166,10 +166,10 @@
 
 .th-btn-outline {
   padding: 7px 18px;
+  font-size: 19px;
   border-radius: 10px;
   border: 1px solid #15161a;
   background: #fff;
-  font-size: 19px;
   font-weight: 400;
   color: #15161a;
   cursor: pointer;
@@ -177,26 +177,26 @@
   transition: background 0.2s;
 }
 
-.th-btn-outline:hover {
+/* .th-btn-outline:hover {
   background: rgba(0, 0, 0, 0.04);
-}
+} */
 
 .th-btn-fill {
   padding: 7px 18px;
+  font-size: 19px;
   border-radius: 10px;
   border: 1px solid #15161a;
   background: #15161a;
   color: #fff;
   border: none;
-  font-size: 19px;
   font-weight: 400;
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
-.th-btn-fill:hover {
+/* .th-btn-fill:hover {
   opacity: 0.82;
-}
+} */
 
 /* ── Card image panel ── */
 .th-card-img {
@@ -229,10 +229,10 @@
 }
 
 .training-tags {
-  width: min-content;
   padding-block: 8px;
   padding-inline: 10px;
   border-radius: 8px;
+  width: min-content;
   background-color: #f6f6f6;
 }
 
@@ -240,9 +240,6 @@
   font-size: 16px;
   color: #15161a;
 }
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
 
 @media (max-width: 1100px) {
   .th-form-wrap {
@@ -255,7 +252,7 @@
 
 @media (max-width: 768px) {
   .th-layout {
-    flex-direction: column;
+    flex-direction: column-reverse;
     padding: 24px 15px 50px;
     gap: 24px;
   }
@@ -274,6 +271,46 @@
     width: 100%;
   }
   .th-card-title {
-    font-size: 18px;
+    font-size: 29px;
+    max-width: 90%;
+  }
+
+  .th-card-left {
+    padding: 15px 15px 15px;
+  }
+
+  .training-tags p {
+    font-size: 14px;
+  }
+
+  .th-card-list {
+    padding-left: 18px;
+  }
+
+  .th-card-list li {
+    line-height: 1.1;
+  }
+  .th-more {
+    font-size: 17.5px;
+  }
+
+  .th-btn-outline,
+  .th-btn-fill {
+    padding: 5px 13px;
+    font-size: 17px;
+  }
+
+  .th-form {
+    padding: 30px 15px 30px;
+  }
+
+  .th-form-heading {
+    display: none;
+  }
+  .th-label {
+    font-size: 20px;
+  }
+  .th-input {
+    font-size: 17px;
   }
 }
