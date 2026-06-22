@@ -86,19 +86,31 @@ const Hero = () => {
         onUpdate: (self) => setProgress2(self.progress),
       });
 
-      if (window.innerWidth > 575) {
-        // Desktop: canvas slides from center (50%) → right column (75%) on footer entry
-        positionTween = gsap.to(canvasEl, {
-          left: "75%",
-          ease: "none",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: footerEl,
-            start: "top 70%",
-            end: "top 40%",
-            scrub: 0.3,
-            onLeave: () => gsap.set(canvasEl, { left: "75%" }),
-          },
+      if (window.innerWidth > 1100) {
+        // Desktop: canvas slides from center (50%) → right column (75%) on footer entry.
+        // Binary toggle (not scrub) — scrub lags behind scroll position, and that lag
+        // compounds with Lenis's own smoothing, so the slide could visually never
+        // catch up to the true 75% mark. A fixed-duration tween triggered by crossing
+        // the line always lands exactly on 75%, matching FooterModel's static position.
+        // Threshold matches Footer.css's own @media(max-width:1100px) breakpoint,
+        // where .footer-right (the column reserving space for the model) gets
+        // display:none and .footer-left's text expands to fill the full width —
+        // sliding to 75% below that width lands the model directly on that text.
+        positionTween = ScrollTrigger.create({
+          trigger: footerEl,
+          start: "top 75%",
+          onEnter: () => gsap.to(canvasEl, { left: "75%", duration: 0.6, ease: "power2.out", overwrite: true }),
+          onLeaveBack: () => gsap.to(canvasEl, { left: "50%", duration: 0.6, ease: "power2.out", overwrite: true }),
+        });
+      } else if (window.innerWidth > 575) {
+        // Tablet/narrow-desktop: footer-right is hidden at this width (no room for
+        // the model), so fade it out instead of sliding it onto the now-full-width
+        // footer text. Fades back in if scrolling back up past the footer.
+        positionTween = ScrollTrigger.create({
+          trigger: footerEl,
+          start: "top 75%",
+          onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+          onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
         });
       } else {
         // Mobile: canvas starts at top:40% (model at bottom, behind Hero content).
@@ -122,9 +134,13 @@ const Hero = () => {
           });
         }
 
-        // Model moves from center (Hero2/Hero3) to deep bottom (Footer)
+        // Model moves from center (Hero2/Hero3) to deep bottom (Footer),
+        // drifting from centered (left:50%, the CSS default) toward the
+        // right side so it lands on the right in the footer instead of
+        // staying dead-center like every earlier section.
         mobileFooterTween = gsap.to(canvasEl, {
           top: "45%",
+          left: "75%",
           ease: "none",
           immediateRender: false,
           scrollTrigger: {
@@ -132,7 +148,7 @@ const Hero = () => {
             start: "top 80%",
             end: "top 20%",
             scrub: 0.5,
-            onLeave: () => gsap.set(canvasEl, { top: "45%" }),
+            onLeave: () => gsap.set(canvasEl, { top: "45%", left: "70%" }),
           },
         });
       }
@@ -145,11 +161,11 @@ const Hero = () => {
       glowTween.kill();
       trigger.kill();
       trigger2?.kill();
-      positionTween?.scrollTrigger?.kill();
+      positionTween?.kill();
       mobileHero2Tween?.scrollTrigger?.kill();
       mobileFooterTween?.scrollTrigger?.kill();
       if (canvasEl) {
-        gsap.set(canvasEl, { clearProps: "left,top" });
+        gsap.set(canvasEl, { clearProps: "left,top,opacity,visibility" });
       }
     };
   }, []);

@@ -1,15 +1,47 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scene from "../Home/Scene";
 import { GlowDot } from "../layout/svg";
 import "../../styles/training-hero.css";
 import TextAnimation from "../layout/TextAnimation";
 
+gsap.registerPlugin(ScrollTrigger);
+
 // Change x / y / z here (degrees) to rotate the model to any pose.
 const MODEL_ANGLE = { x: -10, y: 450, z: 18 };
 
 const TrainingHero = () => {
+  const canvasWrapperRef = useRef(null);
+
+  useEffect(() => {
+    const canvasEl = canvasWrapperRef.current;
+    const footerEl = document.querySelector(".footer");
+    // .th-canvas-wrapper is already statically left:75% (no slide needed —
+    // unlike Hero/AboutHero/ServiceHero, it's never centred). But below
+    // Footer.css's 1100px breakpoint, .footer-right (the blank-space column
+    // the model relies on) gets display:none, so the model would land on
+    // the now-full-width footer text instead. Only the >575/<=1100 tablet
+    // tier needs handling here — desktop is already correct, and mobile
+    // uses its own CSS override position (left:50%) which doesn't reach 75%.
+    if (!canvasEl || !footerEl) return;
+    if (window.innerWidth <= 575 || window.innerWidth > 1100) return;
+
+    const fadeTrigger = ScrollTrigger.create({
+      trigger: footerEl,
+      start: "top 75%",
+      onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+      onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+    });
+
+    return () => {
+      fadeTrigger.kill();
+      gsap.set(canvasEl, { clearProps: "opacity,visibility" });
+    };
+  }, []);
+
   return (
     <div className="training-hero-wrapper">
 
@@ -56,7 +88,7 @@ const TrainingHero = () => {
 
       {/* ── 3D model — fixed, same as ServiceHero's canvas (will persist down
            the page, including over the footer; z-index is handled manually) ── */}
-      <div className="th-canvas-wrapper">
+      <div className="th-canvas-wrapper" ref={canvasWrapperRef}>
         <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
           <Suspense fallback={null}>
             <Scene overrideRotation={MODEL_ANGLE} progress2={0} />

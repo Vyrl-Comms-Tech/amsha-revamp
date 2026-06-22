@@ -92,15 +92,46 @@
   }
 }
 
-/* ── 3D model — fixed, mirrors ServiceHero's .sh-canvas-wrapper ── */
+/* ── 3D model — fixed, matches the same left:75% + transform convention
+     used by .canvas-wrapper (AboutHero.css / Hero.css / FooterModel) so the
+     model lands in the same spot in the footer across every page. ── */
 .th-canvas-wrapper {
   position: fixed;
   top: 8%;
-  left: 50%;
-  width: 50vw;
+  left: 75%;
+  transform: translateX(-50%);
+  width: 55vw;
   height: 100vh;
   z-index: 1;
   pointer-events: none;
+}
+
+@media (max-width: 1280px) {
+  .th-canvas-wrapper {
+    width: 38vw;
+  }
+}
+
+@media (max-width: 991px) {
+  .th-canvas-wrapper {
+    width: 52vw;
+    top: 18%;
+    height: 70vh;
+  }
+}
+
+/* Below this width the canvas was too narrow (width:50vw on a ~375px phone
+   is only ~190px) for the model's full extent to fit — this is what was
+   cutting it in half on mobile. Widen it the same way every other
+   canvas-wrapper does at this breakpoint. */
+@media (max-width: 575px) {
+  .th-canvas-wrapper {
+    left: 50%;
+    top: 40%;
+    width: 85vw;
+    height: 60vh;
+    transform: translateX(-50%);
+  }
 }
 
 /* ── Opaque cover — sits between the canvas (z:1) and the text (z:10).

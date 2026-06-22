@@ -1,16 +1,63 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Scene from "../Home/Scene";
 import { GlowDot } from "../layout/svg";
 import "../../styles/service-hero.css";
 import TextAnimation from "../layout/TextAnimation";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Change x / y / z here (degrees) to rotate the model to any pose.
 // x = pitch (tilt forward/back)   y = yaw (spin left/right)   z = roll (tilt sideways)
 const MODEL_ANGLE = { x: -10, y: 450, z: 18 };
 
 const ServiceHero = () => {
+  const canvasWrapperRef = useRef(null);
+
+  useEffect(() => {
+    const canvasEl = canvasWrapperRef.current;
+    const footerEl = document.querySelector(".footer");
+    // Mobile keeps the CSS-defined centred position (service-hero.css media
+    // queries) — only desktop/tablet need footer-tied behaviour.
+    if (!canvasEl || !footerEl || window.innerWidth <= 575) return;
+
+    let positionTrigger;
+    if (window.innerWidth > 1100) {
+      // Slide from centre (50%, the CSS default) → right column (75%) once the
+      // footer enters view — same convention as Hero/AboutHero/FooterModel so
+      // the model lands in the same spot across every page. Threshold matches
+      // Footer.css's own @media(max-width:1100px) breakpoint, where
+      // .footer-right (the column reserving space for the model) gets
+      // display:none and .footer-left's text expands to fill the full width.
+      positionTrigger = ScrollTrigger.create({
+        trigger: footerEl,
+        start: "top 75%",
+        onEnter: () =>
+          gsap.to(canvasEl, { left: "75%", duration: 0.6, ease: "power2.out", overwrite: true }),
+        onLeaveBack: () =>
+          gsap.to(canvasEl, { left: "50%", duration: 0.6, ease: "power2.out", overwrite: true }),
+      });
+    } else {
+      // Tablet/narrow-desktop: footer-right is hidden at this width (no room
+      // for the model), so fade it out instead of sliding it onto the
+      // now-full-width footer text.
+      positionTrigger = ScrollTrigger.create({
+        trigger: footerEl,
+        start: "top 75%",
+        onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+        onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+      });
+    }
+
+    return () => {
+      positionTrigger.kill();
+      gsap.set(canvasEl, { clearProps: "left,opacity,visibility" });
+    };
+  }, []);
+
   return (
     <>
       <section className="sh-section">
@@ -75,7 +122,7 @@ const ServiceHero = () => {
       </section>
 
       {/* Fixed canvas on the right half — same model as the rest of the site */}
-      <div className="sh-canvas-wrapper">
+      <div className="sh-canvas-wrapper" ref={canvasWrapperRef}>
         <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
           <Suspense fallback={null}>
             <Scene overrideRotation={MODEL_ANGLE} progress2={0} />

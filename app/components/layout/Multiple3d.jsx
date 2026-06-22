@@ -26,11 +26,11 @@ const COLOR_OPTIONS = [
 ];
 
 export default function Multiple3d({ embed = false, targetIndex = 0 }) {
-  const canvasRef       = useRef(null);
+  const canvasRef = useRef(null);
   const triggerMorphRef = useRef(null);
   const changeSchemeRef = useRef(null);
-  const goToShapeRef    = useRef(null);   // exposed by init(); called when targetIndex prop changes
-  const prevIndexRef    = useRef(undefined);
+  const goToShapeRef = useRef(null); // exposed by init(); called when targetIndex prop changes
+  const prevIndexRef = useRef(undefined);
 
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingFading, setLoadingFading] = useState(false);
@@ -67,7 +67,8 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
     let noise3D, noise4D;
     const mouseNDC = { x: 0, y: 0, active: false };
     const mouseWorldPos = new THREE.Vector3();
-let onMouseMoveGlobal = null;
+    let onMouseMoveGlobal = null;
+    let resizeObserver = null;
     let morphTimeline = null;
     let isMorphing = false;
     let currentShapeIndex = 0;
@@ -120,9 +121,8 @@ let onMouseMoveGlobal = null;
     const flowV = new THREE.Vector3();
     const bezV = new THREE.Vector3();
     const axisV = new THREE.Vector3();
-const p2V = new THREE.Vector3();
+    const p2V = new THREE.Vector3();
     const pV = new THREE.Vector3();
-
 
     // ── Shape generators ───────────────────────────────────────────
     function generateSphere(count, size) {
@@ -494,7 +494,7 @@ const p2V = new THREE.Vector3();
 
       sourcePositions.set(currentPositions);
       const nextPos = targetPositions[targetIdx];
-      const offset  = CONFIG.shapeSize * CONFIG.swarmDistanceFactor;
+      const offset = CONFIG.shapeSize * CONFIG.swarmDistanceFactor;
 
       for (let i = 0; i < CONFIG.particleCount; i++) {
         const i3 = i * 3;
@@ -508,12 +508,12 @@ const p2V = new THREE.Vector3();
         ).normalize();
         const df = srcV.distanceTo(tgtV) * 0.1 + offset;
         swV.addScaledVector(tV, df * (0.5 + Math.random() * 0.8));
-        swarmPositions[i3]     = swV.x;
+        swarmPositions[i3] = swV.x;
         swarmPositions[i3 + 1] = swV.y;
         swarmPositions[i3 + 2] = swV.z;
       }
 
-      currentShapeIndex  = targetIdx;
+      currentShapeIndex = targetIdx;
       morphState.progress = 0;
       // Embed mode: 2 s morph (feels snappy on scroll); standalone: 4 s
       morphTimeline = gsap.to(morphState, {
@@ -604,7 +604,8 @@ const p2V = new THREE.Vector3();
       let resetEff = false;
 
       // Project mouse NDC → world z=0 plane once per frame
-      let mwx = -99999, mwy = -99999;
+      let mwx = -99999,
+        mwy = -99999;
       if (mouseNDC.active) {
         tV.set(mouseNDC.x, mouseNDC.y, 0.5).unproject(camera);
         tV.sub(camera.position).normalize();
@@ -615,12 +616,12 @@ const p2V = new THREE.Vector3();
         }
       }
 
-      const MOUSE_RADIUS    = 7;
+      const MOUSE_RADIUS = 7;
       const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
-      const FORCE_MULT      = 0.22;
-      const VEL_CAP         = 0.8;
-      const FRICTION        = 0.85;
-      const EASE            = 0.10;
+      const FORCE_MULT = 0.22;
+      const VEL_CAP = 0.8;
+      const FRICTION = 0.85;
+      const EASE = 0.1;
 
       for (let i = 0; i < CONFIG.particleCount; i++) {
         const i3 = i * 3;
@@ -650,8 +651,8 @@ const p2V = new THREE.Vector3();
             const dist = Math.sqrt(dist2);
             // Pure radial repulsion: -radius²/dist² keeps hole empty
             const force = (-MOUSE_RADIUS_SQ / dist2) * FORCE_MULT;
-            particleVelocities[i3]     += force * dx / dist;
-            particleVelocities[i3 + 1] += force * dy / dist;
+            particleVelocities[i3] += (force * dx) / dist;
+            particleVelocities[i3 + 1] += (force * dy) / dist;
             particleVelocities[i3 + 2] += force * 0.25; // slight Z scatter for depth
           }
         }
@@ -663,12 +664,12 @@ const p2V = new THREE.Vector3();
         const vspd = Math.sqrt(vx * vx + vy * vy + vz * vz);
         if (vspd > VEL_CAP) {
           const s = VEL_CAP / vspd;
-          particleVelocities[i3]     = vx * s;
+          particleVelocities[i3] = vx * s;
           particleVelocities[i3 + 1] = vy * s;
           particleVelocities[i3 + 2] = vz * s;
         }
 
-        particleVelocities[i3]     *= FRICTION;
+        particleVelocities[i3] *= FRICTION;
         particleVelocities[i3 + 1] *= FRICTION;
         particleVelocities[i3 + 2] *= FRICTION;
 
@@ -678,7 +679,7 @@ const p2V = new THREE.Vector3();
         const ty = inRadius ? cy : tV.y;
         const tz = inRadius ? cz : tV.z;
 
-        positions[i3]     = cx + particleVelocities[i3]     + (tx - cx) * EASE;
+        positions[i3] = cx + particleVelocities[i3] + (tx - cx) * EASE;
         positions[i3 + 1] = cy + particleVelocities[i3 + 1] + (ty - cy) * EASE;
         positions[i3 + 2] = cz + particleVelocities[i3 + 2] + (tz - cz) * EASE;
 
@@ -696,8 +697,21 @@ const p2V = new THREE.Vector3();
       const w = canvas.clientWidth,
         h = canvas.clientHeight;
       camera.aspect = w / h;
+      // FOV (not camera distance) controls mobile scale-down — OrbitControls
+      // owns camera.position every frame (recomputed from its own cached
+      // spherical radius/angles), so mutating position.z gets fought/undone
+      // unpredictably once the render loop starts. FOV is untouched by
+      // OrbitControls and is perfectly symmetric, so it can't shift the
+      // model off-centre either.
+      camera.fov = w < 600 ? 120 : 70;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      // `false` = don't let Three.js write inline canvas.style.width/height
+      // (pixel values). Those would override the CSS class's width:100% with
+      // a fixed px value — if `w` is ever measured wrong even once (likely
+      // on mobile while the sticky/pinned layout is still settling), the
+      // canvas gets permanently pinned too wide and overflows past its
+      // container, which reads as the model sitting off-screen to the right.
+      renderer.setSize(w, h, false);
       composer?.setSize(w, h);
     }
 
@@ -729,7 +743,10 @@ const p2V = new THREE.Vector3();
 
       const w = canvas.clientWidth || window.innerWidth;
       const h = canvas.clientHeight || window.innerHeight;
-      camera = new THREE.PerspectiveCamera(70, w / h, 0.1, 1000);
+      // FOV widened on narrow viewports in onResize() (fired immediately by
+      // the ResizeObserver below) — keep distance fixed here, position never
+      // needs to differ between mobile/desktop.
+      camera = new THREE.PerspectiveCamera(w < 600 ? 120 : 70, w / h, 0.1, 1000);
       camera.position.set(0, 8, 28);
       camera.lookAt(scene.position);
       bump(5);
@@ -740,7 +757,7 @@ const p2V = new THREE.Vector3();
         alpha: true,
         powerPreference: "high-performance",
       });
-      renderer.setSize(w, h);
+      renderer.setSize(w, h, false);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.1;
@@ -771,21 +788,31 @@ const p2V = new THREE.Vector3();
 
       // Expose to React handlers via refs
       triggerMorphRef.current = triggerMorph;
-      goToShapeRef.current    = morphToIndex;
+      goToShapeRef.current = morphToIndex;
       changeSchemeRef.current = (scheme) => {
         CONFIG.colorScheme = scheme;
         refreshColors();
       };
 
       window.addEventListener("resize", onResize);
+      // The canvas's real box size on mount can be stale on mobile — the
+      // sticky/pinned ScrollTrigger layout (PeopleAdvisory) and GSAP refresh
+      // can settle after init() already measured clientWidth/clientHeight,
+      // leaving the camera's aspect baked in wrong (model appears off-centre
+      // or cropped). ResizeObserver fires immediately with the true size and
+      // again on any later layout change, not just window resizes.
+      resizeObserver = new ResizeObserver(() => onResize());
+      resizeObserver.observe(canvas);
       onMouseMoveGlobal = (e) => {
         const rect = canvas.getBoundingClientRect();
         if (
-          e.clientX >= rect.left && e.clientX <= rect.right &&
-          e.clientY >= rect.top  && e.clientY <= rect.bottom
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
         ) {
-          mouseNDC.x = ((e.clientX - rect.left) / rect.width)  *  2 - 1;
-          mouseNDC.y = -((e.clientY - rect.top)  / rect.height) * 2 + 1;
+          mouseNDC.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          mouseNDC.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
           mouseNDC.active = true;
         } else {
           mouseNDC.active = false;
@@ -818,7 +845,9 @@ const p2V = new THREE.Vector3();
       cancelAnimationFrame(animFrameId);
       morphTimeline?.kill();
       window.removeEventListener("resize", onResize);
-      if (onMouseMoveGlobal) window.removeEventListener("mousemove", onMouseMoveGlobal);
+      resizeObserver?.disconnect();
+      if (onMouseMoveGlobal)
+        window.removeEventListener("mousemove", onMouseMoveGlobal);
       controls?.dispose();
       particlesGeometry?.dispose();
       particlesMaterial?.dispose();
@@ -839,24 +868,30 @@ const p2V = new THREE.Vector3();
 
   return (
     <div className="m3d-wrap" onClick={() => triggerMorphRef.current?.()}>
-
       {/* Loading overlay */}
       {!loadingHidden && (
-        <div className={`m3d-loading${loadingFading ? " m3d-loading--fade" : ""}`}>
+        <div
+          className={`m3d-loading${loadingFading ? " m3d-loading--fade" : ""}`}
+        >
           <span>Initializing Particles...</span>
           <div className="m3d-bar-track">
-            <div className="m3d-bar-fill" style={{ width: `${Math.min(100, loadingProgress)}%` }} />
+            <div
+              className="m3d-bar-fill"
+              style={{ width: `${Math.min(100, loadingProgress)}%` }}
+            />
           </div>
         </div>
       )}
 
       {/* Shape label */}
       <div className="m3d-ui">
-        <div className="m3d-info" style={{ textShadow: infoGlow }}>{infoText}</div>
+        <div className="m3d-info" style={{ textShadow: infoGlow }}>
+          {infoText}
+        </div>
       </div>
 
       {/* Controls panel */}
-      <div className="m3d-controls" onClick={e => e.stopPropagation()}>
+      <div className="m3d-controls" onClick={(e) => e.stopPropagation()}>
         <button className="m3d-btn" onClick={() => triggerMorphRef.current?.()}>
           Change Shape
         </button>

@@ -226,7 +226,7 @@
   /* Extend footer so there is room for the 3D model at the bottom */
   .footer-main {
     height: auto;
-    padding-bottom: 50vh;
+    padding-bottom: 1vh;
   }
 
   .footer-heading {

@@ -1,4 +1,3 @@
-/* ── Multiple3d component styles ──────────────────────────── */
 
 .m3d-wrap {
   position: relative;
@@ -11,14 +10,12 @@
   color: #fff;
 }
 
-/* ── Canvas ─────────────────────────────────────────────── */
 .m3d-canvas {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-/* ── Loading overlay ────────────────────────────────────── */
 .m3d-loading {
   position: absolute;
   inset: 0;
