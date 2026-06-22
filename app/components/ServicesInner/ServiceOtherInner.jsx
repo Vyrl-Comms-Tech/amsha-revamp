@@ -47,11 +47,12 @@ const DEFAULT_BOTTOM_CARD = {
 
 export default function ServiceOtherInner({
   topCards = DEFAULT_TOP_CARDS,
-  bottomCard = DEFAULT_BOTTOM_CARD,
+  bottomCard1,
+  bottomCard,
 }) {
   return (
     <section className="oi-section">
-      {/* Top row — two equal cards */}
+      {/* Top row — equal cards, auto-fills 100% when only one */}
       <div className="oi-top-row">
         {topCards.map((card, i) => (
           <div key={i} className="oi-card">
@@ -76,34 +77,72 @@ export default function ServiceOtherInner({
         ))}
       </div>
 
-      {/* Bottom row — wide card with image */}
-      <div className="oi-card oi-card--wide">
-        <div className="oi-wide-left">
-          <TextAnimation animateOnScroll={true} delay={0.3}>
-            <span className="oi-step">{bottomCard.step}</span>
-          </TextAnimation>
-          <TextAnimation animateOnScroll={true} delay={0.3}>
-            <h3 className="oi-title">{bottomCard.title}</h3>
-          </TextAnimation>
-          <ul className="oi-list">
-            {bottomCard.bullets.map((b, j) => (
-              <li key={j}>
-                <TextAnimation animateOnScroll={true} delay={0.3}>
-                  <span>{b}</span>
-                </TextAnimation>
-              </li>
-            ))}
-          </ul>
+      {/* Content card — heading + paragraph pairs */}
+      {bottomCard1 && (
+        <div className="oi-card oi-card--wide">
+          <div className="oi-wide-left">
+            <TextAnimation animateOnScroll={true} delay={0.3}>
+              <span className="oi-step">{bottomCard1.step}</span>
+            </TextAnimation>
+            <TextAnimation animateOnScroll={true} delay={0.3}>
+              <h3 className="oi-title">{bottomCard1.title}</h3>
+            </TextAnimation>
+            <div className="oi-content-list">
+              {bottomCard1.content.map((item, j) => (
+                <div key={j} className="oi-content-item">
+                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                    <p className="oi-content-heading">{item.heading}</p>
+                  </TextAnimation>
+                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                    <p className="oi-content-paragraph">{item.paragraph}</p>
+                  </TextAnimation>
+                </div>
+              ))}
+            </div>
+          </div>
+          {bottomCard1.image && (
+            <div className="oi-wide-img">
+              <Image
+                src={bottomCard1.image}
+                alt={bottomCard1.title}
+                fill
+                className="oi-img"
+              />
+            </div>
+          )}
         </div>
-        <div className="oi-wide-img">
-          <Image
-            src={bottomCard.image}
-            alt={bottomCard.title}
-            fill
-            className="oi-img"
-          />
+      )}
+
+      {/* Bottom row — only rendered when bottomCard is provided */}
+      {bottomCard && (
+        <div className="oi-card oi-card--wide">
+          <div className="oi-wide-left">
+            <TextAnimation animateOnScroll={true} delay={0.3}>
+              <span className="oi-step">{bottomCard.step}</span>
+            </TextAnimation>
+            <TextAnimation animateOnScroll={true} delay={0.3}>
+              <h3 className="oi-title">{bottomCard.title}</h3>
+            </TextAnimation>
+            <ul className="oi-list">
+              {bottomCard.bullets.map((b, j) => (
+                <li key={j}>
+                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                    <span>{b}</span>
+                  </TextAnimation>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="oi-wide-img">
+            <Image
+              src={bottomCard.image}
+              alt={bottomCard.title}
+              fill
+              className="oi-img"
+            />
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

@@ -13,12 +13,14 @@ const SERVICES = {
   "employee-training-development": {
     hero: {
       heading: "Employee Training & Development",
-      desc: "Behavioural, leadership, and professional development training designed for practical workplace impact — strengthening communication, leadership capability, professionalism, team effectiveness, emotional intelligence, customer experience, and overall employee performance through interactive, scenario-based learning customised to your organisation's industry, teams, and objectives.",
+      desc: `At Amsha Advisory, our training programs are designed to create practical workplace impact through behavioural, leadership, and professional development solutions tailored to organisational needs. 
+      
+      We focus on strengthening communication, leadership capability, workplace professionalism, team effectiveness, emotional intelligence, customer experience, and overall employee performance through interactive and scenario-based learning experiences.`,
       image: "/ab1.png",
     },
     topCards: [
       {
-        step: "Step One",
+        // step: "Step One",
         title: "Training Formats",
         bullets: [
           "Online Training Sessions",
@@ -27,7 +29,7 @@ const SERVICES = {
         ],
       },
       {
-        step: "Step Two",
+        // step: "Step Two",
         title: "Session Duration Options",
         bullets: [
           "2-Hour Sessions",
@@ -39,7 +41,7 @@ const SERVICES = {
       },
     ],
     bottomCard: {
-      step: "Step Three",
+      // step: "Step Three",
       title: "Delivery Approach",
       image: "/ab1.png",
       bullets: [
@@ -60,12 +62,12 @@ const SERVICES = {
   "upskilling-training": {
     hero: {
       heading: "Upskilling & Training",
-      desc: "Personalised, practical, and goal-oriented 1:1 development support — tailored to each individual's professional goals, current skill level, and desired growth outcomes, starting with a complimentary 15-minute discovery call.",
+      desc: "At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs. ",
       image: "/ab1.png",
     },
     topCards: [
       {
-        step: "Step One",
+        // step: "Step One",
         title: "Available Formats",
         bullets: [
           "Online 1:1 Sessions",
@@ -74,19 +76,9 @@ const SERVICES = {
           "Short-Term & Long-Term Learning Support",
         ],
       },
-      {
-        step: "Step Two",
-        title: "How It Works",
-        bullets: [
-          "Complimentary 15-Minute Discovery Call",
-          "Personalised 1:1 Training & Development Support",
-          "Tailored to Individual Goals & Skill Level",
-          "Focused, Flexible & Practical Learning Experience",
-        ],
-      },
     ],
     bottomCard: {
-      step: "Step Three",
+      // step: "Step Three",
       title: "Delivery Approach",
       image: "/ab1.png",
       bullets: [
@@ -104,12 +96,12 @@ const SERVICES = {
   "entrepreneurial-consulting": {
     hero: {
       heading: "Entrepreneurial Consulting",
-      desc: "Practical, people-centred consulting that helps entrepreneurs, startups, and growing businesses build stronger operational foundations, leadership capability, and sustainable growth strategies tailored to the stage and needs of the business.",
+      desc: "At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies.",
       image: "/ab1.png",
     },
     topCards: [
       {
-        step: "Step One",
+        // step: "Step One",
         title: "Consulting Formats",
         bullets: [
           "Online Consulting Sessions",
@@ -119,7 +111,7 @@ const SERVICES = {
         ],
       },
       {
-        step: "Step Two",
+        // step: "Step Two",
         title: "Our Approach",
         bullets: [
           "Practical & Growth-Oriented Guidance",
@@ -131,7 +123,7 @@ const SERVICES = {
       },
     ],
     bottomCard: {
-      step: "Step Three",
+      // step: "Step Three",
       title: "Areas of Support",
       image: "/ab1.png",
       bullets: [
@@ -152,60 +144,49 @@ const SERVICES = {
   "career-development": {
     hero: {
       heading: "Career Development",
-      desc: "Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth and workplace performance.",
+      desc: "At Amsha Advisory, our Career Development solutions are designed to help individuals gain greater clarity, confidence, and direction in their professional journey.",
       image: "/ab1.png",
     },
     topCards: [
       {
-        step: "Step One",
-        title: "Development Focus Areas",
+        // step: "Step One",
+        title: "Areas of Support",
         bullets: [
-          "Career Direction & Clarity",
-          "Professional Strengths Identification",
-          "Goal Setting & Action Planning",
+          "Career Clarity & Direction",
+          "Professional Growth Planning",
+          "Workplace Readiness & Corporate Preparation",
+          "Career Transition Support",
+          "CV & Professional Profile Guidance",
+          "Interview Preparation Support",
+          "Communication & Professional Confidence Development",
+          "Leadership & Personal Development",
+          "Behavioural & Career Insight Support",
         ],
       },
       {
-        step: "Step Two",
-        title: "Who We Support",
+        // step: "Step Two",
+        title: "Available Formats",
         bullets: [
-          "Early-Career Professionals",
-          "Mid-Career Individuals",
-          "Career Changers",
-          "Leaders & Senior Professionals",
-          "Returning Workforce Individuals",
+          "Online 1:1 Sessions",
+          "In-Person 1:1 Sessions",
+          "Personalized Development Programs",
+          "Short-Term & Long-Term Career Support",
         ],
       },
-    ],
-    bottomCard: {
-      step: "Step Three",
-      title: "Our Process",
-      image: "/ab1.png",
-      bullets: [
-        "Individual Assessment & Discovery",
-        "Strengths & Values Exploration",
-        "Career Vision & Direction Setting",
-        "Skills & Capability Gap Review",
-        "Personalised Development Planning",
-        "Practical Action Steps & Milestones",
-        "Accountability & Progress Check-Ins",
-        "Workplace Confidence Building",
-        "Long-Term Career Growth Support",
-      ],
-    },
+    ]
   },
 
   /* ── Step 6 ─────────────────────────────────────────────── */
   "talent-assessment": {
     hero: {
       heading: "Talent Assessment & Selection",
-      desc: "Structured, evidence-based assessments that evaluate behavioural fit, communication style, leadership potential, and cultural alignment — helping organisations make more informed, objective, and strategic hiring decisions.",
+      desc: "At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions.",
       image: "/ab1.png",
     },
     topCards: [
       {
-        step: "Step One",
-        title: "Assessment Methods & Tools",
+        // step: "Step One",
+        title: "Assessment Methods",
         bullets: [
           "Psychometric Assessments",
           "Behavioural Evaluations",
@@ -215,12 +196,10 @@ const SERVICES = {
           "Case Study Evaluations",
           "Group Activities & Discussions",
           "Communication & Leadership Assessments",
-          "MBTI® (Myers-Briggs Type Indicator)",
-          "Facet5 Personality Assessment",
         ],
       },
       {
-        step: "Step Two",
+        // step: "Step Two",
         title: "Available Formats",
         bullets: [
           "Online Assessments & Evaluations",
@@ -230,8 +209,23 @@ const SERVICES = {
         ],
       },
     ],
+
+    bottomCard1: {
+      // step: "Step Three",
+      title: "Psychometric Tools",
+      content: [
+        {
+          heading: "MBTI® (Myers-Briggs Type Indicator)",
+          paragraph: "Supporting insight into communication styles, personality preferences, decision-making approaches, and workplace dynamics.",
+        },
+        {
+          heading: "Facet5 Personality Assessment",
+          paragraph: "Providing behavioural insight into leadership style, motivation, communication, resilience, and workplace effectiveness.",
+        },
+      ],
+    },
     bottomCard: {
-      step: "Step Three",
+      // step: "Step Four",
       title: "Areas of Support",
       image: "/ab1.png",
       bullets: [
@@ -241,9 +235,9 @@ const SERVICES = {
         "Role Alignment & Suitability Analysis",
         "Team & Culture Fit Evaluation",
         "Communication & Workplace Effectiveness Assessment",
-        "Talent Development & Succession Insight",
+        "Talent Development & Succession Planning",
         "Structured Hiring & Evaluation Support",
-      ],
+      ]
     },
   },
 };
@@ -268,6 +262,7 @@ export default async function ServiceSlugPage({ params }) {
       />
       <ServiceOtherInner
         topCards={data.topCards}
+        bottomCard1={data.bottomCard1}
         bottomCard={data.bottomCard}
       />
     </div>

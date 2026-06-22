@@ -34,21 +34,22 @@ const NAV = [
     ],
   },
   {
-    section: 'Add Content',
-    items: [
-      { href: '/admin/add-content', label: 'Add Content',  icon: FilePlus },
-    ],
-  },
-  {
     section: 'Training table',
     items: [
       { href: '/admin/trainings', label: 'Trainings', icon: TableProperties },
     ],
   },
   {
-    section: 'Add Trainings',
+    section: 'Contact Table',
     items: [
-      { href: '/admin/training',         label: 'Add Training',  icon: Brain },
+      { href: '/admin/contact-us', label: 'Contact us', icon: TableProperties },
+    ],
+  },
+  {
+    section: 'Add Content',
+    items: [
+      { href: '/admin/training', label: 'Add Training',  icon: Brain },
+      { href: '/admin/add-content', label: 'Add Blog&News',  icon: FilePlus },
     ],
   },
  

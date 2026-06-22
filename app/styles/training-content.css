@@ -74,7 +74,7 @@
 
 .th-input:focus {
   border-color: rgba(0, 0, 0, 0.3);
-  background: #fff;
+  /* background: #fff; */
 }
 
 .th-input::placeholder {
@@ -85,10 +85,69 @@
   resize: none;
 }
 
+/* ── Field error ── */
+.th-field-error {
+  font-size: 13px;
+  color: #d32f2f;
+  margin-top: -2px;
+}
+
+.th-input--error {
+  box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.35) !important;
+}
+
+/* ── Success banner ── */
+.th-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  animation: th-fade-in 0.3s ease;
+}
+
+/* ── API error banner ── */
+.th-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  animation: th-fade-in 0.3s ease;
+}
+
+.th-error-close {
+  background: none;
+  border: none;
+  color: #c62828;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  flex-shrink: 0;
+}
+
+@keyframes th-fade-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .th-submit {
   padding: 11px 26px;
   background: #15161a;
   color: #fff;
+  margin-top: 10px;
   border: none;
   border-radius: 8px;
   font-size: 15px;
@@ -98,10 +157,20 @@
   font-family: var(--font-primary, inherit);
   transition: opacity 0.2s;
 }
-/* 
+/*
 .th-submit:hover {
   opacity: 0.82;
 } */
+
+.th-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.th-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
 /* ── Right course list ── */
 .th-courses {

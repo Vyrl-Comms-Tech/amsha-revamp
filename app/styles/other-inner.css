@@ -11,7 +11,7 @@
 /* ── Top row — two equal cards ── */
 .oi-top-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -43,6 +43,7 @@
   font-size: 52px;
   font-weight: 500;
   color: #fff;
+  line-height: 1;
 }
 
 /* ── Bullet list ── */
@@ -99,6 +100,36 @@
   padding:  40px;
   object-fit: cover;
   object-position: center;
+}
+
+/* ── Content list (heading + paragraph pairs, no bullets) ── */
+.oi-content-list {
+  margin: 32px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.oi-content-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.oi-content-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.oi-content-paragraph {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+  margin: 0;
 }
 
 /* ══════════════════════════════
