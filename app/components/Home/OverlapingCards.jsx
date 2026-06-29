@@ -65,7 +65,7 @@ const OverlapingCards = () => {
     <div className="p-oc">
       <section className="oc-section">
         <div className="oc-bg-wrap">
-          <Image src="/img11.jpg" alt="" fill className="oc-bg" priority />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoOeXj87yhEtDEfguG3Ewehj5OFPoosnSZzp8KAYtxkQ&s=10" alt="" fill className="oc-bg" priority />
         </div>
 
         <div

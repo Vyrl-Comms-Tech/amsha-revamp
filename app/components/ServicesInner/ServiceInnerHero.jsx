@@ -2,6 +2,7 @@
 import Image from "next/image";
 import "../../styles/services-innerhero.css";
 import TextAnimation from "../layout/TextAnimation";
+import Link from "next/link";
 
 export default function ServiceInnerHero({
   heading = "People Advisory",
@@ -25,7 +26,12 @@ export default function ServiceInnerHero({
 
             <p className="sih-desc">{desc}</p>
           </TextAnimation>
-          <a href={btnHref} className="sih-btn btn-4">{btnText}</a>
+          <a href={btnHref} className="sih-btn btn-4">
+            <Link href='/contact-us'> 
+            {btnText}
+            </Link>
+            
+            </a>
         </div>
       </div>
 

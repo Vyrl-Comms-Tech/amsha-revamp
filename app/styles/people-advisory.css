@@ -1,6 +1,6 @@
 .pa-scroll-wrapper {
   position: relative;
-  height: 700vh;
+  height: 100vh;
 }
 
 .hero-section-of-poeple-advisory {
@@ -23,6 +23,22 @@
 }
 
 .hero-section-of-poeple-advisory .hero-heading h1 {
+  font-size: 70px;
+  font-weight: 500;
+}
+
+.hero-section-of-poeple-advisory .hero-heading-right {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  color: white;
+  z-index: 2;
+  width: 50%;
+  overflow: hidden;
+  text-align: right;
+}
+
+.hero-section-of-poeple-advisory .hero-heading-right h1 {
   font-size: 70px;
   font-weight: 500;
 }
@@ -60,6 +76,31 @@
   overflow: hidden;
 }
 
+.hero-section-of-poeple-advisory .hero-arrows {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.hero-section-of-poeple-advisory .hero-arrow-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 34px;
+  color: var(--color-white);
+  border-radius: 6px;
+  border: 0.5px solid var(--color-white-90);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(7px);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero-section-of-poeple-advisory .hero-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .hero-section-of-poeple-advisory .hero-content p {
   font-size: 25px;
   text-align: end;
@@ -81,9 +122,15 @@
   cursor: pointer;
   transition: 0.3s ease;
 }
-
+.hero-section-of-poeple-advisory .hero-content .hero-arrow-btn,
+.hero-arrow-btn {
+  padding: 7px 11px;
+  height: 45px;
+  width: 85px;
+}
 @media (max-width: 1500px) {
-  .hero-section-of-poeple-advisory .hero-heading h1 {
+  .hero-section-of-poeple-advisory .hero-heading h1,
+  .hero-section-of-poeple-advisory .hero-heading-right h1 {
     font-size: 60px;
   }
   .hero-section-of-poeple-advisory .hero-number span {
@@ -103,7 +150,7 @@
 
 @media (max-width: 760px) {
   .pa-scroll-wrapper {
-    height: 600vh;
+    height: 100vh;
   }
   /* Switch to flex column so heading + number stack automatically */
   .hero-section-of-poeple-advisory {
@@ -122,6 +169,19 @@
   }
   .hero-section-of-poeple-advisory .hero-heading h1 {
     font-size: 40px;
+  }
+  /* Right heading stacks under the left one on mobile instead of floating right */
+  .hero-section-of-poeple-advisory .hero-heading-right {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 90%;
+    text-align: left;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .hero-section-of-poeple-advisory .hero-heading-right h1 {
+    font-size: 28px;
   }
   /* Number sits immediately below heading — no fixed top */
   .hero-section-of-poeple-advisory .hero-number {
@@ -155,4 +215,3 @@
     padding: 6px 15px;
   }
 }
-

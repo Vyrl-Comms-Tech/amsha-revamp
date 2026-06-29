@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TextAnimation from "../layout/TextAnimation";
 import Scene from "../Home/Scene";
 import "../../styles/AboutHero.css";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,8 +53,20 @@ export default function AboutHero() {
       positionTween = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
-        onEnter: () => gsap.to(canvasEl, { left: "75%", duration: 0.6, ease: "power2.out", overwrite: true }),
-        onLeaveBack: () => gsap.to(canvasEl, { left: "50%", duration: 0.6, ease: "power2.out", overwrite: true }),
+        onEnter: () =>
+          gsap.to(canvasEl, {
+            left: "75%",
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: true,
+          }),
+        onLeaveBack: () =>
+          gsap.to(canvasEl, {
+            left: "50%",
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: true,
+          }),
       });
     } else if (window.innerWidth > 575) {
       // Tablet/narrow-desktop: footer-right is hidden at this width (no room for
@@ -62,8 +75,10 @@ export default function AboutHero() {
       positionTween = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
-        onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
-        onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+        onEnter: () =>
+          gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+        onLeaveBack: () =>
+          gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
       });
     } else {
       // Mobile: drift from centered (left:50%, the CSS default) toward the
@@ -98,15 +113,19 @@ export default function AboutHero() {
     <>
       <section className="aboutHero">
         <div className="aboutHeroContent">
-
-                    <TextAnimation animateOnScroll={false} delay={0.7}>
-          
-          <h1>At Amsha Advisory, we believe that behind every strong organisation are people, leadership, and workplace cultures shaping the way businesses grow and perform.</h1>
-                    </TextAnimation>
+          <TextAnimation animateOnScroll={false} delay={0.7}>
+            <h1>
+              At Amsha Advisory, we believe that behind every strong
+              organisation are people, leadership, and workplace cultures
+              shaping the way businesses grow and perform.
+            </h1>
+          </TextAnimation>
           <button className="btn-4">
             <span>
-            Contact us
-          </span>
+            <Link href="/contact-us">
+              Contact us
+            </Link>
+              </span>
           </button>
         </div>
       </section>

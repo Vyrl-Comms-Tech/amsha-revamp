@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useState, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Canvas } from "@react-three/fiber";
@@ -7,6 +7,7 @@ import Scene from "./Scene";
 import TextAnimation from "../layout/TextAnimation";
 import "../../styles/Hero.css";
 import { GlowDot } from "../layout/svg";
+import Link from "next/link";
 
 const DOTS = [
   { top: "22%", left: "33%" },
@@ -24,8 +25,14 @@ const DOTS = [
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [progress, setProgress] = useState(0);
-  const [progress2, setProgress2] = useState(0);
+  // Scroll progress drives the 3D model's rotation every frame inside Scene's
+  // useFrame — kept in refs (not state) so scroll ticks never trigger a React
+  // re-render. Re-rendering on every scroll pixel was the source of the
+  // jitter: rotation updates were landing on React's commit schedule instead
+  // of the render loop's frame schedule, so they could lag or double up
+  // relative to the actual rAF tick.
+  const progressRef = useRef(0);
+  const progress2Ref = useRef(0);
   const canvasWrapperRef = useRef(null);
   const glowRef = useRef(null);
 
@@ -50,15 +57,15 @@ const Hero = () => {
     const hero3El = document.querySelector(".hero3-wrapper");
     const glowFadeTween = hero3El
       ? gsap.to(glowEl, {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: hero3El,
-          start: "top bottom",
-          end: `top 40%`,
-          scrub: 0.6,
-        },
-      })
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: hero3El,
+            start: "top bottom",
+            end: `top 40%`,
+            scrub: 0.6,
+          },
+        })
       : null;
 
     // Hero(100vh) + Hero2(300vh) + Hero3(400vh) = 800vh = 8 × viewport height
@@ -66,7 +73,9 @@ const Hero = () => {
       trigger: document.body,
       start: "top top",
       end: `+=${window.innerHeight * 8}`,
-      onUpdate: (self) => setProgress(self.progress),
+      onUpdate: (self) => {
+        progressRef.current = self.progress;
+      },
     });
 
     // Rotation: Facts → Footer (0→1)
@@ -83,7 +92,9 @@ const Hero = () => {
         start: "top bottom",
         endTrigger: footerEl,
         end: "bottom bottom",
-        onUpdate: (self) => setProgress2(self.progress),
+        onUpdate: (self) => {
+          progress2Ref.current = self.progress;
+        },
       });
 
       if (window.innerWidth > 1100) {
@@ -99,8 +110,20 @@ const Hero = () => {
         positionTween = ScrollTrigger.create({
           trigger: footerEl,
           start: "top 75%",
-          onEnter: () => gsap.to(canvasEl, { left: "75%", duration: 0.6, ease: "power2.out", overwrite: true }),
-          onLeaveBack: () => gsap.to(canvasEl, { left: "50%", duration: 0.6, ease: "power2.out", overwrite: true }),
+          onEnter: () =>
+            gsap.to(canvasEl, {
+              left: "75%",
+              duration: 0.6,
+              ease: "power2.out",
+              overwrite: true,
+            }),
+          onLeaveBack: () =>
+            gsap.to(canvasEl, {
+              left: "50%",
+              duration: 0.6,
+              ease: "power2.out",
+              overwrite: true,
+            }),
         });
       } else if (window.innerWidth > 575) {
         // Tablet/narrow-desktop: footer-right is hidden at this width (no room for
@@ -109,8 +132,10 @@ const Hero = () => {
         positionTween = ScrollTrigger.create({
           trigger: footerEl,
           start: "top 75%",
-          onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
-          onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+          onEnter: () =>
+            gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+          onLeaveBack: () =>
+            gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
         });
       } else {
         // Mobile: canvas starts at top:40% (model at bottom, behind Hero content).
@@ -127,8 +152,8 @@ const Hero = () => {
             immediateRender: false,
             scrollTrigger: {
               trigger: hero2El,
-              start: "top 80%",  // hero2 is 80% into viewport
-              end: "top 10%",    // hero2 almost fully entered
+              start: "top 80%", // hero2 is 80% into viewport
+              end: "top 10%", // hero2 almost fully entered
               scrub: 0.5,
             },
           });
@@ -173,22 +198,34 @@ const Hero = () => {
   return (
     <main className="main">
       <section className="hero-section">
-
         {/* animated glow background */}
         <div ref={glowRef} className="hero-glow" />
 
         {/* decorative scatter dots */}
         {DOTS.map((pos, i) => (
-          <GlowDot key={i} delay={+(i * 0.31).toFixed(2)} style={{ position: "absolute", zIndex: 6, pointerEvents: "none", ...pos }} />
+          <GlowDot
+            key={i}
+            delay={+(i * 0.31).toFixed(2)}
+            style={{
+              position: "absolute",
+              zIndex: 6,
+              pointerEvents: "none",
+              ...pos,
+            }}
+          />
         ))}
 
         {/* left col */}
         <div className="hero-left">
           <TextAnimation animateOnScroll={true} delay={0.5}>
-            <span className="hero-badge">&#8226; &nbsp; For those who want more from their business</span>
+            <span className="hero-badge">
+              &#8226; &nbsp; For those who want more from their business
+            </span>
           </TextAnimation>
           <TextAnimation animateOnScroll={false} delay={0.7}>
-            <h1 className="hero-heading">Empowering People Elevating Businesses</h1>
+            <h1 className="hero-heading">
+              Empowering People Elevating Businesses
+            </h1>
           </TextAnimation>
         </div>
 
@@ -198,14 +235,15 @@ const Hero = () => {
         {/* right col */}
         <div className="hero-right">
           <TextAnimation animateOnScroll={false} delay={0.6}>
-            <p className="hero-desc">
-              People-centred strategies designed to strengthen leadership, elevate workplace performance, and drive sustainable business growth.
+            <p className="hero-desc">                          
+              People-centred strategies designed to strengthen leadership,
+              elevate workplace performance, and drive sustainable business
+              growth.
             </p>
           </TextAnimation>
           <button className="hero-cta btn-4">
             <span>
-
-              Contact us
+              <Link href="/contact-us">Contact us</Link>
             </span>
           </button>
         </div>
@@ -214,14 +252,11 @@ const Hero = () => {
         <div ref={canvasWrapperRef} className="canvas-wrapper">
           <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
             <Suspense fallback={null}>
-              <Scene progress={progress} progress2={progress2} />
+              <Scene progressRef={progressRef} progress2Ref={progress2Ref} />
             </Suspense>
           </Canvas>
         </div>
-
       </section>
-
-
     </main>
   );
 };

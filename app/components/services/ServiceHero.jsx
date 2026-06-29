@@ -7,6 +7,7 @@ import Scene from "../Home/Scene";
 import { GlowDot } from "../layout/svg";
 import "../../styles/service-hero.css";
 import TextAnimation from "../layout/TextAnimation";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,13 +33,30 @@ const ServiceHero = () => {
       // Footer.css's own @media(max-width:1100px) breakpoint, where
       // .footer-right (the column reserving space for the model) gets
       // display:none and .footer-left's text expands to fill the full width.
+      // Unlike Hero/AboutHero/FooterModel's .canvas-wrapper, .sh-canvas-wrapper
+      // has no translateX(-50%) — its "left" is the box's left edge, not its
+      // centre. At the default left:50%/width:50vw it already spans 50%-100%
+      // (visual centre at 75%, same spot every other page's footer model
+      // sits at), so no slide is needed on footer entry — sliding "left" to
+      // 75% would shove the whole box to 75%-125%, pushing the model off
+      // the right edge of the screen.
       positionTrigger = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
         onEnter: () =>
-          gsap.to(canvasEl, { left: "75%", duration: 0.6, ease: "power2.out", overwrite: true }),
+          gsap.to(canvasEl, {
+            left: "50%",
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: true,
+          }),
         onLeaveBack: () =>
-          gsap.to(canvasEl, { left: "50%", duration: 0.6, ease: "power2.out", overwrite: true }),
+          gsap.to(canvasEl, {
+            left: "50%",
+            duration: 0.6,
+            ease: "power2.out",
+            overwrite: true,
+          }),
       });
     } else {
       // Tablet/narrow-desktop: footer-right is hidden at this width (no room
@@ -47,8 +65,10 @@ const ServiceHero = () => {
       positionTrigger = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
-        onEnter: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
-        onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+        onEnter: () =>
+          gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+        onLeaveBack: () =>
+          gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
       });
     }
 
@@ -85,7 +105,12 @@ const ServiceHero = () => {
               performance, and long-term business sustainability.
             </p>
           </TextAnimation>
-          <button className="sh-btn btn-4">Contact us</button>
+          <button className="sh-btn btn-4">
+            <Link href='/contact-us'>
+            Contact us
+            </Link>
+            
+            </button>
         </div>
 
         {/* ── Right-side glow with floating dots ── */}

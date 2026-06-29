@@ -1,13 +1,52 @@
 "use client";
+import Link from "next/link";
 import "../../styles/Footer.css";
 import { GlowDot } from "../layout/svg";
 
-const QUICK_LINKS = [
-  "HR Overview",
-  "Recruitment",
-  "Employee Relations",
-  "Benefits Administration",
-  "HR Settings",
+const FOOTER_COLUMNS = [
+  {
+    title: "Quick links",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "About", href: "/about" },
+      { label: "Blogs", href: "/knowledge-hub" },
+      { label: "Contact us", href: "/contact-us" },
+      { label: "Training topics", href: "/training" },
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      { label: "People Advisory", href: "/services/people-advisory" },
+      {
+        label: "Employee Training & Development",
+        href: "/services/employee-training-development",
+      },
+      { label: "Upskilling & Training", href: "/services/upskilling-training" },
+      {
+        label: "Entrepreneurial Consulting",
+        href: "/services/entrepreneurial-consulting",
+      },
+      { label: "Career Development", href: "/services/career-development" },
+    ],
+  },
+  {
+    title: "Social media",
+    links: [
+      {
+        label: "Instagram",
+        href: "https://www.instagram.com/amshaadvisory/?hl=en",
+      },
+      {
+        label: "Facebook",
+        href: "https://www.facebook.com/p/Amsha-Advisory-61566437109181/",
+      },
+      {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/amshaadvisory/",
+      },
+    ],
+  },
 ];
 
 const Footer = () => {
@@ -18,7 +57,9 @@ const Footer = () => {
         <div className="footer-left">
           <h2 className="footer-heading">LETS GET IN TOUCH</h2>
           <div className="button-and-para">
-            <button className="footer-cta">Contact us</button>
+            <button className="footer-cta btn-4">
+              <Link href="/contact-us">Contact us</Link>
+            </button>
             <p className="footer-sub">
               For those who want more from their business, there&apos;s Amsha.
               Get started today and never look back.
@@ -26,13 +67,13 @@ const Footer = () => {
           </div>
 
           <div className="footer-links">
-            {[0, 1, 2].map((col) => (
-              <div className="footer-col" key={col}>
-                <h4>Quick links</h4>
+            {FOOTER_COLUMNS.map((col) => (
+              <div className="footer-col" key={col.title}>
+                <h4>{col.title}</h4>
                 <ul>
-                  {QUICK_LINKS.map((link) => (
-                    <li key={link}>
-                      <a href="#">{link}</a>
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link href={link.href}>{link.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -84,7 +125,8 @@ const Footer = () => {
         <GlowDot
           style={{ position: "absolute", left: "93%", top: "35%" }}
           delay={1.7}
-        /> <GlowDot
+        />{" "}
+        <GlowDot
           style={{ position: "absolute", left: "40%", top: "65%" }}
           delay={0.5}
         />

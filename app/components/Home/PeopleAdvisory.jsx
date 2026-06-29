@@ -1,8 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { flushSync } from "react-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useState } from "react";
 import "../../styles/people-advisory.css";
 import Multiple3d from "../layout/Multiple3d";
 import TextAnimation from "../layout/TextAnimation";
@@ -46,128 +43,44 @@ const SLIDES = [
   },
 ];
 
+function ArrowIcon({ direction }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d={direction === "prev" ? "M11 3.5L5 9l6 5.5" : "M7 3.5l6 5.5-6 5.5"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function PeopleAdvisory() {
-  const wrapperRef = useRef();
-  const numberRef = useRef();
   const [slide, setSlide] = useState(0);
-  const currentSlide = useRef(0);
-  const hasShownAll = useRef(false);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const getEls = () => [numberRef.current].filter(Boolean);
-
-    const isAnimating = { current: false };
-    const pending = { current: null };
-    let sectionEnd = 0;
-
-    const runTransition = (next) => {
-      isAnimating.current = true;
-      currentSlide.current = next;
-
-      gsap.to(getEls(), {
-        autoAlpha: 0,
-        yPercent: -100,
-        duration: 0.3,
-        ease: "power1.inOut",
-        stagger: 0.04,
-        onComplete: () => {
-          flushSync(() => setSlide(currentSlide.current));
-          gsap.fromTo(
-            getEls(),
-            { autoAlpha: 0, yPercent: 100 },
-            {
-              autoAlpha: 1,
-              yPercent: 0,
-              duration: 0.4,
-              ease: "power1.inOut",
-              stagger: 0.06,
-              onComplete: () => {
-                isAnimating.current = false;
-                if (next === SLIDES.length - 1) hasShownAll.current = true;
-                if (
-                  pending.current !== null &&
-                  pending.current !== currentSlide.current
-                ) {
-                  const nextPending = pending.current;
-                  pending.current = null;
-                  runTransition(nextPending);
-                }
-              },
-            },
-          );
-        },
-      });
-    };
-
-    const goTo = (next) => {
-      if (next === currentSlide.current) return;
-      if (isAnimating.current) {
-        pending.current = next;
-        return;
-      }
-      runTransition(next);
-    };
-
-    const st = ScrollTrigger.create({
-      trigger: wrapperRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      onRefresh: (self) => {
-        sectionEnd = self.end;
-      },
-      onUpdate: (self) => {
-        sectionEnd = self.end;
-        goTo(
-          Math.min(
-            SLIDES.length - 1,
-            Math.floor(self.progress * SLIDES.length),
-          ),
-        );
-      },
-    });
-
-    // Wheel guard: intercept downward wheel events when the user is inside the
-    // section and hasn't seen all slides yet.  Non-passive so we can preventDefault.
-    const onWheel = (e) => {
-      if (hasShownAll.current || !sectionEnd) return;
-      const atOrPastEnd = window.scrollY >= sectionEnd - 5;
-      if (e.deltaY > 0 && atOrPastEnd) {
-        e.preventDefault();
-      }
-    };
-
-    // Touch guard: same idea for swipe-up on mobile.
-    let touchStartY = 0;
-    const onTouchStart = (e) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const onTouchMove = (e) => {
-      if (hasShownAll.current || !sectionEnd) return;
-      const swipingUp = e.touches[0].clientY < touchStartY;
-      const atOrPastEnd = window.scrollY >= sectionEnd - 5;
-      if (swipingUp && atOrPastEnd) e.preventDefault();
-    };
-
-    window.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
-
-    return () => {
-      st.kill();
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
-    };
-  }, []);
+  const goPrev = () => setSlide((s) => (s - 1 + SLIDES.length) % SLIDES.length);
+  const goNext = () => setSlide((s) => (s + 1) % SLIDES.length);
 
   const { heading, number, text, href } = SLIDES[slide];
 
   return (
-    <div ref={wrapperRef} className="pa-scroll-wrapper">
+    <div className="pa-scroll-wrapper">
       <section className="hero-section-of-poeple-advisory">
         <div className="hero-heading">
+          <TextAnimation animateOnScroll delay={0.15}>
+            <h1>Services</h1>
+          </TextAnimation>
+        </div>
+
+        <div className="hero-heading-right">
           <TextAnimation
             key={`h-${slide}`}
             animateOnScroll={false}
@@ -182,10 +95,63 @@ export default function PeopleAdvisory() {
         </div>
 
         <div className="hero-number">
-          <span ref={numberRef}>{number}</span>
+          <TextAnimation
+            key={`n-${slide}`}
+            animateOnScroll={false}
+            delay={0.15}
+          >
+            <span>{number}</span>
+          </TextAnimation>
         </div>
 
         <div className="hero-content">
+          <div className="hero-arrows">
+            <button
+              type="button"
+              className="hero-arrow-btn"
+              aria-label="Previous service"
+              onClick={goPrev}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="27"
+                viewBox="0 0 28 27"
+                fill="none"
+              >
+                <path
+                  d="M27 13.5L1 13.5M13.2778 26L1 13.5L13.2778 1"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="hero-arrow-btn"
+              aria-label="Next service"
+              onClick={goNext}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="27"
+                viewBox="0 0 28 27"
+                fill="none"
+              >
+                <path
+                  d="M1 13.5L27 13.5M14.7222 26L27 13.5L14.7222 1"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
           <TextAnimation
             key={`p-${slide}`}
             animateOnScroll={false}

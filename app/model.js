@@ -10,7 +10,8 @@ export function Model({
   rotationY   = 0,
   rotationX   = 0,
   rotationZ   = 0,
-  glassFactor = 0,   // 0 = steel, 1 = glass (Hero2 only)
+  glassFactor = 0,   // 0 = steel, 1 = glass (Hero2 only) — static fallback
+  glassFactorRef,    // preferred: read fresh every frame, bypasses React re-renders
   ...props
 }) {
   const { nodes, materials } = useGLTF("/iTOIlw.glb");
@@ -21,9 +22,10 @@ export function Model({
 
   useFrame(() => {
     if (!steelRef.current || !glassRef.current) return;
+    const gf = glassFactorRef ? glassFactorRef.current : glassFactor;
     // Simple threshold swap — glass visible only in Hero2 (glassFactor ≥ 0.5)
-    steelRef.current.visible = glassFactor < 0.5;
-    glassRef.current.visible = glassFactor >= 0.5;
+    steelRef.current.visible = gf < 0.5;
+    glassRef.current.visible = gf >= 0.5;
   });
 
   const sharedProps = {
