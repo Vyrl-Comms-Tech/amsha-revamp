@@ -35,7 +35,7 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [loadingFading, setLoadingFading] = useState(false);
   const [loadingHidden, setLoadingHidden] = useState(false);
-  const [infoText, setInfoText] = useState("Shape: Sphere (Click to morph)");
+  const [infoText, setInfoText] = useState("Model 1 (Click to morph)");
   const [infoGlow, setInfoGlow] = useState("0 0 5px rgba(0, 128, 255, 0.8)");
   const [activeScheme, setActiveScheme] = useState("mono");
 
@@ -60,7 +60,7 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
 
     // Three.js instances
     let scene, camera, renderer, controls, clock, composer;
-    let particlesGeometry, particlesMaterial;
+    let particlesGeometry, particlesMaterial, pointsGroup;
     let currentPositions, sourcePositions, targetPositions, swarmPositions;
     let particleEffectStrengths;
     let particleVelocities;
@@ -93,6 +93,10 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
       idleFlowSpeed: 0.08,
       morphSizeFactor: 0.5,
       morphBrightnessFactor: 0.6,
+      // Gentle left-right sway instead of a full 360° auto-rotate — radians
+      // either side of centre, and how fast it sweeps back and forth.
+      idleSwayAmp: 0.18,
+      idleSwaySpeed: 0.3,
     };
 
     const COLOR_SCHEMES = {
@@ -104,12 +108,12 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
     };
 
     const SHAPES = [
-      { name: "Sphere", fn: generateSphere },
-      { name: "Cube", fn: generateCube },
-      { name: "Pyramid", fn: generatePyramid },
-      { name: "Torus", fn: generateTorus },
-      { name: "Galaxy", fn: generateGalaxy },
-      { name: "Wave", fn: generateWave },
+      { name: "Model 1", url: "/models/new5.glb" },
+      { name: "Model 2", url: "/models/second1.glb" },
+      { name: "Model 3", url: "/models/third11.glb" },
+      { name: "Model 4", url: "/models/fifth.glb" },
+      { name: "Model 5", url: "/models/new6.glb" },
+      { name: "Model 6", url: "/models/third.glb" },
     ];
 
     // Pre-allocated vectors — avoids GC pressure in the hot animation loop
@@ -121,153 +125,126 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
     const flowV = new THREE.Vector3();
     const bezV = new THREE.Vector3();
     const axisV = new THREE.Vector3();
-    const p2V = new THREE.Vector3();
-    const pV = new THREE.Vector3();
 
-    // ── Shape generators ───────────────────────────────────────────
-    function generateSphere(count, size) {
-      const pts = new Float32Array(count * 3);
-      const phi = Math.PI * (Math.sqrt(5) - 1);
-      for (let i = 0; i < count; i++) {
-        const y = 1 - (i / (count - 1)) * 2;
-        const r = Math.sqrt(1 - y * y);
-        const t = phi * i;
-        pts[i * 3] = Math.cos(t) * r * size;
-        pts[i * 3 + 1] = y * size;
-        pts[i * 3 + 2] = Math.sin(t) * r * size;
-      }
-      return pts;
-    }
+    // ── Load a GLB and resolve it into `count` particle positions ──────────
+    // The morph pipeline below just lerps between Float32Array position sets
+    // index-by-index, so it doesn't care where a shape's points came from —
+    // every loaded model just has to come back as the same particleCount-
+    // sized point cloud, centred and scaled to a consistent footprint.
+    //
+    // The actual .glb files turned out to be two different things: most are
+    // pre-baked point clouds (exported from a THREE.Points object — glTF
+    // primitive mode 0, ~150k verts each), one is an ordinary triangle mesh.
+    // Points objects come in as child.isPoints (not isMesh!) once loaded —
+    // an earlier version of this only checked isMesh, found nothing in the
+    // point-cloud files, threw, and that's what caused the black screen.
+    async function loadModelAsPoints(url, count, size) {
+      const { GLTFLoader } =
+        await import("three/examples/jsm/loaders/GLTFLoader.js");
+      const gltf = await new GLTFLoader().loadAsync(url);
+      gltf.scene.updateMatrixWorld(true);
 
-    function generateCube(count, size) {
-      const pts = new Float32Array(count * 3);
-      const h = size / 2;
-      for (let i = 0; i < count; i++) {
-        const face = Math.floor(Math.random() * 6);
-        const u = Math.random() * size - h,
-          v = Math.random() * size - h;
-        switch (face) {
-          case 0:
-            pts.set([h, u, v], i * 3);
-            break;
-          case 1:
-            pts.set([-h, u, v], i * 3);
-            break;
-          case 2:
-            pts.set([u, h, v], i * 3);
-            break;
-          case 3:
-            pts.set([u, -h, v], i * 3);
-            break;
-          case 4:
-            pts.set([u, v, h], i * 3);
-            break;
-          default:
-            pts.set([u, v, -h], i * 3);
-            break;
-        }
-      }
-      return pts;
-    }
+      const pointObjects = [];
+      const meshObjects = [];
+      gltf.scene.traverse((child) => {
+        if (child.isPoints && child.geometry) pointObjects.push(child);
+        else if (child.isMesh && child.geometry) meshObjects.push(child);
+      });
 
-    function generatePyramid(count, size) {
-      const pts = new Float32Array(count * 3);
-      const hb = size / 2,
-        height = size * 1.2;
-      const apex = new THREE.Vector3(0, height / 2, 0);
-      const bv = [
-        new THREE.Vector3(-hb, -height / 2, -hb),
-        new THREE.Vector3(hb, -height / 2, -hb),
-        new THREE.Vector3(hb, -height / 2, hb),
-        new THREE.Vector3(-hb, -height / 2, hb),
-      ];
-      const baseA = size * size;
-      const sfh = Math.sqrt(height * height + hb * hb);
-      const sideA = 0.5 * size * sfh;
-      const total = baseA + 4 * sideA;
-      const bw = baseA / total,
-        sw = sideA / total;
-      for (let i = 0; i < count; i++) {
-        const r = Math.random();
-        pV.set(0, 0, 0);
-        if (r < bw) {
-          const u = Math.random(),
-            v = Math.random();
-          pV.lerpVectors(bv[0], bv[1], u);
-          p2V.lerpVectors(bv[3], bv[2], u);
-          pV.lerp(p2V, v);
-        } else {
-          const fi = Math.min(3, Math.floor((r - bw) / sw));
-          const v1 = bv[fi],
-            v2 = bv[(fi + 1) % 4];
-          let u = Math.random(),
-            v = Math.random();
-          if (u + v > 1) {
-            u = 1 - u;
-            v = 1 - v;
+      let pts;
+      if (pointObjects.length > 0) {
+        // Pool every point from every Points node (world space), then pick
+        // `count` of them via partial Fisher-Yates so the subsample is
+        // unbiased — a plain stride pick risks visible gaps/clustering if
+        // the source array has any spatial ordering to it.
+        const pool = [];
+        const v = new THREE.Vector3();
+        for (const obj of pointObjects) {
+          const pos = obj.geometry.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            v.fromBufferAttribute(pos, i).applyMatrix4(obj.matrixWorld);
+            pool.push(v.x, v.y, v.z);
           }
-          pV.addVectors(v1, tV.subVectors(v2, v1).multiplyScalar(u));
-          pV.add(tV.subVectors(apex, v1).multiplyScalar(v));
         }
-        pts.set([pV.x, pV.y, pV.z], i * 3);
-      }
-      return pts;
-    }
+        const poolCount = pool.length / 3;
+        pts = new Float32Array(count * 3);
+        if (poolCount >= count) {
+          const indices = new Uint32Array(poolCount);
+          for (let i = 0; i < poolCount; i++) indices[i] = i;
+          for (let i = 0; i < count; i++) {
+            const j = i + Math.floor(Math.random() * (poolCount - i));
+            const tmp = indices[i];
+            indices[i] = indices[j];
+            indices[j] = tmp;
+            const srcI = indices[i];
+            pts[i * 3] = pool[srcI * 3];
+            pts[i * 3 + 1] = pool[srcI * 3 + 1];
+            pts[i * 3 + 2] = pool[srcI * 3 + 2];
+          }
+        } else {
+          // Smaller pool than needed — sample with replacement.
+          for (let i = 0; i < count; i++) {
+            const srcI = Math.floor(Math.random() * poolCount);
+            pts[i * 3] = pool[srcI * 3];
+            pts[i * 3 + 1] = pool[srcI * 3 + 1];
+            pts[i * 3 + 2] = pool[srcI * 3 + 2];
+          }
+        }
+      } else if (meshObjects.length > 0) {
+        const [{ MeshSurfaceSampler }, { mergeGeometries }] = await Promise.all(
+          [
+            import("three/examples/jsm/math/MeshSurfaceSampler.js"),
+            import("three/examples/jsm/utils/BufferGeometryUtils.js"),
+          ],
+        );
 
-    function generateTorus(count, size) {
-      const pts = new Float32Array(count * 3);
-      const R = size * 0.7,
-        r = size * 0.3;
-      for (let i = 0; i < count; i++) {
-        const theta = Math.random() * Math.PI * 2,
-          phi = Math.random() * Math.PI * 2;
-        pts[i * 3] = (R + r * Math.cos(phi)) * Math.cos(theta);
-        pts[i * 3 + 1] = r * Math.sin(phi);
-        pts[i * 3 + 2] = (R + r * Math.cos(phi)) * Math.sin(theta);
-      }
-      return pts;
-    }
+        // Bake each mesh's world transform into its geometry and strip every
+        // attribute but position so multi-mesh GLBs merge into one geometry.
+        const geometries = meshObjects.map((child) => {
+          let geo = child.geometry.clone();
+          geo.applyMatrix4(child.matrixWorld);
+          if (geo.index) geo = geo.toNonIndexed();
+          for (const attr of Object.keys(geo.attributes)) {
+            if (attr !== "position") geo.deleteAttribute(attr);
+          }
+          return geo;
+        });
+        const merged =
+          geometries.length === 1
+            ? geometries[0]
+            : mergeGeometries(geometries, false);
 
-    function generateGalaxy(count, size) {
-      const pts = new Float32Array(count * 3);
-      const arms = 4,
-        armWidth = 0.6,
-        bulgeFactor = 0.3;
-      for (let i = 0; i < count; i++) {
-        const t = Math.pow(Math.random(), 1.5),
-          radius = t * size;
-        const ai = Math.floor(Math.random() * arms);
-        const ao = (ai / arms) * Math.PI * 2;
-        const spread = (Math.random() - 0.5) * armWidth * (1 - radius / size);
-        const theta = ao + (radius / size) * 6 + spread;
-        pts[i * 3] = radius * Math.cos(theta);
-        pts[i * 3 + 1] =
-          (Math.random() - 0.5) *
-          size *
-          0.1 *
-          (1 - (radius / size) * bulgeFactor);
-        pts[i * 3 + 2] = radius * Math.sin(theta);
-      }
-      return pts;
-    }
+        const sampler = new MeshSurfaceSampler(new THREE.Mesh(merged)).build();
+        pts = new Float32Array(count * 3);
+        const sampleV = new THREE.Vector3();
+        for (let i = 0; i < count; i++) {
+          sampler.sample(sampleV);
+          pts[i * 3] = sampleV.x;
+          pts[i * 3 + 1] = sampleV.y;
+          pts[i * 3 + 2] = sampleV.z;
+        }
 
-    function generateWave(count, size) {
-      const pts = new Float32Array(count * 3);
-      const waveScale = size * 0.4,
-        freq = 3;
-      for (let i = 0; i < count; i++) {
-        const u = Math.random() * 2 - 1,
-          v = Math.random() * 2 - 1;
-        const dist = Math.sqrt(u * u + v * v);
-        const angle = Math.atan2(v, u);
-        pts[i * 3] = u * size;
-        pts[i * 3 + 1] =
-          Math.sin(dist * Math.PI * freq) *
-          Math.cos(angle * 2) *
-          waveScale *
-          (1 - dist);
-        pts[i * 3 + 2] = v * size;
+        geometries.forEach((g) => g !== merged && g.dispose());
+        merged.dispose();
+      } else {
+        throw new Error(`No points or mesh geometry found in ${url}`);
       }
+
+      // Centre at origin and scale to fit the same footprint the old
+      // procedural shapes used (shapeSize), so morph distances/feel stay
+      // roughly consistent between models.
+      const tmpGeo = new THREE.BufferGeometry();
+      tmpGeo.setAttribute("position", new THREE.BufferAttribute(pts, 3));
+      tmpGeo.computeBoundingSphere();
+      const { center, radius } = tmpGeo.boundingSphere;
+      const scale = radius > 0 ? size / radius : 1;
+      for (let i = 0; i < count; i++) {
+        pts[i * 3] = (pts[i * 3] - center.x) * scale;
+        pts[i * 3 + 1] = (pts[i * 3 + 1] - center.y) * scale;
+        pts[i * 3 + 2] = (pts[i * 3 + 2] - center.z) * scale;
+      }
+      tmpGeo.dispose();
+
       return pts;
     }
 
@@ -353,10 +330,8 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
       );
     }
 
-    function setupParticles() {
-      targetPositions = SHAPES.map((s) =>
-        s.fn(CONFIG.particleCount, CONFIG.shapeSize),
-      );
+    function setupParticles(positionsPerShape) {
+      targetPositions = positionsPerShape;
       currentPositions = new Float32Array(targetPositions[0]);
       sourcePositions = new Float32Array(targetPositions[0]);
       swarmPositions = new Float32Array(CONFIG.particleCount * 3);
@@ -425,14 +400,15 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
         transparent: true,
         vertexColors: true,
       });
-      scene.add(new THREE.Points(particlesGeometry, particlesMaterial));
+      pointsGroup = new THREE.Group();
+      pointsGroup.add(new THREE.Points(particlesGeometry, particlesMaterial));
+      scene.add(pointsGroup);
     }
 
     // ── Morph ──────────────────────────────────────────────────────
     function triggerMorph() {
       if (isMorphing) return;
       isMorphing = true;
-      controls.autoRotate = false;
       setInfoText("Morphing...");
       setInfoGlow("0 0 8px rgba(255, 150, 50, 0.9)");
 
@@ -468,9 +444,7 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
         ease: "power2.inOut",
         onComplete: () => {
           if (!isAlive) return;
-          setInfoText(
-            `Shape: ${SHAPES[currentShapeIndex].name} (Click to morph)`,
-          );
+          setInfoText(`${SHAPES[currentShapeIndex].name} (Click to morph)`);
           setInfoGlow("0 0 5px rgba(0, 128, 255, 0.8)");
           currentPositions.set(targetPositions[currentShapeIndex]);
           particlesGeometry.attributes.position.needsUpdate = true;
@@ -479,7 +453,6 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
           sourcePositions.set(targetPositions[currentShapeIndex]);
           refreshColors();
           isMorphing = false;
-          controls.autoRotate = true;
         },
       });
     }
@@ -490,7 +463,6 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
       // Kill any running morph so we don't fight with it
       if (morphTimeline) morphTimeline.kill();
       isMorphing = true;
-      controls.autoRotate = false;
 
       sourcePositions.set(currentPositions);
       const nextPos = targetPositions[targetIdx];
@@ -529,7 +501,6 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
           sourcePositions.set(targetPositions[currentShapeIndex]);
           refreshColors();
           isMorphing = false;
-          controls.autoRotate = true;
         },
       });
     }
@@ -746,7 +717,12 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
       // FOV widened on narrow viewports in onResize() (fired immediately by
       // the ResizeObserver below) — keep distance fixed here, position never
       // needs to differ between mobile/desktop.
-      camera = new THREE.PerspectiveCamera(w < 600 ? 120 : 70, w / h, 0.1, 1000);
+      camera = new THREE.PerspectiveCamera(
+        w < 600 ? 120 : 70,
+        w / h,
+        0.1,
+        1000,
+      );
       camera.position.set(0, 8, 28);
       camera.lookAt(scene.position);
       bump(5);
@@ -768,8 +744,8 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
       controls.dampingFactor = 0.05;
       controls.minDistance = 5;
       controls.maxDistance = 80;
-      controls.autoRotate = true;
-      controls.autoRotateSpeed = 0.3;
+      // No autoRotate — the model instead gets a gentle left-right sway
+      // applied to pointsGroup directly in the render loop (see animate()).
       bump(5);
 
       scene.add(new THREE.AmbientLight(0x404060));
@@ -783,8 +759,20 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
 
       await setupPostFx();
       bump(10);
-      setupParticles();
-      bump(25);
+      const positionsPerShape = await Promise.all(
+        SHAPES.map(async (s) => {
+          const pts = await loadModelAsPoints(
+            s.url,
+            CONFIG.particleCount,
+            CONFIG.shapeSize,
+          );
+          bump(4);
+          return pts;
+        }),
+      );
+      if (!isAlive) return;
+      setupParticles(positionsPerShape);
+      bump(1);
 
       // Expose to React handlers via refs
       triggerMorphRef.current = triggerMorph;
@@ -828,6 +816,10 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
         const dt = clock.getDelta();
         const elapsed = clock.elapsedTime;
         controls.update();
+        if (pointsGroup) {
+          pointsGroup.rotation.y =
+            Math.sin(elapsed * CONFIG.idleSwaySpeed) * CONFIG.idleSwayAmp;
+        }
         const pos = particlesGeometry.attributes.position.array;
         const eff = particlesGeometry.attributes.aEffectStrength.array;
         if (isMorphing) morphFrame(pos, eff, elapsed, dt);
@@ -857,7 +849,7 @@ export default function Multiple3d({ embed = false, targetIndex = 0 }) {
 
   // In embed mode the component fills its parent container (hero-image div).
   // The parent already has pointer-events:none so OrbitControls drag is moot;
-  // autoRotate still works since it runs in the animation loop, not off events.
+  // the idle sway still works since it runs in the animation loop, not off events.
   if (embed) {
     return (
       <div className="m3d-wrap" style={{ height: "100%", cursor: "default" }}>

@@ -12,7 +12,7 @@ export default function FooterModel() {
     >
       <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
         <Suspense fallback={null}>
-          <Scene progress={1} progress2={1} />
+          <Scene progress={1} progress2={1} enableMouseIdle={false} />
         </Suspense>
       </Canvas>
     </div>

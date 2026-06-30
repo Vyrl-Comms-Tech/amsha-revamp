@@ -8,15 +8,12 @@ import TextAnimation from "../layout/TextAnimation";
 // Unique brand logos
 const BASE = [
   "/img2.png", "/img3.png", "/img4.png", "/img5.png",
+  "/img6.png", "/img8.png", "/img9.png", "/img10.png","/img2.png", "/img3.png", "/img4.png", "/img5.png",
   "/img6.png", "/img8.png", "/img9.png", "/img10.png",
 ];
 
-// Outer ring: 20 logos → arc/slot ≈ 204px, logo 160px → ~44px gap
-const OUTER_LOGOS = [...BASE, ...BASE, "/img2.png", "/img3.png", "/img4.png", "/img5.png"];
-
-// Inner ring: 14 logos → arc/slot ≈ 211px, logo 140px → ~71px gap
-// (matches outer proportionally — same visual breathing room)
-const INNER_LOGOS = [...BASE, "/img2.png", "/img3.png", "/img4.png", "/img5.png", "/img6.png", "/img8.png"];
+const OUTER_LOGOS = [...BASE];
+const INNER_LOGOS = [...BASE];
 
 const OUTER_R = 650;
 const INNER_R = 470;
@@ -30,7 +27,7 @@ function buildSlots(logos, R, offsetDeg = 0) {
       src,
       angle,
       x: R + R * Math.sin(rad) - 70,
-      y: R - R * Math.cos(rad) - 35,
+      y: R - R * Math.cos(rad) - 70,
     };
   });
 }
@@ -93,12 +90,12 @@ const Brands = () => {
       <div className="brands-mobile-marquee">
         <div className="brands-mobile-track">
           {[...BASE, ...BASE].map((src, i) => (
-            <Image key={i} src={src} alt="" width={120} height={60} className="brand-img" />
+            <Image key={i} src={src} alt="" width={140} height={80} className="brand-img" />
           ))}
         </div>
         <div className="brands-mobile-track brands-mobile-track--reverse">
           {[...BASE, ...BASE].map((src, i) => (
-            <Image key={i} src={src} alt="" width={120} height={60} className="brand-img" />
+            <Image key={i} src={src} alt="" width={140} height={80} className="brand-img" />
           ))}
         </div>
       </div>
@@ -118,7 +115,7 @@ const Brands = () => {
                 transform: `rotate(${s.angle}deg)`,
               }}
             >
-              <Image src={s.src} alt="" width={160} height={80} className="brand-img" />
+              <Image src={s.src} alt="" width={140} height={140} className="brand-img" />
             </div>
           ))}
         </div>
@@ -135,7 +132,7 @@ const Brands = () => {
                 transform: `rotate(${s.angle}deg)`,
               }}
             >
-              <Image src={s.src} alt="" width={140} height={70} className="brand-img" />
+              <Image src={s.src} alt="" width={140} height={140} className="brand-img" />
             </div>
           ))}
         </div>

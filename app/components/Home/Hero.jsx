@@ -33,6 +33,10 @@ const Hero = () => {
   // relative to the actual rAF tick.
   const progressRef = useRef(0);
   const progress2Ref = useRef(0);
+  // Mouse-parallax + idle sway should stop once the model reaches the
+  // footer (it should sit still there) and resume if the user scrolls back
+  // up past it. Read fresh every frame by Scene — see enableMouseIdleRef.
+  const mouseIdleRef = useRef(true);
   const canvasWrapperRef = useRef(null);
   const glowRef = useRef(null);
 
@@ -82,6 +86,7 @@ const Hero = () => {
     const factsEl = document.querySelector(".facts-section");
     const footerEl = document.querySelector(".footer");
     let trigger2 = null;
+    let mouseIdleTrigger = null;
     let positionTween = null;
     let mobileHero2Tween = null;
     let mobileFooterTween = null;
@@ -94,6 +99,20 @@ const Hero = () => {
         end: "bottom bottom",
         onUpdate: (self) => {
           progress2Ref.current = self.progress;
+        },
+      });
+
+      // Freeze mouse-parallax/idle sway once the model reaches the footer,
+      // regardless of which width branch below is handling its position —
+      // independent of those so it applies the same way at every breakpoint.
+      mouseIdleTrigger = ScrollTrigger.create({
+        trigger: footerEl,
+        start: "top 75%",
+        onEnter: () => {
+          mouseIdleRef.current = false;
+        },
+        onLeaveBack: () => {
+          mouseIdleRef.current = true;
         },
       });
 
@@ -186,6 +205,7 @@ const Hero = () => {
       glowTween.kill();
       trigger.kill();
       trigger2?.kill();
+      mouseIdleTrigger?.kill();
       positionTween?.kill();
       mobileHero2Tween?.scrollTrigger?.kill();
       mobileFooterTween?.scrollTrigger?.kill();
@@ -252,7 +272,11 @@ const Hero = () => {
         <div ref={canvasWrapperRef} className="canvas-wrapper">
           <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
             <Suspense fallback={null}>
-              <Scene progressRef={progressRef} progress2Ref={progress2Ref} />
+              <Scene
+                progressRef={progressRef}
+                progress2Ref={progress2Ref}
+                enableMouseIdleRef={mouseIdleRef}
+              />
             </Suspense>
           </Canvas>
         </div>

@@ -324,9 +324,9 @@ const SHOW_GUI = false;
 const DEFAULT_KEYFRAMES = [
   // p     x       y       z
   { p: 0, x: 13.6, y: 75, z: -17.5 }, // Hero  start
-  { p: 0.125, x: -6.5, y: 133, z: -2 }, // Hero2 start
-  { p: 0.5, x: 8.5, y:243, z:3 }, // Hero3 start  (Y higher than Hero2 ✓)
-  { p: 1.0, x: 7.5, y: 292.5, z: -6.5 }, // Hero3 end    (Y higher than Hero3 start ✓)
+  { p: 0.125, x: -6.5, y: 103, z: -2 }, // Hero2 start
+  { p: 0.5, x: -5.5, y:163, z:3 }, // Hero3 start  (Y higher than Hero2 ✓)
+  { p: 1.0, x: -7.5, y: 201.5, z: -6.5 }, // Hero3 end    (Y higher than Hero3 start ✓)
   //                   ↑ was 298.5 — fixed to 658.5 (= 298.5 + 360) so model
   //                     lands at the same visual angle but keeps spinning forward
 ];
@@ -347,7 +347,7 @@ const DEFAULT_KEYFRAMES = [
 //
 // Tune live in the "Facts → Footer  (+extra °)" folder in the lil-gui panel.
 // ─────────────────────────────────────────────────────────────────────────────
-const DEFAULT_EXTRA = { x: -8, y: 195, z: 3 };
+const DEFAULT_EXTRA = { x:0.5, y: -75.5, z: 7 };
 
 // Mobile keyframes — same Y spin progression so the animation feels identical,
 // but x (pitch) and z (roll) are halved so the model tilts far less and stays
@@ -358,7 +358,7 @@ const MOBILE_KEYFRAMES = [
   { p: 0.5, x: 6, y: 500, z: -6 },
   { p: 1.0, x: 3.5, y: 658.5, z: -3 },
 ];
-const MOBILE_EXTRA = { x: -3, y: 200, z: 1 };
+const MOBILE_EXTRA = { x: -3, y: -200, z: 1 };
 
 // Live-editable copies of the desktop keyframes/extra — the lil-gui panel
 // mutates these directly. Module-scope (not a ref) so they're safe to read
@@ -410,8 +410,8 @@ function getRotation(progress, keyframes) {
   };
 }
 
-const MAX_YAW = 0.475; // ~2 deg
-const MAX_PITCH = 0.352; // ~1.3 deg
+const MAX_YAW = 0.22; // mouse-driven yaw amount — lower = less side-to-side turn
+const MAX_PITCH = 0.16; // mouse-driven pitch amount — lower = less up/down tilt
 const LERP_EASE = 0.07;
 
 // Scroll-driven rotation is smoothed toward its target every frame (instead
@@ -437,6 +437,14 @@ const Scene = ({
   progressRef = null,
   progress2Ref = null,
   overrideRotation = null,
+  // Mouse-parallax + idle sway toggle. Flip to false to freeze the model at
+  // its base rotation (no follow, no ambient wiggle). Static instances (e.g.
+  // FooterModel, which sits in the footer permanently) just pass a plain
+  // boolean. Instances that need to toggle this live as the user scrolls
+  // in/out of the footer (Hero, ServiceHero) pass enableMouseIdleRef instead
+  // — it's read fresh every frame, same pattern as progressRef/progress2Ref.
+  enableMouseIdle = true,
+  enableMouseIdleRef = null,
 }) => {
   const mouseGroupRef = useRef();
   const mouseTarget = useRef({ x: 0, y: 0 });
@@ -526,24 +534,33 @@ const Scene = ({
   const cameraZ = isMobile ? 10.8 : 8.2;
 
   useFrame((state) => {
-    mouseCurrent.current.x = lerp(
-      mouseCurrent.current.x,
-      mouseTarget.current.x,
-      LERP_EASE,
-    );
-    mouseCurrent.current.y = lerp(
-      mouseCurrent.current.y,
-      mouseTarget.current.y,
-      LERP_EASE,
-    );
-    if (mouseGroupRef.current) {
-      const t = state.clock.elapsedTime;
-      mouseGroupRef.current.rotation.y =
-        mouseCurrent.current.x * MAX_YAW +
-        Math.sin(t * IDLE_SPEED_Y) * IDLE_AMP_Y;
-      mouseGroupRef.current.rotation.x =
-        mouseCurrent.current.y * MAX_PITCH +
-        Math.sin(t * IDLE_SPEED_X) * IDLE_AMP_X;
+    const mouseIdleOn = enableMouseIdleRef
+      ? enableMouseIdleRef.current
+      : enableMouseIdle;
+    if (mouseIdleOn) {
+      mouseCurrent.current.x = lerp(
+        mouseCurrent.current.x,
+        mouseTarget.current.x,
+        LERP_EASE,
+      );
+      mouseCurrent.current.y = lerp(
+        mouseCurrent.current.y,
+        mouseTarget.current.y,
+        LERP_EASE,
+      );
+      if (mouseGroupRef.current) {
+        const t = state.clock.elapsedTime;
+        mouseGroupRef.current.rotation.y =
+          mouseCurrent.current.x * MAX_YAW +
+          Math.sin(t * IDLE_SPEED_Y) * IDLE_AMP_Y;
+        mouseGroupRef.current.rotation.x =
+          mouseCurrent.current.y * MAX_PITCH +
+          Math.sin(t * IDLE_SPEED_X) * IDLE_AMP_X;
+      }
+    } else if (mouseGroupRef.current) {
+      // Frozen — no mouse-follow, no idle sway.
+      mouseGroupRef.current.rotation.y = 0;
+      mouseGroupRef.current.rotation.x = 0;
     }
 
     // ── Compute target rotation + glass factor ──────────────────────

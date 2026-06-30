@@ -17,6 +17,10 @@ const MODEL_ANGLE = { x: -10, y: 450, z: 18 };
 
 const ServiceHero = () => {
   const canvasWrapperRef = useRef(null);
+  // Mouse-parallax + idle sway should stop once the model reaches the
+  // footer (it should sit still there) and resume if scrolled back up
+  // past it. Read fresh every frame by Scene — see enableMouseIdleRef.
+  const mouseIdleRef = useRef(true);
 
   useEffect(() => {
     const canvasEl = canvasWrapperRef.current;
@@ -24,6 +28,17 @@ const ServiceHero = () => {
     // Mobile keeps the CSS-defined centred position (service-hero.css media
     // queries) — only desktop/tablet need footer-tied behaviour.
     if (!canvasEl || !footerEl || window.innerWidth <= 575) return;
+
+    const mouseIdleTrigger = ScrollTrigger.create({
+      trigger: footerEl,
+      start: "top 75%",
+      onEnter: () => {
+        mouseIdleRef.current = false;
+      },
+      onLeaveBack: () => {
+        mouseIdleRef.current = true;
+      },
+    });
 
     let positionTrigger;
     if (window.innerWidth > 1100) {
@@ -74,6 +89,7 @@ const ServiceHero = () => {
 
     return () => {
       positionTrigger.kill();
+      mouseIdleTrigger.kill();
       gsap.set(canvasEl, { clearProps: "left,opacity,visibility" });
     };
   }, []);
@@ -150,7 +166,11 @@ const ServiceHero = () => {
       <div className="sh-canvas-wrapper" ref={canvasWrapperRef}>
         <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
           <Suspense fallback={null}>
-            <Scene overrideRotation={MODEL_ANGLE} progress2={0} />
+            <Scene
+              overrideRotation={MODEL_ANGLE}
+              progress2={0}
+              enableMouseIdleRef={mouseIdleRef}
+            />
           </Suspense>
         </Canvas>
       </div>

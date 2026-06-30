@@ -8,6 +8,10 @@ import Scene from "../Home/Scene";
 export default function AboutModel() {
   const wrapperRef = useRef();
   const [progress2, setProgress2] = useState(0);
+  // Mouse-parallax + idle sway should stop once the model reaches the
+  // footer (it should sit still there) and resume if scrolled back up
+  // past it. Read fresh every frame by Scene — see enableMouseIdleRef.
+  const mouseIdleRef = useRef(true);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -35,6 +39,17 @@ export default function AboutModel() {
       onUpdate: (self) => setProgress2(self.progress),
     });
 
+    const mouseIdleTrigger = ScrollTrigger.create({
+      trigger: footerEl,
+      start: "top 75%",
+      onEnter: () => {
+        mouseIdleRef.current = false;
+      },
+      onLeaveBack: () => {
+        mouseIdleRef.current = true;
+      },
+    });
+
     // Slide canvas center (50%) → right column (75%) as footer enters —
     // identical to Home's Hero.jsx positionTween
     const positionTween = gsap.to(el, {
@@ -53,6 +68,7 @@ export default function AboutModel() {
     return () => {
       showTrigger.kill();
       rotateTrigger.kill();
+      mouseIdleTrigger.kill();
       positionTween?.scrollTrigger?.kill();
       gsap.set(el, { clearProps: "left" });
     };
@@ -66,7 +82,11 @@ export default function AboutModel() {
     >
       <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
         <Suspense fallback={null}>
-          <Scene progress={1} progress2={progress2} />
+          <Scene
+            progress={1}
+            progress2={progress2}
+            enableMouseIdleRef={mouseIdleRef}
+          />
         </Suspense>
       </Canvas>
     </div>
