@@ -77,11 +77,7 @@ const Brands = () => {
         </TextAnimation>
         <TextAnimation animateOnScroll={true} delay={0.1}>
           <h2 className="brands-sub">
-
-
             Worked With
-
-
           </h2>
         </TextAnimation>
       </div>

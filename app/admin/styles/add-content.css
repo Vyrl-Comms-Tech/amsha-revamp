@@ -179,7 +179,7 @@
 .add-content-tag-remove:hover { color: #dc2626; }
 
 .add-content-tag-hint {
-  font-size: clamp(10px, 0.76vw, 11px);
+  font-size: clamp(10px, 0.8vw, 13px);
   color: var(--admin-text-subtle);
   margin-top: 3px;
 }

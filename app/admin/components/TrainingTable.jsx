@@ -44,7 +44,7 @@ function ViewModal({ training, onClose }) {
         <div className="tt-modal-body">
           <div className="tt-modal-meta-grid">
             <div className="tt-modal-meta-item">
-              <span className="tt-modal-label">Category</span>
+              <span className="tt-modal-label">Service</span>
               <span className="tt-modal-value">{training.category || '—'}</span>
             </div>
             <div className="tt-modal-meta-item">
@@ -235,7 +235,7 @@ export default function TrainingTable() {
               <tr>
                 <th>Image</th>
                 <th>Title</th>
-                <th>Category</th>
+                <th>Service</th>
                 <th>Delivery</th>
                 <th>Status</th>
                 <th>Date</th>

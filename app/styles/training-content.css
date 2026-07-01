@@ -261,6 +261,7 @@
   font-weight: 400;
   cursor: pointer;
   transition: opacity 0.2s;
+  
 }
 
 /* .th-btn-fill:hover {
@@ -308,6 +309,30 @@
 .training-tags p {
   font-size: 16px;
   color: #15161a;
+}
+
+
+@media (max-width: 1536px) {
+  .th-form-wrap {
+    flex: 0 0 400px;
+  }
+
+  .th-form{
+    padding: 10px 20px 10px;;
+  }
+
+  .th-form-heading{
+    font-size: 33px;
+  }
+
+  .th-label{
+    font-size: 21px;
+  }
+
+  .th-input{
+    font-size: 17px;
+    padding: 14px 18px 14px 14px;
+  }
 }
 
 @media (max-width: 1100px) {

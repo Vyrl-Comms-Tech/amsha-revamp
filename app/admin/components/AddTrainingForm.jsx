@@ -318,6 +318,19 @@ export default function AddTrainingForm() {
             </div>
             <div className="add-content-card-body">
               <div className="add-content-field">
+                <label className="add-content-label add-content-label--req">Service</label>
+                <input
+                  type="text"
+                  className="add-content-input"
+                  placeholder="e.g. Behavioral, Soft Skills & Workplace Effectiveness Training"
+                  value={form.category}
+                  onChange={(e) => set('category', e.target.value)}
+                  required
+                />
+                <p className="add-content-tag-hint">Type your service...</p>
+              </div>
+
+              <div className="add-content-field">
                 <label className="add-content-label add-content-label--req">Title</label>
                 <input
                   type="text"
@@ -328,18 +341,7 @@ export default function AddTrainingForm() {
                   required
                 />
               </div>
-              <div className="add-content-field">
-                <label className="add-content-label add-content-label--req">Category</label>
-                <input
-                  type="text"
-                  className="add-content-input"
-                  placeholder="e.g. Behavioral, Soft Skills & Workplace Effectiveness Training"
-                  value={form.category}
-                  onChange={(e) => set('category', e.target.value)}
-                  required
-                />
-                <p className="add-content-tag-hint">Type the category freely — it is not restricted to a fixed list.</p>
-              </div>
+
             </div>
           </div>
 

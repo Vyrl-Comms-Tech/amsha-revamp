@@ -45,7 +45,7 @@ const STEPS = [
   },
 ];
 
-const TOPS = [59, 340, 593, 860, 1127, 1394];
+const TOPS = [59, 290, 493, 760, 1027, 1294];
 const CARD_H = 250;
 const colBottom = TOPS[TOPS.length - 1] + CARD_H;
 
@@ -66,9 +66,8 @@ export default function StickySteps() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  // GSAP scroll animation — desktop only
   useEffect(() => {
-    // Read matchMedia directly — isMobile state can lag behind on first hydration
+
     const mobile = window.matchMedia("(max-width: 768px)").matches;
     if (mobile) {
       if (wrapperRef.current) wrapperRef.current.style.height = "";
@@ -132,9 +131,9 @@ export default function StickySteps() {
                   }
             }
           >
-            <TextAnimation animateOnScroll={true} delay={0.1}>
+            {/* <TextAnimation animateOnScroll={true} delay={0.1}>
               <span>{step.step}</span>
-            </TextAnimation>
+            </TextAnimation> */}
             <TextAnimation animateOnScroll={true} delay={0.1}>
               <h3>{step.title}</h3>
             </TextAnimation>

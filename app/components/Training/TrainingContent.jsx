@@ -1,9 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import "../../styles/training-content.css";
 import axios from "axios";
-
+import Link from "next/link";
 const MAX_VISIBLE = 4;
 
 const INITIAL_FORM = { company: "", activity: "", phone: "", email: "", message: "" };
@@ -218,11 +217,13 @@ export default function TrainingContent() {
           return (
             <div key={course._id} className="th-card">
               <div className="th-card-left">
-                <div>
-                  <span className="hero-badge-training">
-                    {course.category}
-                  </span>
-                </div>
+                {course.category?.trim() && (
+                  <div>
+                    <span className="hero-badge-training">
+                      {course.category}
+                    </span>
+                  </div>
+                )}
 
                 <h3 className="th-card-title">{course.title}</h3>
 
@@ -259,12 +260,14 @@ export default function TrainingContent() {
                 </div>
 
                 <div className="th-card-actions">
-                  <button className="th-btn-outline btn-4" type="button">
+                  {/* <button className="th-btn-outline btn-4" type="button">
                     View more
-                  </button>
-                  <button className="th-btn-fill btn-4" type="button">
-                    Inquiry
-                  </button>
+                  </button> */}
+                  <Link href="/contact-us">
+                    <button className="th-btn-fill btn-4" type="button">
+                      Inquiry
+                    </button>
+                  </Link>
                 </div>
               </div>
 
