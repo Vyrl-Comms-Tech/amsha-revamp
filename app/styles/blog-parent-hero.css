@@ -21,7 +21,7 @@
 .bph-title {
   font-size: 70px;
   font-weight: 500;
-  color: var(--color-black);
+  color: var(--color-bluee);
   line-height: 1.05;
   margin: 0 0 28px;
 }
@@ -48,9 +48,9 @@
 }
 
 .bph-tab--active {
-  background: var(--color-black);
+  background: var(--color-purple);
   color: var(--color-white);
-  border-color: var(--color-black);
+  border-color:none;
 }
 
 /* ── Featured card ── */
@@ -113,7 +113,7 @@
   align-items: center;
   justify-content: center;
   padding: 13px 28px;
-  background: var(--color-black);
+  background: var(--color-purple);
   color: var(--color-white);
   font-size: 22px;
   font-weight: 500;

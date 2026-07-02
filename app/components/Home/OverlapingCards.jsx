@@ -8,23 +8,23 @@ const AVATARS = ["/over1.png", "/over1.png", "/over1.png", "/over1.png"];
 
 const CARDS = [
   {
-    logo: "/img3.png",
+    logo: "/img4.png",
     company: "The St. Regis",
     subtitle: "Downtown Dubai",
     testimonial:
       '"Thank you for the Training Session. It was very informative. There were some techniques I would take, like Stress Origami. I have been folding away papers all this time. I believe that people need less stress in their lives, so this session is very beneficial. It would have been nicer if it had been a bit longer, but since we have a shorter time, maybe we can do a bit longer for the next session. Thank you."',
   },
   {
-    logo: "/img4.png",
+    logo: "/img5.png",
     company: "Bafleh",
     subtitle: "Jewellery LLC",
     testimonial:
       '"Amsha was great in facilitating and delivering our communication training. It was interactive and informative. I\'ve learned a lot that I can apply to daily work. Keep up the good work, Amsha. You\'re making our employees boost their confidence, which will reflect more in their productivity."',
   },
   {
-    logo: "/img5.png",
-    company: "Arakkal Gold and\nDiamonds LLC",
-    subtitle: "",
+    logo: "/img21.png",
+    company: "Arakkal Gold and",
+    subtitle: "Diamonds LLC",
     testimonial:
       '"Amsha was a fantastic facilitator. They made the workshop flow effortlessly. They exactly know what training we should conduct for my employees, which is the Well-being. I am confident that it will make a difference in helping our employees feel more connected and engaged."',
   },
@@ -65,7 +65,7 @@ const OverlapingCards = () => {
     <div className="p-oc">
       <section className="oc-section">
         <div className="oc-bg-wrap">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoOeXj87yhEtDEfguG3Ewehj5OFPoosnSZzp8KAYtxkQ&s=10" alt="" fill className="oc-bg" priority />
+          <img src="/bg2.png" alt="" fill className="oc-bg" priority />
         </div>
 
         <div
@@ -83,7 +83,7 @@ const OverlapingCards = () => {
                 alt={card.company}
                 width={160}
                 height={70}
-                className="oc-card-logo"
+                 className={`oc-card-logo ${i > 0 ? "oc-card-logo-large" : ""}`}
               />
 
               {/* Mobile: overlapping avatars + client count */}

@@ -57,9 +57,17 @@ export default function LenisProvider({ children }) {
     // dynamic import) can still be growing the page after the first paint.
     const timeout = setTimeout(resync, 400);
 
+    // Pages that fetch content over the network (e.g. Training's course
+    // list) can still be growing the DOM well past the 400ms safety net —
+    // that leaves Lenis clamped to the pre-fetch (shorter) scroll height,
+    // which reads as the page "stopping halfway" until a manual refresh.
+    // Any such page can broadcast this event once its async content mounts.
+    window.addEventListener("lenis-resync", resync);
+
     return () => {
       cancelAnimationFrame(raf);
       clearTimeout(timeout);
+      window.removeEventListener("lenis-resync", resync);
     };
   }, [pathname]);
 

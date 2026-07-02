@@ -39,14 +39,14 @@
 /* ── Boxes row ── */
 .facts-boxes {
   position: relative;
-  z-index: 999 ;
+  z-index: 999;
   display: flex;
   gap: 20px;
 }
 
 .facts-box {
-  flex: 1;
   height: 630px;
+  flex: 1;
   padding: 30px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.05);
@@ -54,6 +54,8 @@
   backdrop-filter: blur(19px);
   -webkit-backdrop-filter: blur(19px);
   border: 1px solid rgba(0, 0, 0, 0.28);
+  background-color: #ffffff17;
+  backdrop-filter: blur(14px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -101,8 +103,15 @@
   }
   .facts-box-head {
     align-items: center;
-  }.facts-box-text{
+  }
+  .facts-box-text {
     font-size: 22px;
+  }
+  .facts-box{
+    height: 530px;
+  }
+  .facts-section{
+    padding: 40px 80px;
   }
 }
 
@@ -112,6 +121,7 @@
   }
   .facts-boxes {
     flex-direction: column;
+    /* height: 550px; */
   }
   .facts-box-title {
     font-size: 36px;

@@ -125,7 +125,7 @@ const BlogGrid = ({ data, loading, activeTab }) => {
           : data?.map((post, i) => (
               <Link
                 key={i}
-                href={`/knowledge-hub/${activeTab}/${post?.slug}`}
+                href={`/blogs/${activeTab}/${post?.slug}`}
                 className="bg-card"
               >
                 <div className="bg-card-image">

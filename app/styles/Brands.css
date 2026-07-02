@@ -1,7 +1,7 @@
 .brands-section {
   position: relative;
   width: 100%;
-  height: 800px;
+  height: 850px;
   background: var(--color-white);
   overflow: hidden;
   z-index: 99;
@@ -28,19 +28,19 @@
 .brands-heading {
   font-size: 70px;
   font-weight: 700;
-  color: var(--color-black);
+  color: var(--color-purple);
 }
 .brands-sub {
   font-size: 70px;
   font-weight: 400;
-  color: var(--color-black-50);
+  color: #6EA1C3;
 }
 
 /* Circle centre: 700px below the section top → 200px below the visible edge */
 .brands-center {
   position: absolute;
   left: 50%;
-  top: 950px !important;
+  top: 990px !important;
 }
 
 /* Logos — square box so rotating with the ring only pulses slightly instead
@@ -50,7 +50,7 @@
   width: 140px;
   height: 140px;
   object-fit: contain;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
 }
 
 /* Mobile straight marquee — hidden on desktop */

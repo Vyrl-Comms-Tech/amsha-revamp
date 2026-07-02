@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   z-index: 99;
-  background: var(--color-dark);
+  background: #000;
   color: var(--color-white);
   padding: 100px 0;
 }
@@ -26,7 +26,7 @@
 }
 
 .why-heading h2 span {
-  color: var(--color-white-50);
+  color: var(--color-bluee);
 }
 
 .why-content {
@@ -89,7 +89,7 @@
   border: 1px solid #bfc0c2;
   border-radius: 4px;
   background: transparent;
-  color: var(--color-white);
+  color: var(--color-bluee) !important;
   font-size: 20px;
   line-height: 1;
   display: grid;
@@ -103,15 +103,16 @@
 }
 
 .why-item.active .why-arrow {
-  background: var(--color-white);
-  color: #141519;
-  border-color: var(--color-white);
+  background: var(--color-bluee);
+  color: #fff;
+  border:none;
+  border-color: none !important
 }
 
 .why-image {
-  width: 780px;
+  width: 813px;
+height: 499px;
   flex-shrink: 0;
-  height: 500px;
   border-radius: 8px;
   overflow: hidden;
 }

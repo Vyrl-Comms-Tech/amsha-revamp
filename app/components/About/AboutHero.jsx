@@ -136,13 +136,13 @@ export default function AboutHero() {
               shaping the way businesses grow and perform.
             </h1>
           </TextAnimation>
-          <button className="btn-4">
+          {/* <button className="btn-4">
             <span>
             <Link href="/contact-us">
               Contact us
             </Link>
               </span>
-          </button>
+          </button> */}
         </div>
       </section>
 

@@ -29,7 +29,7 @@ const ArrowDown = () => (
   >
     <path
       d="M9.0195 -0.000139399L9.23294 15.5704L16.0062 8.80323L16.9984 9.62869L8.61243 18.0071L-2.4146e-05 9.8617L0.969154 9.00936L7.92537 15.5884L7.71193 0.0177847L9.0195 -0.000139399Z"
-      fill="#282828"
+      fill="#fff"
     />
   </svg>
 );
@@ -136,7 +136,7 @@ const WhyChooseUs = () => {
           </div>
 
           <div className="why-image">
-            <img src="/img14.png" alt="Amsha Advisory workplace" />
+            <img src="/ab8.png" alt="Amsha Advisory workplace" />
           </div>
         </div>
       </div>

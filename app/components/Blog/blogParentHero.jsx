@@ -64,7 +64,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
                 <p className="bph-card-desc">{featured?.shortDescription}</p>
               </div>
                 
-              <Link href={`/knowledge-hub/${featured.category}/${featured?.slug}`}  className="bph-btn btn-4">View now</Link>
+              <Link href={`/blogs/${featured.category}/${featured?.slug}`}  className="bph-btn btn-4">View now</Link>
             </div>
           </div>
         )

@@ -151,8 +151,14 @@
 }
 
 @keyframes cu-fade-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cu-btn {
@@ -237,7 +243,7 @@
 
 @media (max-width: 1700px) {
   .cu-row {
-    grid-template-columns: 0fr 0fr;
+    grid-template-columns: 1fr 0fr;
   }
   .cu-section {
     padding: 176px 50px 80px;

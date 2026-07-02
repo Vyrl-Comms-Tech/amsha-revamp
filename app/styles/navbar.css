@@ -32,6 +32,66 @@
   );
   align-items: center;
 }
+
+/* ── Services dropdown ── */
+.nav-item-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 160%;
+  transform: translateX(-50%) translateY(0);
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  margin-top: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #9e9e9eab;
+  background: var(--color-black);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 50;
+}
+
+.nav-dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 18px;
+}
+
+.nav-item-dropdown:hover .nav-dropdown,
+.nav-item-dropdown:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-link {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--color-white);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.nav-dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 #contact-link {
   color: var(--color-black);
   padding: 14px 19px;

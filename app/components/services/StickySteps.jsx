@@ -45,7 +45,7 @@ const STEPS = [
   },
 ];
 
-const TOPS = [59, 290, 493, 760, 1027, 1294];
+const TOPS = [60, 330, 583, 820, 1047, 1274];
 const CARD_H = 250;
 const colBottom = TOPS[TOPS.length - 1] + CARD_H;
 

@@ -11,26 +11,43 @@ import {
 import "../../styles/navbar.css";
 
 const darkRoutes = [
-  "/knowledge-hub",
+  "/blogs",
   "/contact-us",
   "/blog-inner",
   "/services-inner",
   "/services-inner1",
-  '/services/people-advisory',
-  '/services/employee-training-development',
-
-"/services/upskilling-training",
- "/services/entrepreneurial-consulting",
- "/services/career-development",
- "/services/talent-assessment",
+  "/services/people-advisory",
+  "/services/employee-training-development",
+  "/about",
+  "/services/upskilling-training",
+  "/services/entrepreneurial-consulting",
+  "/services/career-development",
+  "/services/talent-assessment",
 ];
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/knowledge-hub", label: "Knowledge Hub" },
+  { href: "/blogs", label: "Blogs" },
   { href: "/training", label: "Training" },
+];
+
+const serviceLinks = [
+  { href: "/services/people-advisory", label: "People Advisory" },
+  {
+    href: "/services/employee-training-development",
+    label: "Employee Training & Development",
+  },
+  {
+    href: "/services/upskilling-training",
+    label: "Upskilling & Training",
+  },
+  {
+    href: "/services/entrepreneurial-consulting",
+    label: "Entrepreneurial Consulting",
+  },
+  { href: "/services/career-development", label: "Career Development" },
 ];
 
 const Navbar = () => {
@@ -53,11 +70,30 @@ const Navbar = () => {
 
       {/* Desktop links */}
       <div className="nav-links">
-        {links.map(({ href, label }) => (
-          <Link key={href} href={href} className="lightning-effect">
-            {label}
-          </Link>
-        ))}
+        {links.map(({ href, label }) =>
+          href === "/services" ? (
+            <div key={href} className="nav-item-dropdown">
+              <Link href={href} className="lightning-effect">
+                {label}
+              </Link>
+              <div className="nav-dropdown">
+                {serviceLinks.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    className="nav-dropdown-link"
+                  >
+                    {service.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <Link key={href} href={href} className="lightning-effect">
+              {label}
+            </Link>
+          ),
+        )}
         <Link href="/contact-us" id="contact-link" className="btn-4">
           <span>Contact Us</span>
         </Link>

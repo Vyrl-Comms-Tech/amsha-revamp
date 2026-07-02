@@ -102,6 +102,18 @@ export default function TrainingContent() {
     getData();
   }, []);
 
+  // Course cards mount after this async fetch resolves, growing the page
+  // well past Lenis's initial scroll-height measurement. Tell LenisProvider
+  // to resync once the new cards have painted, otherwise scrolling clamps
+  // at the pre-fetch page height.
+  useEffect(() => {
+    if (loading) return;
+    const raf = requestAnimationFrame(() =>
+      window.dispatchEvent(new Event("lenis-resync")),
+    );
+    return () => cancelAnimationFrame(raf);
+  }, [loading, courses]);
+
 
   return (
     <div className="th-layout">

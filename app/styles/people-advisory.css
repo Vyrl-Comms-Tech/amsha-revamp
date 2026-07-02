@@ -1,5 +1,6 @@
 .pa-scroll-wrapper {
   position: relative;
+  background: #15161A;
   height: 100vh;
 }
 
@@ -10,7 +11,7 @@
   height: 100vh;
   overflow: hidden;
   z-index: 99;
-  background: var(--color-dark) !important;
+  background: #15161A !important;
 }
 
 .hero-section-of-poeple-advisory .hero-heading {
@@ -99,7 +100,7 @@
 }
 
 .hero-section-of-poeple-advisory .hero-arrow-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background:var(--color-bluee);
 }
 
 .hero-section-of-poeple-advisory .hero-content p {
