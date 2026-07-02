@@ -16,7 +16,7 @@ const SERVICES = {
       desc: `At Amsha Advisory, our training programs are designed to create practical workplace impact through behavioural, leadership, and professional development solutions tailored to organisational needs. 
       
       We focus on strengthening communication, leadership capability, workplace professionalism, team effectiveness, emotional intelligence, customer experience, and overall employee performance through interactive and scenario-based learning experiences.`,
-      image: "/ab1.png",
+     image: "/s9.jpg",
     },
     topCards: [
       {
@@ -43,7 +43,7 @@ const SERVICES = {
     bottomCard: {
       // step: "Step Three",
       title: "Delivery Approach",
-      image: "/ab1.png",
+      image: "/s10.jpg",
       bullets: [
         "Interactive & Scenario-Based Learning",
         "Role-Playing & Workplace Simulations",
@@ -63,7 +63,7 @@ const SERVICES = {
     hero: {
       heading: "Upskilling & Training",
       desc: "At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs. ",
-      image: "/ab1.png",
+      image: "/s9.jpg",
     },
     topCards: [
       {
@@ -80,7 +80,7 @@ const SERVICES = {
     bottomCard: {
       // step: "Step Three",
       title: "Delivery Approach",
-      image: "/ab1.png",
+      image: "/s10.jpg",
       bullets: [
         "Personalized Learning Plans",
         "Practical & Scenario-Based Learning",
@@ -97,7 +97,7 @@ const SERVICES = {
     hero: {
       heading: "Entrepreneurial Consulting",
       desc: "At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies.",
-      image: "/ab1.png",
+     image: "/s9.jpg",
     },
     topCards: [
       {
@@ -125,7 +125,7 @@ const SERVICES = {
     bottomCard: {
       // step: "Step Three",
       title: "Areas of Support",
-      image: "/ab1.png",
+      image: "/s10.jpg",
       bullets: [
         "Startup & Business Growth Support",
         "Organisational Structure & Team Development",
@@ -145,7 +145,7 @@ const SERVICES = {
     hero: {
       heading: "Career Development",
       desc: "At Amsha Advisory, our Career Development solutions are designed to help individuals gain greater clarity, confidence, and direction in their professional journey.",
-      image: "/ab1.png",
+      image: "/s9.jpg",
     },
     topCards: [
       {
@@ -181,7 +181,7 @@ const SERVICES = {
     hero: {
       heading: "Talent Assessment & Selection",
       desc: "At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions.",
-      image: "/ab1.png",
+      image: "/s10.jpg",
     },
     topCards: [
       {
@@ -227,7 +227,7 @@ const SERVICES = {
     bottomCard: {
       // step: "Step Four",
       title: "Areas of Support",
-      image: "/ab1.png",
+      image: "/s10.jpg",
       bullets: [
         "Candidate Assessment & Selection Support",
         "Behavioural & Personality Assessments",
