@@ -9,7 +9,6 @@ export default function ServiceInnerHero({
   desc = "At Amsha Advisory, our People Advisory solutions are designed to help organisations strengthen their internal foundations through structured, practical, and people-centred support.",
   image = "/ab1.png",
   btnText = "Start work now",
-  btnHref = "#contact",
 }) {
   return (
     <div className="sih-outer">
@@ -21,17 +20,20 @@ export default function ServiceInnerHero({
 
             <h1 className="sih-heading">{heading}</h1>
           </TextAnimation>
-          <TextAnimation animateOnScroll={true} delay={0.3}>
-
-
-            <p className="sih-desc">{desc}</p>
-          </TextAnimation>
-          <a href={btnHref} className="sih-btn btn-4">
-            <Link href='/contact-us'> 
+          <div className="sih-desc" data-lenis-prevent>
+            {desc
+              .split(/\n{1,}/)
+              .map((line) => line.trim())
+              .filter(Boolean)
+              .map((paragraph, i) => (
+                <TextAnimation key={i} animateOnScroll={false} delay={0.3}>
+                  <p>{paragraph}</p>
+                </TextAnimation>
+              ))}
+          </div>
+          <Link href="/contact-us" className="sih-btn btn-4">
             {btnText}
-            </Link>
-            
-            </a>
+          </Link>
         </div>
       </div>
 

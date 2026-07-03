@@ -77,6 +77,15 @@
   transform: translateX(-50%) translateY(0);
 }
 
+/* Clicking a link inside navigates without the mouse leaving the item, so
+   :hover alone would keep the dropdown open post-navigation. This class is
+   set on click and cleared on the next mouseenter to force it shut. */
+.nav-item-dropdown.is-force-closed .nav-dropdown {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .nav-dropdown-link {
   padding: 10px 14px;
   border-radius: 6px;
@@ -119,8 +128,9 @@
 /* ── Sheet (mobile drawer) ── */
 .nav-sheet {
   background: var(--color-white) !important;
-  padding: 40px 32px !important;
+  padding: 40px 15px !important;
   display: flex;
+  z-index: 99999 !important;
   flex-direction: column;
   gap: 0;
 }
@@ -147,6 +157,60 @@
 }
 
 .nav-sheet-link:hover {
+  opacity: 0.6;
+}
+
+/* ── Mobile sheet: Services expandable row ── */
+.nav-sheet-services {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-sheet-services-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-sheet-services-row .nav-sheet-link {
+  flex: 1;
+  border-bottom: none;
+}
+
+.nav-sheet-services-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav-sheet-services-toggle.is-open {
+  transform: rotate(180deg);
+}
+
+.nav-sheet-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 0 14px 11px;
+}
+
+.nav-sheet-sublink {
+  display: block;
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  padding: 8px 0;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-sheet-sublink:hover {
   opacity: 0.6;
 }
 

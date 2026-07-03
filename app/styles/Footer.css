@@ -202,13 +202,13 @@
   }
 }
 
-@media (max-width:1620px){
+@media (max-width: 1620px) {
   .footer-heading {
-  font-size: 66px;
+    font-size: 66px;
   }
   .footer-sub {
-  max-width: 627px;
-  font-size: 24px;
+    max-width: 627px;
+    font-size: 24px;
   }
 }
 
@@ -289,7 +289,7 @@
   .footer-col ul {
     gap: 5px;
   }
-.footer-left {
-padding-right: 0px;
-}
+  .footer-left {
+    padding-right: 0px;
+  }
 }

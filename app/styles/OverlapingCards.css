@@ -208,7 +208,7 @@
     justify-content: flex-start;
     gap: 80px;
     border-radius: 0;
-    padding-inline: 20px;
+    padding-inline: 10px;
   }
 
   /* hide desktop logo, show avatar row */

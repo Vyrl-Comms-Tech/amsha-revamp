@@ -8,10 +8,12 @@ const SERVICES = {
   "employee-training-development": {
     hero: {
       heading: "Employee Training & Development",
-      desc: `At Amsha Advisory, our training programs are designed to create practical workplace impact through behavioural, leadership, and professional development solutions tailored to organisational needs. 
-      
-      We focus on strengthening communication, leadership capability, workplace professionalism, team effectiveness, emotional intelligence, customer experience, and overall employee performance through interactive and scenario-based learning experiences.`,
-     image: "/s9.jpg",
+      desc: `At Amsha Advisory, our training programs are designed to create practical workplace impact through behavioural, leadership, and professional development solutions tailored to organisational needs.
+We focus on strengthening communication, leadership capability, workplace professionalism, team effectiveness, emotional intelligence, customer experience, and overall employee performance through interactive and scenario-based learning experiences.
+Every program is customised around the organisation’s industry, teams, operational challenges, and business objectives to create meaningful and long-term workplace impact.
+
+     `,
+      image: "/s9.jpg",
     },
     topCards: [
       {
@@ -57,7 +59,12 @@ const SERVICES = {
   "upskilling-training": {
     hero: {
       heading: "Upskilling & Training",
-      desc: "At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs. ",
+      desc: `At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs.
+Whether an individual is looking to strengthen workplace skills, improve communication and confidence, develop professionally, explore a career path, or build capabilities within a specific area, our approach focuses on creating customised learning experiences aligned with their goals, strengths, and development areas.
+Each program is designed based on the individual’s objectives, current skill level, and desired growth outcomes to ensure learning remains practical, relevant, and directly applicable.
+Our upskilling sessions are conducted through personalised 1:1 training and development support, allowing for a more focused, flexible, and tailored learning experience.
+All upskilling programs begin with a complimentary 15-minute discovery call to better understand the individual’s goals, development areas, and learning needs before designing the appropriate support approach.
+`,
       image: "/s9.jpg",
     },
     topCards: [
@@ -91,8 +98,14 @@ const SERVICES = {
   "entrepreneurial-consulting": {
     hero: {
       heading: "Entrepreneurial Consulting",
-      desc: "At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies.",
-     image: "/s9.jpg",
+      desc: `At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies.
+      
+We understand that growing a business involves more than operations alone; it requires clarity, structure, leadership, people management, and sustainable systems that support long-term success. Our approach focuses on helping entrepreneurs navigate business challenges through practical, people-centred, and growth-oriented support tailored to the stage and needs of the business.
+Whether supporting early-stage startups, growing teams, or expanding businesses, we work closely with founders and leadership teams to strengthen workplace structure, operational processes, leadership capability, team alignment, and organisational direction.
+
+Our consulting support is tailored to each business, ensuring solutions remain practical, scalable, and aligned with the entrepreneur’s vision, goals, and long-term business objectives.
+`,
+      image: "/s9.jpg",
     },
     topCards: [
       {
@@ -139,7 +152,15 @@ const SERVICES = {
   "career-development": {
     hero: {
       heading: "Career Development",
-      desc: "At Amsha Advisory, our Career Development solutions are designed to help individuals gain greater clarity, confidence, and direction in their professional journey.",
+      desc: `
+      At Amsha Advisory, our Career Development solutions are designed to help individuals gain greater clarity, confidence, and direction in their professional journey.
+We support students, young professionals, and working individuals in understanding their strengths, behavioural preferences, career interests, and long-term goals through personalized guidance and development support tailored to their individual needs.
+To provide deeper self-awareness and career insight, we also offer psychometric assessments including the MBTI® (Myers-Briggs Type Indicator) and Facet5 Personality Assessment. These assessments help individuals better understand their communication styles, workplace preferences, behavioural tendencies, leadership potential, and suitable career pathways.
+The MBTI® Career Report is also available for students and young professionals seeking guidance on career direction, learning styles, and work environments aligned with their personality type.
+Each assessment includes a personalized report followed by a 1-hour debrief session to help individuals better understand their results, strengths, development areas, and career direction.
+Career Development support can also be paired with personalized 1:1 Upskilling & Training sessions focused on communication skills, workplace confidence, leadership development, professionalism, personal growth, and broader soft-skill development.
+
+      `,
       image: "/s9.jpg",
     },
     topCards: [
@@ -168,14 +189,18 @@ const SERVICES = {
           "Short-Term & Long-Term Career Support",
         ],
       },
-    ]
+    ],
   },
 
   /* ── Step 6 ─────────────────────────────────────────────── */
   "talent-assessment": {
     hero: {
       heading: "Talent Assessment & Selection",
-      desc: "At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions.",
+      desc: `At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions.
+We work with businesses to assess candidates beyond technical capability by evaluating behavioural fit, communication style, leadership potential, workplace effectiveness, and alignment with organisational culture and role requirements.
+Our approach combines structured assessments, behavioural insight, psychometric tools, and practical evaluation methods to help organisations identify individuals who are best suited for both the role and the wider organisational environment.
+Through tailored assessment processes, we support organisations in strengthening hiring quality, reducing bias in selection decisions, improving role alignment, and identifying long-term potential within candidates.
+`,
       image: "/s10.jpg",
     },
     topCards: [
@@ -211,11 +236,13 @@ const SERVICES = {
       content: [
         {
           heading: "MBTI® (Myers-Briggs Type Indicator)",
-          paragraph: "Supporting insight into communication styles, personality preferences, decision-making approaches, and workplace dynamics.",
+          paragraph:
+            "Supporting insight into communication styles, personality preferences, decision-making approaches, and workplace dynamics.",
         },
         {
           heading: "Facet5 Personality Assessment",
-          paragraph: "Providing behavioural insight into leadership style, motivation, communication, resilience, and workplace effectiveness.",
+          paragraph:
+            "Providing behavioural insight into leadership style, motivation, communication, resilience, and workplace effectiveness.",
         },
       ],
     },
@@ -232,7 +259,7 @@ const SERVICES = {
         "Communication & Workplace Effectiveness Assessment",
         "Talent Development & Succession Planning",
         "Structured Hiring & Evaluation Support",
-      ]
+      ],
     },
   },
 };

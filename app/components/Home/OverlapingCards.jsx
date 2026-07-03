@@ -8,7 +8,7 @@ const AVATARS = ["/over1.png", "/over1.png", "/over1.png", "/over1.png"];
 
 const CARDS = [
   {
-    logo: "/img4.png",
+    logo: "/img40.png",
     company: "The St. Regis",
     subtitle: "Downtown Dubai",
     testimonial:

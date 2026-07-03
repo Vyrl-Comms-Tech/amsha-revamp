@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -55,6 +56,13 @@ const Navbar = () => {
   const isDark = darkRoutes.some(
     (r) => pathname === r || pathname.startsWith(r + "/"),
   );
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  // The dropdown is normally hover-driven (CSS :hover/:focus-within), but
+  // clicking a link inside it triggers a client-side route change without
+  // the mouse ever leaving — so hover alone would leave it visually open
+  // after navigating. Suppress it explicitly on click until the mouse
+  // re-enters the item.
+  const [dropdownForceClosed, setDropdownForceClosed] = useState(false);
 
   return (
     <nav className={`nav-container ${isDark ? " nav-dark" : ""}`}>
@@ -72,8 +80,16 @@ const Navbar = () => {
       <div className="nav-links">
         {links.map(({ href, label }) =>
           href === "/services" ? (
-            <div key={href} className="nav-item-dropdown">
-              <Link href={href} className="lightning-effect">
+            <div
+              key={href}
+              className={`nav-item-dropdown${dropdownForceClosed ? " is-force-closed" : ""}`}
+              onMouseEnter={() => setDropdownForceClosed(false)}
+            >
+              <Link
+                href={href}
+                className="lightning-effect"
+                onClick={() => setDropdownForceClosed(true)}
+              >
                 {label}
               </Link>
               <div className="nav-dropdown">
@@ -82,6 +98,7 @@ const Navbar = () => {
                     key={service.href}
                     href={service.href}
                     className="nav-dropdown-link"
+                    onClick={() => setDropdownForceClosed(true)}
                   >
                     {service.label}
                   </Link>
@@ -140,14 +157,61 @@ const Navbar = () => {
 
           {/* Sheet links */}
           <nav className="nav-sheet-links">
-            {links.map(({ href, label }) => (
-              <SheetClose
-                key={href}
-                render={<Link href={href} className="nav-sheet-link" />}
-              >
-                {label}
-              </SheetClose>
-            ))}
+            {links.map(({ href, label }) =>
+              href === "/services" ? (
+                <div key={href} className="nav-sheet-services">
+                  <div className="nav-sheet-services-row">
+                    <SheetClose
+                      render={<Link href={href} className="nav-sheet-link" />}
+                    >
+                      {label}
+                    </SheetClose>
+                    <button
+                      type="button"
+                      className={`nav-sheet-services-toggle${mobileServicesOpen ? " is-open" : ""}`}
+                      aria-label="Toggle services list"
+                      aria-expanded={mobileServicesOpen}
+                      onClick={() => setMobileServicesOpen((prev) => !prev)}
+                    >
+                      <svg width="14" height="9" viewBox="0 0 14 9" fill="none">
+                        <path
+                          d="M1 1.5L7 7.5L13 1.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  {mobileServicesOpen && (
+                    <div className="nav-sheet-services-list">
+                      {serviceLinks.map((service) => (
+                        <SheetClose
+                          key={service.href}
+                          render={
+                            <Link
+                              href={service.href}
+                              className="nav-sheet-sublink"
+                            />
+                          }
+                        >
+                          {service.label}
+                        </SheetClose>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <SheetClose
+                  key={href}
+                  render={<Link href={href} className="nav-sheet-link" />}
+                >
+                  {label}
+                </SheetClose>
+              ),
+            )}
             <SheetClose
               render={<Link href="/contact-us" className="nav-sheet-contact" />}
             >

@@ -15,6 +15,10 @@ export default function LenisProvider({ children }) {
     const lenis = new Lenis({
       lerp: 0.08,        // smoothness (lower = smoother, higher = snappier)
       smoothWheel: true,
+      // Let elements marked data-lenis-prevent (e.g. inner scrollable
+      // panels like .sih-desc) handle their own wheel/touch scroll instead
+      // of Lenis hijacking it to drive the page.
+      prevent: (node) => node.closest("[data-lenis-prevent]") !== null,
     });
     lenisRef.current = lenis;
 
