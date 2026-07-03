@@ -134,7 +134,7 @@
     color: rgba(255, 255, 255, 0.82);
     line-height: 1.15;
     max-width: 90%;
-    max-height: 38vh;
+    max-height: 24vh;
   }
 }
 @media (max-width: 1280px) {

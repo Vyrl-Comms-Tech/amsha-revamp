@@ -19,7 +19,7 @@ const darkRoutes = [
   "/services-inner1",
   "/services/people-advisory",
   "/services/employee-training-development",
-  "/about",
+  // "/about",
   "/services/upskilling-training",
   "/services/entrepreneurial-consulting",
   "/services/career-development",
