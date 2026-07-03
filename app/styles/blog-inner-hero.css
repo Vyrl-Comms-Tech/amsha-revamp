@@ -55,7 +55,13 @@
   object-position: center;
 }
 
-/* ── Responsive ── */
+@media (max-width:1520px){
+  .bih-title
+  {
+    font-size: 58px;
+  }
+}
+
 @media (max-width: 991px) {
   .bih-top {
     padding: 80px 40px 28px;

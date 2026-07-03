@@ -20,7 +20,7 @@
 
 .bg-title {
   font-size: 70px;
-  font-weight: 5   00;
+  font-weight: 5 00;
   color: var(--color-bluee);
 }
 
@@ -104,7 +104,18 @@
   overflow: hidden;
 }
 
-/* ── Responsive ── */
+@media (max-width: 1620px) {
+  .bg-label {
+    margin: 0;
+  }
+  .bg-section {
+    padding: 30px 50px 100px;
+  }
+  .bg-card-image {
+    height: 353px;
+  }
+}
+
 @media (max-width: 1024px) {
   .bg-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -133,18 +144,18 @@
   .bg-card-image {
     height: 220px;
   }
-  
-.bg-label {
-  font-size: 20px;
-}
-.bg-header {
-  margin-bottom: 28px;
-}
 
-.bg-card-title {
-  font-size: 25px;
-}
-.bg-card-desc{
-  line-height: 1.1;
-}
+  .bg-label {
+    font-size: 20px;
+  }
+  .bg-header {
+    margin-bottom: 28px;
+  }
+
+  .bg-card-title {
+    font-size: 25px;
+  }
+  .bg-card-desc {
+    line-height: 1.1;
+  }
 }

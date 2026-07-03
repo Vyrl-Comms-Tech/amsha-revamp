@@ -35,7 +35,7 @@
 .oi-step {
   font-size: 18px;
   font-weight: 400;
-  color:#fff;
+  color: #fff;
   line-height: 1;
 }
 
@@ -59,7 +59,7 @@
 .oi-list li {
   font-size: 27px;
   font-weight: 400;
-  color:#fff;
+  color: #fff;
   line-height: 1.15;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .oi-img {
-  padding:  40px;
+  /* padding: 40px; */
   object-fit: cover;
   object-position: center;
 }
@@ -131,10 +131,20 @@
   line-height: 1.55;
   margin: 0;
 }
-
-/* ══════════════════════════════
-   RESPONSIVE
-══════════════════════════════ */
+@media (max-width: 1620px) {
+  .oi-title {
+    font-size: 44px;
+  }
+  .oi-list li {
+    font-size: 23px;
+  }
+  .oi-card {
+    padding: 18px 26px 27px;
+  }
+  .oi-wide-left{
+    padding: 0;
+  }
+}
 
 @media (max-width: 991px) {
   .oi-section {
@@ -166,12 +176,12 @@
   .oi-list li {
     font-size: 15px;
   }
-.oi-wide-img {
-display: none;
-}
-.oi-wide-left{
-  padding: 0;
-}
+  .oi-wide-img {
+    display: none;
+  }
+  .oi-wide-left {
+    padding: 0;
+  }
 }
 
 @media (max-width: 575px) {

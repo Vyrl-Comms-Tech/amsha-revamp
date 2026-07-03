@@ -57,7 +57,7 @@
 }
 
 .th-req {
-  color: rgba(74, 74, 74, 0.8);
+  color:var(--color-bluee);
   margin-left: 2px;
 }
 
@@ -139,8 +139,14 @@
 }
 
 @keyframes th-fade-in {
-  from { opacity: 0; transform: translateY(-5px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .th-submit {
@@ -261,7 +267,6 @@
   font-weight: 400;
   cursor: pointer;
   transition: opacity 0.2s;
-  
 }
 
 /* .th-btn-fill:hover {
@@ -311,27 +316,30 @@
   color: #15161a;
 }
 
-
 @media (max-width: 1536px) {
   .th-form-wrap {
     flex: 0 0 400px;
   }
 
-  .th-form{
-    padding: 10px 20px 10px;;
+  .th-form {
+    padding: 10px 20px 10px;
   }
 
-  .th-form-heading{
-    font-size: 33px;
+  .th-form-heading {
+    font-size: 29px;
+  }
+.th-card-title {
+    max-width: 60%;
+    font-size: 30px;
+}
+  .th-label {
+    font-size: 20px;
   }
 
-  .th-label{
-    font-size: 21px;
-  }
-
-  .th-input{
-    font-size: 17px;
-    padding: 14px 18px 14px 14px;
+  .th-input {
+    font-size: 16px;
+    margin-bottom: 8px;
+    padding: 11px 18px 11px 11px;
   }
 }
 

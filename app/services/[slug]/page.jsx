@@ -3,12 +3,7 @@ import ServiceInnerHero from "../../components/ServicesInner/ServiceInnerHero";
 import FooterModel from "../../components/layout/FooterModel";
 import ServiceOtherInner from "../../components/ServicesInner/ServiceOtherInner";
 
-// ─────────────────────────────────────────────────────────────
-// SERVICES DATA — update hero / topCards / bottomCard text here
-// for each slug (steps 2 – 6).
-// ─────────────────────────────────────────────────────────────
 const SERVICES = {
-
   /* ── Step 2 ─────────────────────────────────────────────── */
   "employee-training-development": {
     hero: {

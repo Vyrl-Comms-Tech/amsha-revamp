@@ -103,9 +103,10 @@
   }
   .facts-box-head {
     align-items: center;
+    gap:110px;
   }
   .facts-box-text {
-    font-size: 22px;
+    font-size: 20px;
   }
   .facts-box{
     height: 530px;

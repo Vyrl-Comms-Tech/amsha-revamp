@@ -68,13 +68,13 @@
 /* ── Image — absolutely fills 100% of sih-outer height
        ↑ card is 80vh → image overflows ~10vh top + bottom  ── */
 .sih-img-wrap {
+  top: 15%;
   position: absolute;
   right: 100px;
-  top: 15%;
   bottom: 0;
   width: 42%;
   height: 80%;
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -82,35 +82,34 @@
   object-fit: cover;
   object-position: center;
 }
-@media (max-width:1620px){
+@media (max-width: 1620px) {
   .sih-card {
-  margin-top: 6%;
-  height: 70vh;
-}
+    margin-top: 8%;
+    height: 70vh;
+  }
+  .sih-img-wrap {
+    top: 17%;
+  }
+  .sih-content {
+    flex: 0 0 58%;
+    padding: 70px 60px 70px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
 
-.sih-content {
-  flex: 0 0 58%;
-  padding: 70px 60px 70px 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
+  .sih-heading {
+    font-size: 56px;
+    line-height: 1.1;
+  }
 
-.sih-heading {
-  font-size: 60px;
-  font-weight: 400;
-  line-height: 1;
-  color: #fff;
-}
-
-.sih-desc {
-  font-size: 23px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.82);
-  line-height: 1.15;
-  max-width: 90%;
-}
-
+  .sih-desc {
+    font-size: 23px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.15;
+    max-width: 90%;
+  }
 }
 @media (max-width: 1280px) {
   .sih-heading {
@@ -126,7 +125,7 @@
 
 @media (max-width: 991px) {
   .sih-outer {
-    padding: 0 ;
+    padding: 0;
     height: 100vh;
     align-items: stretch;
   }

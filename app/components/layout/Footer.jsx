@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="footer-canvas" />
 
           <div className="footer-bottom">
-            <p className="footer-copyright">© 2021 All Rights Reserved</p>
+            <p className="footer-copyright">© 2026 All Rights Reserved</p>
             <nav className="footer-legal">
               <a href="#">Privacy Policy</a>
               <a href="#">Terms of Use</a>

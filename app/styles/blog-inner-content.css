@@ -36,16 +36,34 @@
   margin-bottom: 12px;
 }
 
-.bic-article h1 { font-size: 32px; }
-.bic-article h2 { font-size: 28px; }
-.bic-article h3 { font-size: 22px; }
-.bic-article h4 { font-size: 20px; }
-.bic-article h5 { font-size: 18px; }
-.bic-article h6 { font-size: 16px; }
+.bic-article h1 {
+  font-size: 32px;
+}
+.bic-article h2 {
+  font-size: 28px;
+}
+.bic-article h3 {
+  font-size: 22px;
+}
+.bic-article h4 {
+  font-size: 20px;
+}
+.bic-article h5 {
+  font-size: 18px;
+}
+.bic-article h6 {
+  font-size: 16px;
+}
 
-.bic-article strong { font-weight: 700; }
-.bic-article em     { font-style: italic; }
-.bic-article u      { text-decoration: underline; }
+.bic-article strong {
+  font-weight: 700;
+}
+.bic-article em {
+  font-style: italic;
+}
+.bic-article u {
+  text-decoration: underline;
+}
 
 .bic-article ul,
 .bic-article ol {
@@ -53,8 +71,12 @@
   margin-bottom: 18px;
 }
 
-.bic-article ul { list-style: disc; }
-.bic-article ol { list-style: decimal; }
+.bic-article ul {
+  list-style: disc;
+}
+.bic-article ol {
+  list-style: decimal;
+}
 
 .bic-article li {
   font-size: 18px;
@@ -89,7 +111,9 @@
 }
 
 /* first child should have no top margin */
-.bic-article > *:first-child { margin-top: 0; }
+.bic-article > *:first-child {
+  margin-top: 0;
+}
 
 /* ── Right: sidebar ── */
 .bic-sidebar {
@@ -100,7 +124,7 @@
 
 .bic-card {
   padding: 28px 24px;
-  background:#F8F8F8;
+  background: #f8f8f8;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -115,7 +139,7 @@
 }
 
 .bic-card-sub {
-  font-size:20px;
+  font-size: 20px;
   font-weight: 400;
   color: #555;
   line-height: 1.15;
@@ -148,11 +172,11 @@
 }
 
 .bic-btn {
-  width:max-content;
   padding: 13px 25px;
+  font-size: 18px;
+  width: max-content;
   background: var(--color-purple);
   color: var(--color-white);
-  font-size: 18px;
   font-weight: 500;
   font-family: var(--font-primary);
   border: none;
@@ -165,7 +189,18 @@
   opacity: 0.8;
 }
 
-/* ── Responsive ── */
+@media (max-width: 1620px) {
+  
+.bic-btn {
+  padding: 12px 22px;
+  font-size: 17px;
+}
+.bic-disclaimer {
+  font-size: 16px;
+}
+}
+
+
 @media (max-width: 991px) {
   .bic-section {
     flex-direction: column;
@@ -185,11 +220,19 @@
   }
 
   .bic-article p,
-  .bic-article li { font-size: 16px; }
+  .bic-article li {
+    font-size: 16px;
+  }
 
-  .bic-article h1 { font-size: 26px; }
-  .bic-article h2 { font-size: 22px; }
-  .bic-article h3 { font-size: 19px; }
+  .bic-article h1 {
+    font-size: 26px;
+  }
+  .bic-article h2 {
+    font-size: 22px;
+  }
+  .bic-article h3 {
+    font-size: 19px;
+  }
 
   .bic-card {
     padding: 28px 15px;

@@ -136,10 +136,13 @@
     font-size: 45px;
   }
   .bph-card-title {
-    font-size: 40px;
+    font-size: 37px;
+    line-height: 1.1;
   }
   .bph-card-desc {
     font-size: 17px;
+    line-height: 1.25;
+
   }
 
   .bph-btn {
