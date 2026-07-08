@@ -2,7 +2,6 @@
 import Link from "next/link";
 import "../../styles/Footer.css";
 import { GlowDot } from "../layout/svg";
-
 const FOOTER_COLUMNS = [
   {
     title: "Quick links",
@@ -36,14 +35,17 @@ const FOOTER_COLUMNS = [
       {
         label: "Instagram",
         href: "https://www.instagram.com/amshaadvisory/?hl=en",
+        external: true,
       },
       {
         label: "Facebook",
         href: "https://www.facebook.com/p/Amsha-Advisory-61566437109181/",
+        external: true,
       },
       {
         label: "LinkedIn",
         href: "https://www.linkedin.com/company/amshaadvisory/",
+        external: true,
       },
     ],
   },
@@ -73,7 +75,17 @@ const Footer = () => {
                 <ul>
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <Link href={link.href}>{link.label}</Link>
+                      {link.external ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link href={link.href}>{link.label}</Link>
+                      )}
                     </li>
                   ))}
                 </ul>

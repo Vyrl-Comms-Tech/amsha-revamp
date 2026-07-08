@@ -110,8 +110,8 @@
 
 .sh-canvas-wrapper {
   position: fixed;
-  top: 8%;
-  left: 50%;
+  top: 4%;
+  left: 40%;
   width: 50vw;
   height: 100vh;
   z-index: 5;

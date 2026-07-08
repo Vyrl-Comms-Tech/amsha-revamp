@@ -84,7 +84,7 @@ const Hero = () => {
 
     // Rotation: Facts → Footer (0→1)
     const factsEl = document.querySelector(".facts-section");
-    const footerEl = document.querySelector(".footer");
+    const footerEl = document.querySelector(".facts-wrapper");
     let trigger2 = null;
     let mouseIdleTrigger = null;
     let positionTween = null;
@@ -131,7 +131,7 @@ const Hero = () => {
           start: "top 75%",
           onEnter: () =>
             gsap.to(canvasEl, {
-              left: "75%",
+              left: "65%",
               duration: 0.6,
               ease: "power2.out",
               overwrite: true,

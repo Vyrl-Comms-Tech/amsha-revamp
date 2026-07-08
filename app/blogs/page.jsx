@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import NewsLetter from "../components/layout/NewsLetter";
 import axios from "axios";
 import BlogParentHero from "../components/Blog/blogParentHero";
 import BlogGrid from "../components/Blog/blogGrid";
@@ -38,6 +39,7 @@ const Page = () => {
         setActiveTab={setActiveTab}
       />
       <BlogGrid data={data?.slice(1)} loading={loading} activeTab={activeTab} />
+      <NewsLetter/>
       <FooterModel />
     </>
   );

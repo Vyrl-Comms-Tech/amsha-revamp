@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import "../../styles/other-inner.css";
-import TextAnimation from "../layout/TextAnimation";
+// import TextAnimation from "../layout/TextAnimation";
 // Default content — used by the employee-training-development page.
 // Pass topCards / bottomCard props to override for any other service page.
 const DEFAULT_TOP_CARDS = [
@@ -57,19 +57,19 @@ export default function ServiceOtherInner({
         {topCards.map((card, i) => (
           <div key={i} className="oi-card">
             <div className="oi-card-header">
-              <TextAnimation animateOnScroll={true} delay={0.3}>
+              {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                 <span className="oi-step">{card.step}</span>
-              </TextAnimation>
-              <TextAnimation animateOnScroll={true} delay={0.3}>
+              {/* </TextAnimation> */}
+              {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                 <h3 className="oi-title">{card.title}</h3>
-              </TextAnimation>
+              {/* </TextAnimation> */}
             </div>
             <ul className="oi-list">
               {card.bullets.map((b, j) => (
                 <li key={j}>
-                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                  {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                     <span>{b}</span>
-                  </TextAnimation>
+                  {/* </TextAnimation> */}
                 </li>
               ))}
             </ul>
@@ -81,21 +81,21 @@ export default function ServiceOtherInner({
       {bottomCard1 && (
         <div className="oi-card oi-card--wide">
           <div className="oi-wide-left">
-            <TextAnimation animateOnScroll={true} delay={0.3}>
+            {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
               <span className="oi-step">{bottomCard1.step}</span>
-            </TextAnimation>
-            <TextAnimation animateOnScroll={true} delay={0.3}>
+            {/* </TextAnimation> */}
+            {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
               <h3 className="oi-title">{bottomCard1.title}</h3>
-            </TextAnimation>
+            {/* </TextAnimation> */}
             <div className="oi-content-list">
               {bottomCard1.content.map((item, j) => (
                 <div key={j} className="oi-content-item">
-                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                  {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                     <p className="oi-content-heading">{item.heading}</p>
-                  </TextAnimation>
-                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                  {/* </TextAnimation> */}
+                  {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                     <p className="oi-content-paragraph">{item.paragraph}</p>
-                  </TextAnimation>
+                  {/* </TextAnimation> */}
                 </div>
               ))}
             </div>
@@ -117,18 +117,18 @@ export default function ServiceOtherInner({
       {bottomCard && (
         <div className="oi-card oi-card--wide">
           <div className="oi-wide-left">
-            <TextAnimation animateOnScroll={true} delay={0.3}>
+            {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
               <span className="oi-step">{bottomCard.step}</span>
-            </TextAnimation>
-            <TextAnimation animateOnScroll={true} delay={0.3}>
+            {/* </TextAnimation> */}
+            {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
               <h3 className="oi-title">{bottomCard.title}</h3>
-            </TextAnimation>
+            {/* </TextAnimation> */}
             <ul className="oi-list">
               {bottomCard.bullets.map((b, j) => (
                 <li key={j}>
-                  <TextAnimation animateOnScroll={true} delay={0.3}>
+                  {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                     <span>{b}</span>
-                  </TextAnimation>
+                  {/* </TextAnimation> */}
                 </li>
               ))}
             </ul>
@@ -143,6 +143,7 @@ export default function ServiceOtherInner({
           </div>
         </div>
       )}
+      
     </section>
   );
 }

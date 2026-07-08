@@ -1,6 +1,9 @@
 .ss-wrapper {
   position: relative;
   /* height set dynamically in JS: window.innerHeight + scrollDistance */
+  padding-bottom: 50px;
+  background: #fff;
+  z-index: 99999;
 }
 
 .services-section {

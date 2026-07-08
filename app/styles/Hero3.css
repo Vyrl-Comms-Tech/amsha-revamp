@@ -3,6 +3,7 @@
    400vh = 100vh section + 300vh stick time. Increase for more scroll. */
 .hero3-wrapper {
   height: 400vh;
+  z-index: 9999;
   background: #000; /* black lives here so the section can be transparent */
 }
 

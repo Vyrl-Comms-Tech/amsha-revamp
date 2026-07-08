@@ -93,11 +93,13 @@
   flex: 0 0 38%;
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 18px;
 }
 
 .oi-img {
-  /* padding: 40px; */
+  padding: 30px;
+  border-radius: 18px !important;
+
   object-fit: cover;
   object-position: center;
 }

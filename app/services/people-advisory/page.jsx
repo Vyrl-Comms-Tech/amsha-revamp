@@ -1,3 +1,4 @@
+import Newsletter from "@/app/components/layout/NewsLetter";
 import ServiceInnerHero from "../../components/ServicesInner/ServiceInnerHero";
 import SupportAreas from "../../components/ServicesInner/SupportAreas";
 import FooterModel from "../../components/layout/FooterModel";
@@ -13,6 +14,7 @@ Our approach goes beyond traditional HR support by focusing on how organisations
         image="/s9.jpg"
       />
       <SupportAreas />
+      <Newsletter/>
     </div>
   );
 };

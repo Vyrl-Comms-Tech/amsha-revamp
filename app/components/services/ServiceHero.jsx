@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Change x / y / z here (degrees) to rotate the model to any pose.
 // x = pitch (tilt forward/back)   y = yaw (spin left/right)   z = roll (tilt sideways)
-const MODEL_ANGLE = { x: -10, y: 450, z: 18 };
+const MODEL_ANGLE = { x: -2.5, y: 301.5, z: 0.5 };
 
 const ServiceHero = () => {
   const canvasWrapperRef = useRef(null);
@@ -57,17 +57,17 @@ const ServiceHero = () => {
       // the right edge of the screen.
       positionTrigger = ScrollTrigger.create({
         trigger: footerEl,
-        start: "top 75%",
+        start: "top 65%",
         onEnter: () =>
           gsap.to(canvasEl, {
-            left: "50%",
+            left: "40%",
             duration: 0.6,
             ease: "power2.out",
             overwrite: true,
           }),
         onLeaveBack: () =>
           gsap.to(canvasEl, {
-            left: "50%",
+            left: "40%",
             duration: 0.6,
             ease: "power2.out",
             overwrite: true,
@@ -79,7 +79,7 @@ const ServiceHero = () => {
       // now-full-width footer text.
       positionTrigger = ScrollTrigger.create({
         trigger: footerEl,
-        start: "top 75%",
+        start: "top 55%",
         onEnter: () =>
           gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
         onLeaveBack: () =>
@@ -122,11 +122,8 @@ const ServiceHero = () => {
             </p>
           </TextAnimation>
           <button className="sh-btn btn-4">
-            <Link href='/contact-us'>
-            Contact us
-            </Link>
-            
-            </button>
+            <Link href="/contact-us">Contact us</Link>
+          </button>
         </div>
 
         {/* ── Right-side glow with floating dots ── */}

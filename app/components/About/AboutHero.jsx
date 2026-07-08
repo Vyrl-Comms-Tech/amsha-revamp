@@ -1,46 +1,29 @@
 "use client";
-import { Suspense, useState, useEffect, useRef } from "react";
+
+import { GlowDot } from "../layout/svg";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TextAnimation from "../layout/TextAnimation";
 import Scene from "../Home/Scene";
 import "../../styles/AboutHero.css";
-import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutHero() {
   const canvasWrapperRef = useRef(null);
-  const [progress2, setProgress2] = useState(0);
-  // Mouse-parallax + idle sway should stop once the model reaches the
-  // footer (it should sit still there) and resume if scrolled back up
-  // past it. Read fresh every frame by Scene — see enableMouseIdleRef.
+
+  // true on hero, false when footer comes
   const mouseIdleRef = useRef(true);
 
   useEffect(() => {
     const canvasEl = canvasWrapperRef.current;
-
-    const factsEl = document.querySelector(".facts-section");
     const footerEl = document.querySelector(".footer");
-    if (!factsEl || !footerEl) return;
 
-    // Fade in when Facts enters view, fade out on scroll back
-    const showTrigger = ScrollTrigger.create({
-      trigger: factsEl,
-      start: "top 80%",
-      onEnter: () => gsap.to(canvasEl, { autoAlpha: 1, duration: 0.6 }),
-      onLeaveBack: () => gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4 }),
-    });
+    if (!canvasEl || !footerEl) return;
 
-    // Track Facts → Footer rotation
-    const rotateTrigger = ScrollTrigger.create({
-      trigger: factsEl,
-      start: "top bottom",
-      endTrigger: footerEl,
-      end: "bottom bottom",
-      onUpdate: (self) => setProgress2(self.progress),
-    });
+    let positionTween = null;
 
     const mouseIdleTrigger = ScrollTrigger.create({
       trigger: footerEl,
@@ -53,54 +36,46 @@ export default function AboutHero() {
       },
     });
 
-    // Desktop: slide canvas center (50%) → right (75%) as footer enters
-    // Mobile: canvas already at top:40% via CSS; nudge to top:45% in footer
-    // Binary toggle (not scrub) — scrub lags behind scroll position, and that lag
-    // compounds with Lenis's own smoothing, so the slide could visually never
-    // catch up to the true 75% mark. A fixed-duration tween triggered by crossing
-    // the line always lands exactly on 75%, matching FooterModel's static position.
-    let positionTween = null;
     if (window.innerWidth > 1100) {
-      // Threshold matches Footer.css's own @media(max-width:1100px) breakpoint,
-      // where .footer-right (the column reserving space for the model) gets
-      // display:none and .footer-left's text expands to fill the full width —
-      // sliding to 75% below that width lands the model directly on that text.
       positionTween = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
         onEnter: () =>
           gsap.to(canvasEl, {
-            left: "75%",
+            left: "65%",
             duration: 0.6,
             ease: "power2.out",
             overwrite: true,
           }),
         onLeaveBack: () =>
           gsap.to(canvasEl, {
-            left: "50%",
+            left: "65%",
             duration: 0.6,
             ease: "power2.out",
             overwrite: true,
           }),
       });
     } else if (window.innerWidth > 575) {
-      // Tablet/narrow-desktop: footer-right is hidden at this width (no room for
-      // the model), so fade it out instead of sliding it onto the now-full-width
-      // footer text. Fades back in if scrolling back up past the footer.
       positionTween = ScrollTrigger.create({
         trigger: footerEl,
         start: "top 75%",
         onEnter: () =>
-          gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
+          gsap.to(canvasEl, {
+            autoAlpha: 0,
+            duration: 0.4,
+            overwrite: true,
+          }),
         onLeaveBack: () =>
-          gsap.to(canvasEl, { autoAlpha: 1, duration: 0.4, overwrite: true }),
+          gsap.to(canvasEl, {
+            autoAlpha: 1,
+            duration: 0.4,
+            overwrite: true,
+          }),
       });
     } else {
-      // Mobile: drift from centered (left:50%, the CSS default) toward the
-      // right as the footer scrolls in — same convention as Hero.jsx.
       positionTween = gsap.to(canvasEl, {
         top: "45%",
-        left: "75%",
+        left: "70%",
         ease: "none",
         immediateRender: false,
         scrollTrigger: {
@@ -114,14 +89,13 @@ export default function AboutHero() {
     }
 
     return () => {
-      showTrigger.kill();
-      rotateTrigger.kill();
-      mouseIdleTrigger.kill();
-      // positionTween is a ScrollTrigger instance on desktop (.kill() directly)
-      // or a gsap tween with its own .scrollTrigger on mobile — cover both.
       positionTween?.kill?.();
       positionTween?.scrollTrigger?.kill();
-      gsap.set(canvasEl, { clearProps: "left,top,opacity,visibility" });
+      mouseIdleTrigger.kill();
+
+      gsap.set(canvasEl, {
+        clearProps: "left,top,opacity,visibility",
+      });
     };
   }, []);
 
@@ -136,27 +110,57 @@ export default function AboutHero() {
               shaping the way businesses grow and perform.
             </h1>
           </TextAnimation>
-          {/* <button className="btn-4">
-            <span>
-            <Link href="/contact-us">
-              Contact us
-            </Link>
-              </span>
-          </button> */}
         </div>
       </section>
 
-      {/* Fixed canvas — identical pattern to Hero.jsx in home */}
+      <div className="sh-right-glow">
+        <GlowDot
+          style={{ position: "absolute", left: "10%", top: "15%" }}
+          delay={0}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "30%", top: "45%" }}
+          delay={0.7}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "55%", top: "22%" }}
+          delay={1.3}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "72%", top: "60%" }}
+          delay={0.4}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "88%", top: "30%" }}
+          delay={1.0}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "45%", top: "75%" }}
+          delay={1.6}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "20%", top: "80%" }}
+          delay={0.2}
+        />
+      </div>
+
       <div
         ref={canvasWrapperRef}
         className="canvas-wrapper"
-        style={{ visibility: "hidden", opacity: 0, pointerEvents: "none" }}
+        style={{
+          visibility: "visible",
+          opacity: 1,
+          pointerEvents: "none",
+        }}
       >
         <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
           <Suspense fallback={null}>
             <Scene
-              progress={1}
-              progress2={progress2}
+              overrideRotation={{
+                x: -2.5,
+                y: 301.5,
+                z: 0.5,
+              }}
               enableMouseIdleRef={mouseIdleRef}
             />
           </Suspense>

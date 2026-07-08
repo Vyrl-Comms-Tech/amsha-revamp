@@ -2,6 +2,9 @@ import { notFound } from "next/navigation";
 import ServiceInnerHero from "../../components/ServicesInner/ServiceInnerHero";
 import FooterModel from "../../components/layout/FooterModel";
 import ServiceOtherInner from "../../components/ServicesInner/ServiceOtherInner";
+import AreasOfSupport from "../../components/ServicesInner/AreasOfSupport";
+import Link from "next/link";
+import Newsletter from "../../components/layout/NewsLetter";
 
 const SERVICES = {
   /* ── Step 2 ─────────────────────────────────────────────── */
@@ -78,20 +81,19 @@ All upskilling programs begin with a complimentary 15-minute discovery call to b
           "Short-Term & Long-Term Learning Support",
         ],
       },
+      {
+        // step: "Step One",
+        title: "Delivery Approach",
+        bullets: [
+          "Personalized Learning Plans",
+          "Practical & Scenario-Based Learning",
+          "Interactive Exercises & Discussions",
+          "Goal-Oriented Development Support",
+          "Continuous Guidance & Feedback",
+          "Flexible Learning Structure",
+        ],
+      },
     ],
-    bottomCard: {
-      // step: "Step Three",
-      title: "Delivery Approach",
-      image: "/s10.jpg",
-      bullets: [
-        "Personalized Learning Plans",
-        "Practical & Scenario-Based Learning",
-        "Interactive Exercises & Discussions",
-        "Goal-Oriented Development Support",
-        "Continuous Guidance & Feedback",
-        "Flexible Learning Structure",
-      ],
-    },
   },
 
   /* ── Step 4 ─────────────────────────────────────────────── */
@@ -146,6 +148,44 @@ Our consulting support is tailored to each business, ensuring solutions remain p
         "Growth Planning & Organisational Scaling",
       ],
     },
+    areasOfSupport: [
+      {
+        num: "01",
+        title: "Startup & Business Growth Support",
+      },
+      {
+        num: "02",
+        title: "Organisational Structure & Team Development",
+      },
+      {
+        num: "03",
+        title: "Leadership & Founder Support",
+      },
+      {
+        num: "04",
+        title: "Workplace Systems & Process Guidance",
+      },
+      {
+        num: "05",
+        title: "Operational & People Strategy Support",
+      },
+      {
+        num: "06",
+        title: "Team Alignment & Workplace Culture",
+      },
+      {
+        num: "07",
+        title: "Employee Development & Performance Support",
+      },
+      {
+        num: "08",
+        title: "Business Professionalism & Organisational Readiness",
+      },
+      {
+        num: "09",
+        title: "Growth Planning & Organisational Scaling",
+      },
+    ],
   },
 
   /* ── Step 5 ─────────────────────────────────────────────── */
@@ -164,21 +204,20 @@ Career Development support can also be paired with personalized 1:1 Upskilling &
       image: "/s9.jpg",
     },
     topCards: [
-      {
-        // step: "Step One",
-        title: "Areas of Support",
-        bullets: [
-          "Career Clarity & Direction",
-          "Professional Growth Planning",
-          "Workplace Readiness & Corporate Preparation",
-          "Career Transition Support",
-          "CV & Professional Profile Guidance",
-          "Interview Preparation Support",
-          "Communication & Professional Confidence Development",
-          "Leadership & Personal Development",
-          "Behavioural & Career Insight Support",
-        ],
-      },
+      // {
+      //   title: "Areas of Support",
+      //   bullets: [
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //     "",
+      //   ],
+      // },
       {
         // step: "Step Two",
         title: "Available Formats",
@@ -188,6 +227,42 @@ Career Development support can also be paired with personalized 1:1 Upskilling &
           "Personalized Development Programs",
           "Short-Term & Long-Term Career Support",
         ],
+      },
+    ], areasOfSupport: [
+      {
+        num: "01",
+        title: "Career Clarity & Direction",
+      },
+      {
+        num: "02",
+        title: "Professional Growth Planning",
+      },
+      {
+        num: "03",
+        title: "Workplace Readiness & Corporate Preparation",
+      },
+      {
+        num: "04",
+        title: "Career Transition Support",
+      },
+      {
+        num: "05",
+        title: "CV & Professional Profile Guidance",
+      },
+      {
+        num: "06",
+        title: "Interview Preparation Support",
+      },
+      {
+        num: "07",
+        title: "Communication & Professional Confidence Development",
+      },
+      {
+        num: "08",
+        title: "Leadership & Personal Development",
+      }, {
+        num: "09",
+        title: "Behavioural & Career Insight Support",
       },
     ],
   },
@@ -246,47 +321,86 @@ Through tailored assessment processes, we support organisations in strengthening
         },
       ],
     },
-    bottomCard: {
-      // step: "Step Four",
-      title: "Areas of Support",
-      image: "/s10.jpg",
-      bullets: [
-        "Candidate Assessment & Selection Support",
-        "Behavioural & Personality Assessments",
-        "Leadership Potential Identification",
-        "Role Alignment & Suitability Analysis",
-        "Team & Culture Fit Evaluation",
-        "Communication & Workplace Effectiveness Assessment",
-        "Talent Development & Succession Planning",
-        "Structured Hiring & Evaluation Support",
-      ],
-    },
+    areasOfSupport: [
+      {
+        num: "01",
+        title: "Candidate Assessment & Selection Support",
+      },
+      {
+        num: "02",
+        title: "Behavioural & Personality Assessments",
+      },
+      {
+        num: "03",
+        title: "Leadership Potential Identification",
+      },
+      {
+        num: "04",
+        title: "Role Alignment & Suitability Analysis",
+      },
+      {
+        num: "05",
+        title: "Team & Culture Fit Evaluation",
+      },
+      {
+        num: "06",
+        title: "Communication & Workplace Effectiveness Assessment",
+      },
+      {
+        num: "07",
+        title: "Talent Development & Succession Planning",
+      },
+      {
+        num: "08",
+        title: "Structured Hiring & Evaluation Support",
+      },
+    ],
   },
 };
-
-export function generateStaticParams() {
-  return Object.keys(SERVICES).map((slug) => ({ slug }));
-}
-
-// In Next.js 15+ params is a Promise — must be awaited
 export default async function ServiceSlugPage({ params }) {
   const { slug } = await params;
   const data = SERVICES[slug];
+
   if (!data) notFound();
+
+  const useAccordionAreas =
+    slug === "entrepreneurial-consulting" || slug === "talent-assessment"|| slug === "career-development";
 
   return (
     <div>
       <FooterModel />
+
       <ServiceInnerHero
         heading={data.hero.heading}
         desc={data.hero.desc}
         image={data.hero.image}
       />
+
       <ServiceOtherInner
         topCards={data.topCards}
         bottomCard1={data.bottomCard1}
-        bottomCard={data.bottomCard}
+        bottomCard={useAccordionAreas ? null : data.bottomCard}
       />
+
+      {useAccordionAreas && (
+        <AreasOfSupport
+          heading="Areas of Support"
+          items={data.areasOfSupport}
+          showNewsletter={false}
+          compact={true}
+        />
+      )}
+
+      {slug === "employee-training-development" && (
+        <div className="training-programme-btn-wrap">
+          <button className="training-programme-btn">
+            <Link href='/training'>
+            View Training Programme
+            </Link>
+          </button>
+        </div>
+      )}
+      <Newsletter/>
     </div>
   );
 }

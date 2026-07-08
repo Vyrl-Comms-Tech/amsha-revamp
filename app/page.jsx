@@ -2,6 +2,7 @@ import Hero from "./components/Home/Hero";
 import Hero2 from "./components/Home/Hero2";
 import Marquee from "./components/Home/Marquee";
 import Brands from "./components/Home/Brands";
+import NewsLetter from "./components/layout/NewsLetter";
 import Hero3 from "./components/Home/Hero3";
 import OverlapingCards from "./components/Home/OverlapingCards";
 import PeopleAdvisory from "./components/Home/PeopleAdvisory";
@@ -22,6 +23,7 @@ export default function Home() {
       <PeopleAdvisory />
       <WhyChooseUs />
       <Facts />
+      <NewsLetter/>
       {/* <Particles /> */}
     </>
   );

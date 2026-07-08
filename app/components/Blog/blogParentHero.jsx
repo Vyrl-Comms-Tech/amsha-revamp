@@ -21,7 +21,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
           <h1 className="bph-title">Blogs & articles</h1>
         </TextAnimation>
 
-        <div className="bph-tabs ">
+        {/* <div className="bph-tabs ">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -31,7 +31,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {loading ? (

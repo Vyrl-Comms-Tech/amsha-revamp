@@ -227,3 +227,31 @@ section, main {
 .btn-4:hover::after {
   left: 120%;
 }
+.training-programme-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 60px !important;
+  position: relative;
+  z-index: 20;
+  background-color: white;
+}
+
+.training-programme-btn {
+  padding: 12px 28px;
+  border: 2px solid rgba(0, 0, 0, 0.85) !important;
+  background: transparent;
+
+    color: #000 !important;
+  border-radius: 8px;
+  font-size: 18px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.training-programme-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

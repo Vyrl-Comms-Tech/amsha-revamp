@@ -5,6 +5,8 @@ import TextAnimation from "../layout/TextAnimation";
 
 const Facts = () => {
   return (
+    <section className="facts-main">
+
     <div className="facts-wrapper">
       <section className="facts-section">
 
@@ -30,7 +32,7 @@ const Facts = () => {
                 </h2>
               </TextAnimation>
               <Image
-                src="/img18.png"
+                src="/fact11.png"
                 alt="MBTI"
                 width={190}
                 height={130}
@@ -59,7 +61,7 @@ const Facts = () => {
                 </h2>
               </TextAnimation>
               <Image
-                src="/img16.png"
+                src="/fact12.png"
                 alt="MBTI"
                 width={140}
                 height={130}
@@ -85,6 +87,7 @@ const Facts = () => {
         </div>
       </section>
     </div>
+    </section>
   );
 };
 

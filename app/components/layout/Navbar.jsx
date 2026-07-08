@@ -31,14 +31,13 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/blogs", label: "Blogs" },
-  { href: "/training", label: "Training" },
 ];
-
 const serviceLinks = [
   { href: "/services/people-advisory", label: "People Advisory" },
   {
     href: "/services/employee-training-development",
     label: "Employee Training & Development",
+    children: [{ href: "/training", label: "Training Programme" }],
   },
   {
     href: "/services/upskilling-training",
@@ -49,6 +48,7 @@ const serviceLinks = [
     label: "Entrepreneurial Consulting",
   },
   { href: "/services/career-development", label: "Career Development" },
+  { href: "/services/talent-assessment", label: "Talent Assessment" },
 ];
 
 const Navbar = () => {
@@ -92,18 +92,44 @@ const Navbar = () => {
               >
                 {label}
               </Link>
-              <div className="nav-dropdown">
-                {serviceLinks.map((service) => (
-                  <Link
-                    key={service.href}
-                    href={service.href}
-                    className="nav-dropdown-link"
-                    onClick={() => setDropdownForceClosed(true)}
-                  >
-                    {service.label}
-                  </Link>
-                ))}
-              </div>
+            <div className="nav-dropdown">
+  {serviceLinks.map((service) =>
+    service.children ? (
+      <div key={service.href} className="nav-dropdown-parent">
+        <Link
+          href={service.href}
+          className="nav-dropdown-link nav-dropdown-link-parent"
+          onClick={() => setDropdownForceClosed(true)}
+        >
+          <span>{service.label}</span>
+          <span className="nav-mini-plus">+</span>
+        </Link>
+
+        <div className="nav-sub-dropdown-bottom">
+          {service.children.map((child) => (
+            <Link
+              key={child.href}
+              href={child.href}
+              className="nav-sub-dropdown-link"
+              onClick={() => setDropdownForceClosed(true)}
+            >
+              {child.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <Link
+        key={service.href}
+        href={service.href}
+        className="nav-dropdown-link"
+        onClick={() => setDropdownForceClosed(true)}
+      >
+        {service.label}
+      </Link>
+    ),
+  )}
+</div>
             </div>
           ) : (
             <Link key={href} href={href} className="lightning-effect">
@@ -188,17 +214,35 @@ const Navbar = () => {
                   {mobileServicesOpen && (
                     <div className="nav-sheet-services-list">
                       {serviceLinks.map((service) => (
-                        <SheetClose
+                        <div
                           key={service.href}
-                          render={
-                            <Link
-                              href={service.href}
-                              className="nav-sheet-sublink"
-                            />
-                          }
+                          className="nav-sheet-service-item"
                         >
-                          {service.label}
-                        </SheetClose>
+                          <SheetClose
+                            render={
+                              <Link
+                                href={service.href}
+                                className="nav-sheet-sublink"
+                              />
+                            }
+                          >
+                            {service.label}
+                          </SheetClose>
+
+                          {service.children?.map((child) => (
+                            <SheetClose
+                              key={child.href}
+                              render={
+                                <Link
+                                  href={child.href}
+                                  className="nav-sheet-subchild"
+                                />
+                              }
+                            >
+                              + {child.label}
+                            </SheetClose>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   )}

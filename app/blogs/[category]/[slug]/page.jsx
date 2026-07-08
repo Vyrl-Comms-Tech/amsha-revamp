@@ -2,6 +2,7 @@ import axios from "axios";
 import BlogInnerHero from "@/app/components/BlogInner/BlogInnerHero";
 import BlogInnerContent from "@/app/components/BlogInner/BlogInnerContent";
 import FooterModel from "@/app/components/layout/FooterModel";
+import Newsletter from "../../../components/layout/NewsLetter";
 async function getContent(slug, category) {
   try {
     const res = await axios.get(
@@ -30,6 +31,7 @@ const Page = async ({ params }) => {
     <div>
       <BlogInnerHero data={content} />
       <BlogInnerContent data={content} />
+      <Newsletter/>
       <FooterModel />
     </div>
   );

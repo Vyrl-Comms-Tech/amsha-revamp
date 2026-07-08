@@ -323,9 +323,9 @@ const SHOW_GUI = false;
 // ─────────────────────────────────────────────────────────────────────────────
 const DEFAULT_KEYFRAMES = [
   // p     x       y       z
-  { p: 0, x: 13.6, y: 75, z: -17.5 }, // Hero  start
-  { p: 0.125, x: -6.5, y: 103, z: -2 }, // Hero2 start
-  { p: 0.5, x: -5.5, y:163, z:3 }, // Hero3 start  (Y higher than Hero2 ✓)
+  { p: 0, x: 8, y: 288, z: 8 }, // Hero  start
+  { p: 0.125, x: 0, y: 338, z: 0 }, // Hero2 start
+  { p: 0.5, x: 0, y: 384, z: 0 }, // Hero3 start  (Y higher than Hero2 ✓)
   { p: 1.0, x: -7.5, y: 201.5, z: -6.5 }, // Hero3 end    (Y higher than Hero3 start ✓)
   //                   ↑ was 298.5 — fixed to 658.5 (= 298.5 + 360) so model
   //                     lands at the same visual angle but keeps spinning forward
@@ -347,7 +347,7 @@ const DEFAULT_KEYFRAMES = [
 //
 // Tune live in the "Facts → Footer  (+extra °)" folder in the lil-gui panel.
 // ─────────────────────────────────────────────────────────────────────────────
-const DEFAULT_EXTRA = { x:0.5, y: -75.5, z: 7 };
+const DEFAULT_EXTRA = { x: 0.5, y: 95.5, z: 7 };
 
 // Mobile keyframes — same Y spin progression so the animation feels identical,
 // but x (pitch) and z (roll) are halved so the model tilts far less and stays
@@ -443,7 +443,8 @@ const Scene = ({
   // boolean. Instances that need to toggle this live as the user scrolls
   // in/out of the footer (Hero, ServiceHero) pass enableMouseIdleRef instead
   // — it's read fresh every frame, same pattern as progressRef/progress2Ref.
-  enableMouseIdle = true,
+  enableMouseIdle = true, // custom model position
+  modelPositionY = 0,
   enableMouseIdleRef = null,
 }) => {
   const mouseGroupRef = useRef();
@@ -621,7 +622,7 @@ const Scene = ({
         position={[0, 2.5, cameraZ]}
       />
       <Environment preset="city" />
-      <group ref={mouseGroupRef}>
+      <group ref={mouseGroupRef}position={[0, modelPositionY, 0]}>
         <group ref={modelRef}>
           <Model glassFactorRef={glassFactorRef} />
         </group>
