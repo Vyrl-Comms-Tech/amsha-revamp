@@ -7,18 +7,23 @@ import Facts from '../components/Home/Facts'
 import MissionVision from '../components/About/MissionVision'
 import BrandsStraight from '../components/About/BrandsStraight'
 import Newsletter from '../components/layout/NewsLetter'
+import OurClientsHorizontal from '../components/services/OurClientsHorizontal'
 
 const page = () => {
   return (
     <div>
         <AboutHero/>
         <TextAndBoxes/>
+        <OurClientsHorizontal/>
         {/* <AboutText/>
         <MissionVision/> */}
         {/* <BrandsStraight/> */}
         <Founder/>
-        <Facts/>
+        {/* <Facts/> */}
+        <div className='!bg-white !z-[999999] relative !pt-[50px]'>
         <Newsletter/>
+
+        </div>
     </div>
   )
 }

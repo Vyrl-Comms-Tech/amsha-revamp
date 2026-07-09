@@ -70,7 +70,7 @@ const TrainingHero = () => {
         </TextAnimation>
         <button className="btn-4">
           {" "}
-          <a href="/contact-us">contact us</a>
+          <a href="/contact-us">Contact us</a>
         </button>
 
         {/* ── Right-side glow with floating dots (same treatment as ServiceHero) ── */}

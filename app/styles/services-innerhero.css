@@ -80,7 +80,7 @@
 
 .sih-content {
   flex: 0 0 100%;
-  padding: 70px 60px 70px 70px;
+  padding: 150px 60px 40px 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,6 +152,33 @@
 
 .sih-btn:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.sih-bottom-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.sih-bottom-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sih-bottom-logo img {
+  width: auto;
+  height: auto;
+  max-width: 180px;
+  object-fit: contain;
+}
+
+@media (max-width: 575px) {
+  .sih-bottom-logos {
+    gap: 26px;
+  }
 }
 
 /* ── Image — absolutely fills 100% of sih-outer height

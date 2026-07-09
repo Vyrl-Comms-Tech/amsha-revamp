@@ -5,6 +5,7 @@ import ServiceOtherInner from "../../components/ServicesInner/ServiceOtherInner"
 import AreasOfSupport from "../../components/ServicesInner/AreasOfSupport";
 import Link from "next/link";
 import Newsletter from "../../components/layout/NewsLetter";
+import Facts from "../../components/Home/Facts";
 
 const SERVICES = {
   /* ── Step 2 ─────────────────────────────────────────────── */
@@ -62,11 +63,9 @@ Every program is customised around the organisation’s industry, teams, operati
   "upskilling-training": {
     hero: {
       heading: "Upskilling & Training",
-      desc: `At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs.
-Whether an individual is looking to strengthen workplace skills, improve communication and confidence, develop professionally, explore a career path, or build capabilities within a specific area, our approach focuses on creating customised learning experiences aligned with their goals, strengths, and development areas.
-Each program is designed based on the individual’s objectives, current skill level, and desired growth outcomes to ensure learning remains practical, relevant, and directly applicable.
-Our upskilling sessions are conducted through personalised 1:1 training and development support, allowing for a more focused, flexible, and tailored learning experience.
-All upskilling programs begin with a complimentary 15-minute discovery call to better understand the individual’s goals, development areas, and learning needs before designing the appropriate support approach.
+      desc: `At Amsha Advisory, our Upskilling & Training solutions are designed to provide personalised, practical, and goal-oriented development support tailored to individual professional needs.Whether an individual is looking to strengthen workplace skills, improve communication and confidence, develop professionally, explore a career path, or build capabilities within a specific area, our approach focuses on creating customised learning experiences aligned with their goals, strengths, and development areas.
+      <br/>
+Each program is designed based on the individual’s objectives, current skill level, and desired growth outcomes to ensure learning remains practical, relevant, and directly applicable. Our upskilling sessions are conducted through personalised 1:1 training and development support, allowing for a more focused, flexible, and tailored learning experience. All upskilling programs begin with a complimentary 15-minute discovery call to better understand the individual’s goals, development areas, and learning needs before designing the appropriate support approach.
 `,
       image: "/s9.jpg",
     },
@@ -100,12 +99,9 @@ All upskilling programs begin with a complimentary 15-minute discovery call to b
   "entrepreneurial-consulting": {
     hero: {
       heading: "Entrepreneurial Consulting",
-      desc: `At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies.
-      
-We understand that growing a business involves more than operations alone; it requires clarity, structure, leadership, people management, and sustainable systems that support long-term success. Our approach focuses on helping entrepreneurs navigate business challenges through practical, people-centred, and growth-oriented support tailored to the stage and needs of the business.
-Whether supporting early-stage startups, growing teams, or expanding businesses, we work closely with founders and leadership teams to strengthen workplace structure, operational processes, leadership capability, team alignment, and organisational direction.
-
-Our consulting support is tailored to each business, ensuring solutions remain practical, scalable, and aligned with the entrepreneur’s vision, goals, and long-term business objectives.
+      desc: `At Amsha Advisory, our Entrepreneurial Consulting solutions are designed to support entrepreneurs, startups, and growing businesses in building stronger operational foundations, people structures, and long-term growth strategies. We understand that growing a business involves more than operations alone; it requires clarity, structure, leadership, people management, and sustainable systems that support long-term success. Our approach focuses on helping entrepreneurs navigate business challenges through practical, people-centred, and growth-oriented support tailored to the stage and needs of the business.
+<br/>
+Whether supporting early-stage startups, growing teams, or expanding businesses, we work closely with founders and leadership teams to strengthen workplace structure, operational processes, leadership capability, team alignment, and organisational direction. Our consulting support is tailored to each business, ensuring solutions remain practical, scalable, and aligned with the entrepreneur’s vision, goals, and long-term business objectives.
 `,
       image: "/s9.jpg",
     },
@@ -134,7 +130,7 @@ Our consulting support is tailored to each business, ensuring solutions remain p
     ],
     bottomCard: {
       // step: "Step Three",
-      title: "Areas of Support",
+      title: "Areas We Support",
       image: "/s10.jpg",
       bullets: [
         "Startup & Business Growth Support",
@@ -228,7 +224,8 @@ Career Development support can also be paired with personalized 1:1 Upskilling &
           "Short-Term & Long-Term Career Support",
         ],
       },
-    ], areasOfSupport: [
+    ],
+    areasOfSupport: [
       {
         num: "01",
         title: "Career Clarity & Direction",
@@ -260,7 +257,8 @@ Career Development support can also be paired with personalized 1:1 Upskilling &
       {
         num: "08",
         title: "Leadership & Personal Development",
-      }, {
+      },
+      {
         num: "09",
         title: "Behavioural & Career Insight Support",
       },
@@ -271,10 +269,9 @@ Career Development support can also be paired with personalized 1:1 Upskilling &
   "talent-assessment": {
     hero: {
       heading: "Talent Assessment & Selection",
-      desc: `At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions.
-We work with businesses to assess candidates beyond technical capability by evaluating behavioural fit, communication style, leadership potential, workplace effectiveness, and alignment with organisational culture and role requirements.
-Our approach combines structured assessments, behavioural insight, psychometric tools, and practical evaluation methods to help organisations identify individuals who are best suited for both the role and the wider organisational environment.
-Through tailored assessment processes, we support organisations in strengthening hiring quality, reducing bias in selection decisions, improving role alignment, and identifying long-term potential within candidates.
+      desc: `At Amsha Advisory, our Talent Assessment & Selection solutions are designed to support organisations in making more informed, objective, and strategic hiring decisions We work with businesses to assess candidates beyond technical capability by evaluating behavioural fit, communication style, leadership potential, workplace effectiveness, and alignment with organisational culture and role requirements.
+      <br/>
+Our approach combines structured assessments, behavioural insight, psychometric tools, and practical evaluation methods to help organisations identify individuals who are best suited for both the role and the wider organisational environment. Through tailored assessment processes, we support organisations in strengthening hiring quality, reducing bias in selection decisions, improving role alignment, and identifying long-term potential within candidates.
 `,
       image: "/s10.jpg",
     },
@@ -321,6 +318,10 @@ Through tailored assessment processes, we support organisations in strengthening
         },
       ],
     },
+    bottomLogos: [
+      { src: "/img21.png", alt: "MBTI®" },
+      { src: "/img22.png", alt: "Facet5" },
+    ],
     areasOfSupport: [
       {
         num: "01",
@@ -364,7 +365,9 @@ export default async function ServiceSlugPage({ params }) {
   if (!data) notFound();
 
   const useAccordionAreas =
-    slug === "entrepreneurial-consulting" || slug === "talent-assessment"|| slug === "career-development";
+    slug === "entrepreneurial-consulting" ||
+    slug === "talent-assessment" ||
+    slug === "career-development";
 
   return (
     <div>
@@ -374,33 +377,39 @@ export default async function ServiceSlugPage({ params }) {
         heading={data.hero.heading}
         desc={data.hero.desc}
         image={data.hero.image}
+        bottomLogos={
+          slug === "talent-assessment" ? ["/fact11.png", "/fact12.png"] : null
+        }
       />
 
       <ServiceOtherInner
         topCards={data.topCards}
         bottomCard1={data.bottomCard1}
         bottomCard={useAccordionAreas ? null : data.bottomCard}
+        // bottomLogos={slug === "talent-assessment" ? data.bottomLogos : null}
       />
 
       {useAccordionAreas && (
         <AreasOfSupport
-          heading="Areas of Support"
+          heading="Areas We Support"
           items={data.areasOfSupport}
           showNewsletter={false}
           compact={true}
         />
       )}
 
-      {slug === "employee-training-development" && (
+      {(slug === "employee-training-development" ||
+        slug === "upskilling-training") && (
         <div className="training-programme-btn-wrap">
           <button className="training-programme-btn">
-            <Link href='/training'>
-            View Training Programme
-            </Link>
+            <Link href="/training">View Training Program</Link>
           </button>
         </div>
       )}
-      <Newsletter/>
+
+      {/* {slug === "talent-assessment" && <Facts />} */}
+
+      <Newsletter />
     </div>
   );
 }

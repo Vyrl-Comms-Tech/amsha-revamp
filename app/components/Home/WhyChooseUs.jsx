@@ -136,7 +136,7 @@ const WhyChooseUs = () => {
           </div>
 
           <div className="why-image">
-            <img src="/ab8.png" alt="Amsha Advisory workplace" />
+            <img src="https://www.amazinghomedecorco.com/wp-content/uploads/2024/04/Beautiful-Grey-Home-Offices_-I-8.jpg" alt="Amsha Advisory workplace" />
           </div>
         </div>
       </div>

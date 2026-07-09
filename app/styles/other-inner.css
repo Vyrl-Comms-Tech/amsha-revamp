@@ -133,6 +133,35 @@
   line-height: 1.55;
   margin: 0;
 }
+/* ── Bottom logos row (e.g. MBTI®/Facet5) ── */
+.oi-bottom-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+
+.oi-bottom-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oi-bottom-logo img {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+  max-width: 160px;
+}
+
+@media (max-width: 575px) {
+  .oi-bottom-logos {
+    gap: 30px;
+  }
+}
+
 @media (max-width: 1620px) {
   .oi-title {
     font-size: 44px;

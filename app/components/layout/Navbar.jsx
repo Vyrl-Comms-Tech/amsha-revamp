@@ -37,7 +37,7 @@ const serviceLinks = [
   {
     href: "/services/employee-training-development",
     label: "Employee Training & Development",
-    children: [{ href: "/training", label: "Training Programme" }],
+    children: [{ href: "/training", label: "Training Program" }],
   },
   {
     href: "/services/upskilling-training",
@@ -102,7 +102,6 @@ const Navbar = () => {
           onClick={() => setDropdownForceClosed(true)}
         >
           <span>{service.label}</span>
-          <span className="nav-mini-plus">+</span>
         </Link>
 
         <div className="nav-sub-dropdown-bottom">

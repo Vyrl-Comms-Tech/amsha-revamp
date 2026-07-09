@@ -272,7 +272,7 @@
 //         makeDefault
 //         position={[0, 2.5, cameraZ]}
 //       />
-//       <Environment preset="city" />
+//       <Environment preset="warehouse" />
 //       <group ref={mouseGroupRef}>
 //         <Model
 //           rotationX={rot.x}

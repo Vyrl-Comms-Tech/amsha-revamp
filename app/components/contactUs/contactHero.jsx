@@ -28,7 +28,7 @@ export default function ContactHero() {
         <div className="contact-info-item">
           <span>Phone</span>
           <a href="tel:+971507569611">+971 50 756 9611</a>
-          <a href="tel:+25575779111">+255 757 791 11</a>
+          <a href="tel:+255757791111">+255 757 791 111</a>
         </div>
       </div>
 

@@ -26,7 +26,7 @@ const DARK_COL = [0, 1, 2, 1, 0, 1];
 const isDark = (i) => DARK_COL[Math.floor(i / 3) % DARK_COL.length] === i % 3;
 
 export default function AreasOfSupport({
-  heading = "Areas of Support",
+  heading = "Areas We Support",
   items = DEFAULT_ITEMS,
   showNewsletter = false,
   compact = false,

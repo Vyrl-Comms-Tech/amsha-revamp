@@ -11,6 +11,7 @@ export default function ServiceInnerHero({
   desc = "At Amsha Advisory, our People Advisory solutions are designed to help organisations strengthen their internal foundations through structured, practical, and people-centred support.",
   image = "/ab1.png",
   btnText = "Start work now",
+  bottomLogos,
 }) {
   return (
     <div className="sih-outer">
@@ -25,15 +26,34 @@ export default function ServiceInnerHero({
               .split(/\n{1,}/)
               .map((line) => line.trim())
               .filter(Boolean)
-              .map((paragraph, i) => (
-                <TextAnimation key={i} animateOnScroll={false} delay={0.3}>
-                  <p>{paragraph}</p>
-                </TextAnimation>
-              ))}
+              .map((paragraph, i) => {
+                const parts = paragraph.split(/\s*<br\s*\/?>\s*/i);
+                return (
+                  <TextAnimation key={i} animateOnScroll={false} delay={0.3}>
+                    <p>
+                      {parts.map((part, j) => (
+                        <span key={j}>
+                          {j > 0 && <br />}
+                          {part}
+                        </span>
+                      ))}
+                    </p>
+                  </TextAnimation>
+                );
+              })}
           </div>
           <Link href="/contact-us" className="sih-btn btn-4">
             {btnText}
           </Link>
+          {bottomLogos && bottomLogos.length > 0 && (
+            <div className="sih-bottom-logos">
+              {bottomLogos.map((logo, i) => (
+                <div key={i} className="sih-bottom-logo">
+                  <Image src={logo} alt="" width={140} height={60} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="th-right-glow">

@@ -49,6 +49,7 @@ export default function ServiceOtherInner({
   topCards = DEFAULT_TOP_CARDS,
   bottomCard1,
   bottomCard,
+  bottomLogos,
 }) {
   return (
     <section className="oi-section">
@@ -143,7 +144,22 @@ export default function ServiceOtherInner({
           </div>
         </div>
       )}
-      
+
+      {bottomLogos && (
+        <div className="oi-bottom-logos">
+          {bottomLogos.map((logo, i) => (
+            <div key={i} className="oi-bottom-logo">
+              <Image
+                src={logo.src}
+                alt={logo.alt || ""}
+                width={logo.width || 160}
+                height={logo.height || 80}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
     </section>
   );
 }

@@ -10,38 +10,38 @@ const STEPS = [
   {
     step: "Step One",
     title: "People Advisory",
-    text: "Strategic organisational support designed to strengthen workplace structure, improve role clarity, enhance operational efficiency, and support overall organisational performance.",
+    text: " Strategic people solutions that strengthen organizational structure, workplace performance, and long-term business success.",
     href: "/services/people-advisory",
   },
   {
     step: "Step Two",
     title: "Employee Training & Development",
-    text: "Interactive and practical training programs focused on improving workplace performance, leadership capability, and team effectiveness.",
+    text: " Interactive, customized training programs that build skills, develop leaders, and enhance workplace performance.",
     href: "/services/employee-training-development",
   },
   {
     step: "Step Three",
     title: "Upskilling & Training",
-    text: "Targeted development programs that help individuals strengthen professional skills and adapt to evolving workplace demands.",
+    text: " Personalized 1:1 development programs designed to strengthen professional skills and support individual growth.",
     href: "/services/upskilling-training",
-  },
-  {
-    step: "Step Four",
-    title: "Entrepreneurial Consulting",
-    text: "Business support solutions designed to help entrepreneurs build stronger foundations, improve operations, and scale sustainably.",
-    href: "/services/entrepreneurial-consulting",
   },
   {
     step: "Step Five",
     title: "Career Development",
-    text: "Personalised guidance that helps individuals identify their strengths, clarify career direction, and support long-term professional growth.",
+    text: " Tailored career guidance and psychometric insights that help individuals gain clarity, confidence, and direction.",
     href: "/services/career-development",
   },
   {
     step: "Step Six",
     title: "Talent Assessment",
-    text: "Behavioural and assessment-based solutions that support informed hiring, development, and organisational decision-making.",
+    text: "Behavioural and assessment-based solutions that support smarter hiring and more informed talent decisions.",
     href: "/services/talent-assessment",
+  },
+  {
+    step: "Step Four",
+    title: "Entrepreneurial Consulting",
+    text: " Strategic consulting that helps entrepreneurs build stronger businesses through people-focused and sustainable growth solutions.",
+    href: "/services/entrepreneurial-consulting",
   },
 ];
 

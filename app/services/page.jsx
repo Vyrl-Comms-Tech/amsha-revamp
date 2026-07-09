@@ -10,7 +10,7 @@ export default function ServicesPage() {
     <main >
       <ServiceHero />
       {/* <BrandsStraight /> */}
-      <OurClientsHorizontal />
+      {/* <OurClientsHorizontal /> */}
       <StickySteps/>
       <Newsletter/>
     </main>

@@ -375,7 +375,7 @@ export default function AddTrainingForm() {
               <div className="add-content-card-body">
                 <textarea
                   className="add-content-textarea"
-                  placeholder="Describe the training programme, objectives, and what participants will gain…"
+                  placeholder="Describe the training program, objectives, and what participants will gain…"
                   rows={7}
                   value={form.description}
                   onChange={(e) => set('description', e.target.value)}

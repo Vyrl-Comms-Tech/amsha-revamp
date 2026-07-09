@@ -8,6 +8,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Services", href: "/services" },
       { label: "Blogs", href: "/blogs" },
       { label: "Contact us", href: "/contact-us" },
       { label: "Training topics", href: "/training" },

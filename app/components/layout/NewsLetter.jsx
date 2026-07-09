@@ -1,4 +1,3 @@
-
 import React from "react";
 import "../../styles/newsletter.css";
 import Link from "next/link";
@@ -13,17 +12,13 @@ const Newsletter = () => {
         </h2>
 
         <p>
-          Facet5 is a psychometric assessment tool that provides deeper insight
-          into individual behaviour, personality, and workplace preferences,
-          helping organisations strengthen hiring decisions, leadership
-          development, team effectiveness, and employee growth.
+          For those who want more from their business, there's Amsha. <br /> Get
+          started today and never look back.
         </p>
 
         <button className="newsletter-btn">
-            <Link href='/contact-us'>
-            Contact us
-            </Link>
-            </button>
+          <Link href="/contact-us">Contact us</Link>
+        </button>
       </div>
     </section>
   );

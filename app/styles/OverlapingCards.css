@@ -34,8 +34,49 @@
   position: relative;
   z-index: 1;
   display: flex;
-  gap: 10px;
-  padding: 40px 35px;
+  gap: 13px;
+  padding: 40px 25px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.oc-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--color-white);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.oc-arrow:hover {
+  background: rgba(0, 0, 0, 0.55);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.oc-arrow-left {
+  left: 10px;
+}
+
+.oc-arrow-right {
+  right:1px;
+}
+
+@media (max-width: 760px) {
+  .oc-arrow {
+    display: none;
+  }
 }
 
 .oc-card {
@@ -44,7 +85,7 @@
   justify-content: space-between;
   height: 587px;
   padding: 28px 25px 27px 25px;
-  flex: 1 0 0;
+  flex: 0 0 calc((100% - 20px) / 3);
   background: var(--color-white) !important;
   border-radius: 12px;
 }
@@ -52,6 +93,7 @@
 .oc-card-logo {
   width: 129px;
   height: 120px;
+  filter: grayscale(1);
   object-fit: contain;
   object-position: left top;
 }
