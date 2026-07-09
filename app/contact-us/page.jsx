@@ -6,8 +6,8 @@ import FooterModel from "../components/layout/FooterModel";
 const page = () => {
   return (
     <div>
-      <ContactUsHero />
-      {/* <ContactHero/> */}
+      {/* <ContactUsHero /> */}
+      <ContactHero/>
       <FooterModel />
     </div>
   );

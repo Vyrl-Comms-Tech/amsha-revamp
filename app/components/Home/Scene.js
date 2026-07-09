@@ -353,12 +353,12 @@ const DEFAULT_EXTRA = { x: 0.5, y: 95.5, z: 7 };
 // but x (pitch) and z (roll) are halved so the model tilts far less and stays
 // within the narrow portrait canvas.
 const MOBILE_KEYFRAMES = [
-  { p: 0, x: 6, y: 75, z: -7 },
-  { p: 0.125, x: 7, y: 321, z: 8 },
-  { p: 0.5, x: 6, y: 500, z: -6 },
-  { p: 1.0, x: 3.5, y: 658.5, z: -3 },
+  { p: 0, x: 6, y: 288, z: -7 },
+  { p: 0.125, x: 7, y: 338, z: 8 },
+  { p: 0.5, x: 6, y: 384, z: -6 },
+  { p: 1.0, x: 3.5, y: 201, z: -3 },
 ];
-const MOBILE_EXTRA = { x: -3, y: -200, z: 1 };
+const MOBILE_EXTRA = { x: -3, y: 95, z: 1 };
 
 // Live-editable copies of the desktop keyframes/extra — the lil-gui panel
 // mutates these directly. Module-scope (not a ref) so they're safe to read

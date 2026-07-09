@@ -138,7 +138,7 @@ const Hero = () => {
             }),
           onLeaveBack: () =>
             gsap.to(canvasEl, {
-              left: "50%",
+              left: "44%",
               duration: 0.6,
               ease: "power2.out",
               overwrite: true,
@@ -150,7 +150,7 @@ const Hero = () => {
         // footer text. Fades back in if scrolling back up past the footer.
         positionTween = ScrollTrigger.create({
           trigger: footerEl,
-          start: "top 75%",
+          start: "top 55%",
           onEnter: () =>
             gsap.to(canvasEl, { autoAlpha: 0, duration: 0.4, overwrite: true }),
           onLeaveBack: () =>
@@ -269,7 +269,7 @@ const Hero = () => {
         </div>
 
         {/* fixed canvas — outside grid flow so it doesn't shift columns */}
-        <div ref={canvasWrapperRef} className="canvas-wrapper">
+        <div ref={canvasWrapperRef} className="home-canvas-wrapper">
           <Canvas gl={{ alpha: true }} style={{ background: "transparent" }}>
             <Suspense fallback={null}>
               <Scene

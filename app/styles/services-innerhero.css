@@ -1,37 +1,99 @@
+
+/* ── Right-side glow strip with floating dots ── */
+.th-right-glow {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  width: 50%;
+  height: 110%;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.th-right-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(21, 22, 26, 0.14) 2.61%,
+    rgba(250, 250, 250, 0.14) 48.84%,
+    rgba(21, 22, 26, 0.14) 91.36%
+  );
+  filter: blur(32px);
+  transform: rotate(13.963deg);
+  transform-origin: center;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes dot-float {
+  0% {
+    translate: 0px 0px;
+  }
+  25% {
+    translate: 4px -6px;
+  }
+  50% {
+    translate: -3px -4px;
+  }
+  75% {
+    translate: -5px 3px;
+  }
+  100% {
+    translate: 0px 0px;
+  }
+}
+
 /* ── Outer: white background, full height, only padding-inline ── */
 .sih-outer {
   position: relative;
   min-height: 100vh;
-  background: var(--color-white, #fff);
+  background: black;
   display: flex;
   align-items: center;
   z-index: 99;
-  padding: 0px 50px;
+  overflow: hidden;
+  /* padding: 0px 50px; */
 }
 
 /* ── Gray card — 80vh tall, centered vertically by parent flex ── */
 .sih-card {
   flex: 1;
-  margin-top: 5%;
-  height: 65vh;
-  background: #6b6b6b;
-  border-radius: 10px;
+  /* margin-top: 5%; */
+  height: 100vh;
+  background: #000;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
 .sih-content {
-  flex: 0 0 59%;
+  flex: 0 0 100%;
   padding: 70px 60px 70px 70px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 22px;
 }
 
 .sih-heading {
   font-size: 70px;
   width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 500;
   line-height: 1.05;
   color: #fff;
@@ -40,13 +102,14 @@
 .sih-desc {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 2px;
   font-size: 23px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.82);
-  line-height: 1.35;
+  text-align: center !important;
+  line-height: 1.15;
   max-width: 90%;
-  max-height: 25vh;
+  /* max-height: 25vh; */
   overflow-y: auto;
   padding-right: 14px;
   scrollbar-width: thin;
@@ -54,7 +117,7 @@
 }
 
 .sih-desc::-webkit-scrollbar {
-  width: 6px;
+  /* width: 6px; */
 }
 
 .sih-desc::-webkit-scrollbar-track {
@@ -109,16 +172,16 @@
   object-position: center;
 }
 @media (max-width: 1620px) {
-  .sih-card {
+  /* .sih-card {
     margin-top: 8%;
     height: 70vh;
   }
   .sih-img-wrap {
     top: 17%;
-  }
+  } */
   .sih-content {
-    flex: 0 0 58%;
-    padding: 70px 60px 70px 50px;
+    /* flex: 0 0 58%; */
+    padding: 70px 15px 50px;
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -135,7 +198,6 @@
     color: rgba(255, 255, 255, 0.82);
     line-height: 1.15;
     max-width: 90%;
-    max-height: 24vh;
   }
 }
 @media (max-width: 1280px) {
@@ -182,6 +244,7 @@
     font-size: 17px;
     max-width: 100%;
     /* max-height: none; */
+    max-height: 24vh;
     /* overflow-y: visible; */
     padding-right: 0;
   }

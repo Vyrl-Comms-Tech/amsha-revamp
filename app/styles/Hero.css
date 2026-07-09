@@ -140,7 +140,7 @@
 }
 
 /* ── fixed canvas — centered on screen ── */
-.canvas-wrapper {
+.home-canvas-wrapper {
   position: fixed;
   top: 0;
   left: 44%;
@@ -222,7 +222,7 @@
   .hero-desc {
     font-size: 17px;
   }
-  .canvas-wrapper {
+  .home-canvas-wrapper {
     width: 38vw;
   }
 }
@@ -237,7 +237,7 @@
   .hero-center {
     display: none;
   }
-  .canvas-wrapper {
+  .home-canvas-wrapper {
     width: 52vw;
     top: 18%;
     height: 70vh;
@@ -276,14 +276,14 @@
     width: 100%;
     z-index: 10;
   }
-  .canvas-wrapper {
-    width: 85vw;
-    left: 50%;
+  .home-canvas-wrapper {
+    width: 75vw;
+    left: 44% !important;
     top: 40%;
     height: 60vh;
     transform: translateX(-50%);
   }
-  .canvas-wrapper::before {
+  .home-canvas-wrapper::before {
     display: none;
   }
   .hero-heading {

@@ -17,7 +17,7 @@
 
 /* ── Card base ── */
 .oi-card {
-  background: #15161a;
+  background: var(--color-grey);
   border-radius: 12px;
   padding: 32px 34px 36px;
   display: flex;

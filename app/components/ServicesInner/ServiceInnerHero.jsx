@@ -1,7 +1,9 @@
-'use client'
+"use client";
 import Image from "next/image";
 import "../../styles/services-innerhero.css";
 import TextAnimation from "../layout/TextAnimation";
+import { GlowDot } from "../layout/svg";
+
 import Link from "next/link";
 
 export default function ServiceInnerHero({
@@ -12,12 +14,10 @@ export default function ServiceInnerHero({
 }) {
   return (
     <div className="sih-outer">
-
       {/* ── Gray card ── */}
       <div className="sih-card">
         <div className="sih-content">
           <TextAnimation animateOnScroll={true} delay={0.3}>
-
             <h1 className="sih-heading">{heading}</h1>
           </TextAnimation>
           <div className="sih-desc" data-lenis-prevent>
@@ -36,12 +36,40 @@ export default function ServiceInnerHero({
           </Link>
         </div>
       </div>
-
-      {/* ── Image ── */}
-      <div className="sih-img-wrap">
-        <Image src={image} alt={heading} fill className="sih-img" />
+      <div className="th-right-glow">
+        <GlowDot
+          style={{ position: "absolute", left: "10%", top: "15%" }}
+          delay={0}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "30%", top: "45%" }}
+          delay={0.7}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "55%", top: "22%" }}
+          delay={1.3}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "72%", top: "60%" }}
+          delay={0.4}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "88%", top: "30%" }}
+          delay={1.0}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "45%", top: "75%" }}
+          delay={1.6}
+        />
+        <GlowDot
+          style={{ position: "absolute", left: "20%", top: "80%" }}
+          delay={0.2}
+        />
       </div>
-
+      {/* ── Image ── */}
+      {/* <div className="sih-img-wrap">
+        <Image src={image} alt={heading} fill className="sih-img" />
+      </div> */}
     </div>
   );
 }

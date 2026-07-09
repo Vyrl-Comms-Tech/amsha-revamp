@@ -14,7 +14,8 @@
   --color-black: #000000;
   --color-body-text: #f4f4f4;
   --color-card-text: #333333;
-
+  --color-grey: #303440;
+/* 303440 */
   /* ── White with opacity ── */
   --color-white-90: rgba(255, 255, 255, 0.9);
   --color-white-85: rgba(255, 255, 255, 0.85);

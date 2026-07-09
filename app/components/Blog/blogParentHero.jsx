@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import TextAnimation from "../layout/TextAnimation";
 import "../../styles/blog-parent-hero.css";
 import Link from "next/link";
-const tabs = ["blog", "education", "news"];
+const tabs = ["blog", "education", "news", "case studies"];
 
 const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
   const featured = data?.[0];
@@ -21,7 +21,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
           <h1 className="bph-title">Blogs & articles</h1>
         </TextAnimation>
 
-        {/* <div className="bph-tabs ">
+        <div className="bph-tabs ">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -31,7 +31,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
             </button>
           ))}
-        </div> */}
+        </div>
       </div>
 
       {loading ? (

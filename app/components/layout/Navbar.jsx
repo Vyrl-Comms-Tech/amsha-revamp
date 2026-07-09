@@ -15,15 +15,15 @@ const darkRoutes = [
   "/blogs",
   "/contact-us",
   "/blog-inner",
-  "/services-inner",
-  "/services-inner1",
-  "/services/people-advisory",
-  "/services/employee-training-development",
+  // "/services-inner",
+  // "/services-inner1",
+  // "/services/people-advisory",
+  // "/services/employee-training-development",
   // "/about",
-  "/services/upskilling-training",
-  "/services/entrepreneurial-consulting",
-  "/services/career-development",
-  "/services/talent-assessment",
+  // "/services/upskilling-training",
+  // "/services/entrepreneurial-consulting",
+  // "/services/career-development",
+  // "/services/talent-assessment",
 ];
 
 const links = [

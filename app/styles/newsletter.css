@@ -11,7 +11,7 @@
 
 .newsletter-card {
   width: 100%;
-  background: #2d323d;
+  background: #303440;
   border-radius: 4px;
   max-width: 1183px;
   padding: 62px 27px 68px;
@@ -53,7 +53,7 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   .newsletter-card {
     max-width: 90%;
     padding: 26px 24px 30px;
@@ -68,13 +68,13 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
   .newsletter-section {
-    padding: 30px 14px;
+    padding: 15px 0px;
   }
 
   .newsletter-card {
-    padding: 24px 18px 28px;
+    padding: 24px 8px 28px;
   }
 
   .newsletter-card h2 {
@@ -82,6 +82,11 @@
   }
 
   .newsletter-card p {
-    font-size: 11px;
+    font-size: 13px;
+    line-height: 1.05;
+  }
+  .newsletter-btn {
+    padding: 7px 16px;
+    font-size: 15px;
   }
 }

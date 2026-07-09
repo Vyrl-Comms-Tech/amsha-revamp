@@ -34,7 +34,14 @@ export default function ContactHero() {
 
       <div className="contact-location">
         <span>Location</span>
+
+      <a href="https://www.google.com/search?sca_esv=bde474a155d49021&sxsrf=AHTn8zoH-cgdnwaCI1dQf-a4JM8wKWLnlg:1746436294161&kgmid=/g/11yb4nt3zs&q=Amsha+Advisory+Human+Resource+Services&shndl=30&shem=lcuae,uaasie&source=sh/x/loc/uni/m1/1&kgs=53ee37db4460fb31" target="__blank">
         <p>Office 1019 | Park Lane Tower | Business Bay | Dubai | UAE.</p>
+      </a>
+
+      <a href="https://www.google.com/search?sca_esv=bde474a155d49021&sxsrf=AHTn8zqWtdp8aVWYbPwNJiadqpKh2lFdEA:1746436317453&kgmid=/g/11wvd4wtsy&q=Amsha+Advisory+Human+Resources&shndl=30&shem=lcuae,uaasie&source=sh/x/loc/uni/m1/1&kgs=7033619710dd52c4">
+        <p>2nd floor | Office no 15 | Viva Towers | Ali Hassan Mwinyi Rd | Dar es Salaam | Tanzania.</p>
+      </a>
       </div>
     </div>
 
@@ -42,22 +49,22 @@ export default function ContactHero() {
       <form>
         <div className="form-group">
           <label>Full Name</label>
-          <input type="text" defaultValue="E. Alexander Vance" />
+          <input type="text" placeholder="E. Alexander Vance" />
         </div>
 
         <div className="form-group">
           <label>Email Address</label>
-          <input type="email" defaultValue="alexander@company.com" />
+          <input type="email" placeholder="alexander@company.com" />
         </div>
 
         <div className="form-group">
           <label>Company Name</label>
-          <input type="text" defaultValue="Your Agency or Venture" />
+          <input type="text" placeholder="Your Agency or Venture" />
         </div>
 
         <div className="form-group">
           <label>Message</label>
-          <textarea defaultValue="Tell us about your project goals and vision..." />
+          <textarea placeholder="Tell us about your project goals and vision..." />
         </div>
 
         <button type="submit">
