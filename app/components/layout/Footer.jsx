@@ -27,6 +27,7 @@ const FOOTER_COLUMNS = [
         href: "/services/entrepreneurial-consulting",
       },
       { label: "Career Development", href: "/services/career-development" },
+      { label: "Talent Assessment", href: "/services/talent-assessment" },
     ],
   },
   {
