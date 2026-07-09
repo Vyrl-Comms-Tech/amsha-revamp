@@ -11,6 +11,16 @@ import "../../styles/AboutHero.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const RIGHT_DOTS = [
+  { top: "18%", left: "58%" },
+  { top: "30%", left: "70%" },
+  { top: "62%", left: "60%" },
+  { top: "15%", left: "82%" },
+  { top: "50%", left: "88%" },
+  { top: "78%", left: "75%" },
+  { top: "42%", left: "92%" },
+];
+
 export default function AboutHero() {
   const canvasWrapperRef = useRef(null);
 
@@ -111,6 +121,19 @@ export default function AboutHero() {
             </h1>
           </TextAnimation>
         </div>
+
+        {RIGHT_DOTS.map((pos, i) => (
+          <GlowDot
+            key={i}
+            delay={+(i * 0.31).toFixed(2)}
+            style={{
+              position: "absolute",
+              zIndex: 6,
+              pointerEvents: "none",
+              ...pos,
+            }}
+          />
+        ))}
       </section>
 
       <div className="sh-right-glow">
