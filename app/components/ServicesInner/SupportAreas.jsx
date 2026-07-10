@@ -16,87 +16,87 @@ const ITEMS = [
     text: "Helping organisations define responsibilities, expectations, and role clarity to improve accountability and team effectiveness.",
   },
   {
-    num: "02",
+    num: "03",
     title: "SOP & Process Development",
     text: "Designing practical systems, workflows, and standard operating procedures that improve consistency and operational flow.",
   },
   // Row 2 — dark at col 1
   {
-    num: "02",
+    num: "04",
     title: "Policy Review & Workplace Governance",
     text: "Reviewing and strengthening workplace policies and internal guidelines to support professionalism, clarity, and organisational alignment.",
   },
   {
-    num: "01",
+    num: "05",
     title: "Training Needs & Skill Gap Analysis",
     text: "Identifying capability gaps and development areas across teams to support targeted employee growth and performance improvement.",
   },
   {
-    num: "02",
+    num: "06",
     title: "Organisational Performance & Improvement",
     text: "Assessing workplace and operational challenges that may be impacting productivity, communication, and overall organisational performance.",
   },
   // Row 3 — dark at col 2
   {
-    num: "02",
+    num: "07",
     title: "Leadership Alignment & Team Effectiveness",
     text: "Supporting leadership teams and departments in improving communication, collaboration, accountability, and alignment.",
   },
   {
-    num: "02",
+    num: "08",
     title: "Leadership Development Support",
     text: "Helping organisations identify and strengthen leadership capability across different levels of the business.",
   },
   {
-    num: "01",
+    num: "09",
     title: "Employee Performance Management",
     text: "Helping organisations strengthen performance management processes that encourage accountability, development, and workplace effectiveness.",
   },
   // Row 4 — dark at col 1
   {
-    num: "02",
+    num: "10",
     title: "Performance Evaluation & KPI Support",
     text: "Supporting businesses in developing clearer performance evaluation processes, KPIs, and accountability structures.",
   },
   {
-    num: "01",
+    num: "11",
     title: "Organisational Development & Change Support",
     text: "Supporting businesses through organisational growth, transitions, restructuring, and workplace change initiatives.",
   },
   {
-    num: "02",
+    num: "12",
     title: "Workplace Communication & Culture Support",
     text: "Helping organisations strengthen communication practices and create healthier, more people-centred workplace cultures.",
   },
   // Row 5 — dark at col 0
   {
-    num: "01",
+    num: "13",
     title: "Culture & Values Alignment",
     text: "Helping organisations align workplace behaviours, leadership practices, and internal culture with their organisational values and vision.",
   },
   {
-    num: "02",
+    num: "14",
     title: "Employee Engagement & Workplace Experience",
     text: "Supporting organisations in strengthening employee engagement, workplace satisfaction, and overall employee experience.",
   },
   {
-    num: "02",
+    num: "15",
     title: "Competency Framework Development",
     text: "Designing competency frameworks that define the behaviours, skills, and expectations required across different roles and functions.",
   },
   // Row 6 — dark at col 1
   {
-    num: "02",
+    num: "16",
     title: "Employee Development Planning",
     text: "Creating structured development approaches that support employee growth, progression, and long-term capability building.",
   },
   {
-    num: "01",
+    num: "17",
     title: "Workplace Behaviour & Professionalism Support",
     text: "Supporting organisations in strengthening workplace conduct, professionalism, accountability, and employee behaviour standards.",
   },
   {
-    num: "02",
+    num: "18",
     title: "Operational & Departmental Support",
     text: "Providing people-focused operational support to improve departmental efficiency, coordination, and workplace effectiveness.",
   },
@@ -104,7 +104,7 @@ const ITEMS = [
 
 // Row 7 — newsletter (cols 0-1) + dark card (col 2)
 const LAST_CARD = {
-  num: "01",
+  num: "19",
   title: "People Strategy & Organisational Planning",
   text: "Helping organisations align their people strategies with wider business objectives, growth plans, and long-term organisational goals.",
 };

@@ -162,7 +162,7 @@ const OverlapingCards = () => {
     <div className="p-oc">
       <section className="oc-section">
         <div className="oc-bg-wrap">
-          <img src="/bg2.png" alt="" fill className="oc-bg" priority />
+          <img src="/bg2.png" alt=""  className="oc-bg"  />
         </div>
 
         <button

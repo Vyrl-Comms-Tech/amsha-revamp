@@ -122,9 +122,9 @@ export default function PeopleAdvisory() {
                 <path
                   d="M27 13.5L1 13.5M13.2778 26L1 13.5L13.2778 1"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
@@ -144,9 +144,9 @@ export default function PeopleAdvisory() {
                 <path
                   d="M1 13.5L27 13.5M14.7222 26L27 13.5L14.7222 1"
                   stroke="white"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>

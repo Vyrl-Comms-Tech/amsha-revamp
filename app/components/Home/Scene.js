@@ -291,6 +291,7 @@
 import { useEffect, useRef, useReducer } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
 import { Environment, PerspectiveCamera } from "@react-three/drei";
+import * as THREE from "three";
 import { Model } from "../../model";
 
 const DEG = Math.PI / 180;
@@ -347,13 +348,13 @@ const DEFAULT_KEYFRAMES = [
 //
 // Tune live in the "Facts → Footer  (+extra °)" folder in the lil-gui panel.
 // ─────────────────────────────────────────────────────────────────────────────
-const DEFAULT_EXTRA = { x: 0.5, y: 95.5, z: 7 };
+const DEFAULT_EXTRA = { x: 7, y: 91, z: 8 };
 
 // Mobile keyframes — same Y spin progression so the animation feels identical,
 // but x (pitch) and z (roll) are halved so the model tilts far less and stays
 // within the narrow portrait canvas.
 const MOBILE_KEYFRAMES = [
-  { p: 0, x: 6, y: 288, z: -7 },
+  { p: 0, x: 6, y: 298, z: -7 },
   { p: 0.125, x: 7, y: 338, z: 8 },
   { p: 0.5, x: 6, y: 384, z: -6 },
   { p: 1.0, x: 3.5, y: 201, z: -3 },
@@ -527,8 +528,20 @@ const Scene = ({
   // ── Canvas size → mobile flag ───────────────────────────────────
   // useThree().size gives canvas pixel dimensions (updates with CSS breakpoints).
   // < 600 px canvas width = mobile (85 vw canvas on a ≤575 px viewport).
-  const { size } = useThree();
+  const { size, gl } = useThree();
   const isMobile = size.width < 600;
+
+  // The monochrome studio HDRI has an overexposed softbox region — HDR
+  // values there can exceed 1.0 by a lot, so any non-zero envMapIntensity
+  // can still clip to blown-out white after the default tone mapping.
+  // Capping exposure here puts a hard ceiling on scene brightness instead
+  // of chasing it through per-material envMapIntensity/color tweaks.
+  // `gl` is the imperative WebGLRenderer instance (not React-tracked state),
+  // so mutating its properties directly is the standard R3F pattern.
+  useEffect(() => {
+    gl.toneMapping = THREE.ACESFilmicToneMapping;
+    gl.toneMappingExposure = 0.7;
+  }, [gl]);
 
   // Pull camera further back on mobile so the model appears smaller and
   // fits inside the narrow portrait canvas without clipping.
@@ -621,7 +634,9 @@ const Scene = ({
         makeDefault
         position={[0, 2.5, cameraZ]}
       />
-      <Environment preset="city" />
+      {/* Self-hosted neutral monochrome HDRI (public/monochrome_studio_02_1k.hdr)
+          — no color cast by design, replaces the "city" preset's orange tint. */}
+      <Environment files="/brown_photostudio_02_1k.hdr" />
       <group ref={mouseGroupRef}position={[0, modelPositionY, 0]}>
         <group ref={modelRef}>
           <Model glassFactorRef={glassFactorRef} />

@@ -17,7 +17,8 @@
 
 /* ── Card base ── */
 .oi-card {
-  background: var(--color-grey);
+  background: linear-gradient(180deg, #6ea1c3 0%, #5d4a6d 100%);
+
   border-radius: 12px;
   padding: 32px 34px 36px;
   display: flex;
@@ -46,7 +47,6 @@
   line-height: 1;
 }
 
-
 .oi-list {
   list-style: disc;
   padding-left: 20px;
@@ -62,7 +62,6 @@
   color: #fff;
   line-height: 1.15;
 }
-
 
 .oi-card--wide {
   flex-direction: row;
@@ -172,7 +171,7 @@
   .oi-card {
     padding: 18px 26px 27px;
   }
-  .oi-wide-left{
+  .oi-wide-left {
     padding: 0;
   }
 }

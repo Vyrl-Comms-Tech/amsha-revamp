@@ -44,7 +44,9 @@
 
 /* ── Dark card variant ── */
 .sa-card--dark {
-  background: #303440;
+  
+background: linear-gradient(180deg, #5D4A6D 0%, #6EA1C3 100%);
+
   border-color: transparent;
 }
 
