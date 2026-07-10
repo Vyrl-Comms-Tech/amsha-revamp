@@ -18,7 +18,7 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
         </TextAnimation>
 
         <TextAnimation animateOnScroll delay={0.3}>
-          <h1 className="bph-title">Blogs & articles</h1>
+          <h1 className="bph-title">Blogs & Articles</h1>
         </TextAnimation>
 
         <div className="bph-tabs ">

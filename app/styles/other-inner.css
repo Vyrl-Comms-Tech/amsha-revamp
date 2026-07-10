@@ -107,14 +107,21 @@
 .oi-content-list {
   margin: 32px 0 0;
   display: flex;
+  gap: 20px;
   flex-direction: column;
-  gap: 24px;
+  /* gap: 14px; */
 }
 
 .oi-content-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+}
+
+.oi-content-heading-row {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 16px;
 }
 
 .oi-content-heading {
@@ -125,6 +132,21 @@
   margin: 0;
 }
 
+.oi-content-logo {
+  object-fit: contain;
+  width: auto;
+  position: relative;
+  top: 5%;
+  height: auto;
+  max-width: 90px;
+  flex-shrink: 0;
+}
+
+.oi-content-item:nth-child(2) .oi-content-logo {
+  left: 2.5%;
+  top: 3%;
+}
+
 .oi-content-paragraph {
   font-size: 17px;
   font-weight: 400;
@@ -132,32 +154,10 @@
   line-height: 1.55;
   margin: 0;
 }
-/* ── Bottom logos row (e.g. MBTI®/Facet5) ── */
-.oi-bottom-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px;
-  flex-wrap: wrap;
-  padding-top: 20px;
-}
-
-.oi-bottom-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.oi-bottom-logo img {
-  object-fit: contain;
-  width: auto;
-  height: auto;
-  max-width: 160px;
-}
 
 @media (max-width: 575px) {
-  .oi-bottom-logos {
-    gap: 30px;
+  .oi-content-logo {
+    max-width: 64px;
   }
 }
 

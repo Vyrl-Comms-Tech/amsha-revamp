@@ -313,18 +313,16 @@ Our approach combines structured assessments, behavioural insight, psychometric 
           heading: "MBTI® (Myers-Briggs Type Indicator)",
           paragraph:
             "Supporting insight into communication styles, personality preferences, decision-making approaches, and workplace dynamics.",
+          logo: "/fact12.png",
         },
         {
           heading: "Facet5 Personality Assessment",
           paragraph:
             "Providing behavioural insight into leadership style, motivation, communication, resilience, and workplace effectiveness.",
+          logo: "/fact11.png",
         },
       ],
     },
-    bottomLogos: [
-      { src: "/img21.png", alt: "MBTI®" },
-      { src: "/img22.png", alt: "Facet5" },
-    ],
     areasOfSupport: [
       {
         num: "01",
@@ -381,16 +379,15 @@ export default async function ServiceSlugPage({ params }) {
         desc={data.hero.desc}
         image={data.hero.image}
         btnText={data.hero.btnText}
-        bottomLogos={
-          slug === "talent-assessment" ? ["/fact11.png", "/fact12.png"] : null
-        }
+        // bottomLogos={
+        //   slug === "talent-assessment" ? ["/fact11.png", "/fact12.png"] : null
+        // }
       />
 
       <ServiceOtherInner
         topCards={data.topCards}
         bottomCard1={data.bottomCard1}
         bottomCard={useAccordionAreas ? null : data.bottomCard}
-        // bottomLogos={slug === "talent-assessment" ? data.bottomLogos : null}
       />
 
       {useAccordionAreas && (

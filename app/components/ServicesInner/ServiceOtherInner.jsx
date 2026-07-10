@@ -49,7 +49,6 @@ export default function ServiceOtherInner({
   topCards = DEFAULT_TOP_CARDS,
   bottomCard1,
   bottomCard,
-  bottomLogos,
 }) {
   return (
     <section className="oi-section">
@@ -91,9 +90,20 @@ export default function ServiceOtherInner({
             <div className="oi-content-list">
               {bottomCard1.content.map((item, j) => (
                 <div key={j} className="oi-content-item">
-                  {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
-                    <p className="oi-content-heading">{item.heading}</p>
-                  {/* </TextAnimation> */}
+                  <div className="oi-content-heading-row">
+                    {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
+                      <p className="oi-content-heading">{item.heading}</p>
+                    {/* </TextAnimation> */}
+                    {item.logo && (
+                      <Image
+                        src={item.logo}
+                        alt=""
+                        width={item.logoWidth || 90}
+                        height={item.logoHeight || 40}
+                        className="oi-content-logo"
+                      />
+                    )}
+                  </div>
                   {/* <TextAnimation animateOnScroll={true} delay={0.3}> */}
                     <p className="oi-content-paragraph">{item.paragraph}</p>
                   {/* </TextAnimation> */}
@@ -142,21 +152,6 @@ export default function ServiceOtherInner({
               className="oi-img"
             />
           </div>
-        </div>
-      )}
-
-      {bottomLogos && (
-        <div className="oi-bottom-logos">
-          {bottomLogos.map((logo, i) => (
-            <div key={i} className="oi-bottom-logo">
-              <Image
-                src={logo.src}
-                alt={logo.alt || ""}
-                width={logo.width || 160}
-                height={logo.height || 80}
-              />
-            </div>
-          ))}
         </div>
       )}
 
