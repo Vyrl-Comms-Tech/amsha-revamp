@@ -177,7 +177,7 @@ export default function SupportAreas() {
             <input
               type="email"
               className="sa-nl-input"
-              placeholder="Enter Your Company Name"
+              placeholder=""
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
