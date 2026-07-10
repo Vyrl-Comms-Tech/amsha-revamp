@@ -76,6 +76,7 @@ const Facts = () => {
                 leadership preferences, and team dynamics through personality-based
                 insight and behavioural understanding.
                 <br />
+                <br />
                 For students and young professionals, the MBTI® Career Report also
                 provides guidance on career preferences, strengths, work styles, and
                 potential career paths aligned with their personality type and natural
