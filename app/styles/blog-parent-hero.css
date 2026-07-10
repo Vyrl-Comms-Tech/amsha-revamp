@@ -180,6 +180,14 @@
   .bph-title {
     font-size: 30px;
   }
+  .bph-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .bph-tab {
+    font-size: 13px;
+    padding: 6px 14px;
+  }
   .bph-card-title {
     font-size: 30px;
   }

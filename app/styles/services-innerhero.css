@@ -259,7 +259,7 @@
     width: 100%;
     padding: 60px 36px;
     gap: 20px;
-    align-items: flex-start;
+    /* align-items: flex-start; */
   }
   .sih-img-wrap {
     display: none;
@@ -284,6 +284,8 @@
   }
   .sih-heading {
     font-size: 35px;
+    /* justify-content: left;
+    align-items: left; */
   }
   .sih-desc {
     font-size: 20px;

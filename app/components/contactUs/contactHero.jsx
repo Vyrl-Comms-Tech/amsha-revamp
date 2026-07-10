@@ -39,7 +39,7 @@ export default function ContactHero() {
         <p>Office 1019 | Park Lane Tower | Business Bay | Dubai | UAE.</p>
       </a>
 
-      <a href="https://www.google.com/search?sca_esv=bde474a155d49021&sxsrf=AHTn8zqWtdp8aVWYbPwNJiadqpKh2lFdEA:1746436317453&kgmid=/g/11wvd4wtsy&q=Amsha+Advisory+Human+Resources&shndl=30&shem=lcuae,uaasie&source=sh/x/loc/uni/m1/1&kgs=7033619710dd52c4">
+      <a href="https://www.google.com/search?sca_esv=bde474a155d49021&sxsrf=AHTn8zqWtdp8aVWYbPwNJiadqpKh2lFdEA:1746436317453&kgmid=/g/11wvd4wtsy&q=Amsha+Advisory+Human+Resources&shndl=30&shem=lcuae,uaasie&source=sh/x/loc/uni/m1/1&kgs=7033619710dd52c4" target="__blank">
         <p>2nd floor | Office no 15 | Viva Towers | Ali Hassan Mwinyi Rd | Dar es Salaam | Tanzania.</p>
       </a>
       </div>

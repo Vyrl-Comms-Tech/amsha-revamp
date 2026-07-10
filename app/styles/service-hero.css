@@ -162,6 +162,7 @@
   .sh-left {
     padding: 0 15px;
     gap: 20px;
+    top: -5%;
   }
   .sh-heading {
     font-size: 40px;

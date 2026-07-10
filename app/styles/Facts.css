@@ -152,14 +152,17 @@
     padding: 14px 15px;
   }
   .facts-mbti-logo {
-    display: none;
+    /* display: none; */
   }
   .facts-box {
     padding: 30px 15px;
     gap: 60px;
   }
+  .facts-box-head {
+  gap: 20px;
+  }
   .facts-box-title {
-    font-size: 35px;
+    font-size: 29px;
   }
   .facts-box-text {
     font-size: 18px;

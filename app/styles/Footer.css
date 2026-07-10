@@ -263,8 +263,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px 16px;
-    margin-top: 30px;
-    padding-top: 24px;
+    margin-top: 19px;
+    padding-top: 1px;
     flex-wrap: unset;
   }
 
