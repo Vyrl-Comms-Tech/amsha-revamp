@@ -296,9 +296,12 @@ background: linear-gradient(180deg, #5D4A6D 0%, #6EA1C3 100%);
   .sa-grid {
     grid-template-columns: 1fr;
     gap: 12px;
+    margin-bottom: 22px;
   }
   .sa-last-row {
     gap: 12px;
+    display: flex;
+    flex-direction: column-reverse;
   }
   .sa-title {
     font-size: 18px;

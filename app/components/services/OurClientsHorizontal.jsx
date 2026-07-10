@@ -20,40 +20,14 @@ const ITEMS = [
   },
 ];
 
-// Item width matches CSS: calc((100vw - 100px) / 3)
-// On tablet (≤991px): calc((100vw - 60px) / 2)
-// On mobile (≤575px): calc(100vw - 40px)
-const getItemWidth = () => {
-  const w = window.innerWidth;
-  if (w <= 575) return w - 40;
-  if (w <= 991) return (w - 60) / 2;
-  return (w - 100) / 3;
-};
-
 export default function OurClientsHorizontal() {
   const wrapperRef = useRef(null);
   const trackRef = useRef(null);
   const trackOuterRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const currentIndex = useRef(0);
-  const hasShownAll = useRef(false);
 
-  const handleMobileScroll = () => {
-    const el = trackOuterRef.current;
-    if (!el) return;
-    const index = Math.min(
-      ITEMS.length - 1,
-      Math.round(el.scrollLeft / el.offsetWidth),
-    );
-    if (index !== currentIndex.current) {
-      currentIndex.current = index;
-      setActiveIndex(index);
-    }
-  };
   useEffect(() => {
-    // Skip GSAP entirely on mobile — touch scroll consumes events and locks the page
-    if (window.matchMedia("(max-width: 768px)").matches) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -69,7 +43,7 @@ export default function OurClientsHorizontal() {
           trigger: wrapperRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.8,
+          scrub: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const index = Math.min(
@@ -107,11 +81,7 @@ export default function OurClientsHorizontal() {
         </div>
 
         {/* ── Horizontal sliding items ── */}
-        <div
-          ref={trackOuterRef}
-          className="och-track-outer"
-          onScroll={handleMobileScroll}
-        >
+        <div ref={trackOuterRef} className="och-track-outer">
           <div ref={trackRef} className="och-track">
             {ITEMS.map((item, i) => {
               const diff = i - activeIndex;
