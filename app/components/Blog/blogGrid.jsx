@@ -95,7 +95,7 @@ const BlogGrid = ({ data, loading, activeTab }) => {
         </TextAnimation>
 
         <TextAnimation animateOnScroll delay={0.3}>
-          <h2 className="bg-title">Blogs & articles</h2>
+          <h2 className="bg-title">Blogs & Articles</h2>
         </TextAnimation>
       </div>
 
