@@ -277,7 +277,7 @@ export default function TrainingContent() {
                   </button> */}
                   <Link href="/contact-us">
                     <button className="th-btn-fill btn-4" type="button">
-                      Inquiry
+                      Inquire
                     </button>
                   </Link>
                 </div>

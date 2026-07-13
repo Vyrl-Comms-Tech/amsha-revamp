@@ -37,7 +37,7 @@ const serviceLinks = [
   {
     href: "/services/employee-training-development",
     label: "Employee Training & Development",
-    children: [{ href: "/training", label: "Training Program" }],
+    children: [{ href: "/training", label: "Training topics" }],
   },
   {
     href: "/services/upskilling-training",
