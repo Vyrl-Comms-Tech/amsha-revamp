@@ -22,7 +22,7 @@ const CARDS = [
       '"Amsha was great in facilitating and delivering our communication training. It was interactive and informative. I\'ve learned a lot that I can apply to daily work. Keep up the good work, Amsha. You\'re making our employees boost their confidence, which will reflect more in their productivity."',
   },
   {
-    logo: "/img21.png",
+    logo: "/img32.png",
     company: "Arakkal Gold and",
     subtitle: "Diamonds LLC",
     testimonial:

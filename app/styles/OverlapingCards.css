@@ -41,7 +41,7 @@
 }
 
 .oc-arrow {
-  top: 45%;
+  top: 44%;
   position: absolute;
   transform: translateY(-50%);
   z-index: 10;
@@ -57,7 +57,9 @@
   justify-content: center;
   cursor: pointer;
   backdrop-filter: blur(6px);
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .oc-arrow:hover {
@@ -66,11 +68,11 @@
 }
 
 .oc-arrow-left {
-  left: 10px;
+  left: 28px;
 }
 
 .oc-arrow-right {
-  right:1px;
+  right: 22px;
 }
 
 @media (max-width: 760px) {
@@ -81,10 +83,10 @@
     font-size: 16px;
   }
   .oc-arrow-left {
-    left: 6px;
+    left: 16px;
   }
   .oc-arrow-right {
-    right: 6px;
+    right: 16px;
   }
 }
 
@@ -102,7 +104,7 @@
 .oc-card-logo {
   width: 129px;
   height: 120px;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
   object-fit: contain;
   object-position: left top;
 }
@@ -290,14 +292,13 @@
   .oc-card-testimonial {
     font-size: 17px;
   }
-  
-.oc-card-logo {
-  width: 119px;
-}
-.oc-card-logo-large {
-  width: 178px;
-}
 
+  .oc-card-logo {
+    width: 119px;
+  }
+  .oc-card-logo-large {
+    width: 178px;
+  }
 }
 
 @media (max-width: 1280px) {

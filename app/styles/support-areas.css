@@ -4,9 +4,8 @@
   z-index: 99;
   padding: 100px 50px 80px;
 }
-.sa-section--compact{
+.sa-section--compact {
   padding: 10px 50px 80px;
-
 }
 .sa-heading {
   font-size: 65px;
@@ -44,8 +43,7 @@
 
 /* ── Dark card variant ── */
 .sa-card--dark {
-  
-background: linear-gradient(180deg, #5D4A6D 0%, #6EA1C3 100%);
+  background: linear-gradient(180deg, #5d4a6d 0%, #6ea1c3 100%);
 
   border-color: transparent;
 }
@@ -277,6 +275,7 @@ background: linear-gradient(180deg, #5D4A6D 0%, #6EA1C3 100%);
   }
   .sa-card {
     overflow: visible;
+    padding: 15px 15px 23px;
   }
   .sa-last-row {
     grid-template-columns: 1fr;
@@ -318,5 +317,67 @@ background: linear-gradient(180deg, #5D4A6D 0%, #6EA1C3 100%);
   }
   .sa-newsletter {
     padding: 36px 24px;
+  }
+
+  /* Force strict alternating white/gradient in the single mobile column,
+     overriding whatever column-based dark/light pattern JS applied for
+     desktop's 3-col grid. Odd cards = gradient + white text,
+     even cards = white bg + black text. */
+  .sa-card,
+  .sa-card--dark {
+    background: #fff;
+  }
+  .sa-card .sa-num,
+  .sa-card--dark .sa-num {
+    color: rgba(0, 0, 0, 0.35);
+  }
+  .sa-card .sa-icon,
+  .sa-card--dark .sa-icon {
+    color: rgba(0, 0, 0, 0.55);
+  }
+  .sa-card .sa-title,
+  .sa-card--dark .sa-title {
+    color: #000;
+  }
+  .sa-card .sa-text,
+  .sa-card--dark .sa-text {
+    color: #000;
+  }
+
+  .sa-card:nth-child(odd) {
+    background: linear-gradient(180deg, #5d4a6d 0%, #6ea1c3 100%);
+    border-color: transparent;
+  }
+  .sa-card:nth-child(odd) .sa-num {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .sa-card:nth-child(odd) .sa-icon {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .sa-card:nth-child(odd) .sa-title {
+    color: #fff;
+  }
+  .sa-card:nth-child(odd) .sa-text {
+    color: #fff;
+  }
+
+  /* Card 19 (the standalone card next to the newsletter block, outside
+     .sa-grid) continues the alternation from card 18 (even/white) — so it
+     should be the gradient card too. */
+  .sa-last-row .sa-card--dark {
+    background: linear-gradient(180deg, #5d4a6d 0%, #6ea1c3 100%);
+    border-color: transparent;
+  }
+  .sa-last-row .sa-card--dark .sa-num {
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .sa-last-row .sa-card--dark .sa-icon {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .sa-last-row .sa-card--dark .sa-title {
+    color: #fff;
+  }
+  .sa-last-row .sa-card--dark .sa-text {
+    color: #fff;
   }
 }
