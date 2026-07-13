@@ -373,21 +373,9 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-function smoothstep(e0, e1, x) {
-  const t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0)));
-  return t * t * (3 - 2 * t);
-}
-
-// Plateau: ramp up entering Hero2, hold 1 throughout Hero2, ramp down entering Hero3.
-// Hero2 = p 0.125 → 0.5  (100vh to 400vh of 800vh total)
-function computeGlassFactor(p) {
-  const START = 0.125;
-  const END = 0.5;
-  const BLEND = 0.03; // ~24vh transition width at each boundary
-  if (p <= START - BLEND || p >= END + BLEND) return 0;
-  if (p >= START + BLEND && p <= END - BLEND) return 1;
-  if (p < START + BLEND) return smoothstep(START - BLEND, START + BLEND, p);
-  return 1 - smoothstep(END - BLEND, END + BLEND, p);
+// Model stays steel the whole way through — glass swap during Hero2 disabled.
+function computeGlassFactor() {
+  return 0;
 }
 
 function getRotation(progress, keyframes) {
