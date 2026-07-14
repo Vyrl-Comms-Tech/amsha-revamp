@@ -11,7 +11,7 @@ const FOOTER_COLUMNS = [
       { label: "Services", href: "/services" },
       { label: "Blogs", href: "/blogs" },
       { label: "Contact us", href: "/contact-us" },
-      { label: "Training topics", href: "/training" },
+      // { label: "Training topics", href: "/training" },
     ],
   },
   {

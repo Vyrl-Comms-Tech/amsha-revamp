@@ -403,7 +403,7 @@ export default async function ServiceSlugPage({ params }) {
         slug === "upskilling-training") && (
         <div className="training-programme-btn-wrap">
           <button className="training-programme-btn">
-            <Link href="/training">View Training Program</Link>
+            <Link href="/training">View Training Topics</Link>
           </button>
         </div>
       )}
