@@ -89,6 +89,7 @@
 
 /* ── Image panel ── */
 .oi-wide-img {
+  display:none;
   flex: 0 0 38%;
   position: relative;
   overflow: hidden;
@@ -196,7 +197,7 @@
     flex-direction: column;
   }
   .oi-wide-img {
-    flex: none;
+    /* flex: none; */
     height: 260px;
     border-radius: 0 0 12px 12px;
   }
