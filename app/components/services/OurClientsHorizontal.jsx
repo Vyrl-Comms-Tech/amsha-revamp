@@ -73,7 +73,6 @@ export default function OurClientsHorizontal() {
 
           <h2 className="och-heading">
             Our 
-            <br />
              <span className="och-heading-dim">Clients </span>
           </h2>
                     </TextAnimation>
