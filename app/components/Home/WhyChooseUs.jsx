@@ -135,9 +135,15 @@ const WhyChooseUs = () => {
             </div>
           </div>
 
-          <div className="why-image">
+          {/* <div className="why-image">
             <img src="https://www.amazinghomedecorco.com/wp-content/uploads/2024/04/Beautiful-Grey-Home-Offices_-I-8.jpg" alt="Amsha Advisory workplace" />
-          </div>
+          </div> */}
+           <div
+            className="why-image"
+            style={{
+              background: "linear-gradient(104deg, #6EA1C3 -43.42%, #835EA2 84.02%)",
+            }}
+          ></div>
         </div>
       </div>
     </section>
