@@ -72,9 +72,9 @@ export default function OurClientsHorizontal() {
                     <TextAnimation animateOnScroll={true} delay={0.3}>
 
           <h2 className="och-heading">
-            Our clients come
+            Our 
             <br />
-            to <span className="och-heading-dim">us because.</span>
+             <span className="och-heading-dim">Clients </span>
           </h2>
                     </TextAnimation>
           <span className="och-number">{numStr}</span>
