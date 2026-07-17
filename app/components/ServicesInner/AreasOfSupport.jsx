@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import "../../styles/support-areas.css";
 import TextAnimation from "../layout/TextAnimation";
 
@@ -31,6 +32,9 @@ export default function AreasOfSupport({
   showNewsletter = false,
   compact = false,
 }) {
+  const [openIdx, setOpenIdx] = useState(null);
+  const toggle = (i) => setOpenIdx((prev) => (prev === i ? null : i));
+
   return (
     <section className={`sa-section${compact ? " sa-section--compact" : ""}`}>
       <TextAnimation animateOnScroll={true} delay={0.3}>
@@ -42,20 +46,22 @@ export default function AreasOfSupport({
           const dark = isDark(i);
           const hasText = Boolean(item.text);
           const showAccordion = !compact && hasText;
+          const open = showAccordion && openIdx === i;
 
           return (
             <div
               key={`${item.title}-${i}`}
               className={`sa-card${dark ? " sa-card--dark" : ""}${
                 compact ? " sa-card--compact" : ""
-              }`}
+              }${open ? " sa-card--open" : ""}`}
+              onClick={showAccordion ? () => toggle(i) : undefined}
             >
               <div className="sa-card-top">
                 <span className="sa-num">
                   {item.num || String(i + 1).padStart(2, "0")}
                 </span>
 
-                {showAccordion && <span className="sa-icon">+</span>}
+                {showAccordion && <span className="sa-icon">{open ? "×" : "+"}</span>}
               </div>
 
               <div className="sa-card-main">

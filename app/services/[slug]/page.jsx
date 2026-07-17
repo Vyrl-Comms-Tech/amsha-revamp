@@ -151,38 +151,47 @@ Whether supporting early-stage startups, growing teams, or expanding businesses,
       {
         num: "01",
         title: "Startup & Business Growth Support",
+        text: "Supporting entrepreneurs in building strong foundations and navigating the challenges of starting, growing, and scaling a business.",
       },
       {
         num: "02",
         title: "Organisational Structure & Team Development",
+        text: "Helping businesses establish effective organizational structures, define roles, and build high-performing teams.",
       },
       {
         num: "03",
         title: "Leadership & Founder Support",
+        text: "Providing guidance to founders and business leaders in strengthening leadership capability, decision-making, and people management.",
       },
       {
         num: "04",
         title: "Workplace Systems & Process Guidance",
+        text: "Developing practical systems and operational processes that improve efficiency, consistency, and day-to-day business operations.",
       },
       {
         num: "05",
         title: "Operational & People Strategy Support",
+        text: "Aligning business operations and people strategies to support sustainable growth, productivity, and organizational success.",
       },
       {
         num: "06",
         title: "Team Alignment & Workplace Culture",
+        text: "Helping businesses foster collaborative teams and build a positive workplace culture aligned with their vision and values.",
       },
       {
         num: "07",
         title: "Employee Development & Performance Support",
+        text: "Supporting the development of employees through performance improvement, capability building, and ongoing professional growth.",
       },
       {
         num: "08",
         title: "Business Professionalism & Organisational Readiness",
+        text: "Preparing businesses with the structures, processes, and professional standards needed for sustainable operations and future growth.",
       },
       {
         num: "09",
         title: "Growth Planning & Organisational Scaling",
+        text: "Helping businesses develop practical growth strategies and scalable structures to support long-term expansion and success.",
       },
     ],
   },
@@ -231,38 +240,47 @@ The MBTI® Career Report is also available for students and young professionals 
       {
         num: "01",
         title: "Career Clarity & Direction",
+        text: "Helping individuals identify their strengths, interests, and career goals to make informed decisions about their professional future.",
       },
       {
         num: "02",
         title: "Professional Growth Planning",
+        text: "Supporting the creation of personalized development plans that align with long-term career aspirations and professional objectives.",
       },
       {
         num: "03",
         title: "Workplace Readiness & Corporate Preparation",
+        text: "Preparing individuals with the skills, behaviours, and professional mindset needed to succeed in today's workplace.",
       },
       {
         num: "04",
         title: "Career Transition Support",
+        text: "Providing guidance and support for individuals navigating career changes, promotions, or new professional opportunities.",
       },
       {
         num: "05",
         title: "CV & Professional Profile Guidance",
+        text: "Helping individuals strengthen their CVs, LinkedIn profiles, and personal brands to better showcase their skills and experience.",
       },
       {
         num: "06",
         title: "Interview Preparation Support",
+        text: "Building confidence through tailored interview coaching, practical techniques, and constructive feedback.",
       },
       {
         num: "07",
         title: "Communication & Professional Confidence Development",
+        text: "Developing effective communication, interpersonal skills, and executive presence to enhance workplace performance and confidence.",
       },
       {
         num: "08",
         title: "Leadership & Personal Development",
+        text: "Strengthening leadership capabilities, emotional intelligence, self-awareness, and other soft skills that support long-term career success.",
       },
       {
         num: "09",
         title: "Behavioural & Career Insight Support",
+        text: "Using psychometric assessments and behavioural insights to help individuals better understand themselves and make more informed career decisions.",
       },
     ],
   },
@@ -327,34 +345,42 @@ Our approach combines structured assessments, behavioural insight, psychometric 
       {
         num: "01",
         title: "Candidate Assessment & Selection Support",
+        text: "Supporting organizations in identifying candidates whose skills, behaviours, and potential align with the requirements of the role.",
       },
       {
         num: "02",
         title: "Behavioural & Personality Assessments",
+        text: "Using psychometric and behavioural assessments to provide objective insights into personality, working styles, and workplace preferences.",
       },
       {
         num: "03",
         title: "Leadership Potential Identification",
+        text: "Evaluating leadership capabilities and future potential to support succession planning and leadership development.",
       },
       {
         num: "04",
         title: "Role Alignment & Suitability Analysis",
+        text: "Assessing how well an individual's strengths, competencies, and behaviours align with the demands of a specific role.",
       },
       {
         num: "05",
         title: "Team & Culture Fit Evaluation",
+        text: "Helping organizations understand how candidates are likely to integrate with existing teams and organizational culture.",
       },
       {
         num: "06",
         title: "Communication & Workplace Effectiveness Assessment",
+        text: "Assessing communication style, interpersonal effectiveness, and workplace behaviours through practical evaluation methods.",
       },
       {
         num: "07",
         title: "Talent Development & Succession Planning",
+        text: "Identifying strengths, development opportunities, and high-potential talent to support long-term workforce planning.",
       },
       {
         num: "08",
         title: "Structured Hiring & Evaluation Support",
+        text: "Designing and facilitating structured assessment processes, including interviews, assessment centres, case studies, role plays, and evaluation frameworks to enable more informed hiring decisions.",
       },
     ],
   },
@@ -395,7 +421,7 @@ export default async function ServiceSlugPage({ params }) {
           heading="Areas We Support"
           items={data.areasOfSupport}
           showNewsletter={false}
-          compact={true}
+          compact={false}
         />
       )}
 
