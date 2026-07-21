@@ -110,6 +110,7 @@
 }
 
 .why-image {
+  position: relative;
   width: 813px;
 height: 499px;
   flex-shrink: 0;

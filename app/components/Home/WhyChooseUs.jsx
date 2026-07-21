@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 import "../../styles/why-choose-us.css";
 import TextAnimation from "../layout/TextAnimation";
 
@@ -138,12 +139,14 @@ const WhyChooseUs = () => {
           {/* <div className="why-image">
             <img src="https://www.amazinghomedecorco.com/wp-content/uploads/2024/04/Beautiful-Grey-Home-Offices_-I-8.jpg" alt="Amsha Advisory workplace" />
           </div> */}
-           <div
-            className="why-image"
-            style={{
-              background: "linear-gradient(104deg, #6EA1C3 -43.42%, #835EA2 84.02%)",
-            }}
-          ></div>
+           <div className="why-image">
+            <Image
+              src="/gradient-img.jpeg"
+              alt="Amsha Advisory workplace"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
         </div>
       </div>
     </section>
