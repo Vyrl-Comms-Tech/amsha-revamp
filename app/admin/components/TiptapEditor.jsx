@@ -155,8 +155,8 @@ export default function TiptapEditor({
     const file = e.target.files?.[0]
     if (!file) return
 
-    if (file.size > 1 * 1024 * 1024) {
-      onError?.('Editor images must be under 1MB. Please compress or resize the image.')
+    if (file.size > 3 * 1024 * 1024) {
+      onError?.('Editor images must be under 3MB. Please compress or resize the image.')
       e.target.value = ''
       return
     }

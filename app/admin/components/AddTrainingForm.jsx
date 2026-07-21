@@ -147,8 +147,8 @@ export default function AddTrainingForm() {
   function handleImageChange(e) {
     const file = e.target.files?.[0]
     if (!file) return
-    if (file.size > 2 * 1024 * 1024) {
-      showError('Image must be under 2MB. Please compress or resize it.')
+    if (file.size > 3 * 1024 * 1024) {
+      showError('Image must be under 3MB. Please compress or resize it.')
       e.target.value = ''
       return
     }

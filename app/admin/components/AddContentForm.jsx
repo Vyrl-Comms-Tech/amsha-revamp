@@ -198,8 +198,8 @@ export default function AddContentForm() {
     const file = e.target.files?.[0]
     if (!file) return
 
-    if (file.size > 1 * 1024 * 1024) {
-      showError('Featured image must be under 1MB. Please compress or resize the image.')
+    if (file.size > 3 * 1024 * 1024) {
+      showError('Featured image must be under 3MB. Please compress or resize the image.')
       e.target.value = ''
       return
     }
