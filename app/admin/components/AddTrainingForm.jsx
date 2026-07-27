@@ -453,7 +453,7 @@ export default function AddTrainingForm() {
                   <div className="add-content-img-placeholder">
                     <ImagePlus size={28} className="add-content-img-icon" />
                     <p className="add-content-img-text">Click to upload image</p>
-                    <p className="add-content-img-hint">PNG, JPG, WEBP · Max 2MB</p>
+                    <p className="add-content-img-hint">PNG, JPG, WEBP · Max 3MB</p>
                   </div>
                 )}
               </label>
