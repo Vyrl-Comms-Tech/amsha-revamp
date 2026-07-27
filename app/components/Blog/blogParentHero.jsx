@@ -5,11 +5,8 @@ import Skeleton from "react-loading-skeleton";
 import TextAnimation from "../layout/TextAnimation";
 import "../../styles/blog-parent-hero.css";
 import Link from "next/link";
-const tabs = ["blog", "education", "news", "case studies"];
 
-const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
-  const featured = data?.[0];
-  
+const BlogParentHero = ({ featured, loading, tabs = [], activeTab, setActiveTab }) => {
   return (
     <div className="bph-wrapper">
       <div className="bph-header">
@@ -41,8 +38,8 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
           </div>
           <div className="bph-content">
             <div className="bph-content-top">
-            <Skeleton width="80%" height={30} />
-            <Skeleton count={5} />
+              <Skeleton width="80%" height={30} />
+              <Skeleton count={5} />
             </div>
             <Skeleton width={160} height={50} />
           </div>
@@ -63,8 +60,8 @@ const BlogParentHero = ({ data, loading, activeTab, setActiveTab }) => {
                 <h2 className="bph-card-title">{featured?.mainTitle}</h2>
                 <p className="bph-card-desc">{featured?.shortDescription}</p>
               </div>
-                
-              <Link href={`/blogs/${featured.category}/${featured?.slug}`}  className="bph-btn btn-4">View now</Link>
+
+              <Link href={`/blogs/${featured.category}/${featured?.slug}`} className="bph-btn btn-4">View now</Link>
             </div>
           </div>
         )
