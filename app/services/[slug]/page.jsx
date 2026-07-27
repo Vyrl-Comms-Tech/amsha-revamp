@@ -385,6 +385,57 @@ Our approach combines structured assessments, behavioural insight, psychometric 
     ],
   },
 };
+
+const SEO = {
+  "entrepreneurial-consulting": {
+    title: "Entrepreneurial Consulting Services Dubai | Amsha Advisory",
+    description:
+      "Boost your startup's success in Dubai with expert entrepreneurial consulting. Build strong teams, foster a supportive culture & scale effectively. Start today.",
+  },
+  "employee-training-development": {
+    title: "Employee Training & Development Services Dubai | Amsha Advisory",
+    description:
+      "Enhance team performance with customized employee training & development services in Dubai. Interactive soft-skills workshops for organizational growth.",
+  },
+  "career-development": {
+    title: "Career Development Services in Dubai | Amsha Advisory",
+    description:
+      "Unlock your potential with expert career development services in Dubai. Psychometric assessments & tailored guidance for professional growth. Start your journey today!",
+  },
+  "upskilling-training": {
+    title: "Upskilling Training Programs in Dubai | Amsha Advisory",
+    description:
+      "Boost productivity with tailored upskilling training in Dubai. Custom 1-on-1 modules & skill gap assessments for long-term employee success. Contact us today",
+  },
+  "talent-assessment": {
+    title: "Talent Assessment Services in Dubai | Amsha Advisory",
+    description:
+      "Leverage expert talent assessment services in Dubai to identify top performers. Improve hiring decisions with reliable psychometric tests and skill evaluations.",
+  },
+};
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const data = SERVICES[slug];
+
+  if (!data) return {};
+
+  if (SEO[slug]) {
+    return SEO[slug];
+  }
+
+  const plainDesc = data.hero.desc
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 160);
+
+  return {
+    title: `Amsha Advisory | ${data.hero.heading} `,
+    description: plainDesc,
+  };
+}
+
 export default async function ServiceSlugPage({ params }) {
   const { slug } = await params;
   const data = SERVICES[slug];

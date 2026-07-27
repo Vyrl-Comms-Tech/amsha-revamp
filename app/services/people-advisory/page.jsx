@@ -3,6 +3,11 @@ import ServiceInnerHero from "../../components/ServicesInner/ServiceInnerHero";
 import SupportAreas from "../../components/ServicesInner/SupportAreas";
 import FooterModel from "../../components/layout/FooterModel";
 
+export const metadata = {
+  title: "People Advisory Services Dubai | Amsha Advisory",
+  description:
+    "Strengthen your organisation with expert people advisory services in Dubai. Improve structure, culture & performance with tailored HR guidance. Start today.",
+};
 const page = () => {
   return (
     <div>
@@ -16,7 +21,7 @@ Our approach goes beyond traditional HR support by focusing on how organisations
         btnText="Book a People Performance Audit"
       />
       <SupportAreas />
-      <Newsletter/>
+      <Newsletter />
     </div>
   );
 };

@@ -10,6 +10,11 @@ import WhyChooseUs from "./components/Home/WhyChooseUs";
 import Facts from "./components/Home/Facts";
 import Multiple3d from "@/app/components/layout/Multiple3d";
 import Particles from "./components/Home/Particles";
+export const metadata = {
+  title: "Top HR Consultancy in Dubai | Amsha Advisory |",
+  description:
+    "Amsha Advisory delivers people-centric HR solutions, talent assessment, training, and strategic consulting to drive business growth and workplace excellence",
+};
 export default function Home() {
   return (
     <>
@@ -23,7 +28,7 @@ export default function Home() {
       <PeopleAdvisory />
       <WhyChooseUs />
       <Facts />
-      <NewsLetter/>
+      <NewsLetter />
       {/* <Particles /> */}
     </>
   );
