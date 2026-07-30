@@ -10,9 +10,9 @@ const BlogParentHero = ({ featured, loading, tabs = [], activeTab, setActiveTab 
   return (
     <div className="bph-wrapper">
       <div className="bph-header">
-        <TextAnimation animateOnScroll delay={0.3}>
+        {/* <TextAnimation animateOnScroll delay={0.3}>
           <p className="bph-label">People Strategies for Startup Success</p>
-        </TextAnimation>
+        </TextAnimation> */}
 
         <TextAnimation animateOnScroll delay={0.3}>
           <h1 className="bph-title">Blogs & Articles</h1>

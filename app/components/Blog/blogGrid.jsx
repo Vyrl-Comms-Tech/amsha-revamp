@@ -108,7 +108,7 @@ const BlogGrid = ({ data, loading, activeTab, pagination, currentPage = 1, onPag
 
   return (
     <section className="bg-section">
-      <div className="bg-header">
+      {/* <div className="bg-header">
         <TextAnimation animateOnScroll delay={0.3}>
           <p className="bg-label">People Strategies for Startup Success</p>
         </TextAnimation>
@@ -116,7 +116,7 @@ const BlogGrid = ({ data, loading, activeTab, pagination, currentPage = 1, onPag
         <TextAnimation animateOnScroll delay={0.3}>
           <h2 className="bg-title">Blogs & Articles</h2>
         </TextAnimation>
-      </div>
+      </div> */}
 
       <div className="bg-grid">
         {loading
